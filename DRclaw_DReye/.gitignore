@@ -1,0 +1,46 @@
+# ==============================================================================
+# 🚨 CRITICAL SECURITY: DO NOT TRACK 🚨
+# ==============================================================================
+# 조지아대학교 & 파이헬스케어 딥러닝 트레이닝 데이터, 안저카메라 원본 이미지 절대 보안
+# AI 모델 가중치(Weights) 및 지적재산권(IP) 원천 유출 방지
+# ==============================================================================
+*.env
+*.env.*
+secrets/
+.keys/
+credentials/
+license.key
+
+# Data & Medical Imagery
+data/
+fundus_images/
+oct_scans/
+raw_data/
+db/
+*.db
+*.csv
+*.xlsx
+*.parquet
+
+# Deep Learning / AI Model (HSIC, CoMoE, Self-critique)
+models/
+weights/
+checkpoints/
+logs/
+*.pt
+*.pth
+*.h5
+*.onnx
+*.safetensors
+train_data/
+eval_data/
+
+# Neo4j / Graph DB dumps
+neo4j_data/
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.venv/
