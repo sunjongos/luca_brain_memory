@@ -1,0 +1,47 @@
+# ==============================================================================
+# 🚨 CRITICAL SECURITY: DO NOT TRACK 🚨
+# ==============================================================================
+# 환자 개인정보(PHI), 병원 기밀 데이터, EMR 연동 키 절대 유출 방지
+# HIPAA 및 대한민국 의료법/개인정보보호법 완벽 준수
+# ==============================================================================
+*.env
+*.env.*
+secrets/
+.keys/
+credentials/
+
+# Data Folders
+data/
+patient_records/
+phi/
+ehr/
+emr_dumps/
+db/
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.xlsx
+*.parquet
+*.json
+!config.example.json
+
+# Deep Learning / Model Training / Knowledge Graph
+models/
+weights/
+logs/
+*.pt
+*.pth
+*.h5
+*.onnx
+*.safetensors
+train_data/
+eval_data/
+*.ttl
+
+# Python caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.venv/
