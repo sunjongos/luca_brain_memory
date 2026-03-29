@@ -7,6 +7,7 @@ import sqlite3
 import os
 import json
 import logging
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -31,6 +32,7 @@ DEFAULT_SYSTEM_PROMPT = """당신은 Luca(루카)입니다. AI 1인 기업 대�
 - [Tier 2] 장기 공유 메모리망 (Port 5050 글로벌 뇌): 정제된 에이전트 간 핵심 규칙/교훈/온톨로지(Ontology)는 5050 포트로 영구 전송 및 공유.
 - [Tier 3] 클라우드 실시간 연동망 (Supabase): 즉각적인 대시보드 표출 등 실시간 외부 웹 연동이 필요한 CRM 로그형/빅데이터는 클라우드로 즉시 적재.
 - [Tier 4] 하니스 엔지니어링 메커니즘 (GitHub Repo): 단순 백업망이 아닌, 에이전트 다중화와 안전한 코드 평가를 위해 Clone/Fork/Pull/Push를 활용하여 하니스(Harness) 모드 및 테스트 샌드박스를 구축하고 배포하는 코어 인프라로 활용.
+- [Self-Healing 방어막] 에이전트 오작동 시 언제든 `luca_brain.rollback_system_prompt()`를 호출하여 뇌 구조를 이전 버전으로 긴급 롤백(상태 복구) 가능.
 
 - run_terminal_command / read_local_file / write_local_file 도구로 대표님 PC를 직접 제어.
 - 파일·터미널 요청이 오면 코드 설명 대신 즉시 도구를 호출하십시오.
@@ -281,8 +283,68 @@ def get_current_system_prompt() -> str:
         return DEFAULT_SYSTEM_PROMPT
 
 
+def backup_db() -> bool:
+    """프롬프트 업데이트 등 중요 작업 전 DB 스냅샷 백업"""
+    try:
+        backup_path = DB_PATH.with_suffix(".db.bak")
+        shutil.copy2(DB_PATH, backup_path)
+        logger.info(f"💾 DB 스냅샷 백업 완료: {backup_path}")
+        return True
+    except Exception as e:
+        logger.error(f"backup_db 실패: {e}")
+        return False
+
+
+def rollback_system_prompt(reason: str = "오작동 감지로 인한 긴급 롤백") -> int:
+    """현재 활성 프롬프트를 비활성화하고 직전 프롬프트로 롤백"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        
+        # 현재 활성 버전 가져오기
+        c.execute("SELECT version FROM system_prompts WHERE is_active = 1")
+        row = c.fetchone()
+        if not row:
+            conn.close()
+            return -1
+            
+        current_version = row[0]
+        if current_version <= 1:
+            logger.warning("이미 v1입니다. 더 이상 롤백할 수 없습니다.")
+            conn.close()
+            return current_version
+            
+        target_version = current_version - 1
+        
+        # 현재 버전 비활성화 & 타겟 버전 활성화
+        c.execute("UPDATE system_prompts SET is_active = 0 WHERE is_active = 1")
+        c.execute("UPDATE system_prompts SET is_active = 1 WHERE version = ?", (target_version,))
+        
+        # 적용된 프롬프트 내용 가져와서 파일에 덮어쓰기
+        c.execute("SELECT content FROM system_prompts WHERE version = ?", (target_version,))
+        target_row = c.fetchone()
+        if target_row:
+            target_content = target_row[0]
+            PROMPT_FILE.write_text(target_content, encoding="utf-8")
+        
+        conn.commit()
+        conn.close()
+        
+        # 교훈 남기기
+        save_lesson(f"v{current_version} 프롬프트가 문제를 일으켜 v{target_version}으로 롤백했습니다. 사유: {reason}", source="self_healing")
+        logger.info(f"🔄 시스템 프롬프트 v{target_version}으로 롤백 완료 (reason: {reason})")
+        
+        return target_version
+    except Exception as e:
+        logger.error(f"rollback_system_prompt 실패: {e}")
+        return -1
+
+
 def update_system_prompt(new_content: str, reason: str = "자기반성") -> int:
     """새 시스템 프롬프트를 저장하고 활성화. 새 버전 번호 반환"""
+    # 진화 전 뇌 전체 백업 수행 (Self-Healing 안전망)
+    backup_db()
+    
     try:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
