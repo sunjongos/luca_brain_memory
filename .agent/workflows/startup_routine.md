@@ -9,34 +9,42 @@ description: 컴퓨터 재시작 후 루카 호출 시 루틴 세팅 (반가운 
 
 ### 루틴 실행 (사용자가 승인한 후)
 
-1. 장기 기억 메모리 서버 실행 (Port 5050)
+1. GitHub 최신 코드 동기화 (Git Pull)
 // turbo
-2. 텔레그램 챗봇 실행
+2. 장기 기억 메모리 서버 실행 (Port 5050)
+// turbo
+3. 텔레그램 챗봇 실행
 // turbo
 3. OpenClaw Gateway 실행
 // turbo
 4. Claude Code (Telegram 플러그인) 자동 실행 - **컴퓨터 부팅 시 자동 실행됨** (shell:startup 바로가기 등록 완료 → 별도 PowerShell 창이 최소화 상태로 자동 오픈)
 
 ```bash
-# 1. 메모리 서버 실행
+# 1. GitHub 최신 코드 동기화
+cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
+git pull origin main
+```
+
+```bash
+# 2. 메모리 서버 실행
 cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트\memory_layer"
 python memory_server.py
 ```
 
 ```bash
-# 2. 텔레그램 챗봇 실행
+# 3. 텔레그램 챗봇 실행
 cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
 python telegram_bot.py
 ```
 
 ```bash
-# 3. OpenClaw Gateway 실행
+# 4. OpenClaw Gateway 실행
 cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
 openclaw gateway
 ```
 
 ```powershell
-# 4. Claude Code (Telegram 플러그인) 실행
+# 5. Claude Code (Telegram 플러그인) 실행
 # ✅ shell:startup 바로가기로 등록 완료 → 컴퓨터 로그인 시 자동으로 최소화 PowerShell 창이 열리며 실행됨
 # 수동 실행이 필요할 경우 새 PowerShell 창에서 아래 명령어를 그대로 실행:
 $env:PATH = "$env:USERPROFILE\.bun\bin;$env:PATH"; claude --dangerously-skip-permissions --channels plugin:telegram@claude-plugins-official
