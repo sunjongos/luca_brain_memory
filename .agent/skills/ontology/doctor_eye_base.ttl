@@ -1,0 +1,68 @@
+@prefix ex: <http://example.org/doctoreye/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+# --- Classes (클래스 정의) ---
+ex:Organization rdfs:label "Organization (조직)" .
+ex:Person rdfs:label "Person (인물)" .
+ex:Project rdfs:label "Project (프로젝트)" .
+ex:Disease rdfs:label "Disease (질병)" .
+ex:MedicalDevice rdfs:label "Medical Device (의료 기기)" .
+ex:Role rdfs:label "Role (역할)" .
+
+# --- Organizations (조직 인스턴스) ---
+ex:NamyangjuBaekHospital rdf:type ex:Organization ;
+    rdfs:label "남양주백병원" .
+
+ex:PiHealthcare rdf:type ex:Organization ;
+    rdfs:label "파이헬스케어" .
+
+ex:SeoulNationalUniversityHospital rdf:type ex:Organization ;
+    rdfs:label "서울대학교병원" .
+
+# --- Project (프로젝트 인스턴스) ---
+ex:DoctorEyeProject rdf:type ex:Project ;
+    rdfs:label "닥터아이 (Doctor Eye)" ;
+    ex:developedBy ex:PiHealthcare ;
+    ex:clinicalPartner ex:NamyangjuBaekHospital ;
+    ex:usesDevice ex:FundusCamera .
+
+# --- Medical Devices (의료 기기) ---
+ex:FundusCamera rdf:type ex:MedicalDevice ;
+    rdfs:label "안저카메라" ;
+    ex:purpose "안저 이미지 촬영을 통한 질환 진단 보조" .
+
+# --- Diseases (진단 대상 질환) ---
+ex:Alzheimers rdf:type ex:Disease ;
+    rdfs:label "알츠하이머 (Alzheimer's Disease)" .
+ex:Parkinsons rdf:type ex:Disease ;
+    rdfs:label "파킨슨병 (Parkinson's Disease)" .
+ex:BrainAneurysm rdf:type ex:Disease ;
+    rdfs:label "뇌동맥류 (Brain Aneurysm)" .
+ex:CerebralArteryStenosis rdf:type ex:Disease ;
+    rdfs:label "뇌동맥협착증 (Cerebral Artery Stenosis)" .
+ex:CoronaryArteryStenosis rdf:type ex:Disease ;
+    rdfs:label "관상동맥협착증 (Coronary Artery Stenosis)" .
+ex:ADHD rdf:type ex:Disease ;
+    rdfs:label "ADHD (주의력결핍 과다행동장애)" .
+
+# 닥터아이 프로젝트가 타겟팅하는 질환들 선언
+ex:DoctorEyeProject ex:targetsDisease ex:Alzheimers, ex:Parkinsons, ex:BrainAneurysm, ex:CerebralArteryStenosis, ex:CoronaryArteryStenosis, ex:ADHD .
+
+# --- Key Personnel (주요 인물 및 이해관계자) ---
+ex:LeeYoungGyu rdf:type ex:Person ;
+    rdfs:label "이영규" ;
+    ex:hasRole "CEO" ;
+    ex:worksFor ex:PiHealthcare .
+
+ex:LeeSoonTae rdf:type ex:Person ;
+    rdfs:label "이순태" ;
+    ex:hasRole "CMO" ;
+    ex:worksFor ex:SeoulNationalUniversityHospital ;
+    ex:consultsFor ex:DoctorEyeProject .
+
+ex:UserCSO rdf:type ex:Person ;
+    rdfs:label "유저 (CSO)" ;
+    ex:hasRole "CSO" ;
+    ex:worksFor ex:DoctorEyeProject .

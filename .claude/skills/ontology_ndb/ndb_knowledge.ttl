@@ -1,0 +1,55 @@
+@prefix ex: <http://example.org/ndb/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Classes
+ex:Hospital rdfs:label "Hospital (병원)" .
+ex:MedicalCenter rdfs:label "Medical Center (진료 센터)" .
+ex:Philosophy rdfs:label "Philosophy (철학 및 가치관)" .
+ex:ClinicalSymptom rdfs:label "Symptom (임상 증상)" .
+
+# Core Identity
+ex:NamyangjuBaekHospital rdf:type ex:Hospital ;
+    rdfs:label "남양주백병원" ;
+    ex:establishedPhilosophy ex:PatientFirst, ex:OneStopCare ;
+    ex:operatesCenter ex:SpineCenter, ex:JointCenter, ex:BrainNeuroCenter, ex:DigestiveCenter, ex:HealthPromotionCenter, ex:EmergencyCenter .
+
+# Philosophies
+ex:PatientFirst rdf:type ex:Philosophy ;
+    rdfs:label "환자 편의 극대화" .
+ex:OneStopCare rdf:type ex:Philosophy ;
+    rdfs:label "유기적 협진을 통한 빠른 원스톱 진료 체계" .
+
+# Centers
+ex:SpineCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "척추 센터" ;
+    ex:treatsSymptom ex:BackPain, ex:LegNumbness .
+
+ex:JointCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "관절 센터" ;
+    ex:treatsSymptom ex:JointPain, ex:ShoulderPain .
+
+ex:BrainNeuroCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "뇌 신경 센터" ;
+    ex:treatsSymptom ex:Headache, ex:Dizziness, ex:LegNumbness .
+
+ex:DigestiveCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "소화기 센터 (내과/외과)" ;
+    ex:treatsSymptom ex:Stomachache, ex:Indigestion .
+
+ex:HealthPromotionCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "건강증진 센터" ;
+    ex:providesService ex:GeneralCheckup .
+
+ex:EmergencyCenter rdf:type ex:MedicalCenter ;
+    rdfs:label "응급진료실" ;
+    ex:providesService ex:EmergencyCare .
+
+# Symptoms
+ex:BackPain rdf:type ex:ClinicalSymptom ; rdfs:label "허리 통증" .
+ex:LegNumbness rdf:type ex:ClinicalSymptom ; rdfs:label "다리 저림" .
+ex:JointPain rdf:type ex:ClinicalSymptom ; rdfs:label "관절 통증" .
+ex:Headache rdf:type ex:ClinicalSymptom ; rdfs:label "두통" .
+ex:Dizziness rdf:type ex:ClinicalSymptom ; rdfs:label "어지러움" .
+ex:Stomachache rdf:type ex:ClinicalSymptom ; rdfs:label "복통" .
+ex:Indigestion rdf:type ex:ClinicalSymptom ; rdfs:label "소화불량" .

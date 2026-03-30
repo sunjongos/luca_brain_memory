@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDB 백병원 척추센터 | VIP Signature Care</title>
+    <!-- 고급스러운 폰트 세트: 제목은 명조계열 바탕체, 본문은 고딕 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700&family=Pretendard:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F4C3A;
+            /* 고급스러운 딥 그린 (시그니처 컬러) */
+            --accent: #C7A97A;
+            /* 샴페인 골드 (프리미엄 포인트) */
+            --bg-light: #F8F9FA;
+            --text-dark: #1A1A1A;
+            --text-gray: #555555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 내비게이션 바 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 24px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--accent);
+        }
+
+        /* 히어로 섹션 (오른쪽에 대형 텍스트, 왼쪽에 우아한 이미지 힌트) */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        /* 배경 우아한 이미지 형태 */
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551076805-e1869043e560?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            opacity: 0.9;
+            mask-image: linear-gradient(to right, transparent, black 30%);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 30%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(199, 169, 122, 0.1);
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--primary);
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* 우아한 결제 카드 (화면 띄워진 느낌) */
+        .booking-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            max-width: 480px;
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            animation: float 6s ease-in-out infinite, fadeUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+            margin-top: 40px;
+        }
+
+        .booking-card h3 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .booking-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        .price-tag span.currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .benefits {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .benefits li {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .benefits li svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent);
+            margin-right: 12px;
+        }
+
+        #paypal-button-container {
+            width: 100%;
+            min-height: 150px;
+        }
+
+        /* 스크롤 다운 인디케이터 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 6%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .scroll-line {
+            width: 60px;
+            height: 1px;
+            background: var(--text-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            animation: scrollLine 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-50%);
+            }
+
+            50% {
+                transform: translateY(-52%);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        @keyframes scrollLine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero::after {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 150px;
+            }
+
+            .booking-card {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 40px 0;
+                animation: fadeUp 1s ease-out 0.3s forwards;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">NDB <span>SPINE</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Philosophy</a></li>
+            <li><a href="#">Treatments</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="badge">Revision Spine Surgery</div>
+            <h1>수많은 실패 끝에 <span>도달하는 곳.</span></h1>
+            <p>FBSS(척추수술실패증후군) 환자들을 위한 대한민국 최후의 보루. 최고 권위자의 정밀한 진단과 독보적인 술기가 당신의 잃어버린 일상을 완벽하게 복원합니다. 거짓된 희망이 아닌, 과학과
+                데이터로 증명합니다.</p>
+        </div>
+
+        <div class="booking-card">
+            <h3>VIP Signature Care</h3>
+            <p>최고 권위자의 1:1 심층 분석 및 대면/화상 진단 예약</p>
+
+            <div class="price-tag">
+                <span class="currency">$</span>150
+            </div>
+
+            <ul class="benefits">
+                <li>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    정밀 MRI 3D 재조합 및 AI 스캐닝
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    이전 수술 실패 원인 심층 교차 검증
+                </li>
+                <li>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    개인 전담 VIP 컨시어지 배정
+                </li>
+            </ul>
+
+            <div id="paypal-button-container"></div>
+        </div>
+
+        <div class="scroll-indicator">
+            SCROLL TO EXPLORE
+            <div class="scroll-line"></div>
+        </div>
+    </div>
+
+    <!-- PayPal SDK -->
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=ATMx3Y4oJldZfNhlYuFmrXW9jrQZIExZ6Zi1DJ9NOYe4GfmXS2BgX5J5J6OYkcq2N1aEr1nEs95qBWGP&currency=USD"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'black', // 좀 더 프리미엄한 블랙 버튼
+                shape: 'rect',
+                label: 'checkout'
+            },
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        description: "NDB Spine VIP Signature Care (Dr. Sun)",
+                        amount: { value: '150.00' }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    alert('결제가 성공적으로 승인되었습니다. VIP 전담팀에서 ' + details.payer.name.given_name + '님께 24시간 내에 연락드리겠습니다.');
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+
+</html>

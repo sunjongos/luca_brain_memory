@@ -1,0 +1,7 @@
+{
+    "python.defaultInterpreterPath": "C:/Users/sunjo/AppData/Local/Programs/Python/Python313/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.extraPaths": [
+        "./"
+    ]
+}

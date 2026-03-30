@@ -1,0 +1,65 @@
+@prefix ex: <http://example.org/dreye/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Classes
+ex:Project rdfs:label "Project (프로젝트)" .
+ex:MedicalDevice rdfs:label "Medical Device (의료 장비)" .
+ex:DiagnosisTarget rdfs:label "Diagnosis Target (진단 타겟/질환)" .
+ex:Biomarker rdfs:label "Biomarker (생체지표)" .
+
+# Core Project
+ex:DoctorEyeProject rdf:type ex:Project ;
+    rdfs:label "닥터아이 (Doctor Eye)" ;
+    ex:utilizesDevice ex:FundusCamera ;
+    ex:detects ex:Alzheimers, ex:Parkinsons, ex:BrainAneurysm, ex:CerebralArteryStenosis, ex:CoronaryArteryStenosis, ex:ADHD .
+
+# Device
+ex:FundusCamera rdf:type ex:MedicalDevice ;
+    rdfs:label "안저카메라" ;
+    ex:analyzesBiomarker ex:RetinalVessel, ex:OpticNerveHead .
+
+# Biomarkers
+ex:RetinalVessel rdf:type ex:Biomarker ;
+    rdfs:label "망막 미세혈관 변화" ;
+    ex:indicatesRiskFor ex:CerebralArteryStenosis, ex:CoronaryArteryStenosis, ex:BrainAneurysm .
+
+ex:OpticNerveHead rdf:type ex:Biomarker ;
+    rdfs:label "시신경유두 및 망막 신경섬유층 이상" ;
+    ex:indicatesRiskFor ex:Alzheimers, ex:Parkinsons, ex:ADHD .
+
+# Target Diseases
+ex:Alzheimers rdf:type ex:DiagnosisTarget ; rdfs:label "알츠하이머 (Alzheimer's Disease)" .
+ex:Parkinsons rdf:type ex:DiagnosisTarget ; rdfs:label "파킨슨병 (Parkinson's Disease)" .
+ex:BrainAneurysm rdf:type ex:DiagnosisTarget ; rdfs:label "뇌동맥류 (Brain Aneurysm)" .
+ex:CerebralArteryStenosis rdf:type ex:DiagnosisTarget ; rdfs:label "뇌동맥협착증 (Cerebral Artery Stenosis)" .
+ex:CoronaryArteryStenosis rdf:type ex:DiagnosisTarget ; rdfs:label "관상동맥협착증 (Coronary Artery Stenosis)" .
+ex:ADHD rdf:type ex:DiagnosisTarget ; rdfs:label "ADHD" .
+
+# ==========================================
+# 8-Step Pipeline (Research & Execution Mode)
+# ==========================================
+ex:PipelineStep rdfs:label "파이프라인 단계 (Process Pipeline)" .
+ex:Certification rdfs:label "의료기기 인허가 (Certification)" .
+ex:DataNode rdfs:label "데이터 소스" .
+
+# Data Sources
+ex:FundusImages rdf:type ex:DataNode ; rdfs:label "Raw 안저 이미지 (Raw Data)" .
+ex:MedicalPapers rdf:type ex:DataNode ; rdfs:label "바이오마커 임상 논문 (Research Data)" .
+
+# 8 Steps for Dr.Eye
+ex:Step1_Parsing rdf:type ex:PipelineStep ; rdfs:label "1. 데이터 파싱 (Image/Text Parsing)" ; ex:processes ex:FundusImages, ex:MedicalPapers .
+ex:Step2_Chunking rdf:type ex:PipelineStep ; rdfs:label "2. 특징 추출 및 청킹 (Feature Extraction)" ; ex:requires ex:Step1_Parsing .
+ex:Step3_Embedding rdf:type ex:PipelineStep ; rdfs:label "3. 벡터 임베딩 (ChromaDB Vectorization)" ; ex:requires ex:Step2_Chunking .
+ex:Step4_GraphStruct rdf:type ex:PipelineStep ; rdfs:label "4. 지식 그래프 구조화 (Neo4j Mapping)" ; ex:requires ex:Step3_Embedding .
+ex:Step5_MetaOntology rdf:type ex:PipelineStep ; rdfs:label "5. 메타온톨로지 진단 규정 (Diagnostic Rules)" ; ex:requires ex:Step4_GraphStruct ; ex:validates ex:RetinalVessel, ex:OpticNerveHead .
+ex:Step6_ReBAC rdf:type ex:PipelineStep ; rdfs:label "6. 연구원 권한 제어 (ReBAC Security)" ; ex:requires ex:Step5_MetaOntology .
+ex:Step7_Orchestration rdf:type ex:PipelineStep ; rdfs:label "7. LangGraph 오케스트레이션" ; ex:requires ex:Step6_ReBAC .
+ex:Step8_AgentAction rdf:type ex:PipelineStep ; rdfs:label "8. 에이전트 진단 보조 (Luca AI Action)" ; ex:requires ex:Step7_Orchestration .
+
+# Certifications
+ex:KFDA_Approval rdf:type ex:Certification ; rdfs:label "KFDA 인허가 획득" ; ex:requiresRigorous ex:Step8_AgentAction .
+ex:FDA_Approval rdf:type ex:Certification ; rdfs:label "미국 FDA 승인" ; ex:requiresRigorous ex:Step8_AgentAction .
+
+# Connect Project to Certification Process
+ex:DoctorEyeProject ex:mustPass ex:KFDA_Approval, ex:FDA_Approval .

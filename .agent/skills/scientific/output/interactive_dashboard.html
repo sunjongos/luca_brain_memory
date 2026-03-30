@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luca Scientific Research Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #c9d1d9; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { color: #58a6ff; text-align: center; margin-bottom: 40px; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .chart-container { position: relative; height: 40vh; width: 100%; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .metric-card { background: #21262d; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #30363d; }
+        .metric-value { font-size: 2em; font-weight: bold; color: #79c0ff; }
+        .metric-label { font-size: 0.9em; color: #8b949e; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Luca Scientific Research Dashboard</h1>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="overallScore">-</div>
+                <div class="metric-label">Overall Evaluation Score</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">Pending</div>
+                <div class="metric-label">Publication Readiness</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="paperType">-</div>
+                <div class="metric-label">Analyzed Document Type</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Dimension Analysis (ScholarEval)</h2>
+            <div class="chart-container">
+                <canvas id="evaluationChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="card" id="executiveSummary">
+            <h2>Executive Summary</h2>
+            <p style="color: #8b949e; font-style: italic;">Provide the document to Luca to generate the summary and update charts automatically.</p>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder data for ScholarEval dimensions
+        const ctx = document.getElementById('evaluationChart').getContext('2d');
+        const evaluationChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Problem Formulation', 
+                    'Literature Review', 
+                    'Methodology', 
+                    'Data Quality', 
+                    'Analysis Rigor', 
+                    'Results Presentation', 
+                    'Scholarly Writing'
+                ],
+                datasets: [{
+                    label: 'Evaluation Score (1-5)',
+                    data: [0, 0, 0, 0, 0, 0, 0], // To be filled dynamically by Luca
+                    backgroundColor: 'rgba(88, 166, 255, 0.2)',
+                    borderColor: 'rgba(88, 166, 255, 1)',
+                    pointBackgroundColor: 'rgba(88, 166, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(88, 166, 255, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: { color: '#c9d1d9', font: { size: 14 } },
+                        ticks: { color: '#8b949e', backdropColor: 'transparent', min: 0, max: 5, stepSize: 1 }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#c9d1d9' } }
+                }
+            }
+        });
+        
+        // This script will be overridden by Luca's python processing when actual data exists.
+    </script>
+</body>
+</html>

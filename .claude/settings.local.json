@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:youtu.be)",
+      "WebFetch(domain:www.youtube.com)",
+      "Bash(yt-dlp:*)",
+      "Bash(chcp 65001:*)",
+      "Bash(curl -s http://127.0.0.1:5050/)",
+      "Bash(curl -s http://127.0.0.1:5050/docs)",
+      "Bash(curl -s http://127.0.0.1:5050/openapi.json)",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -w \"\\\\nHTTP_CODE:%{http_code}\" http://127.0.0.1:5050/)",
+      "Bash(sqlite3 \"C:/Users/sunjo/OneDrive/AgentMemory/shared_memory.db\" \".tables\")",
+      "WebFetch(domain:github.com)",
+      "Bash(nvidia-smi --query-gpu=name,memory.total,driver_version,compute_cap --format=csv,noheader)",
+      "Bash(\"C:/Windows/System32/nvidia-smi.exe\" --query-gpu=name,memory.total,driver_version,compute_cap --format=csv,noheader)",
+      "Bash(\"C:/Program Files/NVIDIA Corporation/NVSMI/nvidia-smi.exe\" --query-gpu=name,memory.total,driver_version,compute_cap --format=csv,noheader)",
+      "Bash(powershell.exe -Command \"nvidia-smi --query-gpu=name,memory.total,driver_version,compute_cap --format=csv,noheader\")",
+      "Bash(powershell.exe -Command \"Get-WmiObject Win32_VideoController | Select-Object Name, AdapterRAM, DriverVersion | Format-List\")",
+      "Bash(pip install torch numpy requests tiktoken --quiet)",
+      "Bash(python -c \"import torch; print\\(f''PyTorch {torch.__version__}''\\); print\\(f''CUDA: {torch.cuda.is_available\\(\\)}''\\)\")",
+      "Bash(python prepare.py --num-shards 1)"
+    ]
+  }
+}
