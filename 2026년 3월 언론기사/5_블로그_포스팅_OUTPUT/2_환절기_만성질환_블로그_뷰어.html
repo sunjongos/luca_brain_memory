@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>감기 탈 쓴 환절기 면역력 주의! 고혈압 당뇨 봄철 건강 비상 - 남양주 백병원 공식 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            letter-spacing: -0.5px;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 임시 히어로 배너 (이미지 삽입 전) */
+        .hero-banner {
+            width: 100%;
+            height: 450px;
+            background-color: #0B192C;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/blog_hero_chronic_webtoon_1772612462305.png');
+            background-size: cover;
+            background-position: center 20%;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .category-badge {
+            background-color: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .blog-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .blog-content {
+            padding: 50px 40px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h2 {
+            font-size: 24px;
+            color: #0B192C;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .highlight-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #FF5722;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            color: #111;
+            font-size: 16px;
+        }
+
+        blockquote {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0B192C;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+            position: relative;
+        }
+
+        blockquote::before,
+        blockquote::after {
+            content: '"';
+            font-size: 40px;
+            color: #4CAF50;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        blockquote::before {
+            top: 10px;
+            left: 20px;
+        }
+
+        blockquote::after {
+            bottom: -10px;
+            right: 20px;
+        }
+
+        ul.num-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            counter-reset: custom-counter;
+        }
+
+        ul.num-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        ul.num-list li::before {
+            counter-increment: custom-counter;
+            content: counter(custom-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #FF5722;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .hospital-info {
+            background-color: #0B192C;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .hospital-info h3 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .hospital-info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        .btn-reserve {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .hashtags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero-banner {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 30px 20px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .content-block h2 {
+                font-size: 20px;
+            }
+
+            blockquote {
+                font-size: 16px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blog-container">
+
+        <div class="hero-banner">
+            <!-- 임시 이미지. API 제한 해제 후 background-image로 url 업데이트 예정 -->
+            <div class="hero-overlay">
+                <span class="category-badge">가정의학과 건강칼럼</span>
+                <h1 class="blog-title">🤧 잦은 봄감기? 춘곤증?<br>환절기 면역력 비상, 만성질환자라면 꼭 보세요!</h1>
+                <div class="blog-meta">
+                    <span>작성자: 남양주 백병원</span>
+                    <span>|</span>
+                    <span>이민웅 센터장 (가정의학과)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-content">
+
+            <div class="content-block">
+                <p>만물이 소생하는 따뜻한 봄! 🌸 하지만 유독 봄만 되면 아침에 일어나기 힘들고, 으슬으슬 감기 기운에 시달리시는 분들 많으시죠?</p>
+                <p>낮에는 따뜻하지만 아침저녁으로는 쌀쌀한 요즘 같은 시기, <strong>10도 이상 벌어지는 큰 일교차</strong>는 우리 몸의 자율신경계를 교란시켜 체온 유지에 엄청난 에너지를
+                    쏟게 만듭니다. 그 결과 피로감은 극에 달하고 면역력은 뚝 떨어져 각종 호흡기 질환의 표적이 되기 십상입니다.</p>
+
+                <div class="highlight-box">
+                    <strong>⚠️ 특히 주의하세요!</strong><br>
+                    고혈압, 당뇨병, 고지혈증 등 기저질환을 앓고 계신 '만성질환자'분들에게 환절기는 <strong>합병증 위험이 도사리고 있는 가장 까다로운 계절</strong>입니다!
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>🚨 단순 감기가 아닐 수 있습니다!</h2>
+                <p>환절기 면역력 저하는 단순한 바이러스 감염(감기)으로 끝나지 않을 수 있습니다.</p>
+                <ul class="num-list">
+                    <li><strong>고혈압 환자 :</strong> 기온이 갑자기 떨어지면 혈관이 훅 수축하면서 혈압이 상승합니다. 자칫 심근경색이나 뇌졸중 등 치명적인 심뇌혈관 질환으로 이어질
+                        수 있습니다.</li>
+                    <li><strong>당뇨 환자 :</strong> 면역력이 떨어지면 몸속 염증 수치가 올라가고, 이로 인해 혈당 조절에 큰 어려움을 겪게 됩니다.</li>
+                </ul>
+
+                <blockquote>
+                    "봄철에 흔히 겪는 가벼운 감기 증상을 단순한 피로로 넘기시면 안 됩니다.<br>이는 우리 몸이 보내는 명백한 <strong>면역력 저하
+                        경고등</strong>입니다.<br>만성질환의 경우 기존 질환이 악화되고 있다는 1차 전조 증상일 수 있으므로<br>더욱 예민하게 반응하셔야 합니다."<br>
+                    <span style="font-size: 15px; font-weight: 400; color: #888; display: block; margin-top: 15px;">-
+                        남양주 백병원 이민웅 센터장 (가정의학과) -</span>
+                </blockquote>
+            </div>
+
+            <div class="content-block">
+                <h2>🛡️ 남양주 백병원이 알려주는 '환절기 면역력 사수 비법'</h2>
+                <p>성공적인 봄철 건강 관리를 위해 가장 중요한 것은 역시 <strong>'기본에 충실한 생활 습관'</strong>입니다!</p>
+
+                <ul class="num-list">
+                    <li><strong>체온 방어막 장착 :</strong> 외출 시에는 입고 벗기 편한 얇은 겉옷을 가방에 챙겨 다니세요. 급격한 체온 변화를 막는 것이 환절기 건강의
+                        제1원칙입니다.</li>
+                    <li><strong>물 마시기도 전략적으로 :</strong> 건조한 봄바람과 미세먼지로부터 호흡기 점막을 촉촉하게 보호하려면 하루 1.5리터 이상의 충분한 수분 섭취가
+                        필수입니다. 외출 후 손 씻기 등 철저한 개인위생 관리도 절대 잊지 마세요!</li>
+                    <li><strong>먹고 자는 것이 최고의 보약 :</strong> 신선한 제철 채소와 과일로 비타민 등 항산화 영양소를 보충하시고 단백질 위주의 균형 잡힌 식사를 하세요.
+                        그리고 무너진 면역 체계를 재건하는 건 바로 '하루 7시간 이상의 꿀잠'입니다.</li>
+                </ul>
+            </div>
+
+            <div class="content-block">
+                <h2>⚠️ 임의로 약 끊으시면 절대 안 됩니다!</h2>
+                <p>안타깝지만 약을 오래 먹으면 안 좋다며, 컨디션이 나아졌다고 <strong>임의로 약 복용을 중단</strong>하시는 만성질환자분들이 꽤 계십니다. 또 날씨가 좋다고 갑자기
+                    무리하게 활동량을 늘리시는 경우도 위험합니다.</p>
+                <p>환절기에는 꼭 병원을 방문하여 주치의 원장님과 상담 후 내 몸에 맞는 맞춤형 <strong>'환절기 관리 계획'</strong>을 세우는 것이 가장 안전합니다!</p>
+                <p>남양주백병원 가정의학과 및 내과센터는 지역 주민들의 만성질환을 체계적으로 추적 관리하며 합병증을 조기에 차단하는 든든한 평생 건강 주치의 역할을 다하고 있습니다. 환절기 피로감, 더
+                    이상 참지 마시고 남양주 백병원과 상의하세요! 😊</p>
+            </div>
+
+            <div class="hospital-info">
+                <h3>가족의 평생 주치의, 남양주 백병원 건강증진센터</h3>
+                <p><strong>📞 예약 및 상담 :</strong> 031-572-3111</p>
+                <p><strong>📍 오시는 길 :</strong> 경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                <p><strong>🌐 진료 과목 :</strong> 가정의학과, 내과, 척추관절, 뇌신경, 소화기 등</p>
+
+                <a href="http://www.baeak.hospital.co.kr" class="btn-reserve" target="_blank">온라인 간편 예약 바로가기 ➔</a>
+            </div>
+
+            <div class="hashtags">
+                <span class="hashtag">#면역력저하</span>
+                <span class="hashtag">#만성질환관리</span>
+                <span class="hashtag">#봄철건강</span>
+                <span class="hashtag">#환절기질환</span>
+                <span class="hashtag">#고혈압당뇨</span>
+                <span class="hashtag">#가정의학과</span>
+                <span class="hashtag">#이민웅센터장</span>
+                <span class="hashtag">#남양주백병원</span>
+                <span class="hashtag">#춘곤증</span>
+                <span class="hashtag">#가족주치의</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

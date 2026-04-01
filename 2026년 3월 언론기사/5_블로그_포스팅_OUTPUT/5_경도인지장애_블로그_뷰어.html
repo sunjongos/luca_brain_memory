@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>건강검진 후 '경도인지장애' 판정? 방치하면 '치매 지름길' 됩니다! - 남양주 백병원 공식 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            letter-spacing: -0.5px;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 히어로 배너 영역 */
+        .hero-banner {
+            width: 100%;
+            height: 450px;
+            background-color: #0B192C;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/blog_hero_dementia_webtoon_1772612657913.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(11, 25, 44, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .category-badge {
+            background-color: #673AB7;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .blog-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .blog-content {
+            padding: 50px 40px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h2 {
+            font-size: 24px;
+            color: #0B192C;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .highlight-box {
+            background-color: #ede7f6;
+            border-left: 4px solid #673AB7;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .doctor-quote {
+            display: flex;
+            background: #f4f6f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+            gap: 20px;
+            border-left: 5px solid #0B192C;
+        }
+
+        .doctor-quote .icon {
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .doctor-quote .quote-body h4 {
+            margin: 0 0 10px 0;
+            color: #0B192C;
+            font-size: 18px;
+        }
+
+        .doctor-quote .quote-body p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        ul.check-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        ul.check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        ul.check-list li::before {
+            content: '✔️';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        .hospital-info {
+            background-color: #0B192C;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .hospital-info h3 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .hospital-info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        .btn-reserve {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .hashtags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero-banner {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 30px 20px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .content-block h2 {
+                font-size: 20px;
+            }
+
+            .doctor-quote {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blog-container">
+
+        <div class="hero-banner">
+            <div class="hero-overlay">
+                <span class="category-badge">뇌신경센터 예방의학칼럼</span>
+                <h1 class="blog-title">🧠 건강검진 후 '경도인지장애' 판정?<br>방치하면 '치매 지름길' 됩니다!</h1>
+                <div class="blog-meta">
+                    <span>작성자: 남양주 백병원</span>
+                    <span>|</span>
+                    <span>강진호 병원장 (뇌신경센터)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-content">
+
+            <div class="content-block">
+                <p>건강검진 결과표가 제일 많이 도착하는 3월입니다! ✉️ 요즘 남양주 백병원 뇌신경센터에는 검진 결과를 들고 상담 오시는 분들이 부쩍 늘었는데요.</p>
+                <p>그중에서 유독 놀란 가슴을 쓸어내리며 찾아오시는 분들이 있습니다. 바로 검진에서 <strong>'경도인지장애'</strong> 판정을 받으신 분들입니다! 😨 "그냥 깜빡깜빡하는
+                    건망증인 줄 알았는데..." 하며 덜컥 겁부터 내시는 분들이 많은데요. 남양주 백병원 강진호 병원장님과 함께 확실하게 알려드릴게요!</p>
+            </div>
+
+            <div class="content-block">
+                <h2>🔎 경도인지장애, 대체 뭔가요?</h2>
+                <p>경도인지장애는 동일 연령대 분들에 비해 <strong>기억력 등 인지 기능은 조금 떨어져 있지만, 다행히 일상생활은 스스로 충분히 하실 수 있는 상태</strong>를 말합니다.
+                    쉽게 말해 '정상적인 노화'와 '치매'의 딱 중간 단계라고 보시면 됩니다!</p>
+
+                <div class="highlight-box">
+                    <strong>🚨 하지만 안심하기엔 이릅니다!</strong><br>
+                    연구 결과에 따르면, 매년 경도인지장애 환자의 약 10~15%가 <strong>'알츠하이머병' 등 명백한 치매로 진행</strong>된다고 합니다. 이는 일반 노인의 치매 발생률에
+                    비해 무려 <strong>10배 이상 높은 수치</strong>예요!
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>💡 진단은 끝이 아니라 치매 예방의 시작!</h2>
+                <p>"그럼 어차피 치매 걸리는 거 아닌가요?" 절대 아닙니다! 🙅‍♀️</p>
+                <p>경도인지장애는 오히려 <strong>치매를 막을 수 있는 마지막 '골든타임'</strong>입니다! 이 단계에서 생활 습관 교정, 인지 재활 훈련 등을 병행하면 치매로 넘어가는
+                    속도를 확 늦추거나 증상을 회복할 수 있습니다.</p>
+
+                <div class="doctor-quote">
+                    <div class="icon">👨‍⚕️</div>
+                    <div class="quote-body">
+                        <h4>강진호 병원장 (뇌신경센터)</h4>
+                        <p>"경도인지장애를 방치하면 수년 내에 높은 확률로 치매로 발전합니다. 하지만 조기에 발견해 체계적으로 뇌 건강을 관리하면 일상생활의 질을 충분히 유지할 수
+                            있습니다!<br><br>단순한 건망증을 넘어 '길눈이 어두워지거나 익숙하게 조작하던 리모컨이나 전자기기 조작이 갑자기 헷갈리는 등' 공간지각 및 실행 능력이 떨어지는
+                            게 느껴진다면 즉각 뇌신경 전문의의 정밀한 심층 진달을 받아보셔야 합니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>🏥 특별한 '맞춤형 인지 재활 가동'</h2>
+                <p>단순히 약만 처방하고 끝나는 것이 아닙니다. 남양주 백병원 뇌신경센터는 환자 개인별 뇌 손상 정도와 인지 저하 패턴을 정밀하게 분석하여 <strong>초밀착 인지 재활 치료
+                        프로그램</strong>을 가동합니다!</p>
+
+                <ul class="check-list">
+                    <li>뇌 신경 세포 자극 집중 치료</li>
+                    <li>숙련된 인지 재활 치료사와 1:1 두뇌 통합 훈련</li>
+                    <li>고혈압, 당뇨 등 뇌 속 혈관을 망가뜨리는 만성질환 동시 타겟 관리</li>
+                </ul>
+
+                <p>건강검진에서 경도인지장애 소견을 받으셨거나, 부모님의 기억력이 예전 같지 않아 불안하신가요? 미루지 말고 맑은 정신을 평생토록 지키기 위한 첫걸음을 남양주 백병원과 상의하세요!
+                    🏃‍♂️💨</p>
+            </div>
+
+            <div class="hospital-info">
+                <h3>대학병원급 뇌신경센터 운영, 남양주 백병원</h3>
+                <p><strong>📞 예약 및 상담 :</strong> 031-572-3111</p>
+                <p><strong>📍 오시는 길 :</strong> 경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                <p><strong>🌐 진료 과목 :</strong> 뇌신경센터, 내과/소화기, 척추관절, 건강증진센터 등</p>
+
+                <a href="http://www.baeak.hospital.co.kr" class="btn-reserve" target="_blank">온라인 간편 예약 바로가기 ➔</a>
+            </div>
+
+            <div class="hashtags">
+                <span class="hashtag">#경도인지장애</span>
+                <span class="hashtag">#치매예방</span>
+                <span class="hashtag">#인지기능저하</span>
+                <span class="hashtag">#치매조기진단</span>
+                <span class="hashtag">#건강검진</span>
+                <span class="hashtag">#남양주뇌신경센터</span>
+                <span class="hashtag">#강진호병원장</span>
+                <span class="hashtag">#남양주치매검사</span>
+                <span class="hashtag">#알츠하이머예방</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

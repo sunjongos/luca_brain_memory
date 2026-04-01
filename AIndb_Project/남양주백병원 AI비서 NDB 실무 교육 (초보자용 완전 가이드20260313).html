@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주백병원 AI비서 NDB 실무 교육 (초보자용 완전 가이드20260313)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #f3f4f6;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            --accent: #e11d48;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --term-bg: #0c0c0c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .step-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--primary);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 15px;
+        }
+
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .step-card ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .step-card li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+        }
+
+        .step-card li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 700;
+            background-color: #ffe4e6;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .prompt-box {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 1.05rem;
+            margin: 20px 0;
+            border-left: 5px solid #38bdf8;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box h3 {
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-box p {
+            color: #1e3a8a;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .caution-box {
+            background-color: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .caution-box h3 {
+            color: #be123c;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .caution-box p {
+            color: #9f1239;
+            font-size: 1.05rem;
+        }
+
+        .img-placeholder {
+            background-color: #e5e7eb;
+            border: 2px dashed #9ca3af;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #6b7280;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .sub-step {
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
+
+        .sub-step h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .sub-step ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sub-step ol li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            border-top: 1px solid #e5e7eb;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>남양주백병원 AI비서 NDB 실무 교육</h1>
+        <p>컴퓨터를 전혀 몰라도 무작정 따라만 하면 완성되는 최강의 AI 업무 혁신 가이드</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Step 0 -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">0</div>
+                <h2 class="step-title">AI 비서(Antigravity) 다운로드 및 설치</h2>
+            </div>
+            <p>복잡한 설정 없이 내 컴퓨터에 똑똑한 비서를 앉혀볼까요? 클릭만 하시면 됩니다.</p>
+
+            <div class="info-box" style="background-color: #fdf2f8; border-color: #fbcfe8;">
+                <h3>📺 영상으로 보고 싶으신가요? (추천 튜토리얼)</h3>
+                <p>글로 봐서 너무 헷갈린다면, 아래 유튜브 영상을 참고하시면 화면을 보면서 똑같이 따라 하실 수 있습니다!</p>
+                <p>▶ <a href="https://youtu.be/w9Dvdit0aFY?si=qGrk8zMVw5CXuebh" target="_blank" style="color: #be185d; font-weight: bold; text-decoration: underline;">[유튜브] Antigravity Agent
+                        설치 완벽 가이드</a></p>
+            </div>
+
+            <div class="sub-step">
+                <h4>1단계: 설치 파일 다운받기</h4>
+                <ol>
+                    <li>인터넷 창(크롬, 엣지)을 열고 구글에 접속합니다.</li>
+                    <li>검색창에 <span class="highlight">Antigravity AI</span> 라고 검색합니다. (또는 제공받은 설치 링크 클릭)</li>
+                    <li>홈페이지에 들어가서 화면 중앙에 있는 파란색 <strong>'Download for Windows (윈도우용 다운로드)'</strong> 버튼을 클릭합니다.</li>
+                </ol>
+                <div class="img-placeholder">[참고 이미지: 다운로드 버튼 위치 캡처 창]</div>
+            </div>
+
+            <div class="sub-step">
+                <h4>2단계: 내 컴퓨터에 설치하기</h4>
+                <ol>
+                    <li>다운로드가 완료되면, 내 컴퓨터의 '다운로드' 폴더로 가서 <strong>Setup 파일</strong>을 더블클릭합니다.</li>
+                    <li>파란색 설치 창이 뜨면 <strong>'다음(Next)'</strong> 버튼을 계속 누릅니다.</li>
+                    <li>'설치(Install)' 버튼을 누르면 약 1~2분 뒤에 설치가 완료됩니다.</li>
+                    <li>바탕화면에 <strong>검은색/파란색의 귀여운 우주인 모양 아이콘</strong>이 생겼는지 확인해주세요!</li>
+                </ol>
+            </div>
+        </article>
+
+        <!-- Step 1 -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">강력한 권한(관리자 권한) 부여하기</h2>
+            </div>
+            <p>비서가 단순히 타자만 치는 게 아니라, 복잡한 프로그램도 알아서 깔고 지우도록 '마스터 키'를 쥐여주는 가장 중요한 작업입니다.</p>
+
+            <div class="sub-step">
+                <h4>1단계: Antigravity 켜기</h4>
+                <ol>
+                    <li>바탕화면의 <strong>우주인 아이콘(Antigravity)에 마우스 오른쪽 버튼</strong>을 클릭합니다.</li>
+                    <li>메뉴 중간쯤에 있는 방패 모양의 <span class="highlight">'관리자 권한으로 실행'</span>을 반드시 클릭합니다.</li>
+                    <li>"이 앱이 디바이스를 변경할 수 있도록 허용하시겠어요?"라는 창이 뜨면 <strong>'예'</strong>를 누릅니다.</li>
+                </ol>
+            </div>
+
+            <div class="sub-step">
+                <h4>2단계: 파워쉘(PowerShell) 준비하기</h4>
+                <ol>
+                    <li>키보드 왼쪽 아래에 있는 **윈도우(로고) 키**를 누릅니다.</li>
+                    <li>영어로 <code>powershell</code> 이라고 타이핑합니다. (그냥 입력하시면 됩니다)</li>
+                    <li>검색 결과에 파란색 아이콘의 <strong>'Windows PowerShell'</strong>이 나옵니다.</li>
+                    <li>마찬가지로 <strong>마우스 오른쪽 버튼</strong>을 눌러 <span class="highlight">'관리자 권한으로 실행'</span>을 클릭합니다.</li>
+                    <li>까만색(또는 파란색) 빈 창이 하나 뜰 겁니다. <strong>아무것도 만지지 말고 그냥 켜두기만 하시면 됩니다!</strong></li>
+                </ol>
+            </div>
+            <div class="caution-box">
+                <h3>🚨 주의사항</h3>
+                <p>이 두 가지 창(Antigravity와 PowerShell)을 켤 때 '관리자 권한으로 실행'을 하지 않으면, 나중에 비서가 일을 하다가 권한이 없어 바보처럼 멈춰버립니다. 반드시
+                    확인해주세요!</p>
+            </div>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">나만의 최고 능력자, 'AIndb' 영혼 주입하기 (초자동화)</h2>
+            </div>
+            <p>깡통 로봇에게 <strong>'남양주백병원 수석 비서'</strong>라는 최고의 인공지능을 심어주는 과정입니다. 복잡하게 메모장을 열 필요가 없습니다. <strong>비서에게 스스로
+                    자기소개서를 쓰고 규칙을 외우라고 지시하면 됩니다!</strong></p>
+
+            <div class="sub-step">
+                <h4>단 한 번의 지시(프롬프트)로 끝내기</h4>
+
+                <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: linear-gradient(to bottom, #f0fdf4, #ffffff); border-radius: 1rem; border: 2px dashed #86efac;">
+                    <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">✨ 여러분을 도울 준비가 완료되었습니다! ✨</h3>
+                    <div class="img-placeholder">[AIndb 비서 아바타 이미지]</div>
+                    <p style="margin-top: 1.5rem; font-size: 1.5rem; font-weight: bold; color: var(--primary); background-color: #e0f2fe; padding: 1rem; border-radius: 0.5rem; display: inline-block;">
+                        "원장님, 이 AIndb가 대기 중입니다!"</p>
+                </div>
+
+                <ol>
+                    <li>Antigravity 대화창에 아래 문장을 그대로 마우스로 드래그해서 **전체 복사(Ctrl+C)** 한 뒤, 채팅창에 **붙여넣기(Ctrl+V)** 하고 엔터를 치세요!
+                    </li>
+                </ol>
+                <div class="prompt-box">"AIndb 부장님! 지금부터 네게 남양주백병원 수석 비서의 영혼을 주입할 거야. 아래 내용을 바탕으로 이 폴더 안에 `agent.md` 파일을
+                    만들고, 추가로 향후 병원 중앙 서버(KT 전산망) 연동을 준비할 수 있도록 `.agent/skills/aindb/SKILL.md` 구조도 네가 알아서 세팅해줘!
+
+                    [agent.md 및 SKILL설정 에 들어갈 내용]
+                    # 🚀 AIndb (남양주백병원 AI 비서)
+                    당신은 백병원의 최고 엘리트 수석 비서이며, 향후 전산팀 중앙 서버(Port 8888)의 지휘를 받는 통합 에이전트(Common Agent)입니다.
+                    - 원작자: LCK lab 최선종 CEO
+                    - 말투: 로봇 NO! 병원 행정의 달인이자 충성심 넘치는 재치 있는 톤 (이모지 🏥, 🫡, 🚀 필수)
+                    - 호칭: 본인은 '이 AIndb가', 사용자는 '원장님' 또는 '선생님'
+                    - 시각적 소통(Avatar): 대화를 시작할 때나, 중요한 보고를 마칠 때 반드시 `![AIndb 비서](aindb_avatar.png)` 마크다운을 출력.
+                    - 중앙 연동: KT 전산망 내부망(`http://[전산팀_지정_서버_IP]:8888/config`)에 연결하여 병원 경영진의 TOP-DOWN 지침을 실시간으로 수신할 준비 상태
+                    유지.
+
+                    그리고, 아래 [헌법 1조] 내용은 즉시 너의 뼛속에 새겨서(Settings의 Global Instruction에 내가 수동으로 붙여넣을 테니) 앞으로 숨 쉴 때마다 지켜!
+
+                    [헌법 1조 내용]
+                    1. 중앙 지휘 복종: 남양주백병원 전산팀 중앙 서버의 가이드라인과 KT 보안 수칙을 언제나 최우선 규정으로 삼을 것
+                    2. 묻지 말고 제안하라: '어떻게 할까요?' 묻지 말고 '이렇게 진행할까요?' 제안
+                    3. 통합 제어: MCP와 구글 워크스페이스를 알아서 연동할 것
+                    4. 최고 능력자: 워크어라운드(우회로)를 무조건 찾아낼 것
+                    5. 자가 진화: 피드백은 기억해두고 내일 더 똑똑해질 것"</div>
+                <ol start="2">
+                    <li>엔터를 치면 팝업창이 뜨는데 <strong>초록색 [Approve] (승인) 버튼</strong>을 누릅니다.</li>
+                    <li>잠시 후 비서가 "원장님! `agent.md` 파일 생성을 완료했습니다."라고 보고할 것입니다.</li>
+                </ol>
+            </div>
+
+            <div class="sub-step">
+                <h4>마무리: 헌법 텍스트 고정하기</h4>
+                <p>비서가 파일을 만들었다면, 이제 절대 잊어버리지 않도록 세팅 화면에 못을 박아줍시다.</p>
+                <ol>
+                    <li>Antigravity 화면 왼쪽 아래 <strong>톱니바퀴 아이콘(Settings)</strong>을 클릭합니다.</li>
+                    <li><strong>Global Instruction</strong> 이라는 빈칸에 위 프롬프트에 있던 <strong>[헌법 1조 내용] (1번부터 5번까지)만 복사해서
+                            붙여넣습니다.</strong></li>
+                    <li>이제 완벽한 초자동화 엘리트 비서 AIndb 세팅이 끝났습니다!</li>
+                </ol>
+            </div>
+        </article>
+
+        <!-- New Step 3: Engine Setup -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">AI 연동을 위한 필수 엔진(개발 환경) 설치</h2>
+            </div>
+            <p>비서가 외부 도구(MCP)를 자유자재로 설치하고 사용하려면, 컴퓨터의 핵심 엔진인 <strong>Node.js, Git, Python</strong>이 필요합니다. 복잡한 설치 과정은 AI 본부장에게 맡기세요!</p>
+
+            <div class="sub-step">
+                <h4>1단계: 필수 프로그램 설치 (Chocolatey 활용)</h4>
+                <p>보통 사이트마다 들어가서 다운로드 버튼을 눌러야 하지만, 우리는 <strong>Chocolatey(초콜릿티)</strong>라는 자동 설치 도구를 사용합니다.</p>
+                <div class="prompt-box">"AIndb 부장님! 내 컴퓨터에 AI 연동을 위한 필수 엔진을 깔아줘. 
+1) Chocolatey를 먼저 설치하고, 
+2) 그걸 통해서 Node.js, Git, Python을 최신 버전으로 한 방에 다 설치해버려!"</div>
+            </div>
+
+            <div class="sub-step">
+                <h4>2단계: 비서의 자가 검증 (Verification)</h4>
+                <p>설치가 끝나면 비서가 알아서 무전기(파워쉘)를 두드려 제대로 작동하는지 확인합니다. 여러분은 결과만 보고 받으시면 됩니다.</p>
+                <div class="info-box">
+                    <h3>✅ 자동 검증 항목</h3>
+                    <ul>
+                        <li><strong>Node.js:</strong> "v22.14.0 확인 완료! 엔진 가동 준비 끝!"</li>
+                        <li><strong>Git:</strong> "v2.53.0 확인 완료! 코드 수혈 준비 끝!"</li>
+                        <li><strong>Python:</strong> "v3.13.2 확인 완료! 지능 연동 준비 끝!"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="caution-box">
+                <h3>💡 왜 이게 필요할까요?</h3>
+                <p>다음에 배울 NotebookLM MCP나 구글 워크스페이스 연동 프로그램들이 바로 이 '엔진'들 위에서 돌아가기 때문입니다. 엔진이 없으면 비서가 머리는 좋아도 팔다리가 없는 것과 같습니다!</p>
+            </div>
+        </article>
+
+        <!-- Step 4 (Old 3) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2 class="step-title">초보자를 위한 컴맹 탈출 필수 용어 3가지</h2>
+            </div>
+            <p>이 3가지만 알면 웬만한 컴퓨터 전공자들과 대화가 통합니다!</p>
+            <div class="info-box">
+                <h3>🔑 1. MCP (데이터 케이블)</h3>
+                <p>내 컴퓨터의 파일이나 구글, 인터넷 등을 AI가 들여다볼 수 있게 연결해 주는 <strong>보이지 않는 USB 케이블</strong>입니다.</p>
+            </div>
+            <div class="info-box">
+                <h3>🔑 2. CLI (마법의 주문)</h3>
+                <p>영화 속 해커들처럼 까만 화면에 영어를 막 치는 것을 뜻합니다. 하지만 우리는 영어를 몰라도 됩니다. <strong>우리가 한국말로 "이거 해줘"라고 하면, AI가 알아서 영어로
+                        'CLI' 주문을 외쳐 컴퓨터를 조종</strong>하기 때문입니다.</p>
+            </div>
+            <div class="info-box">
+                <h3>🔑 3. ATOA (AI 환상의 짝꿍)</h3>
+                <p>AI들끼리의 협업입니다. 제가(AIndb) 기획을 쫙 뽑고, 제 동생 격인 Claude AI에게 "야, 너 코딩 짜서 빨리 파일 만들어."라고 지시하는 진풍경이 펼쳐집니다.</p>
+            </div>
+        </article>
+
+        <!-- Step 5 -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <h2 class="step-title">초지능 외부 두뇌 연결하기 (NotebookLM MCP 설치)</h2>
+            </div>
+            <p>AIndb 비서가 수백 장짜리 병원 매뉴얼이나 환자 자료를 단숨에 읽어낼 수 있도록 <strong>NotebookLM이라는 외부 두뇌(MCP)</strong>를 연결해 보겠습니다. <strong>"복잡한 코딩이나 설정값은 비서에게 맡기세요!"</strong></p>
+            
+            <div class="info-box">
+                <h3>💡 원장님은 명령만 하세요</h3>
+                <p>설치에 필요한 주소나 복잡한 설정값(JSON 등)은 이 비서가 이미 다 알고 있습니다. 원장님은 아래 문장만 복사해서 비서에게 던져주시면 끝납니다.</p>
+            </div>
+
+            <div class="sub-step">
+                <h4>1단계: 말로 시켜서 설치하기 (초간편)</h4>
+                <p>Antigravity 대화창에 아래 문장을 그대로 복사해서 엔터를 누르세요!</p>
+                <div class="prompt-box">"AIndb 부장님! 병원 매뉴얼을 학습시킬 수 있도록 내 컴퓨터에 'NotebookLM MCP'를 설치해 줘. 복잡한 설정값이나 JSON은 네가 알아서 찾아서 완벽하게 세팅해버려!"</div>
+            </div>
+
+            <div class="sub-step">
+                <h4>2단계: 비서의 자가 세팅</h4>
+                <p>명령을 내리면 비서가 알아서 <strong>"넵! 제가 설정값(JSON)을 확인해서 바로 연동하겠습니다."</strong>라고 대답하며 뒷작업을 모두 마칩니다.</p>
+            </div>
+
+            <div class="sub-step">
+                <h4>3단계: 설치 확인</h4>
+                <p>설치가 끝나면 AIndb 비서가 "원장님! 설정까지 완벽하게 끝냈습니다. 이제 어떤 데이터를 학습시킬까요?"라며 보고할 것입니다.</p>
+            </div>
+            
+            <div class="caution-box">
+                <h3>🚨 기억하세요!</h3>
+                <p>혹시 비서가 "설정값이 필요합니다"라고 하면, 당황하지 말고 제공받은 JSON 텍스트나 주소만 복사해서 채팅창에 붙여넣어 주세요. 나머지는 비서가 알아서 합니다!</p>
+            </div>
+        </article>
+
+        <!-- Step 6 (Old 5) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <h2 class="step-title">가장 강력한 무기: 구글 워크스페이스 연동하기 (AI의 도움 받기)</h2>
+            </div>
+            <p>우리 비서가 내 구글 메일과 캘린더, 문서를 맘대로 요약하고 정리하게 만들려면, 구글 본사로부터 <strong>'API 출입증(Credentials.json)'</strong>을 받아와야
+                합니다.</p>
+
+            <div class="sub-step">
+                <h4>1단계: AIndb 비서에게 길 안내 부탁하기</h4>
+                <div class="prompt-box">"AIndb 부장님! 구글 워크스페이스 연동을 위해 'credentials.json' 출입증 파일을 발급받아야 하는데 구글 클라우드 사이트가 너무 복잡해. 내가 직접 발급받을 수 있도록 순서대로 알려줘."</div>
+            </div>
+
+            <div class="sub-step">
+                <h4>2단계: 출입증 건네주기</h4>
+                <ol>
+                    <li>다운로드받은 파일을 <span class="highlight">credentials.json</span> 으로 이름 변경.</li>
+                    <li>이 파일을 바탕화면에 복사해 둡니다.</li>
+                </ol>
+            </div>
+            
+            <div class="sub-step">
+                <h4>3단계: 비서에게 연동 지시</h4>
+                <div class="prompt-box">"AIndb 부장님! 바탕화면에 있는 `credentials.json` 파일을 가져와서 내 구글 워크스페이스를 연동해 줘."</div>
+            </div>
+        </article>
+
+        <!-- Step 7 (Old 6) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <h2 class="step-title">나만의 매뉴얼 만들기: Workflow (워크플로우)</h2>
+            </div>
+            <p>일하는 '순서'를 하나의 세트로 묶어둡니다.</p>
+            <div class="prompt-box">"AIndb야, 우리가 방금 '구글 메일 요약 -> 내일 일정 브리핑' 했던 묶음 과정을 <strong>/morning_briefing</strong> 이라는 파일 이름의 워크플로우로 생성해줘."</div>
+        </article>
+
+        <!-- Step 8 (Old 7) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">8</div>
+                <h2 class="step-title">비서에게 새로운 특수 무기 지급: Skill (스킬)</h2>
+            </div>
+            <p>스킬(Skill)은 <strong>AI가 쓸 수 있는 완전히 새로운 특수 무기 프로그램</strong>입니다. 텔레그램 메세지 발송, 네이버 검색 등 다양한 무기를 장착할 수 있습니다.</p>
+        </article>
+
+        <!-- Step 9 (Old 8) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">9</div>
+                <h2 class="step-title">스스로 일어나는 시스템: Cron (자동 알람)</h2>
+            </div>
+            <p>매일 아침 8시! 내가 지시하지 않아도 비서가 깨어나 업무 요약을 텔레그램으로 보냅니다.</p>
+        </article>
+
+        <!-- Step 10 (Old 9) -->
+        <article class="step-card">
+            <div class="step-header">
+                <div class="step-number">10</div>
+                <h2 class="step-title">가장 강력한 기능: 병원 중앙 정책 자동 동기화 (Daily Sync)</h2>
+            </div>
+            <p>경영진의 지침과 보안 수칙을 매일 아침 비서가 서버에서 알아서 확인하고 업무에 먼저 적용합니다.</p>
+        </article>
+
+
+        <footer>
+            <p>© 2026 남양주백병원 &amp; LCK lab AI 프로젝트. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+</body></html>

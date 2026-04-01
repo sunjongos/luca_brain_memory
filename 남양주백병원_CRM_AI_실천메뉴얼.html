@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주백병원 AI 환자관리 초자동화 매뉴얼</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #d1fae5;
+            --secondary: #3b82f6;
+            --bg-body: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0f172a, var(--primary-dark));
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 2.5rem; margin-bottom: 12px; font-weight: 800; letter-spacing: -1px; }
+        .header p { font-size: 1.15rem; color: #cbd5e1; }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 50px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        .callout strong { color: var(--primary-dark); display: block; margin-bottom: 6px; }
+
+        /* Step Grid */
+        .step-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .step-box {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .step-box:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .step-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        /* Prompt Box */
+        .prompt-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            margin-top: 12px;
+            position: relative;
+            border-left: 4px solid var(--secondary);
+        }
+        .prompt-title {
+            display: block;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Result Check */
+        .result-ul {
+            list-style: none;
+            margin-top: 16px;
+        }
+        .result-ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        .result-ul li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .step-container.grid-2 { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>[실전] CRM + AI 환자관리 초자동화 가이드</h1>
+        <p>코딩이나 어려운 연동 없이, 소수 정예 2~3명으로 수천 명의 환자를 "관리"하는 비법</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2>💡 왜 CRM과 AI를 붙여야 할까? (개념 요약)</h2>
+            <div class="callout">
+                <strong>지금까지의 방식 (수동)</strong>
+                <p>직원이 매일 CRM(전자차트)에 로그인해서, 엑셀을 내려받아 필터를 걸어 대상자를 찾고, 일일이 전화하거나 문자를 복사해서 붙여넣고 보냅니다. (수백 명 한계, 번아웃 발생)</p>
+            </div>
+            <div class="callout" style="background:#eff6ff; border-color:var(--secondary);">
+                <strong>Antigravity AI 방식 (초자동화)</strong>
+                <p>퇴근 전 CRM에서 엑셀 파일을 하나 다운받아 AI에게 툭 던져줍니다. 다음 날 출근하면 AI가 <b>타겟 환자 분류, 안내 문자 초안 작성, 전화 돌려야 할 위험 이탈자 목록</b>을 책상(화면)에 세팅해 둡니다. 사람은 <b>'발송(Send)'</b>버튼 누르고 위험 환자에게 <b>'전화 1~2통'</b>만 하면 끝납니다.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 당장 내일부터 가능한 "3단계 실천 매뉴얼"</h2>
+            <p style="margin-bottom: 24px; color: var(--text-muted);">
+                개발자가 와서 시스템을 뜯어고칠 필요가 없습니다. 현재 사용 중인 CRM(전능, 비트, 이온엠 등)의 <b>'엑셀 다운로드'</b> 기능과 <b>'Antigravity(Luca) AI 비서'</b> 공간만 있으면 당장 시작할 수 있습니다.
+            </p>
+
+            <div class="step-container">
+                <!-- STEP 1 -->
+                <div class="step-box">
+                    <div class="step-badge">STEP 1. 데이터 먹이기 (데이터 스크리닝)</div>
+                    <div class="step-title">CRM에서 엑셀 다운 후 AI에게 던져주기</div>
+                    <p>병원 원무과장이나 코디네이터가 기존 CRM에서 <b>최근 1년 치 내원 환자 / 혹은 75세 이상 환자 목록</b>을 엑셀(.csv 또는 .xlsx)로 다운로드 받아 AI 비서창에 업로드합니다.</p>
+                    
+                    <div class="prompt-box">
+                        <span class="prompt-title">복사해서 AI 비서에게 붙여넣을 명령어 (프롬프트)</span>
+                        "Luca, 여기 올려준 엑셀 환자 명단에서 <br>
+                        1) 주소지가 '진접읍', '화도읍'이고 <br>
+                        2) 나이가 75세 이상이며 <br>
+                        3) 최근 3개월간 내원이 없는 환자(이탈 위험군) 리스트를 엑셀로 뽑아줘."
+                    </div>
+
+                    <ul class="result-ul">
+                        <li>결과물: 수만 개의 복잡한 엑셀이 단 10초 만에 <b>정예 타겟 리스트</b>로 요약됨</li>
+                    </ul>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="step-box">
+                    <div class="step-badge">STEP 2. 초개인화 메시지 양산 (사전 안부/방문 안내)</div>
+                    <div class="step-title">통합돌봄/상병별 맞춤형 문자 초안 작성시키기</div>
+                    <p>단순한 병원 홍보 문자는 모두 차단당합니다. 뽑힌 타겟 리스트의 환자 질환(치매, 고혈압 등)에 맞춰, <b>내 가족이 보내는 것 같은 안부 문자</b>를 AI가 1초 만에 100명분을 찍어내게 합니다.</p>
+                    
+                    <div class="prompt-box">
+                        <span class="prompt-title">복사해서 AI 비서에게 붙여넣을 명령어 (프롬프트)</span>
+                        "방금 분류한 리스트에 있는 환자들에게 보낼 안내 문자를 써줘. <br>
+                        치매 상병 코드가 있는 환자는 <b>'남양주 지정 치매센터 본인부담금 혜택'</b>을 강조하고, <br>
+                        방문진료 대상자에게는 <b>'남양주시 통합돌봄 주치의 방문'</b>을 언급하는 따뜻한 안부 문자 초안을 각각 엑셀 옆에 열로 만들어줘."
+                    </div>
+
+                    <ul class="result-ul">
+                        <li>결과물: 직원은 쭉 읽어보고 이상한 내용이 없는지 확인 후 일괄 발송 버튼만 클릭.</li>
+                        <li>장점: 전화 한 통 없이 <b>현대병원으로 갈 법한 환자들에게 선제적 브랜딩/예약</b> 유도.</li>
+                    </ul>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="step-box">
+                    <div class="step-badge">STEP 3. 위험군 관리 및 영업 (TF 핵심 타격)</div>
+                    <div class="step-title">VIP & 장기요양기관 핫라인 실시간 모니터링</div>
+                    <p>다수의 문자가 발송되고 나면, 실제 전화를 돌려야 할 <b>진짜 타겟(예: 진접읍 요양원 시설장)</b> 목록은 AI가 TF 담당자에게 별도로 추려줍니다.</p>
+
+                    <div class="prompt-box">
+                        <span class="prompt-title">복사해서 AI 비서에게 붙여넣을 명령어 (프롬프트)</span>
+                        "오늘 추출한 리스트 중 '장기요양기관'에서 우리 병원으로 이송했던 이력이 있는 리스트만 따로 표로 병원장/시설장 연락처 정리해줘. 내가 내일 오전에 바로 전화 돌릴 수 있게 우선순위 매겨줘."
+                    </div>
+
+                    <ul class="result-ul">
+                        <li>결과물: TF 코디네이터는 출근 직후 이 표를 수령하여, 다른 업무는 다 제쳐두고 오전에 영업 전화 10통으로 현대병원 파이를 스내칭(Snatching)합니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-left: 5px solid var(--primary);">
+            <h2>🔥 핵심 결론: TF팀의 절대 수칙</h2>
+            <ul style="list-style-type: none; font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
+                <li style="margin-bottom: 12px;">✅ <b>실무진의 손은 키보드에 있으면 안 됩니다. 전화기를 잡거나 핸들을 잡아야 합니다.</b></li>
+                <li style="margin-bottom: 12px;">✅ 데이터 추출 문서 작성, 메시지 초안, 보고서 엑셀은 100% <b>Antigravity AI 비서</b>에게 채팅으로 시킵니다.</li>
+                <li>✅ 직원은 AI가 만들어준 표를 보고, <b>"A요양원장님, 우리 백병원이 치매 산정특례 훨씬 쌉니다"</b>라는 영업적 한 마디만 직접 던집니다.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿Call ID,환자명,전화번호,AI 추출 요약,전체 대본(STT),녹음파일 URL
+019d2860-81a7-722b-8d80-ceaa8cd814ed,최선종 환자,+821062095699,"The AI, identifying itself as Luca, the secretary for Nanyangju Baek Hospital's administrative office, repeatedly attempted to connect. However, the call was met with an automated message indicating that the time to press a key had passed and instructing to press 2 for voicemail. The call ultimately ended with the automated system advising the user to check usage instructions and call again.","AI: 안녕하세요.
+User: 눌러야 할 시간이 지났습니다. 음성녹음은 한 번 호출번호를 남기시려면 이 번을 눌러주세요.
+AI: 안녕하세요. 남양주 백병원 원무가 비서.
+User: 눌러야 할 시간이 지났습니다. 음성녹음은 한 번 호출번호를 남기시려면 이 번을 눌러주세요.
+AI: 안녕하세요. 남양주백병원 원무과 비서 루카입니다.
+User: 사용 방법을 확인하신 후 다시 걸어 주시기 바랍니다. 이용해 주셔서 감사합니다.
+",https://storage.vapi.ai/019d2860-81a7-722b-8d80-ceaa8cd814ed-1774498973320-5da08eb1-50fb-4d0c-8f5a-18c929bc8b66-mono.wav
+019d2861-ce6b-7669-8e8b-6eb8b1b3d186,이호정 실장,+821058449240,"An AI assistant called Lee Ho-jung, the Chief Manager at Namyangju Baek Hospital, to relay a message from Director Choi Seon-jong. The director's message encouraged Lee Ho-jung to ""live diligently, fight hard, and please stop fighting."" Lee Ho-jung acknowledged the message and asked the AI to convey a ""fighting"" message back to the director.","AI: 안녕하세요.
+AI: 신가요?
+User: 네 맞는데요.
+AI: 안녕하세요. 남양주 백병원 최선종 병원장님. 이호정 실장님 맞으신가요?
+User: 네 맞아요.
+AI: 다름이 아니라 원장님께서 실장님께 전해달라고 하신 메시지가 있어서 전화드렸습니다. 이호정 실장, 열심히 좀 살자. 화이팅해라. 제발 싸움질 좀 그만해라라고 꼭 좀 전해달라고 하셨습니다.
+User: 네 감사해요.
+AI: 네 원장님께서 꼭 전해달라고 하셨습니다. 실장님 오늘 하루도 화이팅 하십시오.
+User: 원장님도 화이팅하라고 전해주세요.
+AI: 네, 알겠습니다. 원장님께 꼭 전해드리겠습니다. 실장님도 오늘 하루 힘내세요.
+User: 진짜
+",https://storage.vapi.ai/019d2861-ce6b-7669-8e8b-6eb8b1b3d186-1774499081320-88f1aadb-b0cb-457c-892f-575815171c33-mono.wav
+019d2884-ba09-7eee-98ae-4fc3d5839ac3,도연샘,+821030860722,"A staff member from Namyangju Baek Hospital called Do-yeon to relay a special message from the director. The director warmly encouraged Do-yeon to focus on both work and love during the spring, wishing her success in achieving both goals. The staff member reiterated the director's ongoing support and well wishes.","AI: 안녕하세요. 남양주 백병원 원무가 비서룩합니다. 혹시 도연 선생님 맞으신가요?
+User: 네.
+AI: 원장님께서 선생님께 특별히 전해달라고 하신 메세지 원장님께서 선생님께 특별히 전해달라고 하신 메세지가 있어서 드렸습니다.
+User: 네
+AI: 요즘 봄날이라 싱숭생숭할 텐데 마음 다잡고 일과 연애 두 마리 토끼를 다 잡으라고 따뜻하게 격려해 주셨습니다.
+User: 감사합니다.
+AI: 네 원장님께서 늘 챙기고 응원하고 계십니다. 토연 선생님 올 봄에 꼭 두 마리 토끼 다 잡으시길 바랍니다 화이팅
+User: 빼놔요.
+",https://storage.vapi.ai/019d2884-ba09-7eee-98ae-4fc3d5839ac3-1774501375199-dce79bbb-be30-48ad-a5db-63ff89fbc3ee-mono.wav
+019d2886-f4cd-7559-8cf1-129bb230ef26,이영희 간호부원장,+821020619989,"The AI, identifying itself as Luca from Yangju Baek Hospital, repeatedly attempted to connect with Nurse Deputy Director Lee Young-hee and later Director Choi Seon-jong. However, the call consistently encountered an automated voicemail system on the user's end, preventing any direct communication. The call ended with the user's automated system instructing the caller to check usage instructions and try again.","AI: 안녕하세요. 양주 백병원 원무가 비서 루카입니다. 혹시 이영희 간호부원장님 맞으신가요
+User: 눌러야 할 시간이 지났을 음성녹음은 한 번 호출번호를 남기시려면 이 번을 눌러주세요.
+AI: 안녕하세요 남양주 백병원 최선
+User: 눌러야 할 시간이 지났습니다. 음성녹음은 일 번 호출번호를 남기시려면 이 번을 눌러주세요.
+AI: 안녕하세요 남양주 백병원 최선종 병원장님 전체
+User: 사용 방법을 확인하신 후 다시 걸어두시기 바랍니다. 이용해 주셔서 감사합니다.
+",https://storage.vapi.ai/019d2886-f4cd-7559-8cf1-129bb230ef26-1774501491317-1947c65a-6edf-4f58-925a-8eaefe25f086-mono.wav
+019d28cf-3fa5-7eee-9953-85e2964655af,권오성 실장,+821092509532,"The AI, identifying as the hospital director's secretary ""Luca,"" called Director Kwon Oh-seong to report on the new AI call center system being implemented at Namyangju Baek Hospital. Luca explained that the system, built by linking Mappy AI and Twilio, currently displays as an international number due to the US Twilio network. The director specifically requested that Kwon be informed that integrating the hospital's KT corporate network would allow calls to display the local hospital number.","AI: 안녕하세요 남양주 백병원 원무과 비서룩합니다. 혹시 권오성 실장님 맞으신가요?
+User: 네 맞습니다.
+AI: 지시로 병원에 새로운 AI 콜센터 시스템 구축해 현황을 보고 드리러 전화했습니다. 저 반자동 AI 비서루카는 VF AI 두뇌와 Treeo 통신망을 API로 연동해서 일 차 구축되었습니다.
+User: 전화 잘 받았다고 오늘이 때 보고 이제요?
+AI: 죄송합니다. 제가 약간 혼선을 드린 것 같습니다. 다시 말씀드리겠습니다. 안녕하세요. 남양주 백병원 최선종 병원장님 전속 비서 루카입니다. 혹시 권오성 실장님 맞으신가요? 원장님 지시로 병원에 새로운 AI 콜센터 구축 현황을 보고 드리러 전화했습니다. 저 반자동 AI 비서 루카는 마피 AI 두뇌와 트윌리 통신망을 API로 연동해서 일 차 구축되었습니다. 다만 지금 미국 트윌리 망이라 국제전화 번호로 뜨기 때문에 향후 병원에 KT 기업망 연동해주시면 영삼 일 병원 번호로 전화를 걸 수 있다는 점을 원장님이 꼭 전해달라고 하셨습니다. 실무 세팅을 잘 부탁드립니다.
+User: 네 알겠습니다.
+AI: 네 알겠습니다. 권 실장님 오늘 하루도 화이팅 하십시오.
+",https://storage.vapi.ai/019d28cf-3fa5-7eee-9953-85e2964655af-1774506300750-3d76aa0e-55b8-44dc-abd0-dafc01397534-mono.wav

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDB 스트레스 클리닉 - 내부 홍보 포스터</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #1a202c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .poster {
+            width: 594px;
+            /* A2 proportion approx */
+            height: 841px;
+            background-image: linear-gradient(to bottom, rgba(10, 25, 47, 0.4), rgba(10, 25, 47, 0.9)), url('file:///C:/Users/USER/.gemini/antigravity/brain/11becc64-fe54-4034-9746-a2c2a87d4c86/stress_clinic_poster_1772758923238.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #ffffff;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            padding: 50px 40px 0;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #63b3ed;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 0;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content {
+            padding: 0 50px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .usp-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .usp-box h3 {
+            color: #90cdf4;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .usp-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .usp-list li {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .usp-list li::before {
+            content: "✓";
+            color: #48bb78;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .doctors {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .doctor-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            width: 45%;
+            text-align: center;
+            border: 1px solid rgba(49, 130, 206, 0.3);
+        }
+
+        .doc-title {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .doc-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+        }
+
+        .doc-role {
+            font-size: 13px;
+            color: #bee3f8;
+            margin-top: 8px;
+        }
+
+        .footer {
+            background: rgba(10, 25, 47, 0.95);
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 3px solid #3182ce;
+        }
+
+        .hospital-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            font-size: 15px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .highlight-text {
+            color: #fbd38d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="poster">
+        <div class="header">
+            <div class="subtitle">스트레스는 만병의 근원입니다</div>
+            <h1 class="title">남양주 백병원<br>NDB 스트레스 클리닉</h1>
+        </div>
+
+        <div class="content">
+            <div class="usp-box">
+                <h3>왜 NDB 클리닉인가?</h3>
+                <ul class="usp-list">
+                    <li><span class="highlight-text">건강검진센터 × 뇌신경센터</span>의 완벽한 One-Stop 협진 시스템</li>
+                    <li>증상을 덮는 약물이 아닌, <span class="highlight-text">편도체(Amygdala)</span> 안정화 궁극적 타겟 치료</li>
+                    <li>무너진 호르몬 밸런스 <span class="highlight-text">(HPA AXIS)</span> 근본적 복원 솔루션</li>
+                </ul>
+            </div>
+
+            <div class="doctors">
+                <div class="doctor-card">
+                    <div class="doc-title">뇌신경센터 전문의</div>
+                    <p class="doc-name">강진호 원장</p>
+                    <div class="doc-role">자율신경계 정밀 진단<br>뇌신경 밸런스 회복 전담</div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doc-title">건강검진센터 전문의</div>
+                    <p class="doc-name">이민웅 원장</p>
+                    <div class="doc-role">다방면적 기질적 이상형<br>선제적 병변 파악 (룰아웃)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="hospital-name">남양주 백병원 뇌신경센터 2층</div>
+            <div class="contact-info">
+                예약 및 상담: <strong style="color:#63b3ed; font-size:18px;">031-572-3111</strong><br>
+                경기도 남양주시 진접읍 해밀예당1로 30-25<br>
+                www.baeak.hospital.co.kr
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

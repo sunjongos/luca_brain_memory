@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봄맞이 운동, 설레는 발걸음에 '삐끗'… 관절 수명 깎는 스포츠 손상! - 남양주 백병원 공식 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            letter-spacing: -0.5px;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 히어로 배너 영역 */
+        .hero-banner {
+            width: 100%;
+            height: 450px;
+            background-color: #0B192C;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/blog_hero_sports_webtoon_1772612476555.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .category-badge {
+            background-color: #FF5722;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .blog-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .blog-content {
+            padding: 50px 40px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h2 {
+            font-size: 24px;
+            color: #0B192C;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .highlight-box {
+            background-color: #ffeced;
+            border-left: 4px solid #C62E2E;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .doctor-quote {
+            display: flex;
+            background: #f4f6f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .doctor-quote .icon {
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .doctor-quote .quote-body h4 {
+            margin: 0 0 10px 0;
+            color: #0B192C;
+            font-size: 18px;
+        }
+
+        .doctor-quote .quote-body p {
+            margin: 0;
+            font-size: 15px;
+            font-style: italic;
+            color: #555;
+        }
+
+        ul.check-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        ul.check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        ul.check-list li::before {
+            content: '✔️';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        .hospital-info {
+            background-color: #0B192C;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .hospital-info h3 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .hospital-info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        .btn-reserve {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .hashtags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero-banner {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 30px 20px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .content-block h2 {
+                font-size: 20px;
+            }
+
+            .doctor-quote {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blog-container">
+
+        <div class="hero-banner">
+            <!-- 임시 이미지. API 제한 해제 후 background-image로 url 업데이트 예정 -->
+            <div class="hero-overlay">
+                <span class="category-badge">관절센터 건강칼럼</span>
+                <h1 class="blog-title">🏃‍♀️ 설레는 봄맞이 등산갔다 무릎 '삐끗'!<br>방치하면 골병드는 스포츠 손상</h1>
+                <div class="blog-meta">
+                    <span>작성자: 남양주 백병원</span>
+                    <span>|</span>
+                    <span>백사무엘 센터장, 김용래 원장</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-content">
+
+            <div class="content-block">
+                <p>드디어 만물이 소생하는 봄! 🌱 낮 기온이 훌쩍 오르면서 겨우내 미뤄두었던 등산, 조깅, 골프 등 야외 스포츠 활동 준비하시는 분들 많으시죠? 하지만 3월 이맘때쯤 남양주 백병원
+                    진료실에는 즐거운 마음으로 나갔다가 <strong>예기치 못한 관절 부상(스포츠 손상)</strong>으로 찾아오시는 환자분들이 정말 많습니다.</p>
+                <p>겨울내 굳어있던 척추·관절과 약해진 근력이 갑작스러운 운동 강도를 견디지 못하고 인대 파열이나 염좌로 이어지는 것인데요. 남양주 백병원 관절센터 투톱(Two-Top) 원장님들과 함께
+                    대표적인 가을철 스포츠 손상과 대처법에 대해 알아보겠습니다!</p>
+            </div>
+
+            <div class="content-block">
+                <h2>🤕 봄철 3대 관절 부상 체크리스트</h2>
+                <p>나들이 후 관절이 아플 때, 단순히 "알이 배겼나?" 하고 파스만 붙이시는 분들 주목해 주세요! 🚨</p>
+
+                <ul class="check-list">
+                    <li><strong>발목 염좌 :</strong> 걷거나 뛸 때 발목이 크게 꺾이면서 인대가 손상되는 경우.</li>
+                    <li><strong>무릎 십자인대 & 연골 파열 :</strong> 등산 하산 시 무릎에 엄청난 하중이 실리거나 방향을 고쳐잡을 때 '툭' 하고 찢어집니다.</li>
+                    <li><strong>어깨 회전근개 파열 & 엘보 :</strong> 골프나 야구 등 어깨와 팔의 회전이 많은 운동 후 발생하는 파열입니다.</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong style="color:#C62E2E;">⚠️ 경고! 스포츠 손상은 자연 치유되지 않습니다!</strong><br>
+                    단순 근육통과 달리 인대나 연골 등 뼈를 잡아주는 구조물 자체가 망가진 상태입니다. 통증을 꾹 참고 운동을 지속하면 관절의 불안정성이 커져, <strong>젊은 나이임에도 조기
+                        퇴행성 관절염</strong>으로 직행할 수 있습니다! 😱
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>👨‍⚕️ "미루지 말고 빨리 치료받으세요!"</h2>
+                <p>남양주 백병원 관절센터에서는 각 분야의 권위자인 원장님들이 여러분의 평생 관절 건강을 책임지고 계십니다.</p>
+
+                <div class="doctor-quote">
+                    <div class="icon">🎯</div>
+                    <div class="quote-body">
+                        <h4>백사무엘 센터장 (어깨 질환 전담)</h4>
+                        <p>"봄철 골프 후 발생하는 어깨 회전근개 파열은 방치할 경우 파열 범위가 점차 넓어지고 나중에는 직접적인 봉합조차 어려워질 수 있어요! 팔을 올릴 때 아프거나 걸리는
+                            느낌이 있다면 지체 없이 정확한 진단을 받아야 합니다."</p>
+                    </div>
+                </div>
+
+                <div class="doctor-quote">
+                    <div class="icon">🎯</div>
+                    <div class="quote-body">
+                        <h4>김용래 원장 (무릎 질환 전담)</h4>
+                        <p>"수술이 불가피한 심각한 십자인대나 연골 파열이라도, 최근에는 5mm 이하의 초소형 내시경을 삽입하는 <strong>'관절내시경 수술'</strong>을 통해 피부
+                            절개와 통증을 최소화하고 부상 이전의 생활로 아주 빠르게 회복하실 수 있습니다!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>🏃‍♂️ 치료의 완성은 '맞춤 재활'입니다!</h2>
+                <p>성공적인 수술 후, 관절 주위의 근력을 회복하고 가동 범위를 정상화하는 체계적인 재활 훈련이 없다면 재발합니다. 남양주백병원 관절센터는 완벽한 회복을 돕기 위해 전문의와 숙련된
+                    치료팀이 1:1로 밀착 마크하는 <strong>'맞춤형 스포츠 재활 프로그램'</strong>을 운영합니다.</p>
+                <p>부종 감소부터 관절 꺾기, 단계적인 근력 강화까지! 환자분이 안전하고 신속하게 스포츠 활동으로 복귀하실 수 있도록 돕겠습니다.</p>
+            </div>
+
+            <div class="hospital-info">
+                <h3>관절 수술부터 재활까지 완벽하게, 남양주 백병원 관절센터</h3>
+                <p><strong>📞 예약 및 상담 :</strong> 031-572-3111</p>
+                <p><strong>📍 오시는 길 :</strong> 경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                <p><strong>🌐 진료 과목 :</strong> 척추관절센터, 뇌신경센터, 소화기센터, 통합 혈관클리닉 등</p>
+
+                <a href="http://www.baeak.hospital.co.kr" class="btn-reserve" target="_blank">온라인 간편 예약 바로가기 ➔</a>
+            </div>
+
+            <div class="hashtags">
+                <span class="hashtag">#봄철등산</span>
+                <span class="hashtag">#스포츠손상</span>
+                <span class="hashtag">#십자인대파열</span>
+                <span class="hashtag">#회전근개파열</span>
+                <span class="hashtag">#발목염좌</span>
+                <span class="hashtag">#관절내시경수술</span>
+                <span class="hashtag">#남양주관절병원</span>
+                <span class="hashtag">#백사무엘센터장</span>
+                <span class="hashtag">#김용래원장</span>
+                <span class="hashtag">#무릎통증</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,247 @@
+<!-- 슬라이드 ⑧: 6대 센터 원스톱 통합진료 -->
+<style>
+    .slide-onestop {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 50%, rgba(200, 160, 0, .1) 0%, transparent 65%),
+            linear-gradient(135deg, #07101a 0%, #0c1c30 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .slide-onestop .orb {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #f5c533, transparent 70%);
+        opacity: .15;
+        filter: blur(70px);
+    }
+
+    .slide-onestop .wm {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 220px;
+        font-weight: 900;
+        color: #fff;
+        opacity: .04;
+        user-select: none;
+        letter-spacing: -10px;
+    }
+
+    .slide-onestop .inner {
+        position: relative;
+        z-index: 10;
+        padding: 0 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slide-onestop .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 50px;
+        padding: 6px 18px;
+        margin-bottom: 20px;
+    }
+
+    .slide-onestop .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #f5c533;
+        animation: blink 2s infinite;
+    }
+
+    .slide-onestop .badge span {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, .8);
+        font-weight: 500;
+    }
+
+    .slide-onestop .cat {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #f5c533;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .slide-onestop h2 {
+        font-size: clamp(30px, 3.8vw, 52px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.22;
+        margin-bottom: 10px;
+        word-break: keep-all;
+    }
+
+    .slide-onestop h2 .hl {
+        color: #f5c533;
+    }
+
+    .slide-onestop .impact {
+        font-size: clamp(13px, 1.5vw, 17px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, .9);
+        margin-bottom: 14px;
+    }
+
+    .slide-onestop .desc {
+        font-size: clamp(13px, 1.3vw, 15px);
+        color: rgba(255, 255, 255, .62);
+        line-height: 1.8;
+        margin-bottom: 28px;
+        max-width: 560px;
+        word-break: keep-all;
+    }
+
+    .slide-onestop .desc strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .slide-onestop .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 28px;
+    }
+
+    .slide-onestop .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        background: rgba(245, 197, 51, .1);
+        border: 1px solid rgba(245, 197, 51, .3);
+        color: #fdd85a;
+    }
+
+    .slide-onestop .chip-w {
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .18);
+        color: rgba(255, 255, 255, .85);
+    }
+
+    .slide-onestop .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .slide-onestop .btn-call {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0088ee, #005bbf);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 9px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+        transition: all .25s;
+    }
+
+    .slide-onestop .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 26px;
+        border-radius: 9px;
+        text-decoration: none;
+        backdrop-filter: blur(6px);
+        transition: all .25s;
+    }
+
+    /* 통계 */
+    .os-stats {
+        position: absolute;
+        right: 52px;
+        bottom: 10%;
+        z-index: 20;
+        display: flex;
+        gap: 24px;
+    }
+
+    .os-stat {
+        text-align: center;
+    }
+
+    .os-num {
+        font-size: 28px;
+        font-weight: 900;
+        color: #fff;
+        line-height: 1;
+    }
+
+    .os-num sup {
+        font-size: 14px;
+        color: #f5c533;
+    }
+
+    .os-lbl {
+        font-size: 11px;
+        color: rgba(255, 255, 255, .45);
+        margin-top: 4px;
+    }
+</style>
+
+<div class="slide-onestop">
+    <div class="orb"></div>
+    <div class="wm">08</div>
+    <div class="inner">
+        <div class="badge">
+            <div class="dot"></div><span>대기 없이 · 원하는 날 · 검사~치료 하루 완결</span>
+        </div>
+        <div class="cat">5-Center One-Stop Care</div>
+        <h2>여러 과를 돌아다니는<br>시간 낭비, 이제 그만.<br><span class="hl">5대 센터 원스톱 통합진료</span></h2>
+        <div class="impact">척추관절·뇌신경·소화기·건강증진·응급 — 하나의 병원에서 하루에</div>
+        <p class="desc">환자가 원하는 날짜에 <strong>검사부터 치료까지 하루에 완결</strong>됩니다.<br>5대 센터가 유기적으로 협력하는 통합진료 시스템으로<br>불필요한 재방문과
+            시간 낭비를 없앴습니다.</p>
+        <div class="chips">
+            <div class="chip">🦴 척추관절센터</div>
+            <div class="chip">🧠 뇌신경센터</div>
+            <div class="chip">🫁 소화기센터(내과·외과)</div>
+            <div class="chip">💪 건강증진센터</div>
+            <div class="chip">🚑 24시간 응급진료실</div>
+            <div class="chip chip-w">⚡ 당일 원스톱 완결</div>
+        </div>
+        <div class="cta">
+            <a href="tel:031-572-3111" class="btn-call">📞 031-572-3111 예약 문의</a>
+            <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-more">온라인 예약 →</a>
+        </div>
+    </div>
+    <div class="os-stats">
+        <div class="os-stat">
+            <div class="os-num">5<sup>개</sup></div>
+            <div class="os-lbl">전문센터</div>
+        </div>
+        <div class="os-stat">
+            <div class="os-num">1<sup>day</sup></div>
+            <div class="os-lbl">원스톱 완결</div>
+        </div>
+    </div>
+</div>

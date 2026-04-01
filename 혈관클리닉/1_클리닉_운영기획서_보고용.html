@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDB 더 클리어 통합 혈관클리닉 운영기획서</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #e5e5e5;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* A4 Paper Dimensions */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 20mm 25mm;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Print Settings */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                width: auto;
+                min-height: auto;
+                padding: 15mm;
+            }
+        }
+
+        .doc-header {
+            border-bottom: 3px solid #0B192C;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .document-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 28px;
+            color: #0B192C;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .doc-meta {
+            text-align: right;
+            font-size: 13px;
+            color: #666;
+        }
+
+        h2.section-title {
+            background-color: #f4f6f9;
+            color: #0B192C;
+            border-left: 6px solid #FF5722;
+            padding: 10px 15px;
+            font-size: 18px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .highlight {
+            color: #C62E2E;
+            font-weight: 700;
+        }
+
+        .sub-section {
+            margin-bottom: 25px;
+            padding-left: 10px;
+            border-left: 2px solid #ddd;
+        }
+
+        .sub-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sub-title::before {
+            content: '■';
+            color: #0B192C;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 15px;
+            word-break: keep-all;
+        }
+
+        .footer {
+            margin-top: 60px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer span {
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <!-- Header -->
+        <div class="doc-header">
+            <div>
+                <div style="font-size: 14px; color: #FF5722; font-weight: 700; margin-bottom: 5px;">[비전 2026 특수클리닉 구축안]
+                </div>
+                <h1 class="document-title">남양주 백병원<br>'NDB 더 클리어 통합 혈관클리닉' 운영기획서</h1>
+            </div>
+            <div class="doc-meta">
+                <strong>작성일:</strong> 2026. 03. 04<br>
+                <strong>작성자:</strong> 전략기획실<br>
+                <strong>문서등급:</strong> 대내용 (임원 보고)
+            </div>
+        </div>
+
+        <!-- 1. 클리닉 개요 -->
+        <h2 class="section-title">1. 클리닉 개요</h2>
+        <ul>
+            <li><strong>클리닉명 :</strong> 남양주 백병원 <strong>NDB 더 클리어(The Clear) 통합 혈관클리닉</strong></li>
+            <li><strong>운영 목적 :</strong> MRA, CT Angiography, 최상위 구조적 초음파를 통한 동맥경화증/혈액순환 장애 <span class="highlight">원스톱
+                    당일 진단</span>과, 항혈소판제/항혈전제 및 <span class="highlight">킬레이션(Chelation) 해독 치료</span>를 병행하여 막힌 혈관을 뚫어내는
+                지역 내 유일무이한 통합 케어.</li>
+            <li><strong>핵심 경쟁력(USP) :</strong> "대학병원급 초정밀 진단(트리플 영상 검사) + 전문 약물 및 혈관 해독 보존치료의 압도적 결합"</li>
+        </ul>
+
+        <!-- 2. 진료 분야 및 전담 의료진 -->
+        <h2 class="section-title">2. 진료 분야 및 투톱(Two-Top) 전담 의료진</h2>
+
+        <div class="sub-section">
+            <div class="sub-title">[1] 뇌·경동맥질환 센터 (머리 부위 동맥경화 / 혈류 장애)</div>
+            <ul>
+                <li><strong>전담 의료진 :</strong> <strong>강진호 병원장 (신경과 전문의 / 뇌신경센터)</strong></li>
+                <li><strong>핵심 진료 분야 :</strong>
+                    <ul style="margin-top: 8px;">
+                        <li>뇌 및 경동맥 동맥경화증 조기 진단 및 혈관 해독 케어 (킬레이션, 항혈전 약물 전문)</li>
+                        <li>뇌졸중(중풍) 원천 예방, 기립성 저혈압 및 어지럼증 정밀 감별 진단</li>
+                        <li>망막 혈류를 통해 뇌 미세혈관 상태를 간접 확인하는 안저검사 시행</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <div class="sub-title">[2] 하지혈관 및 정맥류 시술·수술 센터 (다리 부위 순환 장애)</div>
+            <ul>
+                <li><strong>전담 의료진 :</strong> <strong>김용운 진료과장 (외과 전문의)</strong></li>
+                <li><strong>핵심 진료 분야 :</strong>
+                    <ul style="margin-top: 8px;">
+                        <li>하지 혈관 동맥경화증 및 심부정맥혈전증 진단 및 외과적 치료</li>
+                        <li><strong>흉터와 통증을 최소화하는 최신 정맥류 수술 (프레보그립 기계화학적 시술 선제도입)</strong></li>
+                        <li>외과적 정맥류 재발 방지 복합 시술 (초음파 유도하 발거술, 고주파 병행 등)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3. 원스톱 시스템 -->
+        <h2 class="section-title">3. 원스톱 트리플(Triple) 진단 체계 & NDB 애자일 시스템</h2>
+        <p>혈관질환 치료의 핵심은 '얼마나 신속하고 정확하게 미세한 찌꺼기(플라크)를 찾아내는가'에 있습니다. 당 병원은 <strong>당일 진단·당일 판독 원스톱(One-Stop) 애자일
+                시스템</strong>을 가동하여 대학병원의 수개월 대기를 원천적으로 없앴습니다.</p>
+        <ul>
+            <li><strong>초정밀 영상 진단 MRA + CT Angio :</strong> 뇌혈관부터 전신 동맥을 3차원으로 시각화하여 막힘이나 좁아짐 상태를 오차 없이 진단.</li>
+            <li><strong>최상위 하이엔드 초음파 듀얼 라인업 가동 :</strong>
+                <ul>
+                    <li><strong>GE LOGIQ E10S :</strong> 미세 경동맥 플라크, 하지 정맥/동맥 정밀 초음파.</li>
+                    <li><strong>GE Vivid Fortis :</strong> 심초음파 전용 장비로 심장 구조와 중심 혈류 펌핑 능력 심도 진단.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- 4. 치료 요법 -->
+        <h2 class="section-title">4. 독보적 솔루션: TTD(Two-Track Defense) 직접 치료 체계</h2>
+        <p>단순히 좁아진 곳을 진단하고 끝나는 것이 아니라, 실체적인 '혈관 청소' 솔루션을 제시하여 타 병원과의 진입 장벽(Moat)을 확고히 구축합니다.</p>
+        <ul>
+            <li><strong>Track 1. 타겟 약물 요법 :</strong> 환자의 제반 증상과 혈관 내 동맥경화반 두께에 맞춘 정교한 <strong>항혈소판제 및 항혈전제</strong> 투여로
+                추가적인 혈전 생성 억제.</li>
+            <li><strong>Track 2. 킬레이션(Chelation) 해독 요법 :</strong> EDTA 아미노산 및 비타민 복합체를 혈관 내 직접 투여. 이미 쌓여버린 중금속 유해 물질과
+                동맥경화반의 주성분인 칼슘 병합물을 결합시킨 뒤, 소변으로 안전하게 배출하여 혈관벽 탄력을 되돌리는 혁신적 화학적 보존 치료.</li>
+        </ul>
+
+        <!-- Footer -->
+        <div class="footer">
+            NAMYANGJU <span>BAEK</span> HOSPITAL
+        </div>
+
+    </div>
+
+</body>
+
+</html>

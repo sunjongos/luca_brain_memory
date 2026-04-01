@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봄철 허리 통증과 다리 저림! 단순 근육통일까요? - 남양주 백병원 공식 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            letter-spacing: -0.5px;
+        }
+
+        /* 메인 컨테이너 (네이버 블로그 폭 유사) */
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 썸네일 (히어로 이미지) */
+        .hero-banner {
+            width: 100%;
+            height: 450px;
+            background-color: #0B192C;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/dr_choi_spine_webtoon_1772613563058.png');
+            background-size: cover;
+            background-position: center 25%;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .category-badge {
+            background-color: #FF5722;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .blog-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* 본문 영역 */
+        .blog-content {
+            padding: 50px 40px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h2 {
+            font-size: 24px;
+            color: #0B192C;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .highlight-box {
+            background-color: #f0f5fa;
+            border-left: 4px solid #0056b3;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .highlight-box strong {
+            color: #0056b3;
+        }
+
+        /* 인용구 스타일 */
+        blockquote {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0B192C;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+            position: relative;
+        }
+
+        blockquote::before,
+        blockquote::after {
+            content: '"';
+            font-size: 40px;
+            color: #FF5722;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        blockquote::before {
+            top: 10px;
+            left: 20px;
+        }
+
+        blockquote::after {
+            bottom: -10px;
+            right: 20px;
+        }
+
+        /* 체크리스트/목록 */
+        ul.check-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        ul.check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        ul.check-list li::before {
+            content: '✔️';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        /* 하단 CTA 정보 */
+        .hospital-info {
+            background-color: #0B192C;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .hospital-info h3 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .hospital-info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        .btn-reserve {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .hashtags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .blog-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero-banner {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 30px 20px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .content-block h2 {
+                font-size: 20px;
+            }
+
+            blockquote {
+                font-size: 16px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blog-container">
+
+        <!-- 히어로 배너 (썸네일) -->
+        <div class="hero-banner">
+            <div class="hero-overlay">
+                <span class="category-badge">척추/관절 건강칼럼</span>
+                <h1 class="blog-title">🌸 봄철 야외활동 후 찾아온<br>허리 통증과 다리 저림! 단순 근육통일까요?</h1>
+                <div class="blog-meta">
+                    <span>작성자: 남양주 백병원</span>
+                    <span>|</span>
+                    <span>최선종 병원장 (척추센터)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 블로그 본문 -->
+        <div class="blog-content">
+
+            <div class="content-block">
+                <p>요즘 날씨가 제법 따뜻해지면서 등산, 자전거, 골프 등 야외 활동 즐기시는 분들 많으시죠? 🌱 기분 좋게 나들이 다녀오고 났는데, 갑자기 허리가 찌릿! 하거나 다리가 뻐근하게
+                    저려오신 적 없으신가요?</p>
+                <p>단순히 "겨우내 안 쓰던 근육을 써서 근육통이 왔나 보다~" 하고 며칠 쉬면 낫겠거니 방치하시는 경우가 많은데요. <strong style="color:#C62E2E;">통증이 3일
+                        이상 지속되거나 다리 저림까지 동반된다면?</strong> 단순 근육통이 아니라 <strong>허리디스크나 척추관협착증 같은 척추 질환의 경고 신호</strong>일 수
+                    있습니다! 🚨</p>
+            </div>
+
+            <div class="content-block">
+                <h2>📈 왜 유독 봄인 3~4월에 척추 환자가 늘어날까요?</h2>
+                <p>건강보험심사평가원 통계에 따르면, 일 년 중 허리디스크 등 척추 질환 환자가 가장 급증하는 시기가 바로 본격적인 봄나들이가 시작되는 3, 4월이라고 해요!</p>
+                <p>이유는 간단합니다. 추운 겨울 동안 활동량이 크게 줄면서 우리 척추를 지지해 주던 주변 근력들이 많이 약해져 있거든요. 그 상태에서 갑자기 척추에 무리가 가는 활동(등산, 무거운 짐
+                    들기 등)을 하면 뼈 사이의 디스크가 압박을 견디지 못하고 탈출하게 되는 것입니다. 💥</p>
+            </div>
+
+            <div class="content-block">
+                <h2>🤔 허리디스크 vs 척추관협착증, 내 증상은?</h2>
+                <p>허리 통증과 다리 저림을 유발하는 대표적인 두 가지 질환, 증상의 차이를 살짝 비교해 볼까요?</p>
+
+                <ul class="check-list">
+                    <li><strong>허리디스크 (요추 추간판탈출증) :</strong> 주로 한쪽 엉덩이, 허벅지, 종아리로 타고 내려오는 찌릿한 방사통과 저림 현상이 특징입니다.</li>
+                    <li><strong>척추관협착증 :</strong> 주로 중장년층에서 발생하며, 터질 듯이 다리가 아파서 걷다가 꼭 쪼그려 앉아 쉬어야 하는 '간헐적 파행' 증상이 두드러집니다.
+                    </li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>⚠️ 주의하세요!</strong><br>
+                    "다리가 저리다"는 증상은 척추 문제뿐만 아니라 하지정맥류 등 혈관 질환일 수도 있어요! 그래서 전문의의 빠르고 정확한 <strong>'감별 진단'</strong> 이 정말
+                    중요하답니다.
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>🩺 수술 걱정에 병원 가기 두려우신가요?</h2>
+                <p>많은 분들이 척추 병원에 오시는 걸 꺼려 하십니다. 바로 "허리 수술하면 큰일 난다던데...", "전신마취 무서운데..." 하는 걱정 때문이시죠.</p>
+
+                <blockquote>
+                    "최근에는 7mm 이하의 미세한 구멍만 내어 병변을 치료하는<br><strong>양방향 척추내시경 수술(BESS)</strong> 과 같은 첨단 최소침습 수술법이
+                    발달했습니다.<br>수술 후 통증이 획기적으로 적고 회복이 빨라 당일 퇴원이나 1박 2일 입원만으로도<br>금방 일상 복귀가 가능합니다!"<br>
+                    <span style="font-size: 15px; font-weight: 400; color: #888; display: block; margin-top: 15px;">-
+                        남양주 백병원 최선종 병원장 -</span>
+                </blockquote>
+
+                <p>고령이시거나 만성질환이 있어 전신마취 수술이 부담스러우신 분들도 안심하세요. 남양주백병원 척추센터는 최신 의료 장비와 풍부한 임상 경험을 바탕으로 <strong>환자 개개인에게 딱
+                        맞는 안전하고 정밀한 비수술 및 최소침습 치료</strong>를 제공해 드립니다. 👨‍⚕️✨</p>
+            </div>
+
+            <div class="content-block">
+                <h2>🏥 남양주 척추 건강의 든든한 거점!</h2>
+                <p>경기 동북부 지역 대표 의료 기관 남양주 백병원은 척추 질환의 정확한 진단부터 비수술치료, 고난도 최소침습 내시경 수술, 그리고 수술 후 재활까지
+                    <strong>원스톱(One-Stop) 의료 서비스</strong>를 제공합니다.
+                </p>
+                <p>이번 주말 나들이 후, 허리나 다리에 기분 나쁜 통증이 계속된다면 지체 없이 남양주 백병원을 찾아주세요! 여러분의 튼튼한 척추 건강, 확실하게 지켜드리겠습니다! 💪</p>
+            </div>
+
+            <!-- 하단 병원 정보 (CTA) -->
+            <div class="hospital-info">
+                <h3>남양주 백병원 척추관절/뇌신경/혈관 스페셜 센터</h3>
+                <p><strong>📞 예약 및 상담 :</strong> 031-572-3111</p>
+                <p><strong>📍 오시는 길 :</strong> 경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                <p><strong>🌐 진료 과목 :</strong> 척추관절센터, 뇌신경센터, 소화기센터, 통합 혈관클리닉 등</p>
+
+                <a href="http://www.baeak.hospital.co.kr" class="btn-reserve" target="_blank">온라인 간편 예약 바로가기 ➔</a>
+            </div>
+
+            <div class="hashtags">
+                <span class="hashtag">#봄철허리통증</span>
+                <span class="hashtag">#다리저림</span>
+                <span class="hashtag">#허리디스크</span>
+                <span class="hashtag">#척추관협착증</span>
+                <span class="hashtag">#양방향척추내시경</span>
+                <span class="hashtag">#남양주척추병원</span>
+                <span class="hashtag">#남양주백병원</span>
+                <span class="hashtag">#최선종원장</span>
+                <span class="hashtag">#최소침습수술</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

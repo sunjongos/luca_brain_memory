@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>닥터아이 광고 문구 20선 | PaiHealthcare-LCK</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;900&family=Montserrat:wght@700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --navy: #0b1f3a;
+            --blue: #1a4db3;
+            --sky: #2d8cf0;
+            --teal: #00c9b1;
+            --red: #e84545;
+            --gold: #f5a623;
+            --purple: #7c3aed;
+            --green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f0f4f9;
+            color: #1a2744;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a7a 100%);
+            color: #fff;
+            padding: 60px 5% 48px;
+            text-align: center;
+        }
+
+        header .badge {
+            display: inline-block;
+            background: rgba(0, 201, 177, 0.2);
+            color: var(--teal);
+            border: 1px solid rgba(0, 201, 177, 0.4);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            padding: 6px 20px;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.3;
+        }
+
+        header h1 span {
+            color: var(--teal);
+        }
+
+        header p {
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+        }
+
+        /* LEGEND */
+        .legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 24px 5%;
+            background: #fff;
+            border-bottom: 1px solid #e5eaf2;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* CARD */
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 28px 28px 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+            border-top: 4px solid var(--teal);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.13);
+        }
+
+        .card.type-patient {
+            border-top-color: var(--red);
+        }
+
+        .card.type-doctor {
+            border-top-color: var(--blue);
+        }
+
+        .card.type-impact {
+            border-top-color: var(--gold);
+        }
+
+        .card.type-hope {
+            border-top-color: var(--green);
+        }
+
+        .card.type-brand {
+            border-top-color: var(--purple);
+        }
+
+        .card-num {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.06);
+            line-height: 1;
+        }
+
+        .tag {
+            display: inline-block;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 3px 12px;
+            margin-bottom: 14px;
+        }
+
+        .tag.patient {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .tag.doctor {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .tag.impact {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .tag.hope {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .tag.brand {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .card blockquote {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.6;
+            color: #1a2744;
+            margin-bottom: 14px;
+        }
+
+        .card blockquote mark {
+            background: transparent;
+            background-image: linear-gradient(to right, rgba(0, 201, 177, 0.35), rgba(0, 201, 177, 0.1));
+            border-radius: 3px;
+            padding: 0 3px;
+        }
+
+        .card .desc {
+            font-size: 0.83rem;
+            color: #6b7a99;
+            line-height: 1.65;
+        }
+
+        .card .channel {
+            margin-top: 16px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ch {
+            font-size: 0.7rem;
+            color: #888;
+            border: 1px solid #e0e5ee;
+            border-radius: 8px;
+            padding: 2px 10px;
+        }
+
+        /* SUMMARY */
+        .summary {
+            background: var(--navy);
+            color: #fff;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .summary h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 32px;
+        }
+
+        .sum-grid {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sum-box {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 24px 32px;
+            min-width: 160px;
+        }
+
+        .sum-box .num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--teal);
+        }
+
+        .sum-box .lbl {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px;
+            font-size: 0.8rem;
+            color: #aab;
+            background: #e8edf5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="badge">PaiHealthcare-LCK 연구소 | 닥터아이 AI 안저진단</div>
+        <h1>닥터아이 <span>광고 문구 20선</span></h1>
+        <p>환자용 · 의사용 · 브랜드 · 임팩트 · 희망 — 5개 카테고리, 총 20개 광고 카피</p>
+    </header>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="dot" style="background:#dc2626"></div> 환자 감성 (공포·경각심)
+        </div>
+        <div class="legend-item">
+            <div class="dot" style="background:#1d4ed8"></div> 의사·병원 (B2B 설득)
+        </div>
+        <div class="legend-item">
+            <div class="dot" style="background:#b45309"></div> 임팩트 (강렬한 인상)
+        </div>
+        <div class="legend-item">
+            <div class="dot" style="background:#065f46"></div> 희망 (조기 진단 긍정)
+        </div>
+        <div class="legend-item">
+            <div class="dot" style="background:#6d28d9"></div> 브랜드 (닥터아이 정체성)
+        </div>
+    </div>
+
+    <div class="grid">
+
+        <!-- 1 -->
+        <div class="card type-patient">
+            <div class="card-num">01</div>
+            <span class="tag patient">환자 감성</span>
+            <blockquote>당신이 잃을 수 있는 것 중,<br><mark>눈이 가장 먼저입니다.</mark></blockquote>
+            <p class="desc">당뇨 합병증 중 실명이 삶의 질을 가장 극단적으로 파괴한다는 사실을 직접적으로 전달. 강한 공포 유발 효과.</p>
+            <div class="channel"><span class="ch">SNS 광고</span><span class="ch">병원 포스터</span><span class="ch">유튜브
+                    썸네일</span></div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card type-patient">
+            <div class="card-num">02</div>
+            <span class="tag patient">환자 감성</span>
+            <blockquote>혈당을 잡아도,<br><mark>눈을 놓치면 세상을 잃습니다.</mark></blockquote>
+            <p class="desc">열심히 혈당 관리를 해왔지만 눈 관리는 놓친 환자들의 맹점을 정확히 겨냥한 카피.</p>
+            <div class="channel"><span class="ch">네이버 배너</span><span class="ch">카카오 광고</span><span class="ch">진료실
+                    안내문</span></div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card type-patient">
+            <div class="card-num">03</div>
+            <span class="tag patient">환자 감성</span>
+            <blockquote>지금은 괜찮아 보여도,<br><mark>당뇨는 이미 눈 속에서 시작됩니다.</mark></blockquote>
+            <p class="desc">당뇨성 망막증이 무증상으로 진행된다는 특성을 이용한 경각심 유발. "지금 괜찮다"는 안도감을 깨는 카피.</p>
+            <div class="channel"><span class="ch">SNS 카드뉴스</span><span class="ch">당뇨 커뮤니티 광고</span></div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card type-patient">
+            <div class="card-num">04</div>
+            <span class="tag patient">환자 감성</span>
+            <blockquote>손자 얼굴 보고 싶으세요?<br><mark>당뇨 눈 관리, 지금 시작하세요.</mark></blockquote>
+            <p class="desc">고령 당뇨 환자의 감성을 자극하는 정서적 카피. 가족과의 연결을 통해 행동을 유도.</p>
+            <div class="channel"><span class="ch">중장년 타깃 SNS</span><span class="ch">지역 신문 광고</span></div>
+        </div>
+
+        <!-- 5 -->
+        <div class="card type-patient">
+            <div class="card-num">05</div>
+            <span class="tag patient">환자 감성</span>
+            <blockquote>신장은 투석이라도 합니다.<br><mark>눈은 — 한 번 잃으면 끝입니다.</mark></blockquote>
+            <p class="desc">여러 당뇨 합병증 중 실명이 왜 특별히 두려운지를 비교를 통해 명확하게 설명. 강도 높은 공포 메시지.</p>
+            <div class="channel"><span class="ch">병원 리플렛</span><span class="ch">당뇨 강의 슬라이드</span></div>
+        </div>
+
+        <!-- 6 -->
+        <div class="card type-hope">
+            <div class="card-num">06</div>
+            <span class="tag hope">희망 메시지</span>
+            <blockquote>지금 발견하면,<br><mark>95%는 막을 수 있습니다.</mark></blockquote>
+            <p class="desc">공포 유발 후 반전으로 희망을 제시하는 구조. 조기 검진 행동을 직접 유도하는 가장 강력한 희망 카피.</p>
+            <div class="channel"><span class="ch">검진 안내 배너</span><span class="ch">CTA 버튼 문구</span></div>
+        </div>
+
+        <!-- 7 -->
+        <div class="card type-hope">
+            <div class="card-num">07</div>
+            <span class="tag hope">희망 메시지</span>
+            <blockquote>5분의 검사가<br><mark>50년의 시야를 지킵니다.</mark></blockquote>
+            <p class="desc">검사의 간편함(5분)과 결과의 장기적 가치(50년)를 대비시킨 카피. 비용 대비 가치를 직관적으로 전달.</p>
+            <div class="channel"><span class="ch">예약 유도 광고</span><span class="ch">병원 입간판</span></div>
+        </div>
+
+        <!-- 8 -->
+        <div class="card type-hope">
+            <div class="card-num">08</div>
+            <span class="tag hope">희망 메시지</span>
+            <blockquote>당뇨성 실명의 95%,<br><mark>조기 발견으로 예방 가능합니다.</mark></blockquote>
+            <p class="desc">의학적 통계 수치를 전면에 내세운 신뢰 기반 카피. 의사 또는 의료진이 환자에게 전달할 때 효과적.</p>
+            <div class="channel"><span class="ch">의료 콘텐츠</span><span class="ch">EMR 알림 문구</span></div>
+        </div>
+
+        <!-- 9 -->
+        <div class="card type-hope">
+            <div class="card-num">09</div>
+            <span class="tag hope">희망 메시지</span>
+            <blockquote>빛을 잃기 전에<br><mark>닥터아이가 먼저 지킵니다.</mark></blockquote>
+            <p class="desc">'빛'의 이중적 의미(시력과 희망)를 활용한 감성적 카피. 브랜드의 보호자 이미지를 강화.</p>
+            <div class="channel"><span class="ch">브랜드 광고</span><span class="ch">병원 모니터 슬라이드</span></div>
+        </div>
+
+        <!-- 10 -->
+        <div class="card type-doctor">
+            <div class="card-num">10</div>
+            <span class="tag doctor">의사·병원 B2B</span>
+            <blockquote>진료실의 5분이<br><mark>환자의 남은 시야를 결정합니다.</mark></blockquote>
+            <p class="desc">의사의 책임감과 사명감에 호소하는 카피. 도입 망설임을 환자에 대한 책임으로 전환시키는 효과.</p>
+            <div class="channel"><span class="ch">의료 세미나 자료</span><span class="ch">B2B 제안서 표지</span></div>
+        </div>
+
+        <!-- 11 -->
+        <div class="card type-doctor">
+            <div class="card-num">11</div>
+            <span class="tag doctor">의사·병원 B2B</span>
+            <blockquote>혈당 관리만으론 부족합니다.<br><mark>당신의 환자, 눈도 보고 계십니까?</mark></blockquote>
+            <p class="desc">내과·가정의학과 의사의 진료 공백을 짚어내는 카피. "당신의 환자"라는 소유격으로 책임감 극대화.</p>
+            <div class="channel"><span class="ch">의사 대상 DM</span><span class="ch">의학 저널 광고</span></div>
+        </div>
+
+        <!-- 12 -->
+        <div class="card type-doctor">
+            <div class="card-num">12</div>
+            <span class="tag doctor">의사·병원 B2B</span>
+            <blockquote>AI가 판독합니다.<br><mark>의사는 치료에만 집중하세요.</mark></blockquote>
+            <p class="desc">AI 도입의 실용적 장점(업무 분담)을 전면에 내세운 카피. 바쁜 의사의 현실적 고충을 해결하는 솔루션 이미지.</p>
+            <div class="channel"><span class="ch">학회 부스 배너</span><span class="ch">도입 제안 메일 제목</span></div>
+        </div>
+
+        <!-- 13 -->
+        <div class="card type-doctor">
+            <div class="card-num">13</div>
+            <span class="tag doctor">의사·병원 B2B</span>
+            <blockquote>당뇨 환자의 눈까지 보는 병원,<br><mark>경쟁에서 앞서갑니다.</mark></blockquote>
+            <p class="desc">도입 병원의 차별화 및 경쟁 우위를 강조. 환자 유치보다 "앞서가는 병원" 이미지를 자극.</p>
+            <div class="channel"><span class="ch">병원장 대상 브리핑</span><span class="ch">도입 제안서</span></div>
+        </div>
+
+        <!-- 14 -->
+        <div class="card type-doctor">
+            <div class="card-num">14</div>
+            <span class="tag doctor">의사·병원 B2B</span>
+            <blockquote>"이상 있습니다" — AI가 먼저 발견,<br><mark>의사가 먼저 알립니다.</mark></blockquote>
+            <p class="desc">의사가 환자에게 "AI가 발견했습니다"라고 말하는 순간의 신뢰도 상승 효과를 카피로 표현.</p>
+            <div class="channel"><span class="ch">진료 경험 사례 콘텐츠</span><span class="ch">환자 후기 연계</span></div>
+        </div>
+
+        <!-- 15 -->
+        <div class="card type-impact">
+            <div class="card-num">15</div>
+            <span class="tag impact">강렬한 임팩트</span>
+            <blockquote>당뇨는 천천히,<br><mark>실명은 조용히.</mark></blockquote>
+            <p class="desc">짧고 강렬한 대비 구조. 당뇨의 만성적 특성과 실명의 silent progression을 동시에 표현한 시적 카피.</p>
+            <div class="channel"><span class="ch">옥외 광고</span><span class="ch">유튜브 범퍼광고 (6초)</span><span class="ch">카드뉴스
+                    표지</span></div>
+        </div>
+
+        <!-- 16 -->
+        <div class="card type-impact">
+            <div class="card-num">16</div>
+            <span class="tag impact">강렬한 임팩트</span>
+            <blockquote>눈을 잃으면<br><mark>세상을 다 잃는 법이지요.</mark></blockquote>
+            <p class="desc">사용자가 직접 언급한 표현을 세련되게 다듬은 카피. 진솔하고 무게감 있는 메시지.</p>
+            <div class="channel"><span class="ch">시니어 타깃 광고</span><span class="ch">지역방송 CM</span></div>
+        </div>
+
+        <!-- 17 -->
+        <div class="card type-impact">
+            <div class="card-num">17</div>
+            <span class="tag impact">강렬한 임팩트</span>
+            <blockquote>소리도 없이, 증상도 없이,<br><mark>당뇨가 눈을 끄고 있습니다.</mark></blockquote>
+            <p class="desc">'불이 꺼지는' 시각적 이미지로 실명 과정을 묘사. 무증상 진행의 공포를 감각적으로 전달.</p>
+            <div class="channel"><span class="ch">영상 광고 나레이션</span><span class="ch">SNS 릴스</span></div>
+        </div>
+
+        <!-- 18 -->
+        <div class="card type-impact">
+            <div class="card-num">18</div>
+            <span class="tag impact">강렬한 임팩트</span>
+            <blockquote>당뇨 10년,<br><mark>10명 중 3명은 이미 망막이 망가집니다.</mark></blockquote>
+            <p class="desc">구체적 통계(30%)를 일상 언어로 풀어낸 카피. 숫자의 현실감이 경각심을 크게 높임.</p>
+            <div class="channel"><span class="ch">인포그래픽</span><span class="ch">당뇨 환자 블로그</span></div>
+        </div>
+
+        <!-- 19 -->
+        <div class="card type-brand">
+            <div class="card-num">19</div>
+            <span class="tag brand">브랜드 정체성</span>
+            <blockquote>닥터아이가 봅니다.<br><mark>당신이 보지 못하는 것을.</mark></blockquote>
+            <p class="desc">닥터아이 브랜드의 핵심 가치(AI가 인간보다 먼저 발견)를 단 두 줄로 압축한 브랜드 슬로건.</p>
+            <div class="channel"><span class="ch">브랜드 슬로건</span><span class="ch">로고 하단 태그라인</span><span
+                    class="ch">명함</span></div>
+        </div>
+
+        <!-- 20 -->
+        <div class="card type-brand">
+            <div class="card-num">20</div>
+            <span class="tag brand">브랜드 정체성</span>
+            <blockquote>당뇨가 눈을 노리는 동안,<br><mark>AI가 먼저 발견합니다.</mark></blockquote>
+            <p class="desc">당뇨(적)와 AI(수호자)의 대결 구도를 통해 닥터아이의 역할을 영웅적으로 포지셔닝하는 카피.</p>
+            <div class="channel"><span class="ch">제품 소개 표지</span><span class="ch">보도자료 리드문</span><span class="ch">IR
+                    자료</span></div>
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+        <h2>📊 광고 문구 활용 전략 요약</h2>
+        <div class="sum-grid">
+            <div class="sum-box">
+                <div class="num">5</div>
+                <div class="lbl">환자 감성 카피<br>(공포·경각심 유발)</div>
+            </div>
+            <div class="sum-box">
+                <div class="num">4</div>
+                <div class="lbl">희망 메시지 카피<br>(조기 진단 긍정)</div>
+            </div>
+            <div class="sum-box">
+                <div class="num">5</div>
+                <div class="lbl">의사·병원 B2B 카피<br>(도입 설득)</div>
+            </div>
+            <div class="sum-box">
+                <div class="num">4</div>
+                <div class="lbl">임팩트 카피<br>(강렬한 첫인상)</div>
+            </div>
+            <div class="sum-box">
+                <div class="num">2</div>
+                <div class="lbl">브랜드 슬로건<br>(닥터아이 정체성)</div>
+            </div>
+        </div>
+        <p style="margin-top:36px; color:rgba(255,255,255,0.55); font-size:0.85rem;">
+            닥터아이 AI 안저진단 솔루션 | PaiHealthcare-LCK 연구소 | 2026
+        </p>
+    </div>
+
+    <footer>닥터아이 (Doctor Eye) 광고 카피 보고서 — PaiHealthcare-LCK 연구소 | 총 20개 광고 문구</footer>
+
+</body>
+
+</html>

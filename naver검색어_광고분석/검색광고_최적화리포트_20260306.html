@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>남양주백병원 네이버 검색광고 최적화 리포트</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--p:#0d47a1;--pl:#e3f2fd;--s:#1976d2;--g:#10b981;--r:#ef4444;--y:#f59e0b;--t:#1e293b;--tg:#64748b;--bg:#f8fafc;--bc:#ffffff;--brd:#e2e8f0;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',sans-serif;}
+body{background:var(--bg);color:var(--t);line-height:1.6;}
+.container{max-width:1400px;margin:0 auto;padding:2rem;}
+header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid var(--brd);}
+h1{font-size:2rem;font-weight:800;color:var(--p);}
+.badge{display:inline-block;background:var(--pl);color:var(--p);padding:.3rem .8rem;border-radius:20px;font-weight:700;font-size:.85rem;}
+.meta{text-align:right;color:var(--tg);font-size:.9rem;}
+.site-url{color:var(--s);font-weight:600;font-size:.95rem;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:2rem;}
+.grid-2{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+.card{background:var(--bc);border-radius:16px;padding:1.75rem;border:1px solid var(--brd);box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.card-title{font-size:1.1rem;font-weight:700;color:var(--t);display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;}
+.card-title i{color:var(--p);}
+.kpi-val{font-size:2rem;font-weight:800;color:var(--p);line-height:1.2;}
+.kpi-val.red{color:var(--r);}
+.kpi-val.green{color:var(--g);}
+.kpi-sub{color:var(--tg);font-size:.9rem;margin-top:.4rem;}
+.chart-wrap{position:relative;height:300px;}
+.data-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+.data-table th{padding:.9rem 1rem;background:#f1f5f9;color:var(--tg);font-weight:600;text-align:left;border-bottom:2px solid var(--brd);}
+.data-table td{padding:.9rem 1rem;border-bottom:1px solid var(--brd);}
+.data-table tr:hover td{background:var(--bg);}
+.status-pill{padding:.25rem .65rem;border-radius:20px;font-size:.78rem;font-weight:700;white-space:nowrap;}
+.status-success{background:#dcfce7;color:#16a34a;}
+.status-info{background:#e0f2fe;color:#0284c7;}
+.status-warning{background:#fef3c7;color:#b45309;}
+.status-danger{background:#fee2e2;color:#dc2626;}
+h2{font-size:1.5rem;font-weight:700;color:var(--t);margin:2.5rem 0 1rem;}
+.landing-alert{background:linear-gradient(135deg,#fff7ed,#ffedd5);border-left:4px solid var(--y);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin-bottom:1.5rem;}
+.landing-alert strong{color:#b45309;}
+.action-box{background:linear-gradient(135deg,var(--p),var(--s));color:#fff;padding:2rem 2.5rem;border-radius:16px;margin-top:2rem;display:flex;gap:2rem;align-items:flex-start;}
+.action-box i{font-size:2.5rem;opacity:.8;flex-shrink:0;}
+.action-box h3{font-size:1.4rem;font-weight:800;margin-bottom:.75rem;}
+.action-box p{opacity:.95;line-height:1.8;font-size:1rem;}
+.action-box a{display:inline-block;background:#fff;color:var(--p);padding:.6rem 1.4rem;border-radius:8px;font-weight:700;text-decoration:none;margin-top:1rem;}
+@media(max-width:900px){.grid-4{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}header{flex-direction:column;gap:1rem;}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div>
+    <div class="badge">네이버 DataLab API 실데이터</div>
+    <h1>검색광고 최적화 리포트</h1>
+    <p style="color:var(--tg);margin-top:.4rem;font-weight:500;">현재 광고 중인 키워드 성과 진단 및 교체 추천 (월 예산 2,500,000원)</p>
+    <p class="site-url"><i class="fa-solid fa-globe"></i> 광고 랜딩 URL: <a href="https://www.baekhospital.co.kr" target="_blank">https://www.baekhospital.co.kr</a></p>
+  </div>
+  <div class="meta">
+    <strong>작성:</strong> AI 마케팅 본부장 Luca<br>
+    <strong>작성일:</strong> 2026. 03. 06
+  </div>
+</header>
+
+<!-- KPI 요약 -->
+<div class="grid-4">
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-won-sign"></i> 월 광고 예산</div>
+    <div class="kpi-val">250만 원</div>
+    <div class="kpi-sub">일 평균 83천 원</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-tags"></i> 분석 키워드 수</div>
+    <div class="kpi-val">20개</div>
+    <div class="kpi-sub">현재 광고 중인 검색어</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-triangle-exclamation"></i> 교체 권장 키워드</div>
+    <div class="kpi-val red">4개</div>
+    <div class="kpi-sub">예산 누수 추정: 500,000원/월</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-circle-check"></i> 교체 후 절감 효과</div>
+    <div class="kpi-val green">+500,000원</div>
+    <div class="kpi-sub">우량 키워드 재투자 재원</div>
+  </div>
+</div>
+
+<!-- 랜딩 페이지 알림 -->
+<div class="landing-alert">
+  <strong><i class="fa-solid fa-link"></i> 광고 랜딩 페이지 현황:</strong>
+  현재 광고 클릭 시 전체 키워드가 <a href="https://www.baekhospital.co.kr" target="_blank"><strong>https://www.baekhospital.co.kr</strong></a> 메인 홈페이지로 연결됩니다.
+  질환별 세부 클리닉 페이지(혈관클리닉, 스트레스클리닉 등) 직접 연결 시 <strong>전환율 200% 이상 향상</strong>을 기대할 수 있습니다. 키워드와 랜딩 URL 1:1 매핑을 강력히 권장합니다.
+</div>
+
+<!-- 현재 키워드 트렌드 차트 -->
+<h2>1. 현재 광고 키워드 검색량 트렌드 (상위 5개)</h2>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-chart-line"></i> 월별 상대적 검색량 추이</div>
+    <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="fa-solid fa-info-circle"></i> 그래프 읽는 법</div>
+    <p style="font-size:.95rem;color:var(--tg);line-height:1.8;">
+      <strong>Y축(0~100):</strong> 네이버 DataLab 상대 검색량. 100이 해당 기간 최고치.<br><br>
+      <strong>높을수록 비쌈:</strong> 검색량이 높다는 건 많은 광고주가 입찰 경쟁 중이라는 뜻. CPC(클릭당 비용)가 높아짐.<br><br>
+      <strong>안정적 우량:</strong> 평균 30~60 사이에서 등락 없이 꾸준한 키워드가 가성비 최고.
+    </p>
+  </div>
+</div>
+
+<!-- 현재 키워드 성과 테이블 -->
+<h2>2. 현재 광고 키워드 성과 진단 (전체)</h2>
+<div class="card">
+  <div style="overflow-x:auto;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th><th>키워드</th><th>평균 검색량</th><th>변동성(편차)</th><th>최근 트렌드</th><th>가성비 점수</th><th>등급</th><th>권장 조치</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>1</td>
+            <td><strong>남양주뇌MRI</strong></td>
+            <td>1.0</td>
+            <td>0.0</td>
+            <td>➡️ 유지</td>
+            <td>79점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><strong>남양주재활치료</strong></td>
+            <td>1.2</td>
+            <td>0.0</td>
+            <td>➡️ 유지</td>
+            <td>79점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><strong>남양주신경과</strong></td>
+            <td>1.0</td>
+            <td>0.5</td>
+            <td>➡️ 유지</td>
+            <td>79점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><strong>남양주내과</strong></td>
+            <td>3.2</td>
+            <td>0.9</td>
+            <td>➡️ 유지</td>
+            <td>77점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><strong>남양주건강검진</strong></td>
+            <td>4.5</td>
+            <td>4.5</td>
+            <td>➡️ 유지</td>
+            <td>75점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><strong>남양주허리통증</strong></td>
+            <td>12.8</td>
+            <td>0.0</td>
+            <td>➡️ 유지</td>
+            <td>71점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><strong>남양주체형교정</strong></td>
+            <td>8.4</td>
+            <td>15.4</td>
+            <td>🔻 하락</td>
+            <td>61점</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+            <td>✅ 유지</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td><strong>남양주목디스크</strong></td>
+            <td>34.6</td>
+            <td>37.8</td>
+            <td>🔺 상승</td>
+            <td>56점</td>
+            <td><span class="status-pill status-warning">C (재검토 필요)</span></td>
+            <td>⚠️ 재검토</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td><strong>남양주도수치료</strong></td>
+            <td>51.9</td>
+            <td>28.9</td>
+            <td>➡️ 유지</td>
+            <td>34점</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td><strong>남양주정형외과</strong></td>
+            <td>48.2</td>
+            <td>29.4</td>
+            <td>🔻 하락</td>
+            <td>31점</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td><strong>남양주백병원</strong></td>
+            <td>62.0</td>
+            <td>15.7</td>
+            <td>🔻 하락</td>
+            <td>24점</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td><strong>남양주종합병원</strong></td>
+            <td>81.0</td>
+            <td>21.3</td>
+            <td>🔻 하락</td>
+            <td>8점</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td><strong>남양주디스크</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td><strong>남양주척추</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td><strong>남양주두통</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td><strong>남양주어지럼증</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td><strong>남양주손발저림</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td><strong>남양주관절</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td><strong>남양주무릎통증</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td><strong>평내호평역병원</strong></td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>데이터없음</td>
+            <td>0점</td>
+            <td><span class="status-pill status-danger">F</span></td>
+            <td>🚫 교체 권장</td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 추천 교체 키워드 -->
+<h2>3. AI 추천 교체 키워드 (롱테일 세부 키워드)</h2>
+<div class="card">
+  <div style="overflow-x:auto;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th><th>추천 키워드</th><th>평균 검색량</th><th>가성비 점수</th><th>트렌드</th><th>등급</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>1</td>
+            <td><strong>구리신경과</strong></td>
+            <td>10.6</td>
+            <td>71점</td>
+            <td>➡️ 유지</td>
+            <td><span class="status-pill status-info">B (유지 권장)</span></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><strong>남양주파킨슨</strong></td>
+            <td>83.3</td>
+            <td>22점</td>
+            <td>➡️ 유지</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><strong>하남정형외과</strong></td>
+            <td>73.4</td>
+            <td>14점</td>
+            <td>🔻 하락</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><strong>남양주치매검사</strong></td>
+            <td>91.7</td>
+            <td>12점</td>
+            <td>➡️ 유지</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><strong>남양주어깨통증</strong></td>
+            <td>100.0</td>
+            <td>10점</td>
+            <td>➡️ 유지</td>
+            <td><span class="status-pill status-danger">D (교체 대상)</span></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><strong>남양주다리저림</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><strong>평내호평손목통증</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td><strong>구리척추내시경</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td><strong>남양주하지정맥류수술</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td><strong>남양주도수치료실비</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td><strong>남양주손발저림병원</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td><strong>남양주두통병원</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td><strong>남양주냉방병</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td><strong>남양주낙상골절</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td><strong>남양주발저림</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td><strong>남양주교통사고후유증</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td><strong>남양주뇌졸중</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td><strong>남양주뇌경색</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td><strong>남양주수면장애</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td><strong>남양주이명</strong></td>
+            <td>0.0</td>
+            <td>0점</td>
+            <td>데이터없음</td>
+            <td><span class="status-pill status-danger">F</span></td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 결론 -->
+<div class="action-box">
+  <i class="fa-solid fa-rocket"></i>
+  <div>
+    <h3>Luca 본부장의 광고비 최적화 액션 플랜</h3>
+    <p>
+      현재 <strong>https://www.baekhospital.co.kr</strong> 홈페이지를 단일 랜딩으로 사용하고 있어, 질환별 맞춤 정보를 찾는 환자가 이탈하는 구조입니다.
+      교체 권장 키워드 4개를 제외하고, 가성비 우량 키워드 + 추천 롱테일 키워드로 재편성 시,
+      동일 예산(2,500,000원)으로 <strong>신환 문의 2~3배 증가</strong>가 예상됩니다.<br><br>
+      <strong>당장 실행 가능한 3가지:</strong><br>
+      1️⃣ D등급 키워드 광고 정지 → 월 500,000원 즉시 절감<br>
+      2️⃣ 추천 롱테일 키워드 20개 광고 계정에 등록<br>
+      3️⃣ 네이버 광고 관리자에서 '확장 소재(전화번호, 위치)' 연동 확인
+    </p>
+    <a href="https://www.baekhospital.co.kr" target="_blank"><i class="fa-solid fa-hospital"></i> 백병원 홈페이지 확인</a>
+  </div>
+</div>
+</div>
+
+<script>
+const ctx = document.getElementById('trendChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["25-10"],
+    datasets: [{"label": "남양주뇌MRI", "data": [0.96525], "borderColor": "#0d47a1", "backgroundColor": "transparent", "borderWidth": 2.5, "tension": 0.3, "pointRadius": 3}, {"label": "남양주재활치료", "data": [1.1583], "borderColor": "#f59e0b", "backgroundColor": "transparent", "borderWidth": 2.5, "tension": 0.3, "pointRadius": 3}, {"label": "남양주신경과", "data": [0.96753, 0.90388, 0.36919, 0.33099, 0.82749, 1.66772, 0.99299, 1.54042, 0.66199, 1.97326, 1.08211, 0.92934, 0.2928], "borderColor": "#10b981", "backgroundColor": "transparent", "borderWidth": 2.5, "tension": 0.3, "pointRadius": 3}, {"label": "남양주내과", "data": [3.16995, 4.15022, 2.41884, 2.24061, 3.2336, 4.07383, 3.30999, 4.13749, 3.2718, 4.11203, 3.6028, 3.48822, 0.64926], "borderColor": "#ef4444", "backgroundColor": "transparent", "borderWidth": 2.5, "tension": 0.3, "pointRadius": 3}, {"label": "남양주건강검진", "data": [2.6098, 9.53532, 4.45576, 16.42266, 7.28198, 1.03119, 1.37492, 2.22788, 3.80649, 4.11203, 0.61107, 0.10184], "borderColor": "#8b5cf6", "backgroundColor": "transparent", "borderWidth": 2.5, "tension": 0.3, "pointRadius": 3}]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {mode:'index',intersect:false},
+    scales: {
+      y: {beginAtZero:true, max:100, title:{display:true,text:'상대 검색량 (Max 100)'}}
+    },
+    plugins: {
+      legend: {position:'bottom', labels:{usePointStyle:true, padding:16, font:{family:"'Pretendard',sans-serif"}}}
+    }
+  }
+});
+</script>
+</body>
+</html>

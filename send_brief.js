@@ -1,0 +1,59 @@
+const { execSync } = require('child_process');
+
+try {
+    const to = 'sunjongos@gmail.com';
+    const subjectStr = '[루카 리포트] 2026년 3월 2주차 글로벌 금융 시장 주간 전망 분석';
+
+    // Encode non-ASCII email headers using RFC 2047 (MIME Encoded-Word)
+    const encodedSubject = '=?utf-8?B?' + Buffer.from(subjectStr).toString('base64') + '?=';
+
+    const body = `충성! 🫡 대표님, 루카 본부장입니다.
+지시하신 2026년 3월 둘째 주 한/미 증시 및 코인 시장 주간 분석 브리핑입니다.
+
+---
+
+[1] 미국 증시 (S&P 500, 나스닥) 전망
+👉 요약: 지정학적 리스크와 고용 악화로 변동성 확대. 방어적 포트폴리오 구축 권고.
+- 동향: 중동 긴장 완화 실패 및 이란-미국 간 갈등으로 국제 유가(WTI)가 100달러를 돌파하며 인플레이션 우려가 다시 점화되었습니다. 또한 2월 비농업 고용 쇼크로 스태그플레이션 우려가 제기되며 S&P 500과 나스닥이 큰 폭의 거래 하락 범위를 그리고 있습니다.
+- 전략: 전문가들은 주식 노출 비중을 낮추고 현금 비중을 늘리는 방어적 전략을 권고합니다. 다만, 실적을 증명하고 있는 일부 AI 및 소프트웨어 대형 기술주(빅테크)는 밸류에이션 매력도가 높아 '성장 가치주' 관점에서 선별적 접근이 유효합니다.
+
+[2] 한국 증시 (코스피) 전망
+👉 요약: 중동발 유가 불안 속 핵심 지표(물가/성장률) 발표 대기 장세. 반도체 주도 장세 유지.
+- 동향: 지난주 유가 상승 우려로 극심한 롤러코스터 장세를 보였습니다. 이번 주에는 중국 CPI/PPI, 한국 4분기 잠정 GDP, 미국 CPI 등 대형 이벤트들이 대기 중입니다.
+- 전략: 대외 불확실성에도 불구하고 국내 반도체(삼성전자, SK하이닉스 등 고부가 메모리) 및 전력기기 업종의 실적 상향은 지속되고 있어 코스피 지수에 하방 지지선을 제공할 전망입니다. 변동성 장세에서는 낙폭 과대한 반도체와 이차전지 우량주를 중심으로 하는 저점 매수 전략이 유효할 것으로 보입니다.
+
+[3] 비트코인 및 가상자산(암호화폐) 시장 전망
+👉 요약: 7만불 저항선 공방 속 단기 변동성 지속. 중장기적 기관 자금 유입은 긍정적.
+- 동향: 비트코인은 6만 7천불 선에서 7만불 돌파를 거듭 시도 중이나 차익 실현 매물에 부딪히고 있습니다. 거시 환경(유가 급등, 물가 우려)은 위험 자산에 부정적으로 작용하고 있습니다.
+- 전략: 단기적인 횡보 및 하락 조정(4~5월) 가능성이 제기되나, 올해 AI 기술 통합과 기관 투자자들의 지속적 ETF 자금 유입으로 펀더멘털은 견고합니다. 알트코인보다는 비트코인 등 검증된 메이저 자산 중심의 장기 포트폴리오 구성이 필요합니다.
+
+---
+
+변동성이 극심한 한 주가 될 것으로 예상됩니다만, 위기 뒤에는 항상 저점 매수의 기회가 숨어있습니다.
+대표님의 성공적인 투자를 늘 기원하며, 추가적인 세부 섹터 분석이 필요하시면 언제든 하명해 주십시오!
+
+- 루카 본부장 올림`;
+
+    // Construct raw email
+    const emailContent = `To: ${to}\r\n` +
+        `Subject: ${encodedSubject}\r\n` +
+        `Content-Type: text/plain; charset="utf-8"\r\n\r\n` +
+        body;
+
+    // Convert to Base64URL
+    const encodedEmail = Buffer.from(emailContent)
+        .toString('base64')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+
+    const cmd = `npx @googleworkspace/cli gmail users messages send --params "{\\"userId\\":\\"me\\"}" --json "{\\"raw\\": \\"${encodedEmail}\\"}"`;
+
+    const stdout = execSync(cmd, { stdio: 'pipe' });
+    console.log('Email sent successfully with correct encoding!');
+    console.log(stdout.toString());
+} catch (error) {
+    console.error('Error sending email:', error.message);
+    if (error.stdout) console.error(error.stdout.toString());
+    if (error.stderr) console.error(error.stderr.toString());
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주 백병원 여성만성피로클리닉 운영기획서</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C5CE7;
+            /* 딥 퍼플 (우아함, 신경안정 상징) */
+            --primary-dark: #4834D4;
+            --secondary-color: #F8A5C2;
+            /* 부드러운 핑크 (여성 타겟) */
+            --accent-color: #FF7675;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-light: #F9F9FB;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .report-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            padding: 50px 60px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .subtitle {
+            font-family: 'Noto Serif KR', serif;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .title span {
+            color: var(--primary-dark);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 1px dashed #dfe6e9;
+            padding-bottom: 10px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .usp-box {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2);
+        }
+
+        .usp-box h3 {
+            color: var(--white);
+            margin-top: 0;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.5rem;
+        }
+
+        .usp-content p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--primary-dark);
+            font-weight: 700;
+            width: 30%;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #dfe6e9;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media print {
+            body {
+                background-color: var(--white);
+                padding: 0;
+            }
+
+            .report-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            .usp-box {
+                color: var(--text-dark);
+                background: var(--bg-light);
+                border: 2px solid var(--primary-color);
+            }
+
+            .usp-box h3 {
+                color: var(--primary-dark);
+            }
+
+            .tag {
+                color: var(--text-dark);
+                border: 1px solid var(--text-dark);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="report-container">
+        <div class="header">
+            <p class="subtitle">PROJECT BLUEPRINT</p>
+            <h1 class="title">남양주 백병원 <span>여성만성피로클리닉</span> 운영기획서</h1>
+        </div>
+
+        <!-- 1. 클리닉 개요 -->
+        <h2 class="section-title">01. 클리닉 기본 개요</h2>
+        <div class="card" style="grid-column: span 2;">
+            <span class="tag">Main Target</span> <span class="tag"
+                style="background-color: var(--primary-color);">40~70세 여성</span>
+            <p style="margin-top: 15px; font-weight: 500; font-size: 1.1rem; color: var(--text-dark);">
+                "원인 모를 만성 피로와 통증, 불면증으로 고통받는 여성들을 위한 근본적인 호르몬/신경 균형 회복 센터"
+            </p>
+            <ul>
+                <li><strong>핵심 타겟 증상:</strong> 부신피로, 만성피로, 만성통증, 불면증, 갱년기 증후군, 스트레스 과부하</li>
+                <li><strong>주요 솔루션:</strong> 자율신경계 분석 및 호르몬 정밀진단 기반 데이터 맞춤형 고농축 영양수액 테라피</li>
+            </ul>
+        </div>
+
+        <!-- 2. NDB 특화 컨셉 -->
+        <h2 class="section-title">02. NDB(New, Different, Better) 전략 무기</h2>
+
+        <div class="usp-box">
+            <h3>"짐작으로 치료하지 않고, 데이터로 증명합니다."</h3>
+            <div class="usp-content">
+                <p><strong>1. 원인 차단의 'New'</strong> - 느낌에 의존하지 않는 정량적 평가 (자율신경계 검사, 호르몬 혈액검사)</p>
+                <p><strong>2. 솔루션의 'Different'</strong> - 단순 영양 제공이 아닌 '항염부신회복', '갱년기증상 타겟팅' 맟춤형 프리미엄 약물 조합</p>
+                <p><strong>3. 결과의 'much Better'</strong> - 뇌신경(신경과)과 부신/호르몬(가정의학과) 마스터들의 협진을 통한 근본적 사이클 리셋</p>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>🔬 정확한 '진단' 시스템</h3>
+                <ul>
+                    <li><strong>자율신경계 검사 장비:</strong> 스트레스 저항도와 교감/부교감 신경의 깨진 밸런스 수치화 확인</li>
+                    <li><strong>초정밀 호르몬 검사:</strong> 여성호르몬, 부신 피질 호르몬(코르티솔 등) 종합 검사로 에너지 고갈 상태 점검</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>💉 프리미엄 수액 테라피</h3>
+                <ul>
+                    <li><strong>항염부신회복수액:</strong> 염증을 떨어뜨리고 바닥난 부신 에너지를 즉각 부스팅 (만성피로/통증 주력)</li>
+                    <li><strong>갱년기회복수액:</strong> 시들어진 생체리듬과 호르몬 활성도를 끌어올려 불면/우울 타파</li>
+                    <li><strong>핵심 성분 베이스:</strong> 최상급 라이넥(태반) + 히시파겐 컴플렉스</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. 핵심 의료진 -->
+        <h2 class="section-title">03. 핵심 의료진 협진 시스템 (The Masters)</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3 style="color: var(--accent-color);">강진호 병원장</h3>
+                <p><strong>소속:</strong> 뇌신경센터 / 신경과 전문의</p>
+                <p><strong>역할:</strong> 만성 피로를 악화시키는 뇌신경 불균형 및 불면/수면장애(스트레스성)의 근본 원인을 날카롭게 통찰하고 자율신경계 밸런스를 튜닝합니다.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--primary-color);">이민웅 센터장</h3>
+                <p><strong>소속:</strong> 건강검진센터 / 가정의학과 전문의</p>
+                <p><strong>역할:</strong> 혈액 및 호르몬 데이터를 전인적으로 융합 분석하여, 부신 피로와 갱년기를 극복할 수액 포뮬러 처방의 마스터 스페셜리스트입니다.</p>
+            </div>
+        </div>
+
+        <!-- 4. 병원 실정보 -->
+        <h2 class="section-title">04. 오퍼레이션 기본 정보</h2>
+        <table>
+            <tr>
+                <th>병원명</th>
+                <td>남양주 백병원</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>경기도 남양주시 진접읍 해밀예당1로 30-25</td>
+            </tr>
+            <tr>
+                <th>대표 번호</th>
+                <td><strong>031-572-3111</strong> (클리닉 예약 및 상담 전용망)</td>
+            </tr>
+            <tr>
+                <th>공식 홈페이지</th>
+                <td><a href="http://www.baeak.hospital.co.kr" target="_blank"
+                        style="color: var(--primary-dark);">www.baeak.hospital.co.kr</a></td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <p>※ 본 운영기획서는 <strong>슈퍼에이전트 실무그룹(LCK lab) - Luca Director</strong>에 의해 NDB 원칙하에 전략적으로 자동 산출된 기밀 문서입니다. 무단
+                전재를 금합니다.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

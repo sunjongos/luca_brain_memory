@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여성만성피로클리닉 브로셔</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --primary-dark: #4834D4;
+            --accent: #F8A5C2;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #fdfbfb;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #e2e8f0;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Noto Serif KR', serif;
+            margin: 0;
+        }
+
+        /* A4 가로 사이즈 (297mm x 210mm) 비율 유지 */
+        .brochure-page {
+            width: 1122px;
+            /* A4 가로 픽셀 근사치 */
+            height: 793px;
+            background-color: var(--white);
+            display: flex;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 3단 접지를 위한 패널 구분 선 */
+        .brochure-page::before,
+        .brochure-page::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.05);
+            /* 접는 선 (다꾸바) */
+            z-index: 10;
+        }
+
+        .brochure-page::before {
+            left: 33.33%;
+        }
+
+        .brochure-page::after {
+            left: 66.66%;
+        }
+
+        /* 3개 패널 (각 33.33%) */
+        .panel {
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------------- 외면 (Outer) ---------------- */
+        /* 패널 1: 안쪽 날개 (Introduction) */
+        .panel-inner-flap {
+            background-color: var(--bg-light);
+            border-right: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        /* 패널 2: 뒷면 (Hospital Info) */
+        .panel-back {
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 패널 3: 표지 (Front Cover) */
+        .panel-cover {
+            background-image: linear-gradient(to bottom, rgba(45, 52, 54, 0.3), rgba(108, 92, 231, 0.9)), url('file:///C:/Users/USER/.gemini/antigravity/brain/2570f83a-d114-4ad1-b9aa-0e7fac88727a/fatigue_clinic_hero_kr_woman_1772695781217.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        /* ---------------- 내면 (Inner) ---------------- */
+        /* 패널 4, 5, 6: 상세 내용 (USP, Doctors) */
+        .panel-inner {
+            background-color: var(--white);
+        }
+
+        .panel-inner-center {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Typography & Components */
+        .cover-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover-title span {
+            color: var(--accent);
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: absolute;
+            top: 40px;
+            right: 40px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        .panel-title {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .panel-title.white {
+            color: var(--white);
+        }
+
+        .panel-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .panel-inner-center .panel-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-item {
+            margin-bottom: 25px;
+        }
+
+        .feature-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-item.white h4 {
+            color: var(--accent);
+        }
+
+        .feature-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .feature-item.white p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .doc-box {
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .doc-box h4 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .doc-box .role {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .doc-box p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .map-box {
+            height: 200px;
+            background-color: #dfe6e9;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            margin-top: auto;
+            border-top: 2px solid var(--primary);
+            padding-top: 20px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-label {
+            width: 80px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .info-value {
+            color: var(--text-dark);
+        }
+
+        .tel-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 15px 0;
+            font-family: 'Noto Sans KR';
+            letter-spacing: -1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 외면 (바깥쪽) : 프린트 시 겉면 -->
+    <div class="brochure-page">
+        <!-- 안쪽 날개 (접었을 때 처음 열리는 면) -->
+        <div class="panel panel-inner-flap">
+            <span class="section-tag">INTRODUCTION</span>
+            <h2 class="panel-title">어느새 일상이 된<br>피로와 통증,<br>당연한 것이 아닙니다.</h2>
+            <p class="panel-desc">갱년기를 기점으로 여성의 몸은 급격한 호르몬과 자율신경계의 변화를 겪습니다. 원인 모를 만성 피로, 밤마다 찾아오는 불면증, 이유 없는 어깨와 허리의
+                통증.</p>
+
+            <div class="feature-item">
+                <h4 style="color: var(--primary);">휴식이 아닌 '치료'가 필요합니다.</h4>
+                <p>단순히 쉬거나 일시적인 영양제를 맞는다고 해결되지 않습니다. 바닥난 부신의 에너지를 채우고, 뇌신경 센터의 밸런스를 바로잡아야 진짜 회복이 시작됩니다.</p>
+            </div>
+
+            <div class="feature-item" style="margin-top: 50px;">
+                <h4 style="color: var(--primary);">남양주 백병원의 약속</h4>
+                <p>수많은 중년 여성 환자분들이 저희 클리닉을 통해 잃어버린 생기와 숙면을 되찾았습니다. 짐작으로 치료하지 않고, 데이터로 증명하여 가장 안전하고 확실한 길을 안내합니다.</p>
+            </div>
+        </div>
+
+        <!-- 뒷면 (접었을 때 가장 뒷면) -->
+        <div class="panel panel-back">
+            <div>
+                <span class="section-tag">CONTACT US</span>
+                <h2 class="panel-title" style="font-size: 1.8rem; margin-bottom: 30px;">당일 원스톱 정밀 진단<br>빠른 예약을 도와드립니다.
+                </h2>
+
+                <div class="map-box">
+                    [ 약도 이미지 영역 ]
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>남양주 백병원</h3>
+                <div class="tel-number">031-572-3111</div>
+                <div class="info-row">
+                    <div class="info-label">주소</div>
+                    <div class="info-value">경기 남양주시 진접읍 해밀예당1로 30-25</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">홈페이지</div>
+                    <div class="info-value">www.baeak.hospital.co.kr</div>
+                </div>
+                <!-- 
+                <div class="info-row">
+                    <div class="info-label">진료시간</div>
+                    <div class="info-value">평일 09:00 - 18:00<br>토요일 09:00 - 13:00</div>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <!-- 표지 (가장 앞면) -->
+        <div class="panel panel-cover">
+            <div class="logo-text">남양주 백병원 NDB 특수클리닉</div>
+            <h1 class="cover-title">원인 없는 피로는<br>없습니다.<br><span>데이터</span>로 증명합니다.</h1>
+            <p class="cover-subtitle">부신피로 / 갱년기 불면증 / 만성 통증<br>정밀 진단 기반 맞춤형 수액 테라피</p>
+
+            <div
+                style="font-size: 1.2rem; font-weight: 700; border-top: 2px solid rgba(255,255,255,0.3); padding-top: 20px; display: inline-block;">
+                여성만성피로클리닉
+            </div>
+        </div>
+    </div>
+
+    <!-- 내면 (안쪽) : 프린트 시 안쪽 펼친 면 -->
+    <div class="brochure-page">
+        <!-- 첫 번째 패널 (자율신경 검사) -->
+        <div class="panel panel-inner">
+            <span class="section-tag">01. DIAGNOSIS</span>
+            <h2 class="panel-title">내 몸의 밸런스,<br>숫자로 확인하세요.</h2>
+            <p class="panel-desc">환자의 주관적인 느낌이 아닌, 객관적인 정량 지표를 통해 만성 피로의 근본 원인을 추적합니다.</p>
+
+            <div class="feature-item">
+                <h4>자율신경계(스트레스) 정밀 검사</h4>
+                <p>우리의 몸을 자동 조절하는 '스위치'인 교감/부교감 신경의 상태를 5분 만에 정밀하게 측정합니다. 교감신경 항진으로 인한 스트레스 과부하 상태를 수치로 확인합니다.</p>
+            </div>
+
+            <div class="feature-item">
+                <h4>초정밀 부신 & 호르몬 검사</h4>
+                <p>여성 호르몬 수치와 '스트레스 호르몬'이라 불리는 코르티솔(부신 피질 호르몬) 분비량을 확인하여 나도 모르게 바닥난 에너지 고갈 상태를 진단합니다.</p>
+            </div>
+        </div>
+
+        <!-- 두 번째 패널 (수액 테라피) -->
+        <div class="panel panel-inner-center">
+            <span class="section-tag" style="background-color: var(--white);">02. THERAPY</span>
+            <h2 class="panel-title white">라이넥 & 히시파겐<br>프리미엄 NDB 수액</h2>
+            <p class="panel-desc">일반 포도당이나 비타민이 아닙니다. 진단 결과에 맞춰 염증을 잡고 자율신경계를 조절하는 강력한 맞춤형 수액 솔루션입니다.</p>
+
+            <div class="feature-item white">
+                <h4>항염부신회복 주사</h4>
+                <p>히시파겐 성분을 베이스로 체내 누적된 만성 염증을 제거하고, 고갈된 부신 기능을 즉각적으로 부스팅하여 만성 피로와 뻐근한 근육 통증을 해소합니다.</p>
+            </div>
+
+            <div class="feature-item white">
+                <h4>갱년기 회복 & 평온 주사</h4>
+                <p>최상급 태반 엑기스(라이넥)를 주성분으로 여성 호르몬 균형을 개선하고 뇌신경을 안정화시켜, 심혈을 기울이는 갱년기 열감과 우울증, 심각한 불면증을 치료합니다.</p>
+            </div>
+        </div>
+
+        <!-- 세 번째 패널 (의료진) -->
+        <div class="panel panel-inner">
+            <span class="section-tag">03. MEDICAL MASTERS</span>
+            <h2 class="panel-title">뇌신경과 호르몬의<br>완벽한 투톱 협진</h2>
+            <p class="panel-desc">전문화된 두 명의 센터장이 증상별 원인을 크로스 체크하여 가장 안전하고 확실한 처방을 내립니다.</p>
+
+            <div class="doc-box">
+                <div class="role">뇌신경(자율신경/수면) 마스터</div>
+                <h4>강진호 병원장</h4>
+                <p>신경과 전문의. 교감신경 과항진으로 인한 뇌신경 불균형 및 수면 장애의 근본적 원인을 날카롭게 통찰하고 약물/수액 치료를 병행합니다.</p>
+            </div>
+
+            <div class="doc-box">
+                <div class="role">전신밸런스(호르몬/피로) 마스터</div>
+                <h4>이민웅 센터장</h4>
+                <p>가정의학과 전문의. 혈액 및 호르몬 데이터를 전인적으로 융합 분석하여, 부신 피로와 갱년기를 극복할 최적의 수액 포뮬러를 처방합니다.</p>
+            </div>
+
+            <div
+                style="font-size: 1.1rem; color: var(--primary); font-weight: 700; text-align: center; margin-top: auto; border: 2px dashed var(--primary); padding: 15px; border-radius: 8px;">
+                "오늘 하루만, 검사와 치료를<br>동시에 끝내는 병원"
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

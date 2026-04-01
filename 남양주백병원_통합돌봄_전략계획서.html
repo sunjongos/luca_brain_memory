@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주백병원 신환 창출 전술 종합 보고서</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --glass-bg: rgba(20, 25, 35, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --chart-hyundai: #ef4444;
+            --chart-baek: #3b82f6;
+            --chart-goal: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+            border-radius: 4px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* Value Props */
+        .value-prop {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .value-prop h3 {
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+        }
+
+        .value-prop ul {
+            list-style: none;
+            color: var(--text-secondary);
+        }
+
+        .value-prop ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .value-prop ul li::before {
+            content: '➝';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+        }
+
+        /* Strategy Steps */
+        .strategy-step {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 32px;
+        }
+
+        .strategy-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .strategy-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .strategy-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .strategy-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .fire {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @media (max-width: 900px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="badge">남양주백병원 신환 창출 TF</div>
+            <h1>돌봄통합지원법(2026) 완벽 대응<br>현대병원 제압 & 신환 창출 보고서</h1>
+            <p class="subtitle">통합돌봄 공공·민간 네트워크 장악을 통한 남양주 현대병원 의료·요양 트래픽 100% 흡수 전략</p>
+        </header>
+
+        <!-- 0. 통합돌봄 사업 개요 -->
+        <div class="glass-panel animate-up" style="border-left: 4px solid var(--accent-primary);">
+            <h2>💡 '통합돌봄 사업' 근본 개념 및 핵심 스탠스</h2>
+            <div style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
+                <p style="margin-bottom: 20px;">
+                    <strong style="color:white; font-size: 1.15rem;">"Aging in Place (지역사회 계속 거주): 환자가 살던 곳에서 의료·요양·돌봄을 원스톱으로 받게 하는 국가 대개조 사업 (2026.03 시행)"</strong>
+                </p>
+                <div class="grid-3" style="margin-bottom: 0;">
+                    <div class="value-prop" style="padding: 20px;">
+                        <h3 style="color: var(--accent-primary); font-size: 1.1rem; margin-bottom: 12px;">핵심 1. 방문 진료로 패러다임 전환</h3>
+                        <p style="font-size: 0.95rem;">병원 내원만 기다리던 시대는 끝났습니다. 지역사회(요양시설/자택)로 '방자의료/방문간호 주치의'가 침투하여 거동 불편 중증 환자를 선제적으로 낚아채야 합니다.</p>
+                    </div>
+                    <div class="value-prop" style="padding: 20px;">
+                        <h3 style="color: var(--accent-primary); font-size: 1.1rem; margin-bottom: 12px;">핵심 2. 지자체가 케어 컨트롤타워</h3>
+                        <p style="font-size: 0.95rem;">과거에는 보호자가 병원을 찾아 헤맸지만, 이제 지자체(통합지원회의/읍면동)가 환자의 상태를 평가하고 적합한 병원으로 다이렉트 의뢰(Routing)를 꽂아주는 구조로 바뀝니다.</p>
+                    </div>
+                    <div class="value-prop" style="padding: 20px;">
+                        <h3 style="color: var(--chart-goal); font-size: 1.1rem; margin-bottom: 12px;">핵심 3. 선점하는 자가 독점한다</h3>
+                        <p style="font-size: 0.95rem;">이 공공 파이프라인(지자체)과 민간 파이프라인(요양기관)의 끝단에 '남양주백병원'을 연결하면, 현대병원은 경쟁할 기회조차 없이 환자를 고스란히 빼앗기게 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- 1. 지표 경쟁 분석 -->
+            <div class="glass-panel animate-up delay-1">
+                <h2>경쟁 지형 및 Snatching 목표</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 0.9rem;">
+                    통합돌봄 사업의 판도를 활용하여 경쟁사의 파이를 뺏고 백병원의 압도적 성장을 도모합니다.
+                </p>
+                
+                <div class="chart-container">
+                    <canvas id="competitorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 2. 백병원의 핵심 무기 -->
+            <div class="glass-panel animate-up delay-1">
+                <h2>전쟁 승리를 위한 2대 킬러 무기</h2>
+                
+                <div class="value-prop" style="margin-bottom: 20px;">
+                    <h3>⚔️ "장기요양기관장님, 비용이 절반 이하입니다"</h3>
+                    <ul>
+                        <li><span class="highlight">무기:</span> 남양주시 지정 치매 센터 (뇌신경센터 內)</li>
+                        <li><span class="highlight">현실:</span> 현대병원에서 비싼 비용 치르던 환자들 이탈 유도</li>
+                        <li><span class="highlight">효과:</span> 중증 치매 산정특례로 인한 압도적인 경제적 혜택. "가장 저렴하고 수준 높은 치매 센터" 브랜딩</li>
+                    </ul>
+                </div>
+
+                <div class="value-prop">
+                    <h3>🛡️ "밤에 응급 터져도 우리 중환자실은 열려있습니다"</h3>
+                    <ul>
+                        <li><span class="highlight">무기:</span> 365일 9A 9P 응급진료실 + 110병상/ICU 인프라</li>
+                        <li><span class="highlight">현실:</span> 야간·휴일 돌봄 공백 터지면 대형병원에서 대기만 수시간</li>
+                        <li><span class="highlight">효과:</span> 시설장 VIP 전용 핫라인 구축으로 장기요양기관의 나이트메어(야간낙상·급성질환) 완벽 해결</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel animate-up delay-2">
+            <h2>현대병원 환자 쟁탈(Snatching) 3단계 전술</h2>
+            <div class="grid-3">
+                <div class="value-prop">
+                    <div class="strategy-step">
+                        <div class="strategy-number">1</div>
+                        <div class="strategy-title">공공 거버넌스 장악 (Top-Down)</div>
+                        <div class="strategy-desc">
+                            지자체(보건소, 통합돌봄과)의 애타는 '시범사업 편입 실적'을 달성해 주고 읍면동 게이트키퍼 권력 흡수.<br><br>
+                            ➔ <b>통합지원회의</b> 자문위원 선점으로 공공 의료 연계 대상을 백병원으로 <b style="color:var(--accent-primary)">Automatic Routing</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="value-prop">
+                    <div class="strategy-step">
+                        <div class="strategy-number">2</div>
+                        <div class="strategy-title">민간 요양원 융단폭격 (Bottom-Up)</div>
+                        <div class="strategy-desc">
+                            700여 개 장기요양기관 대상 '현대 vs 백병원' 직접 비교 원가표 살포.<br><br>
+                            ➔ <b>찾아가는 기동대(방문진료)</b> 파견. 독거노인/취약지의 숨은 환자까지 방문 진료로 흡수하여 신환 발굴.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="value-prop">
+                    <div class="strategy-step">
+                        <div class="strategy-number">3</div>
+                        <div class="strategy-title">퇴원 환자 하방 병목 독점</div>
+                        <div class="strategy-desc">
+                            서울대, 아산병원 등 3대 상급병원 진료협력센터를 압박. 지역 하방 환자가 무조건 백병원으로 몰리게 함.<br><br>
+                            ➔ <b>안심 퇴원 브릿지</b> 포지셔닝 체결, 병원 내 <b>지속 모니터링 플랜</b> 가동으로 환자 이탈 0% 방어.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="glass-panel animate-up delay-3">
+                <h2>TF 무장력 극대화: 휴먼 & AI 하이브리드</h2>
+                <div style="color: var(--text-secondary); line-height: 1.8;">
+                    <p style="margin-bottom: 12px;"><strong style="color:white">1. 영업 정예 스쿼드 (B2B 코디네이터)</strong><br>
+                    행정을 멈추고 현장으로 투입. 장기요양기관 원장 및 통합돌봄 공무원과 직접 커피를 마시며 환자를 '직거래(Snatch)' 해옵니다.</p>
+
+                    <p><strong style="color:white">2. AI Agent 초자동화 (Hyper-Automation)</strong><br>
+                    지자체 보고용 방대한 문서 작업, 환자 연계 모니터링 엑셀, 심지어 24시간 핫라인 1차 응대까지 모두 AI 비서망에 전적으로 일임. 
+                    <br><b style="color:var(--accent-secondary)">사람은 오직 '경쟁사 환자 뺏기'에만 집중합니다.</b></p>
+                </div>
+            </div>
+
+            <div class="glass-panel animate-up delay-3">
+                <h2>전략 달성 핵심 성과 지표 (KPI)</h2>
+                <ul style="color: var(--text-secondary); line-height: 1.8; list-style-type: none;">
+                    <li style="margin-bottom: 16px;">
+                        <span style="font-size:1.5rem; margin-right:8px;">📈</span>
+                        <strong style="color:white">외래 파이 역전 (Patient Snatching)</strong><br>
+                        현대병원 이탈 치매·신경계 신환 급증 ➔ <b>일 320명에서 일 450명(+40%) 초과 달성</b>
+                    </li>
+                    <li style="margin-bottom: 16px;">
+                        <span style="font-size:1.5rem; margin-right:8px;">💰</span>
+                        <strong style="color:white">응급-ICU 전환 캐시카우 가동률</strong><br>
+                        VIP 핫라인 응급 내원 및 수술 전환 극대화 ➔ <b>월 평균 30억에서 단기 50억 수성</b>
+                    </li>
+                    <li>
+                        <span style="font-size:1.5rem; margin-right:8px;">👑</span>
+                        <strong style="color:white">현대병원 공공 파트너십 상실 유도</strong><br>
+                        2026년 말, 남양주시 권역 통합지원회의 의뢰 환자 중 백병원 배정률 <b>50% 이상 장악</b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        const ctx = document.getElementById('competitorChart').getContext('2d');
+        
+        // CSS 변수 가져오기
+        const style = getComputedStyle(document.body);
+        const colorHyundai = style.getPropertyValue('--chart-hyundai').trim();
+        const colorBaek = style.getPropertyValue('--chart-baek').trim();
+        const colorGoal = style.getPropertyValue('--chart-goal').trim();
+        const textColor = style.getPropertyValue('--text-primary').trim();
+        const gridColor = style.getPropertyValue('--glass-border').trim();
+
+        Chart.defaults.color = textColor;
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['일 외래환자(명)', '월 수술건수(건)', '월 수익(단위: 1,000만원)'],
+                datasets: [
+                    {
+                        label: '남양주 현대병원(경쟁사)',
+                        data: [900, 432, 950],
+                        backgroundColor: colorHyundai,
+                        borderRadius: 6,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: '남양주백병원(현재)',
+                        data: [320, 200, 300],
+                        backgroundColor: colorBaek,
+                        borderRadius: 6,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: '남양주백병원(목표 스내칭 후)',
+                        data: [450, 250, 500],
+                        backgroundColor: colorGoal,
+                        borderRadius: 6,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: { size: 13, weight: 600 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleFont: { size: 14, weight: 600 },
+                        bodyFont: { size: 13 },
+                        padding: 12
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: gridColor, drawBorder: false },
+                        ticks: { font: { size: 12 } }
+                    },
+                    x: {
+                        grid: { display: false, drawBorder: false },
+                        ticks: { font: { size: 13, weight: 600 } }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

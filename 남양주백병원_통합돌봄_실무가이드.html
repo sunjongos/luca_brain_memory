@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주백병원 신환 창출 TF 실무 매뉴얼</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --secondary: #475569;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-gray: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, var(--primary));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+        }
+
+        /* 롤앤레스판시빌리티 (R&R) 태그 */
+        .role-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .role-b2b { background: var(--primary-light); color: var(--primary); }
+        .role-er { background: var(--danger-light); color: var(--danger); }
+        .role-ai { background: var(--success-light); color: var(--success); }
+
+        /* 체크리스트 스타일 */
+        .checklist {
+            list-style: none;
+        }
+        .checklist li {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: transform 0.2s;
+        }
+        .checklist li:hover {
+            transform: translateX(5px);
+            border-color: #cbd5e1;
+        }
+        
+        .step-num {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 말풍선 (화법 가이드) */
+        .speech-bubble {
+            background: #f1f5f9;
+            border-radius: 0 12px 12px 12px;
+            padding: 12px 16px;
+            margin-top: 8px;
+            position: relative;
+            font-style: italic;
+            color: #334155;
+            border-left: 3px solid #64748b;
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -10px;
+            border-width: 10px 10px 0 0;
+            border-style: solid;
+            border-color: #f1f5f9 transparent transparent transparent;
+        }
+
+        /* 하이라이트 박스 */
+        .highlight-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .highlight-box h4 { color: #d97706; margin-bottom: 8px; }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>남양주백병원 TF 행동 매뉴얼 (SOP)</h1>
+        <p>우리 목표는 하나입니다. <b>"남양주 현대병원으로 가는 환자의 발길을 돌릴 것!"</b></p>
+    </header>
+
+    <div class="container">
+        
+        <!-- 0. 통합돌봄 사업 개요 -->
+        <div class="card" style="border-left: 5px solid var(--primary);">
+            <h2>💡 [필독] '통합돌봄 사업'이란 무엇인가? (개요 및 핵심)</h2>
+            <p style="margin-bottom: 12px; color: var(--text-main); font-size: 1.05rem;">
+                <strong>"어르신들이 살던 동네(자택, 요양원)에서 계속해서 건강하게 노후를 보낼 수 있도록 의사, 간호사, 지자체가 한 팀이 되어 원스톱으로 돌봐주는 국가 주도 사업"</strong>입니다. (돌봄통합지원법 2026년 3월 본격 시행)
+            </p>
+            <div class="highlight-box" style="background:#eff6ff; border-color:#93c5fd;">
+                <h4 style="color:#1d4ed8; margin-bottom:12px;">[사업의 3대 핵심 요약]</h4>
+                <ul style="padding-left: 20px; line-height: 1.7; color: #334155;">
+                    <li style="margin-bottom:8px;"><strong>1. 병원 방문 중심 ➔ 지역사회 방문 중심</strong>: 아픈 환자가 병원에 오기만 기다리는 게 아니라, "방문 의료/방문 간호 전담팀"을 꾸려 거동이 불편한 타겟 환자를 자택이나 요양시설에서 직접 찾아가 선제적으로 진료합니다.</li>
+                    <li style="margin-bottom:8px;"><strong>2. 흩어진 기관을 하나로 '통합(Routing)'</strong>: 의료(건강보험), 요양(장기요양장), 돌봄(지자체)이 따로 놀아 보호자가 뺑뺑이를 돌던 난맥상을 없앱니다. 이제는 지자체(보건소, 행정복지센터)가 케어플랜 컨트롤타워가 되어 알아서 거점 병원과 요양시설을 매칭시켜 줍니다.</li>
+                    <li><strong>3. 왜 이것이 '신환 창출의 핵심'인가?</strong>: 통합지원회의(지자체)와 민간 장기요양기관 네트워크에 백병원이 '독점 파트너'로 미리 배관을 뚫어놓으면, 행정망과 민간망에서 발생한 환자를 <strong>경쟁 병원에 뺏기지 않고 우리 병원으로 알아서 꽂아주는 합법적 파이프라인</strong>이 생기기 때문입니다.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 1. 행동 수칙 -->
+        <div class="card">
+            <h2>🎯 TF 실무자 필수 마인드셋</h2>
+            <p style="margin-bottom: 16px; color: var(--text-muted);">
+                통합돌봄 사업은 복잡한 행사가 아닙니다. <strong>합법적으로 지역 요양기관 네트워크를 우리 병원으로 끌어오는 기회</strong>입니다.
+            </p>
+            <div class="highlight-box">
+                <h4>[3대 절대 원칙]</h4>
+                1. 데스크탑 앞 엑셀 작업은 <strong>AI 비서</strong>에게 넘긴다.<br>
+                2. 실무진(코디네이터)은 밖으로 나가 <strong>요양원 원장님과 공무원을 직접 만난다</strong>.<br>
+                3. 우리 병원의 무기 2가지(<strong>초저가 치매진단, 24시간 중환자실 핫라인</strong>)만 무한 반복해서 외운다.
+            </div>
+        </div>
+
+        <!-- 2. 단계별 실행 가이드 -->
+        <div class="card">
+            <h2>📝 [실무자용] 단계별 환자 유치(Snatching) 행동 요령</h2>
+            
+            <ul class="checklist">
+                <li>
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <span class="role-tag role-b2b">통합돌봄 코디네이터</span>
+                        <strong>1단계: 무기 들고 진접/화도 요양기관 방문하기</strong>
+                        <p>준비물: <span style="color:var(--danger); font-weight:bold;">[현대병원 vs 백병원 비용/시간 절감 비교표]</span> 전단지 지참</p>
+                        <div class="speech-bubble">
+                            "원장님, 치매 진단받으러 어르신 모시고 현대병원 가시면 비싸잖아요? 백병원은 남양주시 지정 센터라서 <b>산정특례(본인부담금 대폭 인하)</b>가 바로 적용됩니다."
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <span class="role-tag role-b2b">통합돌봄 코디네이터</span>
+                        <span class="role-tag role-er">응급실/원무과</span>
+                        <strong>2단계: VIP 프리패스 '핫라인(명함)' 꽂아주기</strong>
+                        <p>요양기관 시설장과 간호조무사들의 가장 큰 골칫거리인 '야간 응급 상황'을 해결해 줍니다.</p>
+                        <div class="speech-bubble">
+                            "밤이나 주말에 어르신 낙상하시거나 열나시면 대학병원 가셔서 밤새지 마세요. 이 <b>직통 번호(핫라인)</b>로 전화 주시면 우리 9A9P 진료실과 중환자실로 원패스로 모십니다."
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <span class="role-tag role-b2b">방문진료팀</span>
+                        <strong>3단계: 타겟 지역(진접/화도) 찾아가는 기동대 가동</strong>
+                        <p>의료 취약지구이자 노인 1인 가구가 많은 지역에 직접 찾아갑니다.</p>
+                        <div class="speech-bubble">
+                            "행정복지센터 주무관님, 거동 불편하신 어르신들 명단 주시면 우리 백병원 주치의팀이 <b>직접 방문해서 통합돌봄 진료</b> 시작합니다. 현대병원 가기 힘드신 분들 저희가 다 케어하겠습니다."
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <span class="role-tag role-b2b">진료협력센터</span>
+                        <strong>4단계: 상급병원(서울대/아산) 퇴원 환자 그물망 치기</strong>
+                        <p>서울에서 수술받고 내려오는 진접 거주 환자들이 중간에 현대병원을 거치지 않고 오도록 대학병원에 영업합니다.</p>
+                        <div class="speech-bubble">
+                            (서울대병원 진료협력센터장에게) "남양주시로 환자 내려보내실 때, 무조건 백병원으로 연결해 주십시오. 지자체 통합돌봄 시스템과 연계해서 <b>퇴원 후 자택 복귀 모니터링까지 책임지는 유일한 거점</b>입니다."
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3. AI 비서 활용법 -->
+        <div class="card">
+            <h2>🤖 AI 비서 활용 매뉴얼 (업무 자동화)</h2>
+            <p style="margin-bottom: 16px; color: var(--text-muted);">
+                우리의 경쟁 무기는 '시간'입니다. 실무진은 현장에 집중하고, 잡무는 AI에게 맡기세요.
+            </p>
+            <ul class="checklist" style="border-left:none;">
+                <li style="border-left: 4px solid var(--success);">
+                    <div class="step-content">
+                        <strong>📊 1. 가망 환자 리스트 뽑기 (AI CRM 연동)</strong>
+                        <p>"AI야, 우리 병원 안 온 지 1년 넘은 75세 이상 진접읍 환자 명단 엑셀로 뽑아줘." → <b>AI가 10초 만에 영업 대상 리스트 생성</b></p>
+                    </div>
+                </li>
+                <li style="border-left: 4px solid var(--success);">
+                    <div class="step-content">
+                        <strong>📱 2. 반복적인 카톡/문자 자동화</strong>
+                        <p>퇴원 환자, 방문진료 예정 환자에게 보내는 안내 문자와 안부 연락은 AI가 초안을 씁니다. 실무진은 '발송 승인'만 누르세요.</p>
+                    </div>
+                </li>
+                <li style="border-left: 4px solid var(--success);">
+                    <div class="step-content">
+                        <strong>📝 3. 지자체 보고용 서류 작성</strong>
+                        <p>통합돌봄 성과 보고 문서? 키워드만 던져주면 AI가 공문서 양식으로 완벽하게 문장화합니다.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>닥터아이 3단계 진료 워크플로우 | PaiHealthcare-LCK</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;900&family=Montserrat:wght@700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --navy: #0b1f3a;
+            --blue: #1a4db3;
+            --sky: #2d8cf0;
+            --teal: #00c9b1;
+            --red: #e84545;
+            --gold: #f5a623;
+            --purple: #7c3aed;
+            --green: #10b981;
+            --orange: #f97316;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f0f4f9;
+            color: #1a2744;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a7a 100%);
+            color: #fff;
+            padding: 52px 5% 44px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 201, 177, 0.2);
+            color: var(--teal);
+            border: 1px solid rgba(0, 201, 177, 0.4);
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            padding: 5px 18px;
+            margin-bottom: 16px;
+        }
+
+        header h1 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            line-height: 1.3;
+        }
+
+        header h1 span {
+            color: var(--teal);
+        }
+
+        header p {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* ENTRY */
+        .entry-box {
+            max-width: 480px;
+            margin: 48px auto 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 24px 32px;
+            text-align: center;
+        }
+
+        .entry-box .label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 8px;
+        }
+
+        .entry-box .title {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .entry-box .sub {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 6px;
+        }
+
+        /* ARROW */
+        .arrow-down {
+            text-align: center;
+            padding: 6px 0;
+            font-size: 2rem;
+            color: var(--teal);
+            line-height: 1;
+        }
+
+        /* MAIN LAYOUT */
+        .workflow {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 4% 60px;
+        }
+
+        /* STAGE HEADER */
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stage-num {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .s1 .stage-num {
+            background: linear-gradient(135deg, var(--teal), var(--sky));
+        }
+
+        .s2 .stage-num {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+        }
+
+        .s3 .stage-num {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+        }
+
+        .stage-header h2 {
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .stage-header .desc {
+            font-size: 0.88rem;
+            color: #6b7a99;
+            margin-top: 3px;
+        }
+
+        /* STAGE CARD */
+        .stage-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .stage-card.s1 {
+            border-left: 5px solid var(--teal);
+        }
+
+        .stage-card.s2 {
+            border-left: 5px solid var(--gold);
+        }
+
+        .stage-card.s3 {
+            border-left: 5px solid var(--purple);
+        }
+
+        /* STEP DETAIL */
+        .step-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf0f7;
+        }
+
+        .step-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .teal-bg {
+            background: rgba(0, 201, 177, 0.1);
+        }
+
+        .gold-bg {
+            background: rgba(245, 166, 35, 0.1);
+        }
+
+        .purple-bg {
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .red-bg {
+            background: rgba(232, 69, 69, 0.1);
+        }
+
+        .step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 0.85rem;
+            color: #6b7a99;
+            line-height: 1.65;
+        }
+
+        .code-tag {
+            display: inline-block;
+            background: #edf2ff;
+            color: var(--blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 6px;
+            padding: 2px 10px;
+            margin-top: 6px;
+        }
+
+        /* BRANCH */
+        .branch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        @media(max-width:600px) {
+            .branch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .branch-box {
+            border-radius: 14px;
+            padding: 20px 22px;
+        }
+
+        .branch-ok {
+            background: #f0fdf4;
+            border: 1.5px solid #a7f3d0;
+        }
+
+        .branch-bad {
+            background: #fff7ed;
+            border: 1.5px solid #fcd34d;
+        }
+
+        .branch-box h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .branch-ok h4 {
+            color: var(--green);
+        }
+
+        .branch-bad h4 {
+            color: var(--orange);
+        }
+
+        .branch-box ul {
+            list-style: none;
+        }
+
+        .branch-box ul li {
+            font-size: 0.82rem;
+            color: #4b5563;
+            padding: 3px 0;
+        }
+
+        .branch-box ul li::before {
+            content: '→ ';
+            color: #9ca3af;
+        }
+
+        /* RISK GRID */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        @media(max-width:700px) {
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .risk-box {
+            border-radius: 16px;
+            padding: 24px 20px;
+        }
+
+        .risk-low {
+            background: #f0fdf4;
+            border: 2px solid var(--green);
+        }
+
+        .risk-mid {
+            background: #fffbeb;
+            border: 2px solid var(--gold);
+        }
+
+        .risk-high {
+            background: #fef2f2;
+            border: 2px solid var(--red);
+        }
+
+        .risk-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            padding: 3px 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .risk-low .risk-label {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .risk-mid .risk-label {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        .risk-high .risk-label {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .risk-box h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a2744;
+        }
+
+        .rx-item {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            font-size: 0.8rem;
+            color: #4b5563;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .rx-item:last-child {
+            border-bottom: none;
+        }
+
+        .rx-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* EMR BOX */
+        .emr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .emr-pkg {
+            background: #f8faff;
+            border: 1.5px solid #dbeafe;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .emr-pkg h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 12px;
+        }
+
+        .emr-pkg li {
+            font-size: 0.8rem;
+            color: #4b5563;
+            padding: 3px 0;
+            list-style: none;
+        }
+
+        .emr-pkg li::before {
+            content: '📋 ';
+        }
+
+        /* SUMMARY FOOTER */
+        .summary {
+            background: var(--navy);
+            color: #fff;
+            padding: 48px 5%;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .summary h2 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 28px;
+        }
+
+        .flow-sum {
+            display: flex;
+            gap: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .fs-item {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 140px;
+            position: relative;
+        }
+
+        .fs-item:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--teal);
+            font-size: 1.2rem;
+            font-weight: 900;
+            z-index: 1;
+        }
+
+        .fs-item .step {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--teal);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .fs-item .name {
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 0.78rem;
+            color: #aab;
+            background: #e8edf5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="badge">닥터아이 AI 안저진단 | 당뇨 환자 관리 프로토콜</div>
+        <h1>당뇨 환자 <span>3단계 진료 워크플로우</span></h1>
+        <p>닥터아이 AI 진단 → 약물 처방 → 위험도별 처치 · EMR 연동</p>
+
+        <div class="entry-box">
+            <div class="label">진입 조건</div>
+            <div class="title">🏥 당뇨(±고혈압) 만성 외래 내원</div>
+            <div class="sub">월 1회 정기 내원 · 내과·가정의학과 외래</div>
+        </div>
+    </header>
+
+    <div class="arrow-down" style="padding:24px 0 0;">↓</div>
+
+    <div class="workflow">
+
+        <!-- ======= STAGE 1 ======= -->
+        <div class="stage-header s1">
+            <div class="stage-num s1">1</div>
+            <div>
+                <h2>닥터아이 AI 안저검사</h2>
+                <div class="desc">X-eye 기반 AI 판독 · E6670 코드 청구 · 4대 안질환 동시 스크리닝</div>
+            </div>
+        </div>
+
+        <div class="stage-card s1">
+            <div class="step-row">
+                <div class="step-icon teal-bg">👁️</div>
+                <div class="step-content">
+                    <h4>안저 촬영 시행</h4>
+                    <p>동공 산대 없이 비접촉 촬영. 표준화된 프로토콜로 재현성 확보.<br>당뇨성 망막증 · 녹내장 · 황반변성 · 망막혈관폐쇄 4대 질환 동시 스크리닝.</p>
+                    <span class="code-tag">보험코드 E6670 — 안저촬영 (닥터아이 판독)</span>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-icon teal-bg">🤖</div>
+                <div class="step-content">
+                    <h4>AI 판독 (5분 이내)</h4>
+                    <p>닥터아이 AI가 미세출혈·삼출·황반부 부종·비정상 신생혈관 등을 자동 분석.<br>판독 리포트 자동 생성 → EMR 팝업 연동.</p>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-icon teal-bg">📊</div>
+                <div class="step-content">
+                    <h4>결과 분기</h4>
+                    <p>AI 판독 결과에 따라 두 가지 경로로 분기됩니다.</p>
+                </div>
+            </div>
+
+            <div class="branch-grid">
+                <div class="branch-box branch-ok">
+                    <h4>✅ A. 정상 / 경미한 변화</h4>
+                    <ul>
+                        <li>기본 혈당·혈압·지질 목표 유지</li>
+                        <li>생활습관 강화 안내</li>
+                        <li>닥터아이 재검: 6~12개월 후</li>
+                        <li>EMR 리마인더 자동 등록</li>
+                    </ul>
+                </div>
+                <div class="branch-box branch-bad">
+                    <h4>⚠️ B. 망막 / 황반 이상 소견</h4>
+                    <ul>
+                        <li>즉시 2단계 내과 조치 진행</li>
+                        <li>닥터아이 추적 간격: 3~6개월로 단축</li>
+                        <li>X-ECAS 경동맥 위험도 평가 의뢰</li>
+                        <li>EMR 오더셋 팝업 자동 추천</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down">↓ 이상 소견 시</div>
+
+        <!-- ======= STAGE 2 ======= -->
+        <div class="stage-header s2">
+            <div class="stage-num s2">2</div>
+            <div>
+                <h2>내과 조치 — 약물 처방</h2>
+                <div class="desc">망막 혈관 보호 약물 투여 + X-ECAS 경동맥 위험도 평가 병행</div>
+            </div>
+        </div>
+
+        <div class="stage-card s2">
+            <div class="step-row">
+                <div class="step-icon gold-bg">💊</div>
+                <div class="step-content">
+                    <h4>1차 약물 처방: 망막 혈관 보호</h4>
+                    <p>당뇨성 망막증 진행 억제를 위한 표준 병용 요법.</p>
+                    <div style="display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;">
+                        <div
+                            style="background:#fffbeb; border:1.5px solid #fcd34d; border-radius:10px; padding:12px 18px; min-width:180px;">
+                            <div
+                                style="font-size:0.7rem; color:#92400e; font-weight:700; letter-spacing:1px; margin-bottom:4px;">
+                                약물 ①</div>
+                            <div style="font-size:0.9rem; font-weight:700;">칼슘 도베실레이트</div>
+                            <div style="font-size:0.78rem; color:#6b7a99; margin-top:3px;">bid (1일 2회) — 망막 모세혈관 투과성 억제
+                            </div>
+                        </div>
+                        <div
+                            style="background:#f0fdf4; border:1.5px solid #a7f3d0; border-radius:10px; padding:12px 18px; min-width:180px;">
+                            <div
+                                style="font-size:0.7rem; color:#065f46; font-weight:700; letter-spacing:1px; margin-bottom:4px;">
+                                약물 ②</div>
+                            <div style="font-size:0.9rem; font-weight:700;">징코빌로바 추출물</div>
+                            <div style="font-size:0.78rem; color:#6b7a99; margin-top:3px;">qd~bid — 망막 혈류 개선·항산화</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-row">
+                <div class="step-icon gold-bg">🩺</div>
+                <div class="step-content">
+                    <h4>X-ECAS 경동맥 초음파 위험도 평가</h4>
+                    <p>망막 이상 소견 = 전신 혈관 위험 신호. 경동맥 죽상경화 동반 가능성 평가.<br>X-ECAS 리포트 결과에 따라 3단계 처치 경로 결정.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down">↓ X-ECAS 결과에 따라 분기</div>
+
+        <!-- ======= STAGE 3 ======= -->
+        <div class="stage-header s3">
+            <div class="stage-num s3">3</div>
+            <div>
+                <h2>X-ECAS 위험도별 처치</h2>
+                <div class="desc">Low · Intermediate · High — 3단계 맞춤 약물·검사·협진 전략</div>
+            </div>
+        </div>
+
+        <div class="stage-card s3">
+            <div class="risk-grid">
+
+                <div class="risk-box risk-low">
+                    <span class="risk-label">LOW RISK</span>
+                    <h4>🟢 저위험군</h4>
+                    <div class="rx-item"><span class="rx-icon">💊</span><span>기존 요법 유지 (필요 시 강화)</span></div>
+                    <div class="rx-item"><span class="rx-icon">🏃</span><span>생활습관 교정 집중<br>(금연·운동·식이)</span></div>
+                    <div class="rx-item"><span class="rx-icon">📅</span><span>닥터아이 6~12개월 추적</span></div>
+                    <div class="rx-item"><span class="rx-icon">💡</span><span>망막병증 있으나 경동맥 위험 낮음 → 기본 관리 유지</span></div>
+                </div>
+
+                <div class="risk-box risk-mid">
+                    <span class="risk-label">INTERMEDIATE RISK</span>
+                    <h4>🟡 중등위험군</h4>
+                    <div class="rx-item"><span class="rx-icon">💊</span><span>스타틴 시작 또는 강도 상향<br>(아토르바스타틴/로수바스타틴)</span>
+                    </div>
+                    <div class="rx-item"><span class="rx-icon">💊</span><span>항혈소판제 고려<br>(아스피린 100mg / 클로피도그렐
+                            75mg)</span></div>
+                    <div class="rx-item"><span class="rx-icon">📊</span><span>ASCVD·출혈 위험 확인 필수</span></div>
+                    <div class="rx-item"><span class="rx-icon">🔁</span><span>경동맥 재초음파 6~12개월</span></div>
+                    <div class="rx-item"><span class="rx-icon">🏥</span><span>필요 시 순환기내과 컨설트</span></div>
+                </div>
+
+                <div class="risk-box risk-high">
+                    <span class="risk-label">HIGH RISK</span>
+                    <h4>🔴 고위험군</h4>
+                    <div class="rx-item"><span class="rx-icon">🧠</span><span>뇌 MRI + MRA 즉시 의뢰<br>(무증상 뇌경색·협착
+                            평가)</span></div>
+                    <div class="rx-item"><span class="rx-icon">💊</span><span>고강도 스타틴 + 항혈소판제 적극 투여</span></div>
+                    <div class="rx-item"><span class="rx-icon">🤝</span><span>신경과·순환기내과 협진 필수</span></div>
+                    <div class="rx-item"><span class="rx-icon">🔪</span><span>혈관외과·중재시술 연계 고려</span></div>
+                    <div class="rx-item"><span class="rx-icon">🛡️</span><span>뇌졸중 1차 예방 집중 관리</span></div>
+                </div>
+
+            </div>
+
+            <!-- EMR ORDER SETS -->
+            <div style="margin-top:32px; padding-top:24px; border-top:1px solid #edf0f7;">
+                <h3 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:4px;">📋 EMR 오더셋 템플릿 — 3단계
+                    연동</h3>
+                <p style="font-size:0.82rem; color:#6b7a99; margin-bottom:0;">X-ECAS 위험도 값에 따라 추천 오더셋이 자동 팝업으로 제안됩니다.
+                </p>
+                <div class="emr-grid">
+                    <div class="emr-pkg">
+                        <h4>① 스크리닝 패키지 (전체 해당)</h4>
+                        <ul>
+                            <li>E6670 안저촬영 (닥터아이)</li>
+                            <li>칼슘 도베실레이트 정 ○○mg bid</li>
+                            <li>징코빌로바 추출물 정 ○○mg qd/bid</li>
+                        </ul>
+                    </div>
+                    <div class="emr-pkg">
+                        <h4>② 혈관 평가 패키지 (이상 소견)</h4>
+                        <ul>
+                            <li>X-ECAS 경동맥 초음파/위험도 리포트</li>
+                            <li>스타틴 (Intermediate 이상)</li>
+                            <li>항혈소판제 (ASCVD 확인 후)</li>
+                        </ul>
+                    </div>
+                    <div class="emr-pkg">
+                        <h4>③ High Risk 패키지</h4>
+                        <ul>
+                            <li>뇌 MRI + MRA</li>
+                            <li>신경과 외래 컨설트 의뢰</li>
+                            <li>순환기내과 외래 컨설트 의뢰</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+        <h2>⚡ 닥터아이 3단계 워크플로우 한눈에 보기</h2>
+        <div class="flow-sum">
+            <div class="fs-item">
+                <div class="step">STAGE 1</div>
+                <div class="name">닥터아이<br>AI 안저검사</div>
+            </div>
+            <div class="fs-item" style="width:24px;"></div>
+            <div class="fs-item">
+                <div class="step">STAGE 2</div>
+                <div class="name">내과 처방<br>+ X-ECAS</div>
+            </div>
+            <div class="fs-item" style="width:24px;"></div>
+            <div class="fs-item">
+                <div class="step">STAGE 3 – LOW</div>
+                <div class="name">생활습관<br>강화 관리</div>
+            </div>
+            <div class="fs-item" style="width:24px;"></div>
+            <div class="fs-item">
+                <div class="step">STAGE 3 – MID</div>
+                <div class="name">스타틴<br>+ 항혈소판제</div>
+            </div>
+            <div class="fs-item" style="width:24px;"></div>
+            <div class="fs-item">
+                <div class="step">STAGE 3 – HIGH</div>
+                <div class="name">뇌 MRI<br>+ 협진</div>
+            </div>
+        </div>
+        <p style="margin-top:32px; color:rgba(255,255,255,0.45); font-size:0.82rem;">
+            닥터아이 AI 안저진단 솔루션 | PaiHealthcare-LCK 연구소 | 2026
+        </p>
+    </div>
+
+    <footer>닥터아이 당뇨 환자 3단계 진료 워크플로우 | 출처: 당뇨 환자 통합 관리 프로토콜 제안서 (2026.03.07)</footer>
+
+</body>
+
+</html>

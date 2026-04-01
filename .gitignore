@@ -1,0 +1,40 @@
+# 환경변수 / API 키
+.env
+.env.*
+*.env
+
+# 테스트 산출물
+test_*.html
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# 로그
+*.log
+bot_error.log
+
+# 임시 파일
+*.tmp
+*.bak
+
+# API Keys & Auth
+credentials.json
+gmail_token.json
+run_perplexity.js
+telegram_bot/.env

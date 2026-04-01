@@ -1,0 +1,13 @@
+[   84175ms] [ERROR] ErrorUtils caught an error:
+
+Missing cryptedUid for successful web login
+
+Subsequent non-fatal errors won't be logged; see https://fburl.com/debugjs. {column: 17870, clientTime: 1773913793, extra: Object, guardList: Array(1), hash: 3ooppy} @ https://static.xx.fbcdn.net/rsrc.php/v4/yN/r/QPG1-_fWQhl.js:78
+[   85465ms] [ERROR] ErrorUtils caught an error:
+
+terminate stream because StartStreamFailure with msg : UNAUTHENTICATED [Caught in: Subscription error in preprocessResponse]
+
+Subsequent non-fatal errors won't be logged; see https://fburl.com/debugjs. {column: 180, clientTime: 1773913794, extra: Object, guardList: Array(0), hash: cdyh0e} @ https://static.xx.fbcdn.net/rsrc.php/v4/yN/r/QPG1-_fWQhl.js:78
+[   85855ms] [ERROR] Permissions policy violation: unload is not allowed in this document. @ https://static.xx.fbcdn.net/rsrc.php/v4/yE/r/RAc5Wo4oVpC.js:335
+[  158355ms] [ERROR] Permissions policy violation: unload is not allowed in this document. @ https://static.xx.fbcdn.net/rsrc.php/v4/yJ/r/UaUeJBgTY7A.js:251
+[  865144ms] [WARNING] react-spring: Directly calling start instead of using the api object is deprecated in v9 (use ".start" instead), this will be removed in later 0.X.0 versions @ https://static.cdninstagram.com/rsrc.php/v4i2T14/yn/l/ko_KR-j/dgdv5hbhvdaiqumGQQ9wOC6Qam0b3yH72MeXtv_VmQCTufume2SqyVFSQOlWZSjehNXy1qGbuYgCz1cC36ynLojLZHGL1hf-xz261YBbWnd6mrK4dnqd17thVtwZjN3Taf-9oRvsWDWwjNRDrXDlbx9775Zcepd5d1UUjzz7eu9sWHtRVVVEYAamdRyfEXKxzJbolxiPZjtK7UOlt0rDjgebLwkeWWSUeKg-ccSYdlN8O3yfNzNB89kXqd3KXYq6Fd6gEz_lwIBs_cDW-1U-1m49_grDaSx2jFQmutZMg2B0hVfoz2LYMEjBF01xHv-U7s5PyZim_J.js:1874
