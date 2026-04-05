@@ -1,0 +1,253 @@
+<!-- 슬라이드 ⑤: 관절센터 - 김용래 원장 + 백사무엘 센터장 -->
+<style>
+    .slide-joint {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 220, .15) 0%, transparent 65%),
+            linear-gradient(135deg, #050c1e 0%, #091630 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .slide-joint .orb {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #3db8ff, transparent 70%);
+        opacity: .18;
+        filter: blur(70px);
+    }
+
+    .slide-joint .wm {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 220px;
+        font-weight: 900;
+        color: #fff;
+        opacity: .04;
+        user-select: none;
+        letter-spacing: -10px;
+    }
+
+    .slide-joint .inner {
+        position: relative;
+        z-index: 10;
+        padding: 0 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slide-joint .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 50px;
+        padding: 6px 18px;
+        margin-bottom: 20px;
+    }
+
+    .slide-joint .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #3db8ff;
+        animation: blink 2s infinite;
+    }
+
+    .slide-joint .badge span {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, .8);
+        font-weight: 500;
+    }
+
+    .slide-joint .cat {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #3db8ff;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .slide-joint h2 {
+        font-size: clamp(32px, 4vw, 56px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        word-break: keep-all;
+    }
+
+    .slide-joint h2 .hl {
+        color: #3db8ff;
+    }
+
+    .slide-joint .impact {
+        font-size: clamp(14px, 1.6vw, 18px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, .9);
+        margin-bottom: 14px;
+    }
+
+    .slide-joint .desc {
+        font-size: clamp(13px, 1.4vw, 15px);
+        color: rgba(255, 255, 255, .62);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        max-width: 540px;
+        word-break: keep-all;
+    }
+
+    .slide-joint .desc strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .slide-joint .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .slide-joint .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: rgba(61, 184, 255, .1);
+        border: 1px solid rgba(61, 184, 255, .3);
+        color: #7aceff;
+    }
+
+    .slide-joint .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .slide-joint .btn-call {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0088ee, #005bbf);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 9px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+        transition: all .25s;
+    }
+
+    .slide-joint .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 26px;
+        border-radius: 9px;
+        text-decoration: none;
+        backdrop-filter: blur(6px);
+        transition: all .25s;
+    }
+
+    /* 통계 */
+    .joint-stats {
+        position: absolute;
+        right: 52px;
+        bottom: 10%;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .js-item {
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 14px;
+        padding: 16px 20px;
+        backdrop-filter: blur(12px);
+    }
+
+    .js-num {
+        font-size: 28px;
+        font-weight: 900;
+        color: #fff;
+        line-height: 1;
+    }
+
+    .js-num sup {
+        font-size: 14px;
+        color: #3db8ff;
+    }
+
+    .js-lbl {
+        font-size: 11px;
+        color: rgba(255, 255, 255, .5);
+        margin-top: 4px;
+    }
+
+    .js-names {
+        font-size: 12px;
+        font-weight: 700;
+        color: #7aceff;
+        margin-top: 3px;
+    }
+</style>
+
+<div class="slide-joint">
+    <div class="orb"></div>
+    <div class="wm">05</div>
+    <div class="inner">
+        <div class="badge">
+            <div class="dot"></div><span>김용래 원장(서울의대) · 백사무엘 센터장 · 관절센터</span>
+        </div>
+        <div class="cat">Joint & Orthopedic Center</div>
+        <h2>무릎·어깨 통증,<br>로봇이 오차 <span class="hl">0.1mm</span>로<br>정확하게 해결합니다</h2>
+        <div class="impact">김용래 원장(서울의대) 로봇인공관절 · 백사무엘 센터장 어깨 관절경</div>
+        <p class="desc">사람 손보다 정밀한 <strong>로봇 수술</strong>로 인공관절을,<br><strong>백사무엘 센터장</strong>의 고난이도 회전근개 파열 수술까지.<br>두
+            전문가가 함께하는 관절센터입니다.</p>
+        <div class="chips">
+            <div class="chip">🤖 로봇인공관절 수술 (김용래)</div>
+            <div class="chip">💪 회전근개 파열 관절경 (백사무엘)</div>
+            <div class="chip">🏃 수술 당일 보행 가능</div>
+            <div class="chip">🎓 서울의대 출신 전문의</div>
+        </div>
+        <div class="cta">
+            <a href="tel:031-572-3111" class="btn-call">📞 031-572-3111 관절 상담</a>
+            <a href="/sub/r60/r10/s1010.php" class="btn-more">관절센터 자세히 →</a>
+        </div>
+    </div>
+    <div class="joint-stats">
+        <div class="js-item">
+            <div class="js-num">0.1<sup>mm</sup></div>
+            <div class="js-lbl">로봇 정밀도</div>
+            <div class="js-names">김용래 원장 (서울의대)</div>
+        </div>
+        <div class="js-item">
+            <div class="js-num">고난이도<sup></sup></div>
+            <div class="js-lbl">어깨 관절경 전문</div>
+            <div class="js-names">백사무엘 센터장</div>
+        </div>
+    </div>
+</div>

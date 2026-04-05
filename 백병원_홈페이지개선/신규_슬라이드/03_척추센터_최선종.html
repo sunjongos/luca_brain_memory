@@ -1,0 +1,318 @@
+<!-- 슬라이드 ③: 최선종 병원장 - 척추센터 -->
+<!-- 원본 슬라이드 교체용 코드. 원본 슬라이더 안에 삽입 -->
+<style>
+    .slide-choi {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 50%, rgba(0, 150, 200, .15) 0%, transparent 65%),
+            linear-gradient(135deg, #050e1a 0%, #091828 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .slide-choi .orb {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #00d4aa, transparent 70%);
+        opacity: .18;
+        filter: blur(70px);
+    }
+
+    .slide-choi .wm {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 220px;
+        font-weight: 900;
+        color: #fff;
+        opacity: .04;
+        user-select: none;
+        letter-spacing: -10px;
+    }
+
+    .slide-choi .inner {
+        position: relative;
+        z-index: 10;
+        padding: 0 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slide-choi .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 50px;
+        padding: 6px 18px;
+        margin-bottom: 20px;
+    }
+
+    .slide-choi .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #00d4aa;
+        animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1)
+        }
+
+        50% {
+            opacity: .4;
+            transform: scale(1.5)
+        }
+    }
+
+    .slide-choi .badge span {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, .8);
+        font-weight: 500;
+    }
+
+    .slide-choi .cat {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #00d4aa;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .slide-choi h2 {
+        font-size: clamp(32px, 4vw, 56px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        word-break: keep-all;
+    }
+
+    .slide-choi h2 .hl {
+        color: #00d4aa;
+    }
+
+    .slide-choi .impact {
+        font-size: clamp(14px, 1.6vw, 18px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, .9);
+        margin-bottom: 14px;
+    }
+
+    .slide-choi .desc {
+        font-size: clamp(13px, 1.4vw, 15px);
+        color: rgba(255, 255, 255, .62);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        max-width: 540px;
+        word-break: keep-all;
+    }
+
+    .slide-choi .desc strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .slide-choi .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .slide-choi .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: rgba(0, 212, 170, .1);
+        border: 1px solid rgba(0, 212, 170, .3);
+        color: #4defc8;
+    }
+
+    .slide-choi .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .slide-choi .btn-call {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0088ee, #005bbf);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 9px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+        transition: all .25s;
+    }
+
+    .slide-choi .btn-call:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 136, 238, .55);
+    }
+
+    .slide-choi .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 26px;
+        border-radius: 9px;
+        text-decoration: none;
+        backdrop-filter: blur(6px);
+        transition: all .25s;
+    }
+
+    .slide-choi .btn-more:hover {
+        background: rgba(255, 255, 255, .12);
+        transform: translateY(-3px);
+    }
+
+    /* 우측 카드 */
+    .slide-choi .card {
+        position: absolute;
+        right: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        width: 260px;
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 18px;
+        padding: 24px 20px;
+        backdrop-filter: blur(18px);
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(-50%)
+        }
+
+        50% {
+            transform: translateY(calc(-50% - 10px))
+        }
+    }
+
+    .card .cr {
+        font-size: 10.5px;
+        color: #00d4aa;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .card .cn {
+        font-size: 20px;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+
+    .card .cd {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.5;
+        margin-bottom: 14px;
+    }
+
+    .card .cl {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .card .ci {
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, .82);
+    }
+
+    .card .ci::before {
+        content: '▸';
+        flex-shrink: 0;
+        color: #00d4aa;
+        margin-top: 1px;
+    }
+
+    .card .cbadge {
+        margin-top: 14px;
+        padding: 9px;
+        border-radius: 8px;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-align: center;
+        background: rgba(0, 212, 170, .08);
+        border: 1px solid rgba(0, 212, 170, .2);
+        color: #00d4aa;
+    }
+</style>
+
+<div class="slide-choi">
+    <div class="orb"></div>
+    <div class="wm">03</div>
+    <div class="inner">
+        <div class="badge">
+            <div class="dot"></div><span>최선종 병원장 · 서울의대 · 척추센터장</span>
+        </div>
+        <div class="cat">Spine Center</div>
+        <h2>허리·목 수술,<br><span class="hl">서울까지 갈 필요 없습니다</span></h2>
+        <div class="impact">서울의대 출신 최선종 병원장 — 내시경척추·고난이도 재수술 전문</div>
+        <p class="desc">피부 1cm 절개, 전신마취 없이.<br><strong>ERAS 빠른 회복 프로그램</strong>으로 1~2일 입원 후 일상 복귀.<br>풍석확장성형술·유착박리술 등
+            고난이도 수술까지 커버합니다.</p>
+        <div class="chips">
+            <div class="chip">🔬 서울의대 척추내시경 수술</div>
+            <div class="chip">🔄 고난이도 척추 재수술 전문</div>
+            <div class="chip">🩺 풍석확장성형술 · 유착박리술</div>
+            <div class="chip">🏃 ERAS 빠른 회복 프로그램</div>
+        </div>
+        <div class="cta">
+            <a href="tel:031-572-3111" class="btn-call">📞 031-572-3111 척추 상담</a>
+            <a href="/sub/r50/r10/s1010.php" class="btn-more">척추센터 자세히 →</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cr">척추센터장 · 병원장</div>
+        <div class="cn">최선종</div>
+        <div class="cd">척추외과 전문의 · 의학박사<br>서울대학교 의과대학 출신</div>
+        <div class="cl">
+            <div class="ci">서울의대 척추내시경 수술</div>
+            <div class="ci">고난이도 척추 재수술 전문</div>
+            <div class="ci">풍석확장성형술 · 유착박리술</div>
+            <div class="ci">ERAS 빠른 회복 프로그램</div>
+        </div>
+        <div class="cbadge">⚡ 당일 · 1~2일 입원 후 일상 복귀</div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+- generic [ref=e12]:
+  - img [ref=e16]
+  - separator [ref=e20]
+  - generic [ref=e31]:
+    - generic [ref=e38]: Facebook에 로그인
+    - generic [ref=e43]:
+      - generic [ref=e47]:
+        - textbox "이메일 또는 휴대폰 번호" [ref=e48]
+        - generic: 이메일 또는 휴대폰 번호
+      - generic [ref=e52]:
+        - textbox "비밀번호" [ref=e53]
+        - generic: 비밀번호
+      - button "로그인" [ref=e56] [cursor=pointer]:
+        - generic [ref=e59]: 로그인
+      - link "비밀번호를 잊으셨나요?" [ref=e62] [cursor=pointer]:
+        - /url: https://www.facebook.com/recover/initiate/?privacy_mutation_token=eyJ0eXBlIjo1LCJjcmVhdGlvbl90aW1lIjoxNzczOTEzNzQzfQ%3D%3D&ars=facebook_login&next=https%3A%2F%2Fwww.facebook.com%2Foidc%2F%3Fapp_id%3D124024574287414%26redirect_uri%3Dhttps%253A%252F%252Fwww.instagram.com%252Faccounts%252Fsignupviafb%252F%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bprofile%2Blinking%26state%3DATpEdZOB_F1qI-Y_MUG6Ia57hYqQ5KrK-x2zw_x_k_ivKfD70h4a_KmNlcfRjqw_g_6CU26FlLFiaOB7yqFjtRYkdwjCrXcfzCdsN7sAlXe8jbqrrU0SIPodzjp-ggUwTcJ3Hakx6pSXxlLzwoLeCB2mGLK0fOmqbM_eVYKR6Q8i21U0fdv2hSDPt3PyIuazWOD4lwdCyo3iPd0CzHqn4oQny4pyKuf79fCKsbSFYegFdITmB4lzREJT41Q381dtx5e25RXUt2MhYc3IoWiWl21wjQ
+        - generic [ref=e65]: 비밀번호를 잊으셨나요?
+      - link "새 계정 만들기" [ref=e68] [cursor=pointer]:
+        - /url: /reg/?entry_point=login&next=https%3A%2F%2Fwww.facebook.com%2Foidc%2F%3Fapp_id%3D124024574287414%26redirect_uri%3Dhttps%253A%252F%252Fwww.instagram.com%252Faccounts%252Fsignupviafb%252F%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bprofile%2Blinking%26state%3DATpEdZOB_F1qI-Y_MUG6Ia57hYqQ5KrK-x2zw_x_k_ivKfD70h4a_KmNlcfRjqw_g_6CU26FlLFiaOB7yqFjtRYkdwjCrXcfzCdsN7sAlXe8jbqrrU0SIPodzjp-ggUwTcJ3Hakx6pSXxlLzwoLeCB2mGLK0fOmqbM_eVYKR6Q8i21U0fdv2hSDPt3PyIuazWOD4lwdCyo3iPd0CzHqn4oQny4pyKuf79fCKsbSFYegFdITmB4lzREJT41Q381dtx5e25RXUt2MhYc3IoWiWl21wjQ
+        - generic [ref=e71]: 새 계정 만들기
+      - img "Meta 로고" [ref=e73]
+  - separator [ref=e81]
+  - main [ref=e87]:
+    - separator [ref=e89]
+    - generic [ref=e94]:
+      - generic [ref=e96]:
+        - generic [ref=e98]: 한국어
+        - link "English (US)" [ref=e101] [cursor=pointer]:
+          - /url: "#"
+        - link "Tiếng Việt" [ref=e104] [cursor=pointer]:
+          - /url: "#"
+        - link "Bahasa Indonesia" [ref=e107] [cursor=pointer]:
+          - /url: "#"
+        - link "ภาษาไทย" [ref=e110] [cursor=pointer]:
+          - /url: "#"
+        - link "Español" [ref=e113] [cursor=pointer]:
+          - /url: "#"
+        - link "中文(简体)" [ref=e116] [cursor=pointer]:
+          - /url: "#"
+        - link "언어 더 보기..." [ref=e119] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=e122]:
+        - link "가입하기" [ref=e125] [cursor=pointer]:
+          - /url: https://www.facebook.com/reg/
+        - link "로그인" [ref=e128] [cursor=pointer]:
+          - /url: https://www.facebook.com/login/
+        - link "Messenger" [ref=e131] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fmessenger.com%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Facebook Lite" [ref=e134] [cursor=pointer]:
+          - /url: https://www.facebook.com/lite/
+        - link "동영상" [ref=e137] [cursor=pointer]:
+          - /url: https://www.facebook.com/watch/
+        - link "Meta Pay" [ref=e140] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fabout.meta.com%2Ftechnologies%2Fmeta-pay&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Meta 스토어" [ref=e143] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.meta.com%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Meta Quest" [ref=e146] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.meta.com%2Fquest%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Ray-Ban Meta" [ref=e149] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.meta.com%2Fsmart-glasses%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Meta AI" [ref=e152] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.meta.ai%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Instagram" [ref=e155] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "Threads" [ref=e158] [cursor=pointer]:
+          - /url: https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.threads.com%2F&h=AT4prjEPuulPdqaiX6AUu2hw6evKgXXeFJLzgyQp_X59cM74NFzV0aUW7eeNwBf91ygC_81B8k5cYUWd1YWsYj6Yff_1UJL2M4FQCy14vPqbSMYOJ-_gay0poQR_1ku1tcHihl06Hh1e7RCsA4IPPg
+        - link "개인정보처리방침" [ref=e161] [cursor=pointer]:
+          - /url: https://www.facebook.com/privacy/policy/?entry_point=facebook_page_footer
+        - link "개인정보 보호 센터" [ref=e164] [cursor=pointer]:
+          - /url: https://www.facebook.com/privacy/center/?entry_point=facebook_page_footer
+        - link "정보" [ref=e167] [cursor=pointer]:
+          - /url: https://www.facebook.com/about/
+        - link "광고 만들기" [ref=e170] [cursor=pointer]:
+          - /url: https://www.facebook.com/ad_campaign/landing.php?placement=pflo&campaign_id=402047449186&nav_source=unknown&extra_1=auto
+        - link "페이지 만들기" [ref=e173] [cursor=pointer]:
+          - /url: https://www.facebook.com/pages/create/?ref_type=site_footer
+        - link "개발자" [ref=e176] [cursor=pointer]:
+          - /url: https://developers.facebook.com/?ref=pf
+        - link "채용 정보" [ref=e179] [cursor=pointer]:
+          - /url: https://www.facebook.com/careers/?ref=pf
+        - link "쿠키" [ref=e182] [cursor=pointer]:
+          - /url: https://www.facebook.com/policies/cookies/
+        - link "AdChoices" [ref=e185] [cursor=pointer]:
+          - /url: https://www.facebook.com/help/568137493302217
+        - link "약관" [ref=e188] [cursor=pointer]:
+          - /url: https://www.facebook.com/policies?ref=pf
+        - link "고객 센터" [ref=e191] [cursor=pointer]:
+          - /url: https://www.facebook.com/help/?ref=pf
+        - link "연락처 업로드 및 비사용자" [ref=e194] [cursor=pointer]:
+          - /url: https://www.facebook.com/help/637205020878504
+      - generic [ref=e197]: Meta © 2026

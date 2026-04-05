@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환자 관리 대시보드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+        .lucide {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
+    <div class="flex min-h-screen">
+        <!-- 사이드바 -->
+        <aside class="w-64 bg-slate-800 dark:bg-gray-950 text-white min-h-screen p-4 flex flex-col fixed left-0 top-0 z-20 shadow-lg">
+            <div class="text-2xl font-bold mb-8 px-2 flex items-center gap-2 text-blue-400">
+                <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="stethoscope" class="w-6 h-6 text-white"></i>
+                </div>
+                <span>헬스케어 대시보드</span>
+            </div>
+            <nav class="flex-1 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-blue-300 bg-slate-700 dark:bg-gray-800 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>대시보드</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span>환자 관리</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                    <span>예약</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                    <span>진료 기록</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                    <span>성과 분석</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 dark:hover:bg-gray-800 transition-colors">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span>설정</span>
+                </a>
+            </nav>
+            <div class="border-t border-slate-700 dark:border-gray-800 pt-4 mt-4">
+                <div class="flex items-center gap-3 px-2">
+                    <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-sm font-semibold text-white">JS</div>
+                    <div class="text-sm">
+                        <p class="font-medium text-white">김지수</p>
+                        <p class="text-slate-400 text-xs">관리자</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="flex-1 ml-64">
+            <!-- 상단 바 -->
+            <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between sticky top-0 z-10 shadow-sm">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-50">환자 관리 대시보드</h1>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">오늘의 병원 현황을 한눈에 확인하세요.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="sun" class="w-5 h-5 text-gray-600 dark:text-gray-400 hidden dark:block"></i>
+                        <i data-lucide="moon" class="w-5 h-5 text-gray-600 dark:text-gray-400 block dark:hidden"></i>
+                    </button>
+                    <button class="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <i data-lucide="bell" class="w-5 h-5 text-gray-600 dark:text-gray-400"></i>
+                        <span class="absolute top-1 right-1 block w-2 h-2 rounded-full bg-red-500 border-2 border-white dark:border-gray-800"></span>
+                    </button>
+                    <div class="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold text-sm">JS</div>
+                </div>
+            </header>
+
+            <!-- 대시보드 콘텐츠 -->
+            <div class="p-6">
+                <!-- 통계 카드 섹션 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- 환자 현황 카드 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400">총 환자수</h3>
+                            <i data-lucide="users" class="w-5 h-5 text-blue-500"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 dark:text-gray-50">1,250명</div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">지난 달 대비 <span class="text-green-600 dark:text-green-400">+5%</span></p>
+                    </div>
+
+                    <!-- 오늘 예약 카드 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400">오늘 예약</h3>
+                            <i data-lucide="calendar-check" class="w-5 h-5 text-indigo-500"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 dark:text-gray-50">78건</div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">미처리 예약 <span class="text-orange-500 dark:text-orange-400">3건</span></p>
+                    </div>
+
+                    <!-- 병상 가동률 카드 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400">병상 가동률</h3>
+                            <i data-lucide="bed" class="w-5 h-5 text-teal-500"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 dark:text-gray-50">85<span class="text-xl">%</span></div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">총 120병상 중 <span class="text-red-600 dark:text-red-400">18병상</span> 공실</p>
+                    </div>
+
+                    <!-- 매출 통계 카드 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400">월 매출</h3>
+                            <i data-lucide="won" class="w-5 h-5 text-green-500"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-900 dark:text-gray-50">₩ 2.3억</div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">목표 대비 <span class="text-green-600 dark:text-green-400">10% 초과</span></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 월별 환자수 차트 -->
+                    <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-50">월별 신규 및 재방문 환자수</h3>
+                        <div class="h-80">
+                            <canvas id="patientChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 최근 환자 목록 테이블 -->
+                    <div class="lg:col-span-1 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-50">최근 등록 환자</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 rounded-tl-lg">이름</th>
+                                        <th scope="col" class="px-4 py-3">성별</th>
+                                        <th scope="col" class="px-4 py-3 rounded-tr-lg">등록일</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">박선우</td>
+                                        <td class="px-4 py-3">남</td>
+                                        <td class="px-4 py-3">2023-10-26</td>
+                                    </tr>
+                                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">이지은</td>
+                                        <td class="px-4 py-3">여</td>
+                                        <td class="px-4 py-3">2023-10-25</td>
+                                    </tr>
+                                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">최민준</td>
+                                        <td class="px-4 py-3">남</td>
+                                        <td class="px-4 py-3">2023-10-24</td>
+                                    </tr>
+                                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">김하윤</td>
+                                        <td class="px-4 py-3">여</td>
+                                        <td class="px-4 py-3">2023-10-23</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-50">정서윤</td>
+                                        <td class="px-4 py-3">여</td>
+                                        <td class="px-4 py-3">2023-10-22</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>새 환자 등록</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Lucide Icons 초기화
+        lucide.createIcons();
+
+        // 다크 모드 토글 함수
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // 시스템 테마 또는 저장된 테마에 따라 초기 모드 설정
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+        }
+        setInitialTheme();
+
+        // Chart.js 데이터 및 옵션
+        const ctx = document.getElementById('patientChart').getContext('2d');
+        const patientChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월'],
+                datasets: [
+                    {
+                        label: '신규 환자',
+                        data: [120, 150, 130, 160, 180, 200, 190, 220, 210, 240],
+                        borderColor: 'rgb(59, 130, 246)', // Tailwind blue-500
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    },
+                    {
+                        label: '재방문 환자',
+                        data: [300, 320, 310, 350, 340, 360, 380, 370, 400, 420],
+                        borderColor: 'rgb(124, 58, 237)', // Tailwind violet-600
+                        backgroundColor: 'rgba(124, 58, 237, 0.2)',
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: 'rgb(124, 58, 237)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(124, 58, 237)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color-primary') // 다크모드 대응
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false,
+                            color: 'rgba(200, 200, 200, 0.1)'
+                        },
+                        ticks: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color-secondary') // 다크모드 대응
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(200, 200, 200, 0.1)'
+                        },
+                        ticks: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color-secondary') // 다크모드 대응
+                        }
+                    }
+                }
+            }
+        });
+
+        // Dark/Light 모드 변경 시 차트 텍스트 색상 업데이트
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    const isDarkMode = document.documentElement.classList.contains('dark');
+                    const primaryColor = isDarkMode ? '#e5e7eb' : '#1f2937'; // gray-200 vs gray-900
+                    const secondaryColor = isDarkMode ? '#9ca3af' : '#6b7280'; // gray-400 vs gray-600
+
+                    patientChart.options.plugins.legend.labels.color = primaryColor;
+                    patientChart.options.scales.x.ticks.color = secondaryColor;
+                    patientChart.options.scales.y.ticks.color = secondaryColor;
+                    patientChart.update();
+                }
+            });
+        });
+        observer.observe(document.documentElement, { attributes: true });
+
+        // CSS 변수 정의 (Chart.js 텍스트 색상 동적 변경용)
+        document.documentElement.style.setProperty('--text-color-primary', getComputedStyle(document.body).color);
+        document.documentElement.style.setProperty('--text-color-secondary', getComputedStyle(document.querySelector('.text-gray-600')).color);
+
+
+    </script>
+</body>
+</html>

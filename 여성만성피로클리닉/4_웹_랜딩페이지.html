@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여성만성피로클리닉 | 남양주 백병원</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --primary-light: #a29bfe;
+            --accent: #F8A5C2;
+            --dark: #2d3436;
+            --gray: #636e72;
+            --light-gray: #f5f6fa;
+            --white: #ffffff;
+            --gold: #e1b12c;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--white);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/2570f83a-d114-4ad1-b9aa-0e7fac88727a/fatigue_clinic_hero_kr_woman_1772695781217.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            color: var(--white);
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 0 0 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(248, 165, 194, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(248, 165, 194, 0.6);
+            background-color: #f78fb3;
+        }
+
+        /* USP Section */
+        .section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .section-light {
+            background-color: var(--light-gray);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .usp-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: left;
+            border-top: 5px solid var(--primary);
+        }
+
+        .usp-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .usp-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .usp-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .usp-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* NDB Process */
+        .process-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .process-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dfe6e9;
+            z-index: 1;
+        }
+
+        .step {
+            width: 30%;
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: -55px auto 20px;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Doctor Section */
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .doctor-card {
+            display: flex;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .doctor-img {
+            width: 40%;
+            background-color: var(--light-gray);
+            /* Placeholder pattern */
+            background-image: radial-gradient(var(--primary-light) 2px, transparent 2px);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .doctor-img::after {
+            content: '사진 영역';
+            color: var(--gray);
+            font-weight: 700;
+        }
+
+        .doctor-info {
+            width: 60%;
+            padding: 30px;
+            text-align: left;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Noto Serif KR';
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .usp-grid,
+            .doctor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .process-container::before {
+                display: none;
+            }
+
+            .step {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">남양주 백병원 여성만성피로클리닉</span>
+            <h1 class="hero-title">원인 없는 피로는<br><span>존재하지 않습니다.</span></h1>
+            <p class="hero-subtitle">
+                느낌에 의존한 일시적 수액 치료는 이제 그만.<br>
+                정밀 자율신경계·호르몬 진단을 통해 잃어버린 여성의 생기와 깊은 숙면을 되찾아 드립니다.
+            </p>
+            <a href="#consult" class="cta-btn">정밀 진단 예약하기</a>
+        </div>
+    </div>
+
+    <!-- USP Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">New, Different, Better</h2>
+            <p class="section-desc">왜 남양주 백병원 여성만성피로클리닉이어야 할까요?</p>
+        </div>
+        <div class="usp-grid">
+            <div class="usp-card">
+                <div class="usp-icon">📊</div>
+                <h3>정량적 검사 시스템</h3>
+                <p>스트레스가 내 몸을 얼마나 망가뜨렸을까? 자율신경계 정밀 검사와 부신 호르몬 혈액검사로 무너진 밸런스를 수치로 증명합니다.</p>
+            </div>
+            <div class="usp-card">
+                <div class="usp-icon">💉</div>
+                <h3>맞춤형 특수 수액</h3>
+                <p>단순 영양제가 아닌, 피로와 통증의 근원인 '염증'을 잡는 항염부신회복수액과 라이넥 베이스의 갱년기회복수액을 맞춤 처방합니다.</p>
+            </div>
+            <div class="usp-card">
+                <div class="usp-icon">🤝</div>
+                <h3>마스터 투톱 협진</h3>
+                <p>뇌신경 전문 강진호 병원장과 가정의학과 이민웅 센터장이 신경과 호르몬을 전인적으로 융합 분석하여 최상의 진료를 제공합니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="section section-light">
+        <div class="section-header">
+            <h2 class="section-title">One-Stop Care Process</h2>
+            <p class="section-desc">오직 당신의 편안한 치유를 위한 당일 원스톱 프로세스</p>
+        </div>
+        <div class="process-container">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>정밀 진단</h3>
+                <p style="color: var(--gray);">방문 당일 자율신경계 / 스트레스 / 호르몬 속성 검사 진행</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>마스터 처방</h3>
+                <p style="color: var(--gray);">검사 결과를 바탕으로 한 전문의 1:1 심층 상담 및 원인 분석</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>회복 수액</h3>
+                <p style="color: var(--gray);">프라이빗한 공간에서 내 상황에 딱 맞는 맞춤형 항염 회복 수액 진행</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctors Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Medical Masters</h2>
+            <p class="section-desc">당신의 잃어버린 활력을 책임질 남양주 백병원의 최고 의료진</p>
+        </div>
+        <div class="doctor-grid">
+            <div class="doctor-card">
+                <div class="doctor-img"></div>
+                <div class="doctor-info">
+                    <h4 style="color: var(--primary); margin: 0 0 5px;">뇌신경 마스터</h4>
+                    <h3 style="margin: 0 0 15px; font-size: 1.6rem;">강진호 병원장</h3>
+                    <p style="color: var(--gray); font-size: 0.95rem;">
+                        "원인 모를 피로와 불면증, 교감신경의 과항진에서 시작됩니다. 신경 밸런스를 맞춰 편안한 밤을 약속드립니다."
+                    </p>
+                    <p style="font-size: 0.85rem; font-weight: 700; margin-top: 15px;">신경과 전문의 / 뇌신경센터</p>
+                </div>
+            </div>
+            <div class="doctor-card">
+                <div class="doctor-img"></div>
+                <div class="doctor-info">
+                    <h4 style="color: var(--primary); margin: 0 0 5px;">신체 밸런스 마스터</h4>
+                    <h3 style="margin: 0 0 15px; font-size: 1.6rem;">이민웅 센터장</h3>
+                    <p style="color: var(--gray); font-size: 0.95rem;">
+                        "바닥난 부신 에너지와 호르몬 불균형을 정확히 포착하여, 환자분께 가장 완벽한 비율의 수액 테라피를 처방합니다."
+                    </p>
+                    <p style="font-size: 0.85rem; font-weight: 700; margin-top: 15px;">가정의학과 전문의 / 건강검진센터</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" id="consult">
+        <div class="footer-logo">여성만성피로클리닉 x 남양주 백병원</div>
+        <p>상담 및 예약 대기 없이 당일 바로 진료받으세요.</p>
+        <h2 style="font-size: 3rem; color: var(--accent); margin: 20px 0;">031-572-3111</h2>
+        <p style="color: #999;">경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+    </div>
+
+</body>
+
+</html>

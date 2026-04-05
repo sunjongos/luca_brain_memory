@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>닥터아이 Multi-Agent 당뇨 눈 관리 시스템 사업보고서</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;900&family=Montserrat:wght@700;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --navy: #0b1f3a;
+            --blue: #1a4db3;
+            --teal: #00c9b1;
+            --red: #e84545;
+            --gold: #f5a623;
+            --purple: #7c3aed;
+            --green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f0f4f9;
+            color: #1a2744;
+            line-height: 1.7;
+        }
+
+        /* COVER */
+        .cover {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3a7a 100%);
+            color: #fff;
+            padding: 80px 8%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: rgba(0, 201, 177, .2);
+            color: var(--teal);
+            border: 1px solid rgba(0, 201, 177, .4);
+            border-radius: 30px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            padding: 5px 18px;
+            margin-bottom: 24px;
+        }
+
+        .cover h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .cover h1 span {
+            color: var(--teal);
+        }
+
+        .cover .sub {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, .65);
+            margin-bottom: 48px;
+            max-width: 640px;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cover-meta div {
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .cover-meta strong {
+            display: block;
+            color: #fff;
+            font-size: 1rem;
+            margin-top: 3px;
+        }
+
+        /* SECTIONS */
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 64px 5%;
+        }
+
+        h2.sec {
+            font-size: 1.7rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--teal);
+        }
+
+        h3.sub {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 28px 0 10px;
+            color: var(--blue);
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: .95rem;
+            color: #374151;
+        }
+
+        /* CARDS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+        }
+
+        .card.t {
+            border-top: 4px solid var(--teal);
+        }
+
+        .card.b {
+            border-top: 4px solid var(--blue);
+        }
+
+        .card.g {
+            border-top: 4px solid var(--green);
+        }
+
+        .card.r {
+            border-top: 4px solid var(--red);
+        }
+
+        .card.p {
+            border-top: 4px solid var(--purple);
+        }
+
+        .card .num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--teal);
+            line-height: 1;
+        }
+
+        .card h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            margin: 8px 0 4px;
+        }
+
+        .card p {
+            font-size: .8rem;
+            color: #6b7a99;
+            margin: 0;
+        }
+
+        /* AGENT TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: .85rem;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+        }
+
+        th {
+            background: var(--navy);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #edf0f7;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f8faff;
+        }
+
+        /* ARCH */
+        .arch-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 20px 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+        }
+
+        .layer {
+            background: #f0f4f9;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .layer h4 {
+            font-size: .88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--blue);
+        }
+
+        .layer p {
+            font-size: .8rem;
+            color: #6b7a99;
+            margin: 0;
+        }
+
+        /* RISK */
+        .risk-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        @media(max-width:600px) {
+            .risk-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .risk {
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .risk.low {
+            background: #f0fdf4;
+            border: 2px solid var(--green);
+        }
+
+        .risk.mid {
+            background: #fffbeb;
+            border: 2px solid var(--gold);
+        }
+
+        .risk.high {
+            background: #fef2f2;
+            border: 2px solid var(--red);
+        }
+
+        .risk .rlbl {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 2px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .risk.low .rlbl {
+            background: var(--green);
+        }
+
+        .risk.mid .rlbl {
+            background: var(--gold);
+        }
+
+        .risk.high .rlbl {
+            background: var(--red);
+        }
+
+        .risk h4 {
+            font-size: .88rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .risk li {
+            font-size: .78rem;
+            color: #4b5563;
+            padding: 2px 0;
+            list-style: none;
+        }
+
+        .risk li::before {
+            content: '→ ';
+            color: #9ca3af;
+        }
+
+        /* MARKET */
+        .mkt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media(max-width:600px) {
+            .mkt-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight {
+            background: linear-gradient(135deg, rgba(0, 201, 177, .1), rgba(45, 140, 240, .1));
+            border: 1.5px solid rgba(0, 201, 177, .4);
+            border-radius: 14px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .highlight p {
+            color: #1a2744;
+            font-weight: 600;
+            font-size: .95rem;
+            margin: 0;
+        }
+
+        /* PATENT */
+        .patent-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--purple);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+        }
+
+        .patent-item h4 {
+            font-size: .92rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin-bottom: 6px;
+        }
+
+        .patent-item p {
+            font-size: .82rem;
+            color: #6b7a99;
+            margin: 0;
+        }
+
+        /* ROADMAP */
+        .road {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin: 20px 0;
+        }
+
+        .road-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 200px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .07);
+        }
+
+        .road-item .phase {
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--teal);
+            margin-bottom: 6px;
+        }
+
+        .road-item h4 {
+            font-size: .88rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .road-item li {
+            font-size: .78rem;
+            color: #6b7a99;
+            list-style: none;
+            padding: 2px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--navy);
+            color: rgba(255, 255, 255, .5);
+            text-align: center;
+            padding: 32px;
+            font-size: .8rem;
+        }
+
+        /* PAGE BREAK for print */
+        @media print {
+            .page-break {
+                page-break-before: always;
+            }
+
+            .cover {
+                min-height: auto;
+                padding: 60px 8%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER -->
+    <div class="cover">
+        <div class="cover-badge">CONFIDENTIAL BUSINESS REPORT · 2026.03</div>
+        <h1>닥터아이 <span>Multi-Agent</span><br>당뇨 눈 질환 관리 시스템</h1>
+        <p class="sub">세계 최초 — AI 안저진단 + 다중 에이전트 오케스트레이션으로<br>당뇨성 실명을 막는 의료 자동화 플랫폼 사업 제안</p>
+        <div class="cover-meta">
+            <div>
+                <div>개발사</div><strong>PaiHealthcare-LCK 연구소</strong>
+            </div>
+            <div>
+                <div>제품</div><strong>닥터아이 (Doctor Eye)</strong>
+            </div>
+            <div>
+                <div>보고서 일자</div><strong>2026년 03월 07일</strong>
+            </div>
+            <div>
+                <div>문서 분류</div><strong>대외비 · 투자/협력 제안용</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. 사업 개요 -->
+    <div class="page page-break">
+        <h2 class="sec">1. 사업 개요</h2>
+        <p>본 사업은 파이헬스케어-LCK 연구소가 개발한 AI 안저진단 솔루션 <strong>닥터아이(Doctor Eye)</strong>를 핵심 엔진으로, <strong>Multi-Agent AI
+                시스템</strong>을 결합하여 당뇨 환자의 눈 질환을 자동화된 3단계 워크플로우로 관리하는 세계 최초의 의료 AI 오케스트레이션 플랫폼을 구축하는 것을 목표로 합니다.</p>
+        <div class="card-grid">
+            <div class="card t">
+                <div class="num">4대</div>
+                <h4>AI 진단 질환</h4>
+                <p>당뇨망막증·녹내장·황반변성·망막혈관폐쇄</p>
+            </div>
+            <div class="card b">
+                <div class="num">7+</div>
+                <h4>전문 AI 에이전트</h4>
+                <p>병렬·직렬 실행으로 워크플로우 자동화</p>
+            </div>
+            <div class="card g">
+                <div class="num">95%</div>
+                <h4>조기 발견 시 예방률</h4>
+                <p>당뇨 합병증 실명 예방 의학적 근거</p>
+            </div>
+            <div class="card r">
+                <div class="num">5분</div>
+                <h4>AI 판독 완료</h4>
+                <p>촬영 후 전자동 리포트 생성</p>
+            </div>
+        </div>
+        <div class="highlight">
+            <p>💡 핵심 혁신: 기존 AI 의료 솔루션이 '진단'에 그쳤다면, 본 시스템은 진단 → 처방 초안 → 협진 의뢰 → 환자 알림 → 재방문 예약까지 <strong>의료 업무 전 과정을
+                    Multi-Agent가 자동 처리</strong>하며, 중요한 의사결정만 의사가 Human-in-the-Loop 방식으로 승인합니다.</p>
+        </div>
+    </div>
+
+    <!-- 2. 문제 정의 -->
+    <div class="page page-break">
+        <h2 class="sec">2. 문제 정의 — 왜 지금인가</h2>
+        <h3 class="sub">2.1 당뇨 합병증 실명의 위험성</h3>
+        <p>대한민국 당뇨 환자는 약 <strong>600만 명</strong>으로, 이 중 당뇨성 망막증 발생률은 진단 10년 후 <strong>30%</strong>에 달합니다. 당뇨 합병증 중 실명은
+            삶의 질을 가장 극단적으로 파괴합니다. 신장부전은 투석으로 대체 가능하지만, 시력은 한 번 잃으면 회복이 불가능합니다.</p>
+        <div class="card-grid">
+            <div class="card r">
+                <div class="num">1위</div>
+                <h4>후천성 실명 원인</h4>
+                <p>당뇨성 망막증 — 대한민국 기준</p>
+            </div>
+            <div class="card r">
+                <div class="num">90%</div>
+                <h4>무증상 진행</h4>
+                <p>초기 당뇨 망막증은 증상이 없음</p>
+            </div>
+            <div class="card t">
+                <div class="num">95%</div>
+                <h4>조기 예방 가능</h4>
+                <p>조기 발견 시 실명 95% 예방</p>
+            </div>
+            <div class="card b">
+                <div class="num">600만</div>
+                <h4>국내 당뇨 환자</h4>
+                <p>지속 증가 추세, 고령화와 직결</p>
+            </div>
+        </div>
+        <h3 class="sub">2.2 현재 의료 시스템의 한계</h3>
+        <table>
+            <tr>
+                <th>문제</th>
+                <th>현황</th>
+                <th>결과</th>
+            </tr>
+            <tr>
+                <td>안저검사 누락</td>
+                <td>당뇨 외래에서 안저검사 시행률 30% 미만</td>
+                <td>진단 지연 → 실명</td>
+            </tr>
+            <tr>
+                <td>단절된 워크플로우</td>
+                <td>진단·처방·협진이 각각 분리 운영</td>
+                <td>의료 질 편차 발생</td>
+            </tr>
+            <tr>
+                <td>의사 업무 과부하</td>
+                <td>반복적 오더 작성, 협진 의뢰 등 수작업</td>
+                <td>진료 집중도 저하</td>
+            </tr>
+            <tr>
+                <td>환자 추적 실패</td>
+                <td>재방문 주기 관리 없음</td>
+                <td>고위험군 이탈</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 3. 솔루션 -->
+    <div class="page page-break">
+        <h2 class="sec">3. 솔루션 — 닥터아이 + Multi-Agent 시스템</h2>
+        <h3 class="sub">3.1 시스템 개념</h3>
+        <p>닥터아이 AI 진단 결과를 트리거로, 복수의 전문 AI 에이전트가 <strong>병렬(Parallel)</strong> 및 <strong>직렬(Sequential)</strong> 방식으로
+            협업하여 진료 워크플로우를 자동 처리합니다. 의사는 중요한 의사결정(처방 최종 승인, 협진 서명)만 <strong>Human-in-the-Loop</strong> 방식으로 개입합니다.</p>
+
+        <div class="arch-box">
+            <div class="layer">
+                <h4>🔵 Layer 1 — 진단 레이어 (닥터아이 AI)</h4>
+                <p>안저 촬영 → 4대 안질환 AI 분석 → 위험도 스코어링 → 결과 분기 판단 (완전 자동)</p>
+            </div>
+            <div class="layer" style="border-color:var(--gold)">
+                <h4>🟡 Layer 2 — 처리 레이어 (Multi-Agent 병렬 실행)</h4>
+                <p>Prescription Agent(처방 초안) + ECAS Agent(혈관 평가) + Notify Agent(환자 문자) + Scheduler Agent(재방문 예약) — 동시 병렬
+                    실행</p>
+            </div>
+            <div class="layer" style="border-color:var(--purple)">
+                <h4>🟣 Layer 3 — 승인 레이어 (Human-in-the-Loop)</h4>
+                <p>처방 최종 승인 · 협진 의뢰 서명 · 고위험군 뇌 MRI 의뢰 — 반드시 의사 개입</p>
+            </div>
+            <div class="layer" style="border-color:var(--green)">
+                <h4>🟢 Layer 4 — 학습 레이어 (Feedback Loop)</h4>
+                <p>의사 수정 이력 학습 → 처방 초안 정확도 지속 향상 → 개인화 프로토콜 진화</p>
+            </div>
+        </div>
+
+        <h3 class="sub">3.2 Agent 구성 및 역할</h3>
+        <table>
+            <tr>
+                <th>Agent명</th>
+                <th>역할</th>
+                <th>실행방식</th>
+                <th>의사개입</th>
+            </tr>
+            <tr>
+                <td><strong>Screening Agent</strong></td>
+                <td>닥터아이 결과 수신·위험도 분류</td>
+                <td>자동</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>Risk Scoring Agent</strong></td>
+                <td>X-ECAS 경동맥 위험도 계산</td>
+                <td>자동</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>Prescription Draft Agent</strong></td>
+                <td>EMR 오더셋 처방 초안 생성</td>
+                <td>자동 초안</td>
+                <td>⚠️ 승인</td>
+            </tr>
+            <tr>
+                <td><strong>Referral Agent</strong></td>
+                <td>협진 의뢰서 자동 작성</td>
+                <td>자동 초안</td>
+                <td>⚠️ 서명</td>
+            </tr>
+            <tr>
+                <td><strong>Patient Notify Agent</strong></td>
+                <td>결과 문자·앱 알림 발송</td>
+                <td>자동</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>Scheduler Agent</strong></td>
+                <td>다음 방문 일정 자동 예약</td>
+                <td>자동</td>
+                <td>❌</td>
+            </tr>
+            <tr>
+                <td><strong>Alert Agent</strong></td>
+                <td>High-Risk 긴급 의사 알림</td>
+                <td>즉시 알림</td>
+                <td>🔴 필수</td>
+            </tr>
+            <tr>
+                <td><strong>Learning Agent</strong></td>
+                <td>처방 이력 학습·모델 개선</td>
+                <td>배치 자동</td>
+                <td>❌</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 4. 3단계 워크플로우 -->
+    <div class="page page-break">
+        <h2 class="sec">4. 3단계 임상 워크플로우</h2>
+        <h3 class="sub">Stage 1 — 닥터아이 AI 안저검사</h3>
+        <p>당뇨 외래 내원 시 E6670 코드로 안저촬영 시행. 닥터아이 AI가 5분 내 4대 안질환 분석 및 위험도 리포트 자동 생성 → EMR 팝업 연동. 정상 판정 시 6~12개월 후 자동 재방문
+            예약.</p>
+        <h3 class="sub">Stage 2 — 내과 조치 및 약물 처방 (이상 소견 시)</h3>
+        <p>Prescription Draft Agent가 표준 프로토콜 기반 처방 초안 생성 (칼슘 도베실레이트 bid + 징코빌로바 추출물). 의사가 검토·수정 후 최종 승인. 동시에 X-ECAS 검사
+            오더 자동 생성.</p>
+        <h3 class="sub">Stage 3 — X-ECAS 위험도별 처치</h3>
+        <div class="risk-row">
+            <div class="risk low"><span class="rlbl">LOW</span>
+                <h4>🟢 저위험군</h4>
+                <ul>
+                    <li>기존 요법 유지</li>
+                    <li>생활습관 강화</li>
+                    <li>6~12개월 자동 추적</li>
+                    <li>자동 문자 안내 발송</li>
+                </ul>
+            </div>
+            <div class="risk mid"><span class="rlbl">INTERMEDIATE</span>
+                <h4>🟡 중등위험군</h4>
+                <ul>
+                    <li>스타틴 처방 초안 자동 생성</li>
+                    <li>항혈소판제 추가 고려</li>
+                    <li>순환기내과 협진 의뢰서 초안</li>
+                    <li>의사 최종 승인</li>
+                </ul>
+            </div>
+            <div class="risk high"><span class="rlbl">HIGH</span>
+                <h4>🔴 고위험군</h4>
+                <ul>
+                    <li>Alert Agent — 의사 즉시 알림</li>
+                    <li>뇌 MRI+MRA 의뢰 (의사 필수 승인)</li>
+                    <li>신경과·순환기내과 협진</li>
+                    <li>고강도 스타틴 처방</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 세계 최초 포지셔닝 -->
+    <div class="page page-break">
+        <h2 class="sec">5. 세계 최초 포지셔닝 및 경쟁 우위</h2>
+        <table>
+            <tr>
+                <th>비교 항목</th>
+                <th>기존 의료 AI</th>
+                <th>닥터아이 Multi-Agent</th>
+            </tr>
+            <tr>
+                <td>AI 역할</td>
+                <td>단일 진단만</td>
+                <td><strong>진단 → 처방 → 협진 → 알림 자동화</strong></td>
+            </tr>
+            <tr>
+                <td>워크플로우</td>
+                <td>의사가 모든 단계 수동 처리</td>
+                <td><strong>Multi-Agent 병렬·직렬 자동화</strong></td>
+            </tr>
+            <tr>
+                <td>의사 역할</td>
+                <td>모든 결정</td>
+                <td><strong>핵심 결정만 Human-in-the-Loop</strong></td>
+            </tr>
+            <tr>
+                <td>학습 능력</td>
+                <td>정적 모델</td>
+                <td><strong>처방 이력으로 지속 개인화 학습</strong></td>
+            </tr>
+            <tr>
+                <td>EMR 연동</td>
+                <td>별도 입력 필요</td>
+                <td><strong>위험도 기반 오더셋 자동 팝업</strong></td>
+            </tr>
+            <tr>
+                <td>환자 관리</td>
+                <td>의사 기억·수동</td>
+                <td><strong>Scheduler Agent 자동 추적 관리</strong></td>
+            </tr>
+        </table>
+        <div class="highlight">
+            <p>🌏 2026년 현재, 안과 영역(특히 당뇨 눈 질환)에 Multi-Agent 오케스트레이션 + Human-in-the-Loop를 결합한 임상 워크플로우 시스템은 국내외 논문 및 상용
+                제품에서 발표된 바 없음. <strong>세계 최초 출시 가능 영역.</strong></p>
+        </div>
+    </div>
+
+    <!-- 6. 시장 분석 -->
+    <div class="page page-break">
+        <h2 class="sec">6. 시장 분석</h2>
+        <div class="mkt-grid">
+            <div class="card t">
+                <div class="num" style="font-size:1.6rem;">$8.7B</div>
+                <h4>글로벌 안과 AI 시장 (2028)</h4>
+                <p>연평균 성장률 38.7% (당뇨 눈 질환 중심)</p>
+            </div>
+            <div class="card b">
+                <div class="num" style="font-size:1.6rem;">600만</div>
+                <h4>국내 당뇨 환자</h4>
+                <p>고령화로 2030년 700만 명 이상 예상</p>
+            </div>
+            <div class="card g">
+                <div class="num" style="font-size:1.6rem;">3만+</div>
+                <h4>국내 내과·가정의학과 의원</h4>
+                <p>1차 타깃: 당뇨 전문 클리닉 보유 병원</p>
+            </div>
+            <div class="card p">
+                <div class="num" style="font-size:1.6rem;">$42B</div>
+                <h4>글로벌 의료 AI 자동화 시장</h4>
+                <p>Multi-Agent 의료 워크플로우 급성장 중</p>
+            </div>
+        </div>
+        <h3 class="sub">6.1 타깃 고객</h3>
+        <table>
+            <tr>
+                <th>타깃</th>
+                <th>니즈</th>
+                <th>제공 가치</th>
+            </tr>
+            <tr>
+                <td><strong>내과·가정의학과 의원</strong></td>
+                <td>당뇨 환자 눈 관리 솔루션</td>
+                <td>완전 자동화 워크플로우 + 차별화 포인트</td>
+            </tr>
+            <tr>
+                <td><strong>종합병원 내분비내과</strong></td>
+                <td>EMR 연동 AI 오더셋</td>
+                <td>표준화 프로토콜 + 의료 질 향상</td>
+            </tr>
+            <tr>
+                <td><strong>건강검진센터</strong></td>
+                <td>당뇨 스크리닝 패키지</td>
+                <td>닥터아이 + 자동 보고서 + 재검 관리</td>
+            </tr>
+            <tr>
+                <td><strong>보험사·헬스케어 기업</strong></td>
+                <td>당뇨 합병증 예방</td>
+                <td>실명 예방 = 보험금 절감</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 7. 사업 모델 -->
+    <div class="page page-break">
+        <h2 class="sec">7. 사업 모델</h2>
+        <div class="card-grid">
+            <div class="card t">
+                <h4>💼 SaaS 구독형</h4>
+                <p>월 구독료 기반. 병원 규모에 따른 에이전트 수 티어링.</p>
+            </div>
+            <div class="card b">
+                <h4>📊 Per-Case 과금</h4>
+                <p>닥터아이 판독 건당 과금. 저위험 기관 진입 장벽 낮춤.</p>
+            </div>
+            <div class="card g">
+                <h4>🤝 EMR 연동 라이선스</h4>
+                <p>히포크라테스·차트히어로·의사랑 등 EMR 공급사 파트너십.</p>
+            </div>
+            <div class="card p">
+                <h4>🌏 해외 수출</h4>
+                <p>동남아(당뇨 고발생 지역) OEM·기술이전. 글로벌 확장.</p>
+            </div>
+        </div>
+        <h3 class="sub">7.1 수익 구조 (예상)</h3>
+        <table>
+            <tr>
+                <th>시기</th>
+                <th>도입 병원</th>
+                <th>월 매출 (추정)</th>
+                <th>핵심 활동</th>
+            </tr>
+            <tr>
+                <td>2026 (파일럿)</td>
+                <td>5개</td>
+                <td>500만원</td>
+                <td>임상 검증, 데이터 수집</td>
+            </tr>
+            <tr>
+                <td>2027 (초기 확장)</td>
+                <td>50개</td>
+                <td>5,000만원</td>
+                <td>EMR 연동 완성, 학술 발표</td>
+            </tr>
+            <tr>
+                <td>2028 (성장)</td>
+                <td>300개</td>
+                <td>3억원</td>
+                <td>전국 확산, 보험 수가 등재</td>
+            </tr>
+            <tr>
+                <td>2029 (글로벌)</td>
+                <td>500개+</td>
+                <td>10억원+</td>
+                <td>동남아·중동 수출</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 8. 특허·지식재산 전략 -->
+    <div class="page page-break">
+        <h2 class="sec">8. 특허 및 지식재산 전략</h2>
+        <div class="patent-item">
+            <h4>특허 ① — 당뇨 눈 질환 Multi-Agent 자동화 진료 시스템</h4>
+            <p>AI 안저진단 결과를 트리거로 복수 AI 에이전트가 병렬·직렬로 처방 초안·협진 의뢰·환자 알림·일정 관리를 자동 처리하는 의료 워크플로우 시스템 및 방법.</p>
+        </div>
+        <div class="patent-item">
+            <h4>특허 ② — Human-in-the-Loop 기반 의료 AI 처방 승인 방법</h4>
+            <p>AI 에이전트가 생성한 처방 초안에 대해 의사가 단계적으로 검토·수정·승인하는 구조의 의료 의사결정 지원 시스템.</p>
+        </div>
+        <div class="patent-item">
+            <h4>특허 ③ — 안저 위험도와 경동맥 위험도 통합 스코어링 AI 시스템</h4>
+            <p>X-eye 안저 AI 판독 결과와 X-ECAS 경동맥 초음파 데이터를 AI로 통합 분석하여 뇌졸중·심근경색 위험도를 복합 산출하는 방법.</p>
+        </div>
+        <div class="patent-item">
+            <h4>특허 ④ — 의사 처방 이력 학습을 통한 개인화 EMR 오더셋 추천 방법</h4>
+            <p>각 의사의 처방 패턴을 학습하여 맞춤형 오더셋을 자동 추천하는 적응형 AI 시스템.</p>
+        </div>
+    </div>
+
+    <!-- 9. 실행 계획 -->
+    <div class="page page-break">
+        <h2 class="sec">9. 실행 계획 (로드맵)</h2>
+        <div class="road">
+            <div class="road-item">
+                <div class="phase">2026 Q2</div>
+                <h4>🔬 파일럿</h4>
+                <ul>
+                    <li>닥터아이 + 2개 Agent 연동</li>
+                    <li>파일럿 병원 3~5곳</li>
+                    <li>임상 데이터 수집</li>
+                    <li>IRB 승인 추진</li>
+                </ul>
+            </div>
+            <div class="road-item">
+                <div class="phase">2026 Q4</div>
+                <h4>⚙️ 시스템 완성</h4>
+                <ul>
+                    <li>8개 Agent 전체 구축</li>
+                    <li>EMR 3종 연동</li>
+                    <li>특허 출원 (4건)</li>
+                    <li>학술지 투고</li>
+                </ul>
+            </div>
+            <div class="road-item">
+                <div class="phase">2027</div>
+                <h4>📈 초기 확산</h4>
+                <ul>
+                    <li>50개 병원 도입</li>
+                    <li>보험 수가 등재 신청</li>
+                    <li>의학 학회 발표</li>
+                    <li>Series A 투자 유치</li>
+                </ul>
+            </div>
+            <div class="road-item">
+                <div class="phase">2028</div>
+                <h4>🚀 전국 확장</h4>
+                <ul>
+                    <li>300개 병원 목표</li>
+                    <li>건강보험 연동</li>
+                    <li>동남아 파트너 계약</li>
+                    <li>FDA 510(k) 준비</li>
+                </ul>
+            </div>
+            <div class="road-item">
+                <div class="phase">2029+</div>
+                <h4>🌏 글로벌</h4>
+                <ul>
+                    <li>해외 수출 본격화</li>
+                    <li>당뇨 외 질환 확장</li>
+                    <li>IPO 준비</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. 결론 -->
+    <div class="page page-break">
+        <h2 class="sec">10. 결론 — 지금이 기회입니다</h2>
+        <div class="highlight"
+            style="background:linear-gradient(135deg,rgba(11,31,58,.05),rgba(26,77,179,.08));border-color:rgba(26,77,179,.3);">
+            <p style="font-size:1.05rem; line-height:1.8;">
+                당뇨성 실명은 <strong>막을 수 있는 실명</strong>입니다.<br>
+                닥터아이가 보고, Multi-Agent가 움직이고, 의사가 결정합니다.<br><br>
+                기술적 혁신 + 의학적 근거 + 세계 최초 포지셔닝이 갖춰진 이 시스템은<br>
+                <strong>대한민국을 의료 AI 자동화의 글로벌 리더로 만들 수 있습니다.</strong>
+            </p>
+        </div>
+        <p style="margin-top:24px;">본 사업에 관심 있는 투자자, 병원 파트너, 기술 협력사는 아래로 문의 바랍니다.</p>
+        <div class="card-grid" style="margin-top:20px;">
+            <div class="card t">
+                <h4>🏢 개발사</h4>
+                <p>PaiHealthcare-LCK 연구소</p>
+            </div>
+            <div class="card b">
+                <h4>📧 문의</h4>
+                <p>contact@paihealth.kr</p>
+            </div>
+            <div class="card g">
+                <h4>📄 문서 구성</h4>
+                <p>HTML · DOCX · PDF 3형식 제공</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>닥터아이 Multi-Agent 당뇨 눈 질환 관리 시스템 사업보고서 © 2026 PaiHealthcare-LCK 연구소 · 대외비</footer>
+
+</body>
+
+</html>

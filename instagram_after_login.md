@@ -1,0 +1,24 @@
+- generic [ref=e12]:
+  - generic [ref=e19]:
+    - img "Meta" [ref=e21]
+    - iframe [ref=e23]:
+      - generic [active] [ref=f1e1]:
+        - iframe [ref=f1e9]:
+          - generic [ref=f3e2]:
+            - generic [ref=f3e3]:
+              - checkbox "로봇이 아닙니다." [ref=f3e7]
+              - generic [ref=f3e11]: 로봇이 아닙니다.
+            - generic [ref=f3e12]:
+              - generic [ref=f3e15]: reCAPTCHA
+              - generic [ref=f3e16]:
+                - link "개인정보 보호" [ref=f3e17] [cursor=pointer]:
+                  - /url: https://www.google.com/intl/ko/policies/privacy/
+                - text: "-"
+                - link "약관" [ref=f3e18] [cursor=pointer]:
+                  - /url: https://www.google.com/intl/ko/policies/terms/
+        - generic [ref=f1e2]:
+          - paragraph [ref=f1e3]: 이는 유해한 행위를 방지하고 스팸을 감지 및 예방하며 제품의 무결성을 유지하는 데 도움이 됩니다.
+          - paragraph [ref=f1e4]: Meta에서는 Google의 reCAPTCHA Enterprise 제품을 사용하여 이 보안 확인 절차를 제공해왔습니다. 회원님의 reCAPTCHA Enterprise 사용에는 Google의 개인정보처리방침과 이용 약관이 적용됩니다.
+          - paragraph [ref=f1e5]: reCAPTCHA Enterprise에서는 reCAPTCHA Enterprise를 제공, 유지 및 개선하고 일반적인 보안 목적으로 사용하기 위해 기기, 앱 데이터 등의 하드웨어 및 소프트웨어 정보를 수집하여 Google에 전송합니다. 이 정보는 Google에서 광고를 맞춤화하는 데 사용되지 않습니다.
+  - generic:
+    - img

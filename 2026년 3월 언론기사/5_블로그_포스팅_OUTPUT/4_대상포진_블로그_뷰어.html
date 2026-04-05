@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봄철 불청객 '대상포진', 스치기만 해도 칼로 찌르는 고통! - 남양주 백병원 공식 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            letter-spacing: -0.5px;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 임시 히어로 배너 (이미지 삽입 전) */
+        .hero-banner {
+            width: 100%;
+            height: 450px;
+            background-color: #0B192C;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/blog_hero_shingles_webtoon_1772612406835.png');
+            background-size: cover;
+            background-position: center 20%;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .category-badge {
+            background-color: #E91E63;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .blog-title {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .blog-content {
+            padding: 50px 40px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h2 {
+            font-size: 24px;
+            color: #0B192C;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-block p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .highlight-box {
+            background-color: #fce4ec;
+            border-left: 4px solid #E91E63;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .doctor-quote {
+            display: flex;
+            background: #f4f6f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+            gap: 20px;
+            border-left: 5px solid #0B192C;
+        }
+
+        .doctor-quote .icon {
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .doctor-quote .quote-body h4 {
+            margin: 0 0 10px 0;
+            color: #0B192C;
+            font-size: 18px;
+        }
+
+        .doctor-quote .quote-body p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .hospital-info {
+            background-color: #0B192C;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+        }
+
+        .hospital-info h3 {
+            color: #FFD700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .hospital-info p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #eee;
+        }
+
+        .btn-reserve {
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reserve:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .hashtags {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hashtag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .hero-banner {
+                height: 350px;
+            }
+
+            .hero-overlay {
+                padding: 30px 20px;
+            }
+
+            .blog-title {
+                font-size: 24px;
+            }
+
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .content-block h2 {
+                font-size: 20px;
+            }
+
+            .doctor-quote {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blog-container">
+
+        <div class="hero-banner">
+            <!-- 임시 이미지. API 제한 해제 후 background-image로 url 업데이트 예정 -->
+            <div class="hero-overlay">
+                <span class="category-badge">뇌신경/소화기센터 건강칼럼</span>
+                <h1 class="blog-title">⚡ 스치기만 해도 칼로 찌르는 고통!<br>봄철 불청객 '대상포진' 72시간 골든타임</h1>
+                <div class="blog-meta">
+                    <span>작성자: 남양주 백병원</span>
+                    <span>|</span>
+                    <span>강진호 병원장, 이명윤 센터장</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-content">
+
+            <div class="content-block">
+                <p>따뜻해진 봄바람에 나들이 가기 참 좋은 날씨입니다! 🌸 하지만 큰 일교차와 미세먼지 탓에 우리 몸의 면역 방어선은 그 어느 때보다 무너지기 쉽습니다. 바로 이 틈을 노리고 고개를
+                    드는 엄청난 녀석이 있으니, 스치기만 해도 칼로 찌르는 듯한 극심한 고통을 유발하는 <strong>'대상포진'</strong>입니다! 😱</p>
+                <p>최근에는 과로와 극심한 스트레스에 시달리는 30~40대 젊은 층에서도 대상포진 환자가 가파르게 늘고 있다고 하니, 남녀노소 할 것 없이 모두가 주의해야 할 질환입니다.</p>
+            </div>
+
+            <div class="content-block">
+                <h2>🦠 대상포진, 감기랑 헷갈린다고요?</h2>
+                <p>대상포진은 어릴 적 앓았던 수두 바이러스가 신경절에 숨어 있다가, 면역력이 뚝 떨어진 틈을 타 피부로 내려와 염증을 일으키는 질환입니다.</p>
+                <p>문제는 초기 증상입니다. 발열, 오한, 이유 없는 근육통에 소화불량까지... 초기엔 <strong>단순 감기나 몸살, 위장염</strong>과 너무 비슷해서 방치하다 진단이 늦어지는
+                    경우가 매우 흔합니다.</p>
+
+                <div class="doctor-quote">
+                    <div class="icon">👨‍⚕️</div>
+                    <div class="quote-body">
+                        <h4>이명윤 센터장 (소화기센터)</h4>
+                        <p>"이유 없는 복통이나 구역질을 단순 소화불량으로 오인하고 내원하시는 환자분들이 많습니다. 피부 발진보다 통증이 먼저 나타나는 경우가 많으므로, 수포 발생 후 '72시간
+                            이내'에 항바이러스제 투여를 시작하는 것이 피부 병변과 신경 손상을 막는 핵심 골든타임입니다!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>⚡ 평생 가는 끔찍한 '대상포진 후 신경통'</h2>
+
+                <div class="highlight-box">
+                    <strong>⚠️ "피부의 수포가 다 가라앉았는데도 왜 이렇게 아프죠?"</strong><br>
+                    이것이 대상포진이 정말 무서운 이유, <strong>'대상포진 후 신경통'</strong>입니다!
+                </div>
+
+                <p>바이러스가 신경을 파괴하여 발생하는 이 신경통은 길게는 수개월에서 수년, 심지어 <strong>평생</strong> 지속될 수 있으며 일상생활이 불가능할 정도의 통증과 우울증을
+                    동반합니다.</p>
+                <p>특히 얼굴, 눈, 귀 주변에 대상포진이 생겼다면 뇌수막염이나 뇌졸중으로 이어질 수 있는 초비상 사태입니다! 🚨</p>
+
+                <div class="doctor-quote">
+                    <div class="icon">🧠</div>
+                    <div class="quote-body">
+                        <h4>강진호 병원장 (뇌신경센터)</h4>
+                        <p>"머리 주변에 수포가 발생했다면 즉각 뇌신경센터를 찾아 뇌 정밀 검사를 포함한 집중 치효를 받아야 합니다. 만약 신경통으로 발전했더라도, 만성화되기 전에 신경 차단술
+                            등을 적극 병행해야 합니다!"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h2>🏥 남양주백병원 투톱 협진으로 통증 완벽 방어!</h2>
+                <p>대상포진은 속도전이자 스케일전입니다! 남양주 백병원은 <strong>소화기/내과센터의 정확한 감별진단과 뇌신경센터의 신경계 합병증 차단 진료를 아우르는 '원스톱 대상포진 통증 협진
+                        시스템'</strong>으로 환자 여러분의 빠르고 온전한 일상 회복을 돕습니다.</p>
+                <p>단순한 근육통이나 소화불량으로 넘기지 마시고, 찌릿한 통증이 느껴진다면 72시간 골든타임을 잊지 마시고 남양주 백병원을 찾아주세요!</p>
+            </div>
+
+            <div class="hospital-info">
+                <h3>감별진단부터 합병증 차단까지, 남양주 백병원 대상포진 통합치료</h3>
+                <p><strong>📞 예약 및 상담 :</strong> 031-572-3111</p>
+                <p><strong>📍 오시는 길 :</strong> 경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                <p><strong>🌐 진료 과목 :</strong> 뇌신경센터, 소화기센터, 척추관절, 건강증진센터 등</p>
+
+                <a href="http://www.baeak.hospital.co.kr" class="btn-reserve" target="_blank">온라인 간편 예약 바로가기 ➔</a>
+            </div>
+
+            <div class="hashtags">
+                <span class="hashtag">#대상포진초기증상</span>
+                <span class="hashtag">#항바이러스제</span>
+                <span class="hashtag">#대상포진예방접종</span>
+                <span class="hashtag">#대상포진후신경통</span>
+                <span class="hashtag">#뇌신경센터</span>
+                <span class="hashtag">#강진호병원장</span>
+                <span class="hashtag">#이명윤센터장</span>
+                <span class="hashtag">#남양주대상포진치료</span>
+                <span class="hashtag">#대상포진골든타임</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

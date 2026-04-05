@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIndb: 남양주백병원 KT 전산망 기반 AI 에이전트 도입 제안서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #92fe9d;
+            --accent: #ff00c8;
+            --bg: #050a15;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e6ed;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(146, 254, 157, 0.1), transparent);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 24px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            margin-top: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Mission Section */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #fff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Architecture Section */
+        .arch-viz {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            padding: 60px;
+            margin-top: 40px;
+            border: 1px dashed var(--glass-border);
+            text-align: center;
+        }
+
+        .viz-node {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--primary), #0072ff);
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            margin: 20px;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+        }
+
+        .connector {
+            height: 2px;
+            width: 100px;
+            background: var(--glass-border);
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: var(--text-main);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 1s forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero container">
+        <div class="hero-content animate">
+            <h1>AIndb Core</h1>
+            <p>남양주백병원 전 직원을 위한 최첨단 업무 지식 공유 및 자동화 시스템</p>
+            <a href="#details" class="btn">프로젝트 상세 보기</a>
+            <br>
+            <img src="C:\Users\USER\.gemini\antigravity\brain\37f2885c-5839-4235-9562-5cc8ac880a05\aindb_hero_banner_1773311960180.png" alt="AIndb Dashboard" class="hero-image">
+        </div>
+    </section>
+
+    <section id="details" class="section container">
+        <h2 class="section-title">AI 업무 혁신의 3대 축</h2>
+        <div class="grid">
+            <div class="card animate" style="animation-delay: 0.2s;">
+                <h3>01. 통합 에이전트 (Common Agent)</h3>
+                <p>전 직원의 로컬 PC에 <code>AIndb</code> 스킬을 탑재하여 현장 업무 상황에 즉각 대응하는 개인형 AI 비서를 구축합니다.</p>
+            </div>
+            <div class="card animate" style="animation-delay: 0.4s;">
+                <h3>02. 전사 지침 (Global Rules)</h3>
+                <p>경영진의 운영 철학과 규칙이 모든 에이전트의 사고방식(Global Instruction)에 실시간으로 반영됩니다.</p>
+            </div>
+            <div class="card animate" style="animation-delay: 0.6s;">
+                <h3>03. 중앙 관리 (Top-Down Ops)</h3>
+                <p>병원 중앙 서버를 통해 데이터와 보안, 업무 메뉴얼을 일괄 통제하여 정보의 일관성을 확보합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">시각화: AIndb 시스템 인텔리전스</h2>
+        <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 40px;">
+            <div class="animate">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">[Data Connectivity]</h3>
+                <img src="C:\Users\USER\.gemini\antigravity\brain\37f2885c-5839-4235-9562-5cc8ac880a05\aindb_architecture_diagram_1773311960181.png" alt="Architecture Diagram" class="hero-image" style="margin-top: 0;">
+                <p style="margin-top: 20px; color: var(--text-dim);">중앙 집중식 서버를 통한 전사 에이전트 동기화 프로세스 시각화</p>
+            </div>
+            <div class="animate" style="animation-delay: 0.3s;">
+                <h3 style="color: var(--secondary); margin-bottom: 20px;">[Future Workspace]</h3>
+                <img src="C:\Users\USER\.gemini\antigravity\brain\37f2885c-5839-4235-9562-5cc8ac880a05\medical_ai_collaboration_1773311960182.png" alt="Hospital Collaboration" class="hero-image" style="margin-top: 0;">
+                <p style="margin-top: 20px; color: var(--text-dim);">AIndb를 통한 의료진과 행정팀의 유기적인 협업 환경 구축</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">자체 서버 기반 실시간 동기화 (KT전산망 최적화)</h2>
+        <div class="arch-viz animate">
+            <div class="viz-node" style="background: var(--accent); color: #fff;">Hospital Executive Hub</div>
+            <div class="connector"></div>
+            <div class="viz-node">Internal Server (KT Backbone)</div>
+            <div class="connector"></div>
+            <p style="margin: 20px 0; color: var(--text-dim);">Internal Data Push & Sync (Port 8888)</p>
+            <div class="grid" style="margin-top: 40px;">
+                <div class="viz-node" style="background: rgba(255,255,255,0.1); color: var(--text-main);">Nurse Station Agent</div>
+                <div class="viz-node" style="background: rgba(255,255,255,0.1); color: var(--text-main);">Admin Office Agent</div>
+                <div class="viz-node" style="background: rgba(255,255,255,0.1); color: var(--text-main);">Doctor Room Agent</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">기대 효과</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>반복 업무 70% 감소</h3>
+                <p>매뉴얼 확인, 보고서 초안 작성, 일정 조율 등 단순 반복 업무의 획기적 단축.</p>
+            </div>
+            <div class="card">
+                <h3>의사결정 속도 향상</h3>
+                <p>중앙 지침이 현장 에이전트에게 즉시 전파되어 전략 실행의 병목 현상 제거.</p>
+            </div>
+            <div class="card">
+                <h3>휴먼 에러 방지</h3>
+                <p>표준화된 AI 가이드를 통해 소통 오류 및 규정 미준수 사례 예방.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">TOP-DOWN 통합 지휘 체계 (IT Roadmap)</h2>
+        <div class="grid" style="grid-template-columns: 1fr; gap: 20px;">
+            <div class="card">
+                <ul style="list-style: none; color: var(--text-dim);">
+                    <li style="margin-bottom: 15px;"><strong style="color: var(--primary);">[Hub Port 8888]:</strong> 병원의 모든 AI 에지(PC)가 중앙 서버의 8888 포트를 통해 경영진의 최신 지휘 명령을 수급받습니다.</li>
+                    <li style="margin-bottom: 15px;"><strong style="color: var(--primary);">[Organic Deployment]:</strong> 직원이 배포된 가이드를 따라 직접 설치하는 방식으로 IT 팀의 초기 업무 부담을 90% 이상 제거했습니다.</li>
+                    <li style="margin-bottom: 15px;"><strong style="color: var(--primary);">[Centralized Rule]:</strong> 전산팀은 중앙 서버의 설정 파일 하나만 수정하여 전 병원 에이전트의 행동 규칙을 동시 통제합니다.</li>
+                    <li><strong style="color: var(--primary);">[Security]:</strong> KT 전산망 내부에서만 작동하는 폐쇄형 구조로 환자 정보 유출을 완벽히 차단합니다.</li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+                    <p><a href="file:///c:/Users/USER/OneDrive/바탕 화면/luca연구에이전트/AIndb_Project/남양주백병원 AI비서 NDB 실무 교육 (초보자용 완전 가이드).html" style="color: var(--accent); text-decoration: none; font-weight: 600;">[초보자용 실무 가이드 보기]</a></p>
+                    <p><a href="file:///c:/Users/USER/OneDrive/바탕 화면/luca연구에이전트/AIndb_Project/IT_Implementation_Roadmap.md" style="color: var(--secondary); text-decoration: none; font-weight: 600;">[상세 기술 로드맵 보기 &rarr;]</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <p>&copy; 2026 남양주백병원 전산팀 & Antigravity Luca Special Force. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

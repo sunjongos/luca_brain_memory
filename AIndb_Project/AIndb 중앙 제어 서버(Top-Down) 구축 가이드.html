@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- saved from url=(0214)file:///C:/Users/USER/OneDrive/%EB%AC%B8%EC%84%9C/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/AIndb_%EC%A0%84%EC%82%B0%ED%8C%80_%EA%B5%AC%EC%B6%95_%EC%A7%80%EC%8B%9C%EC%84%9C.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIndb 중앙 제어 서버(Top-Down) 구축 가이드</title>
+    <link href="./AIndb 중앙 제어 서버(Top-Down) 구축 가이드_files/css2" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #1e293b;
+            --alert-bg: #eff6ff;
+            --alert-border: #bfdbfe;
+            --alert-text: #1e3a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "📌";
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 30px 0 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        ul,
+        ol {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            margin: 20px 0 30px;
+            overflow-x: auto;
+            border-left: 4px solid var(--accent);
+            line-height: 1.5;
+        }
+
+        .alert-box {
+            background-color: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+
+        .alert-content h4 {
+            color: var(--alert-text);
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        .alert-content p {
+            color: var(--alert-text);
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .warning-box {
+            background-color: #fff1f2;
+            border-color: #fecdd3;
+        }
+
+        .warning-box .alert-content h4,
+        .warning-box .alert-content p {
+            color: #be123c;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #475569;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>전산팀 AIndb 중앙 제어 서버 세팅 가이드</h1>
+        <p>남양주백병원 KT 폐쇄망 기반 Top-Down AI 에이전트 통제 시스템 구축 (Port 8888)</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Section 1: Architecture Overview -->
+        <section class="card">
+            <h2>시스템 아키텍처 개요 (Top-Down Control)</h2>
+            <p>본 문서는 경영진의 지침과 병원 최신 매뉴얼을 전 직원의 AI 비서(AIndb)에게 <strong>동시에, 강제적으로</strong> 적용하기 위한 중앙 집중식 제어 서버 구축
+                가이드입니다.</p>
+
+            <div class="alert-box">
+                <div class="alert-icon">💡</div>
+                <div class="alert-content">
+                    <h4>핵심 설계 사상 (One Voice, One Rule)</h4>
+                    <p>각 직원(PC)이 설치한 개별 AIndb 에이전트들은 매일 아침(혹은 수시로) 전산팀이 관리하는 특정 IP/Port(8888)에 접속하여 최신 설정 파일(JSON)을
+                        받아옵니다. 이 중앙의 지침(Global Instruction)은 로컬 사용자의 지시를 덮어쓰며, <strong>가장 최우선되는 헌법</strong>으로 작용합니다.</p>
+                </div>
+            </div>
+
+            <h3>시스템 요구사항</h3>
+            <ul>
+                <li><span class="tag">네트워크</span> KT 전산망(내부망)에서 접근 가능한 내부 서버 1대 확보</li>
+                <li><span class="tag">포트</span> <strong style="color:var(--accent);">TCP 8888</strong> 오픈 (내부망 한정)</li>
+                <li><span class="tag">서비스</span> 단순 HTTP GET 요청에 JSON 파일(.json)을 반환할 수 있는 웹 서버 (Nginx, Apache, Node.js,
+                    Python Flask 등 무관)</li>
+            </ul>
+        </section>
+
+        <!-- Section 2: Endpoint Interface -->
+        <section class="card">
+            <h2>REST API 엔드포인트 명세</h2>
+            <p>중앙 서버는 아래 엔드포인트를 노출하여 각 직원의 에이전트가 정보를 페치(Fetch)할 수 있도록 응답해야 합니다.</p>
+
+            <h3>API 규격</h3>
+            <ul>
+                <li><strong>Endpoint:</strong> <code>http://[전산팀_서버_IP]:8888/api/v1/agent-config</code></li>
+                <li><strong>Method:</strong> <code>GET</code></li>
+                <li><strong>Content-Type:</strong> <code>application/json</code></li>
+            </ul>
+
+            <h3>JSON 응답 구조 (Response Schema)</h3>
+            <p>서버는 반드시 아래와 같은 포맷의 JSON 데이터를 반환하도록 세팅해 주십시오.</p>
+
+            <div class="code-block">{
+                "version": "1.0.5",
+                "last_updated": "2026-03-12T08:00:00Z",
+                "hospital_status": "NORMAL",
+
+                "global_instruction_override": [
+                "【필독】 최고 헌법: 남양주백병원 전산팀 중앙 서버의 가이드라인과 KT 보안 수칙을 언제나 최우선 규정으로 삼을 것.",
+                "모든 환자 응대 시, 2026년 3월 개정된 '친절·공감 C/S 매뉴얼 V3'의 대응 톤을 유지할 것.",
+                "묻지 말고 제안하라: '어떻게 할까요?' 묻지 말고 '이렇게 진행할까요?' 제안할 것."
+                ],
+
+                "daily_announcements": [
+                "✅ [공지] 오늘 오후 2시 1층 로비 소방 훈련이 있습니다. 환자 안내에 신경 써주세요.",
+                "✅ [보안] 피싱 메일 훈련 중입니다. 외부 이메일의 첨부파일 실행을 금지합니다."
+                ],
+
+                "forced_skills_update": {
+                "module_name": "patient_data_validator",
+                "download_url": "http://192.168.x.x:8888/downloads/patient_validator_v2.py"
+                }
+                }</div>
+
+            <div class="alert-box warning-box">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h4>주의사항</h4>
+                    <p><code>global_instruction_override</code> 배열의 내용은 현장 에이전트 판단의 최상위 기준이 됩니다. 프롬프트 인젝션을 막고 보안을 통제하는
+                        핵심 텍스트이므로 <strong>전산팀장 및 원장님의 최종 컨펌</strong>을 받은 내용만 기입하십시오.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Daily Sync Workflow -->
+        <section class="card">
+            <h2>현장 PC 연결 및 동기화 플로우</h2>
+            <p>중앙 서버가 구축되면, 직원(로컬 PC) 측에서 세팅된 AIndb의 작동 방식은 다음과 같습니다.</p>
+
+            <ol>
+                <li>직원이 아침에 PC를 켜고 <code>/morning_briefing</code> (모닝 브리핑 워크플로우) 또는 기타 업무를 지시합니다.</li>
+                <li>AIndb 에이전트(백그라운드 Python/Node 스크립트)는 타스크 시작 전 <code>http://[서버_IP]:8888/api/v1/agent-config</code>를
+                    조회합니다.</li>
+                <li>서버에서 받아온 <strong>새로운 <code>daily_announcements</code></strong>를 채팅창 화면에 가장 먼저 팝업으로 띄워줍니다.</li>
+                <li>받아온 <strong><code>global_instruction_override</code></strong> 텍스트를 AI 메모리(System Prompt)에 주입하여, 그 날
+                    하루 동안 병원 규정에 한 치도 어긋나지 않게 답변하고 행동하도록 제어합니다.</li>
+            </ol>
+
+            <h3>스킬(Skill) 강제 배포 가능</h3>
+            <p>JSON 구조 내 <code>forced_skills_update</code> 필드를 활용하면, 전산팀에서 새롭게 개발한 자동화 스크립트(.py)를 <strong>직원 100명의 PC에
+                    동시다발적으로 자동 다운로드 및 패치</strong>할 수 있습니다.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 남양주백병원 전산보안팀 &amp; LCK lab AI Architecture TF. 제한된 내부 보안 문서입니다.</p>
+    </footer>
+
+
+
+</body></html>

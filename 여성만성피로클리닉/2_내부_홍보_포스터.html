@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여성만성피로클리닉 원내 포스터</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --accent: #F8A5C2;
+            --dark: #2D3436;
+            --white: #FFFFFF;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* A3 세로 비율 모방 (근사치 비율 1:1.414) */
+        .poster-container {
+            width: 794px;
+            height: 1123px;
+            background-image: linear-gradient(rgba(45, 52, 54, 0.7), rgba(45, 52, 54, 0.9)), url('file:///C:/Users/USER/.gemini/antigravity/brain/2570f83a-d114-4ad1-b9aa-0e7fac88727a/fatigue_clinic_poster_bg_1772695575337.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            color: var(--white);
+        }
+
+        .top-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(108, 92, 231, 0.8), transparent);
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            padding: 80px 60px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .overhead {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .main-copy {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.25;
+            margin: 0 0 30px;
+            text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-copy span {
+            color: var(--accent);
+        }
+
+        .sub-copy {
+            font-size: 1.6rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        .feature-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-box h3 {
+            margin: 0 0 20px;
+            font-size: 1.5rem;
+            color: var(--accent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .feature-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 1.25rem;
+            line-height: 2;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1.5em;
+        }
+
+        .doctor-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .doctor-card {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent);
+            border-radius: 50px;
+            padding: 10px 20px 10px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .doc-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #dfe6e9;
+            /* Placeholder for actual image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-right: 15px;
+            border: 2px solid var(--accent);
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .doc-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .doc-info h4 {
+            margin: 0 0 5px;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+
+        .doc-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--accent);
+            opacity: 0.9;
+        }
+
+        .hospital-info {
+            background-color: var(--primary);
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .hospital-details h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.8rem;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .hospital-details p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .contact-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--white);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="poster-container">
+        <div class="top-gradient"></div>
+        <div class="content-layer">
+
+            <div class="overhead">남양주 백병원 NDB 특수클리닉</div>
+
+            <h1 class="main-copy">원인 없는 피로는<br>없습니다.<br><span>데이터로 증명</span>합니다.</h1>
+
+            <div class="sub-copy">
+                느낌에 의존한 수액 치료는 멈춰야 합니다.<br>
+                자율신경계 분석과 호르몬 정밀 진단으로 4070 여성의<br>무너진 불면증과 만성피로를 근본적으로 회복시킵니다.
+            </div>
+
+            <div class="feature-box">
+                <h3>여성만성피로클리닉 NDB 솔루션</h3>
+                <ul class="feature-list">
+                    <li>자율신경계 정밀 검사 & 호르몬 검사 (교감/부교감 밸런스 측정)</li>
+                    <li>항염부신회복수액 (만성 피로, 부신 고갈 타겟)</li>
+                    <li>갱년기회복 특수수액 (라이넥, 히시파겐 컴플렉스 기반)</li>
+                    <li>당일 정밀 진단부터 수액 치료까지 <b>원스톱 논스톱 진료</b></li>
+                </ul>
+            </div>
+
+            <!-- 의료진(The Masters) 정보 -->
+            <div class="doctor-section">
+                <div class="doctor-card">
+                    <div class="doc-img">
+                        <!-- 실제 이미지 파일 경로로 교체 권장: src="kang_jinho.jpg" -->
+                        <span style="font-size: 0.7rem; text-align: center;">사진<br>삽입영역</span>
+                    </div>
+                    <div class="doc-info">
+                        <h4>강진호 병원장</h4>
+                        <p>뇌신경 마스터 (신경과)</p>
+                    </div>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doc-img">
+                        <!-- 실제 이미지 파일 경로로 교체 권장: src="lee_minwoong.jpg" -->
+                        <span style="font-size: 0.7rem; text-align: center;">사진<br>삽입영역</span>
+                    </div>
+                    <div class="doc-info">
+                        <h4>이민웅 센터장</h4>
+                        <p>신체밸런스 마스터 (가정의학과)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 하단 병원 정보 -->
+            <div class="hospital-info">
+                <div class="hospital-details">
+                    <h2>남양주 백병원</h2>
+                    <p>경기도 남양주시 진접읍 해밀예당1로 30-25</p>
+                </div>
+                <div class="contact-number">
+                    031) 572-3111
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,427 @@
+- generic [ref=e1]:
+  - generic:
+    - generic:
+      - generic:
+        - generic [ref=e6]:
+          - generic [ref=e9]:
+            - link [ref=e14] [cursor=pointer]:
+              - /url: /
+              - img [ref=e19]
+            - generic [ref=e22]:
+              - link [ref=e27] [cursor=pointer]:
+                - /url: /
+                - img [ref=e32]
+              - link [ref=e37] [cursor=pointer]:
+                - /url: /reels/
+                - img [ref=e42]
+              - link [ref=e49] [cursor=pointer]:
+                - /url: /direct/inbox/
+                - img [ref=e54]
+              - link [ref=e60] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e65]
+              - link [ref=e71] [cursor=pointer]:
+                - /url: /explore/
+                - img [ref=e76]
+              - link [ref=e85] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e90]
+              - link [ref=e98] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e103]
+              - link [ref=e109] [cursor=pointer]:
+                - /url: /coeseonjongcoe/
+                - link [ref=e114]:
+                  - img [ref=e115]
+            - generic [ref=e116]:
+              - link [ref=e119] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e124]
+              - link [ref=e127] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e132]
+          - generic [ref=e135]:
+            - main [ref=e136]:
+              - generic [ref=e139]:
+                - generic [ref=e144]:
+                  - list [ref=e146]:
+                    - listitem [ref=e147]
+                    - listitem [ref=e148]:
+                      - generic [ref=e149]:
+                        - link [ref=e150] [cursor=pointer]:
+                          - /url: /zin3964/
+                          - link [ref=e152]:
+                            - img [ref=e153]
+                          - generic [ref=e156]: zin3964
+                        - button [ref=e157]:
+                          - img [ref=e159]
+                    - listitem [ref=e162]:
+                      - generic [ref=e163]:
+                        - link [ref=e164] [cursor=pointer]:
+                          - /url: /seoulpainclinic1/
+                          - link [ref=e166]:
+                            - img [ref=e167]
+                          - generic [ref=e170]: seoulpainclinic1
+                        - button [ref=e171]:
+                          - img [ref=e173]
+                    - listitem [ref=e176]:
+                      - generic [ref=e177]:
+                        - link [ref=e178] [cursor=pointer]:
+                          - /url: /ksycaptain/
+                          - link [ref=e180]:
+                            - img [ref=e181]
+                          - generic [ref=e184]: ksycaptain
+                        - button [ref=e185]:
+                          - img [ref=e187]
+                    - listitem [ref=e190]:
+                      - generic [ref=e191]:
+                        - link [ref=e192] [cursor=pointer]:
+                          - /url: /kny_153/
+                          - link [ref=e194]:
+                            - img [ref=e195]
+                          - generic [ref=e198]: kny_153
+                        - button [ref=e199]:
+                          - img [ref=e201]
+                    - listitem [ref=e204]:
+                      - generic [ref=e205]:
+                        - link [ref=e206] [cursor=pointer]:
+                          - /url: /_oomin2/
+                          - link [ref=e208]:
+                            - img [ref=e209]
+                          - generic [ref=e212]: _oomin2
+                        - button [ref=e213]:
+                          - img [ref=e215]
+                    - listitem [ref=e218]:
+                      - generic [ref=e219]:
+                        - link [ref=e220] [cursor=pointer]:
+                          - /url: /kangtaeklim/
+                          - link [ref=e222]:
+                            - img [ref=e223]
+                          - generic [ref=e226]: kangtaeklim
+                        - button [ref=e227]:
+                          - img [ref=e229]
+                    - listitem [ref=e232]:
+                      - generic [ref=e233]:
+                        - link [ref=e234] [cursor=pointer]:
+                          - /url: /cocaban_tony/
+                          - link [ref=e236]:
+                            - img [ref=e237]
+                          - generic [ref=e240]: cocaban_tony
+                        - button [ref=e241]:
+                          - img [ref=e243]
+                    - listitem [ref=e246]:
+                      - generic [ref=e247]:
+                        - link [ref=e248] [cursor=pointer]:
+                          - /url: /zugug/
+                          - link [ref=e250]:
+                            - img [ref=e251]
+                          - generic [ref=e254]: zugug
+                        - button [ref=e255]:
+                          - img [ref=e257]
+                    - listitem [ref=e260]:
+                      - generic [ref=e261]:
+                        - link [ref=e262] [cursor=pointer]:
+                          - /url: /seho.lee.142/
+                          - link [ref=e264]:
+                            - img [ref=e265]
+                          - generic [ref=e268]: seho.lee.142
+                        - button [ref=e269]:
+                          - img [ref=e271]
+                    - listitem [ref=e274]:
+                      - generic [ref=e275]:
+                        - link [ref=e276] [cursor=pointer]:
+                          - /url: /nineman9999/
+                          - link [ref=e278]:
+                            - img [ref=e279]
+                          - generic [ref=e282]: nineman9999
+                        - button [ref=e283]:
+                          - img [ref=e285]
+                    - listitem [ref=e288]:
+                      - generic [ref=e289]:
+                        - link [ref=e290] [cursor=pointer]:
+                          - /url: /orthoyoon/
+                          - link [ref=e292]:
+                            - img [ref=e293]
+                          - generic [ref=e296]: orthoyoon
+                        - button [ref=e297]:
+                          - img [ref=e299]
+                    - listitem [ref=e302]:
+                      - generic [ref=e303]:
+                        - link [ref=e304] [cursor=pointer]:
+                          - /url: /babonnida/
+                          - link [ref=e306]:
+                            - img [ref=e307]
+                          - generic [ref=e310]: babonnida
+                        - button [ref=e311]:
+                          - img [ref=e313]
+                  - button [ref=e316] [cursor=pointer]:
+                    - img [ref=e317]
+                - generic [ref=e320]:
+                  - generic [ref=e322]:
+                    - article [ref=e323]:
+                      - generic [ref=e324]:
+                        - generic [ref=e326]:
+                          - button [disabled] [ref=e331]:
+                            - link [disabled] [ref=e333] [cursor=pointer]:
+                              - img [ref=e334]
+                          - generic [ref=e337]:
+                            - generic [ref=e339]:
+                              - link [ref=e347] [cursor=pointer]:
+                                - /url: /tae._.dragon.0/
+                                - generic [ref=e350]: tae._.dragon.0
+                              - generic [ref=e351]:
+                                - generic [ref=e353]: •
+                                - link [ref=e355] [cursor=pointer]:
+                                  - /url: /p/DWBZbJdiSCp/
+                                  - time [ref=e357]: 23시간
+                            - button [ref=e359] [cursor=pointer]: 팔로우
+                          - button [ref=e362] [cursor=pointer]:
+                            - img [ref=e365]
+                        - button [ref=e372]:
+                          - img [ref=e378]
+                        - generic [ref=e382]:
+                          - generic [ref=e383]:
+                            - generic [ref=e384]:
+                              - button [ref=e387] [cursor=pointer]:
+                                - img [ref=e390]
+                              - button [ref=e392] [cursor=pointer]: "15"
+                              - button [ref=e394] [cursor=pointer]:
+                                - img [ref=e396]
+                              - button [ref=e398] [cursor=pointer]:
+                                - img [ref=e399]
+                            - button [ref=e404] [cursor=pointer]:
+                              - button [ref=e405]:
+                                - img [ref=e407]
+                          - generic [ref=e409]:
+                            - link [ref=e414] [cursor=pointer]:
+                              - /url: /tae._.dragon.0/
+                              - generic [ref=e417]: tae._.dragon.0
+                            - generic [ref=e418]:
+                              - generic [ref=e419]: 오리온 성운 (M42)
+                              - generic [ref=e420]:
+                                - text: ...
+                                - button [ref=e421] [cursor=pointer]:
+                                  - generic [ref=e422]: 더 보기
+                    - article [ref=e423]:
+                      - generic [ref=e424]:
+                        - generic [ref=e426]:
+                          - button [disabled] [ref=e431]:
+                            - link [disabled] [ref=e433] [cursor=pointer]:
+                              - img [ref=e434]
+                          - generic [ref=e437]:
+                            - generic [ref=e438]:
+                              - generic [ref=e439]:
+                                - generic [ref=e441]:
+                                  - link [ref=e447] [cursor=pointer]:
+                                    - /url: /tsumizo/
+                                    - generic [ref=e450]: tsumizo
+                                  - img [ref=e452]
+                                - generic [ref=e454]:
+                                  - generic [ref=e456]: •
+                                  - link [ref=e458] [cursor=pointer]:
+                                    - /url: /p/DWA2DHnEc4F/
+                                    - time [ref=e460]: 1일
+                              - link [ref=e464] [cursor=pointer]:
+                                - /url: /explore/locations/420540408075930/
+                                - text: さきたま古墳公園
+                            - button [ref=e466] [cursor=pointer]: 팔로우
+                          - button [ref=e469] [cursor=pointer]:
+                            - img [ref=e472]
+                        - button [ref=e479]:
+                          - img [ref=e485]
+                        - generic [ref=e489]:
+                          - generic [ref=e490]:
+                            - generic [ref=e491]:
+                              - button [ref=e494] [cursor=pointer]:
+                                - img [ref=e497]
+                              - button [ref=e499] [cursor=pointer]: 1.6천
+                              - button [ref=e501] [cursor=pointer]:
+                                - img [ref=e503]
+                              - button [ref=e505] [cursor=pointer]: "14"
+                              - button [ref=e506] [cursor=pointer]:
+                                - img [ref=e507]
+                            - button [ref=e512] [cursor=pointer]:
+                              - button [ref=e513]:
+                                - img [ref=e515]
+                          - generic [ref=e517]:
+                            - link [ref=e522] [cursor=pointer]:
+                              - /url: /tsumizo/
+                              - generic [ref=e524]:
+                                - generic [ref=e525]: tsumizo
+                                - img [ref=e527]
+                            - generic [ref=e529]:
+                              - generic [ref=e530]: 埼玉県行田市・さきたま古墳公園
+                              - generic [ref=e531]:
+                                - text: ...
+                                - button [ref=e532] [cursor=pointer]:
+                                  - generic [ref=e533]: 더 보기
+                          - button [ref=e535] [cursor=pointer]:
+                            - generic [ref=e536]: 번역 보기
+                    - article [ref=e537]:
+                      - generic [ref=e538]:
+                        - generic [ref=e540]:
+                          - button [ref=e545] [cursor=pointer]:
+                            - link [ref=e547]:
+                              - img [ref=e548]
+                          - generic [ref=e552]:
+                            - generic [ref=e555]:
+                              - link [ref=e561] [cursor=pointer]:
+                                - /url: /coursera/?enable_persistent_cta=true&entry_point=feed&e=42dd9b14-7fc5-44ea-8aca-1d18e1972667&a_mpk=3759704868940455303_2474888698&c[0]=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF&__tn__=[%7B%22type%22%3A10%7D%2C%7B%22type%22%3A230%7D%2C%7B%22type%22%3A301%7D]&a_tt=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF
+                                - generic [ref=e564]: coursera
+                              - img [ref=e566]
+                            - generic [ref=e572]: 광고
+                          - button [ref=e575] [cursor=pointer]:
+                            - img [ref=e578]
+                        - generic [ref=e583]:
+                          - button [ref=e585]:
+                            - link [ref=e590] [cursor=pointer]:
+                              - /url: https://www.facebook.com/ads/ig_redirect/?d=Ad8kwDLoW_4HBQrwbHVfKcdcMAQg-duHVUptTWtUU2w3qj_Hp6wk0RAm917sOuNU50vme60eOISYtmvpsE1K0QJAExwX3NGI381M9rdsLyJEMrNlbainQQ9OQr_q68Zal4OHcUEqYkfo4VDOuGJFasTmOppksnhlBSiiiaR2xgC1sBQKNh2TtAKi8ou_yzk49-26uL8-tWDu12gwFqYtxEfl60AHacwzMyL_LghT0xHa9Rgan4qJrcpH79p_zukaZO1T55grMIomMSqjF8P1dwVXABzJHWsUPTgEOxCHz8xaiYFc2LEWaWTnMniiqVMl9cnAOUNUp3vX55skugiUGn5enRV09_1U2VG8hKxGICy5Ev_XgoPuIasF06Cax5CRqoggntMNQ6QjQpLIFTq5MOCacL1Gyk-EtnOFWpwHHf5U8yiF7ajyYh2eOlN3znjnZTIwpGqvSVq2_Nxvq2r6zeone83einIdFT5fu3_PWqIDbVhc83AoVvZSV0ENX4pHPrFQVHgA94Vld4MAYethwOJcSPLFOHw66qkF0amHi3y5e4j_u0bbjPEFEF158gCWow6-wEOUupxN9waCFv1bnMJXXhWzfU8tHZFG1Yx2_HFV48MpTwTIX0uQ0z-xgHUF0fORqMtDME0lWwxNWdYL9Wr9718hDhI84Lh_hbIUWQ4o292r49RXVeYZrVvG3jow8KDIJMDf6fnRnEdh36QyD4GDLTyM0w4EKe8q31yLw5h1ZM9mIFmBpFh9A5FYyA0QhIA_1KduFLSxVFNsUGkk2kxP4APP9V7lqeAQHyJQlV1TmhyS-z2OTUoXy1N9vzMnsdQUJE6N-Wwn8qVYbT7QFqWnj0hOsHNMI-CYujFrtDUkAjKC_Nu9pEMg2awabh3sq2HPEazyC6GcRJRwaRbUP0-6SMxhrZIHlZTsLYgE0MOKa9ZUgwQ5BkBg3JSsThGOnuyHYDHyBlwP125nZxfTTD-AVsFHtF6nyxVbuHoTWh2F4oDRNTX8vnWoisyGwsJOBUdfn657aH4_h4Jpjh8gHcypru_Wcv35U4BfDqWGzgteaqqTQkge1XHmviSiXU6OEUw2s04VP8kzXz_V3cs-_pGF3MdPy1TMOctUIVX7XGTyvm2122QGEayi_G0zD4GW0udNwmVBjQGraU-Yp2Vn4CNn&a=1&hash=Ad-qVd6UncB0ZvSBpdg&c[0]=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF&__tn__=E-R
+                              - img [ref=e593]
+                          - link [ref=e598] [cursor=pointer]:
+                            - /url: https://www.facebook.com/ads/ig_redirect/?d=Ad8kwDLoW_4HBQrwbHVfKcdcMAQg-duHVUptTWtUU2w3qj_Hp6wk0RAm917sOuNU50vme60eOISYtmvpsE1K0QJAExwX3NGI381M9rdsLyJEMrNlbainQQ9OQr_q68Zal4OHcUEqYkfo4VDOuGJFasTmOppksnhlBSiiiaR2xgC1sBQKNh2TtAKi8ou_yzk49-26uL8-tWDu12gwFqYtxEfl60AHacwzMyL_LghT0xHa9Rgan4qJrcpH79p_zukaZO1T55grMIomMSqjF8P1dwVXABzJHWsUPTgEOxCHz8xaiYFc2LEWaWTnMniiqVMl9cnAOUNUp3vX55skugiUGn5enRV09_1U2VG8hKxGICy5Ev_XgoPuIasF06Cax5CRqoggntMNQ6QjQpLIFTq5MOCacL1Gyk-EtnOFWpwHHf5U8yiF7ajyYh2eOlN3znjnZTIwpGqvSVq2_Nxvq2r6zeone83einIdFT5fu3_PWqIDbVhc83AoVvZSV0ENX4pHPrFQVHgA94Vld4MAYethwOJcSPLFOHw66qkF0amHi3y5e4j_u0bbjPEFEF158gCWow6-wEOUupxN9waCFv1bnMJXXhWzfU8tHZFG1Yx2_HFV48MpTwTIX0uQ0z-xgHUF0fORqMtDME0lWwxNWdYL9Wr9718hDhI84Lh_hbIUWQ4o292r49RXVeYZrVvG3jow8KDIJMDf6fnRnEdh36QyD4GDLTyM0w4EKe8q31yLw5h1ZM9mIFmBpFh9A5FYyA0QhIA_1KduFLSxVFNsUGkk2kxP4APP9V7lqeAQHyJQlV1TmhyS-z2OTUoXy1N9vzMnsdQUJE6N-Wwn8qVYbT7QFqWnj0hOsHNMI-CYujFrtDUkAjKC_Nu9pEMg2awabh3sq2HPEazyC6GcRJRwaRbUP0-6SMxhrZIHlZTsLYgE0MOKa9ZUgwQ5BkBg3JSsThGOnuyHYDHyBlwP125nZxfTTD-AVsFHtF6nyxVbuHoTWh2F4oDRNTX8vnWoisyGwsJOBUdfn657aH4_h4Jpjh8gHcypru_Wcv35U4BfDqWGzgteaqqTQkge1XHmviSiXU6OEUw2s04VP8kzXz_V3cs-_pGF3MdPy1TMOctUIVX7XGTyvm2122QGEayi_G0zD4GW0udNwmVBjQGraU-Yp2Vn4CNn&a=1&hash=Ad-qVd6UncB0ZvSBpdg&c[0]=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF&__tn__=*J-R
+                            - generic [ref=e600]:
+                              - generic [ref=e602]: 더 알아보기
+                              - img [ref=e604]
+                        - generic [ref=e608]:
+                          - generic [ref=e609]:
+                            - generic [ref=e610]:
+                              - button [ref=e613] [cursor=pointer]:
+                                - img [ref=e616]
+                              - button [ref=e618] [cursor=pointer]: "279"
+                              - button [ref=e620] [cursor=pointer]:
+                                - img [ref=e622]
+                              - button [ref=e624] [cursor=pointer]: "2"
+                              - button [ref=e625] [cursor=pointer]:
+                                - img [ref=e626]
+                            - button [ref=e631] [cursor=pointer]:
+                              - button [ref=e632]:
+                                - img [ref=e634]
+                          - generic [ref=e636]:
+                            - link [ref=e641] [cursor=pointer]:
+                              - /url: /coursera/?enable_persistent_cta=true&entry_point=feed&e=d0497577-306e-406b-a11b-b6f637d459e8&a_mpk=3759704868940455303_2474888698&c[0]=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF&__tn__=[%7B%22type%22%3A301%7D]&a_tt=AI%40AQKlAMmzX_p8vodIX29yeIKIJqepGpRl0SvWHmf9YRHZF4jxw4PH9DCgEWXygHqmZ0nMUb98z5-exJGnJI4Js2XF
+                              - generic [ref=e643]:
+                                - generic [ref=e644]: coursera
+                                - img [ref=e646]
+                            - generic [ref=e648]:
+                              - generic [ref=e649]: Launch your career in AI development with training from IBM. Learn to build retrieval-augmented generation pipelines and
+                              - generic [ref=e650]:
+                                - text: ...
+                                - button [ref=e651] [cursor=pointer]:
+                                  - generic [ref=e652]: 더 보기
+                          - button [ref=e654] [cursor=pointer]:
+                            - generic [ref=e655]: 번역 보기
+                    - article [ref=e656]:
+                      - generic [ref=e657]:
+                        - generic [ref=e659]:
+                          - button [ref=e664] [cursor=pointer]:
+                            - link [ref=e666]:
+                              - img [ref=e667]
+                          - generic [ref=e670]:
+                            - generic [ref=e672]:
+                              - link [ref=e680] [cursor=pointer]:
+                                - /url: /suful415/
+                                - generic [ref=e683]: suful415
+                              - generic [ref=e684]:
+                                - generic [ref=e686]: •
+                                - link [ref=e688] [cursor=pointer]:
+                                  - /url: /p/DWD4hF-iTy4/
+                                  - time [ref=e690]: 32분
+                            - button [ref=e692] [cursor=pointer]: 팔로우
+                          - button [ref=e695] [cursor=pointer]:
+                            - img [ref=e698]
+                        - button [ref=e705]:
+                          - generic [ref=e709] [cursor=pointer]:
+                            - button [ref=e710]:
+                              - img [ref=e712]
+                            - button [ref=e715]:
+                              - img [ref=e717]
+                        - generic [ref=e721]:
+                          - generic [ref=e722]:
+                            - generic [ref=e723]:
+                              - button [ref=e726] [cursor=pointer]:
+                                - img [ref=e729]
+                              - button [ref=e731] [cursor=pointer]: "27"
+                              - button [ref=e733] [cursor=pointer]:
+                                - img [ref=e735]
+                              - button [ref=e737] [cursor=pointer]:
+                                - img [ref=e738]
+                            - button [ref=e743] [cursor=pointer]:
+                              - button [ref=e744]:
+                                - img [ref=e746]
+                          - generic [ref=e748]:
+                            - link [ref=e753] [cursor=pointer]:
+                              - /url: /suful415/
+                              - generic [ref=e756]: suful415
+                            - generic [ref=e757]:
+                              - generic [ref=e758]: 봄비가 그친 후 텃밭으로 나섭니다. 텃밭 일을 하기 가장 좋은 때가 비가 막 그쳤을 때거든요. 땅이 성글어 무언가를 심기도, 뽑기도 좋아서요.
+                              - generic [ref=e759]:
+                                - text: ...
+                                - button [ref=e760] [cursor=pointer]:
+                                  - generic [ref=e761]: 더 보기
+                  - progressbar [ref=e763]:
+                    - img [ref=e764]
+            - contentinfo [ref=e777]:
+              - generic [ref=e778]:
+                - generic [ref=e780]:
+                  - link [ref=e782] [cursor=pointer]:
+                    - /url: https://about.meta.com/
+                    - generic [ref=e783]: Meta
+                  - link [ref=e785] [cursor=pointer]:
+                    - /url: https://about.instagram.com/
+                    - generic [ref=e786]: 소개
+                  - link [ref=e788] [cursor=pointer]:
+                    - /url: https://about.instagram.com/blog/
+                    - generic [ref=e789]: 블로그
+                  - link [ref=e791] [cursor=pointer]:
+                    - /url: https://about.instagram.com/about-us/careers
+                    - generic [ref=e792]: 채용 정보
+                  - link [ref=e794] [cursor=pointer]:
+                    - /url: https://help.instagram.com/
+                    - generic [ref=e795]: 도움말
+                  - link [ref=e797] [cursor=pointer]:
+                    - /url: https://developers.facebook.com/docs/instagram
+                    - generic [ref=e798]: API
+                  - link [ref=e800] [cursor=pointer]:
+                    - /url: /legal/privacy/
+                    - generic [ref=e801]: 개인정보처리방침
+                  - link [ref=e803] [cursor=pointer]:
+                    - /url: /legal/terms/
+                    - generic [ref=e804]: 약관
+                  - link [ref=e806] [cursor=pointer]:
+                    - /url: /explore/locations/
+                    - generic [ref=e807]: 위치
+                  - link [ref=e809] [cursor=pointer]:
+                    - /url: /web/lite/
+                    - generic [ref=e810]: Instagram Lite
+                  - link [ref=e812] [cursor=pointer]:
+                    - /url: https://www.meta.ai/?utm_source=foa_web_footer
+                    - generic [ref=e813]: Meta AI
+                  - link [ref=e815] [cursor=pointer]:
+                    - /url: https://www.threads.com/
+                    - generic [ref=e816]: Threads
+                  - link [ref=e818] [cursor=pointer]:
+                    - /url: https://www.facebook.com/help/instagram/261704639352628
+                    - generic [ref=e819]: 연락처 업로드 & 비사용자
+                  - link [ref=e821] [cursor=pointer]:
+                    - /url: /accounts/meta_verified/?entrypoint=web_footer
+                    - generic [ref=e822]: Meta Verified
+                - generic [ref=e823]:
+                  - generic [ref=e824] [cursor=pointer]:
+                    - generic [ref=e825]:
+                      - generic [ref=e826]: 한국어
+                      - img [ref=e829]
+                    - combobox [ref=e831]
+                  - generic [ref=e833]: © 2026 Instagram from Meta
+        - button "메시지" [ref=e836] [cursor=pointer]:
+          - generic "메시지" [ref=e837]:
+            - generic [ref=e838]:
+              - img "메시지" [ref=e841]
+              - generic [ref=e844]: 메시지
+  - dialog [ref=e851]:
+    - generic [ref=e855]:
+      - generic [ref=e859]:
+        - heading "알림 설정" [active] [level=2] [ref=e860]
+        - generic [ref=e861]: 회원님을 팔로우하거나 사진에 좋아요 또는 댓글을 남기면 바로 알 수 있습니다.
+      - generic [ref=e862]:
+        - button "설정" [ref=e863] [cursor=pointer]
+        - button "나중에 하기" [ref=e864] [cursor=pointer]

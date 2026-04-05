@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김태유 교수의 초격차 전략 | 대한민국 패권 도약의 해법</title>
+    <meta name="description" content="4차 산업혁명 시대, 대한민국이 패권국으로 도약하기 위한 김태유 교수의 초격차 전략을 만나보세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a0f2e;
+            --deep-blue: #0d1b4b;
+            --accent: #1e90ff;
+            --gold: #f0b429;
+            --light: #e8f0fe;
+            --white: #ffffff;
+            --gray: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #050913 0%, #0a0f2e 40%, #0d1b4b 70%, #0a2060 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(30,144,255,0.12) 0%, transparent 70%);
+            top: -200px; right: -200px;
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 70%);
+            bottom: -150px; left: -100px;
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            max-width: 900px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(30,144,255,0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.4rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 span { color: var(--gold); }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-btns {
+            display: flex; gap: 1rem;
+            justify-content: center; flex-wrap: wrap;
+            animation: fadeUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #0066cc);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 30px rgba(30,144,255,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(30,144,255,0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 1rem 2.5rem;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === STATS BAR === */
+        .stats {
+            background: rgba(30,144,255,0.08);
+            border-top: 1px solid rgba(30,144,255,0.2);
+            border-bottom: 1px solid rgba(30,144,255,0.2);
+            padding: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat { text-align: center; }
+        .stat-num { font-size: 2.5rem; font-weight: 900; color: var(--gold); }
+        .stat-label { font-size: 0.9rem; color: var(--gray); margin-top: 0.3rem; }
+
+        /* === SECTIONS === */
+        section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+        .section-tag {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 span { color: var(--gold); }
+
+        /* === STRATEGY CARDS === */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(30,144,255,0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--gold); }
+        .card p { color: var(--gray); line-height: 1.7; font-size: 0.95rem; }
+
+        /* === QUOTE === */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(30,144,255,0.1), rgba(240,180,41,0.05));
+            border-left: 4px solid var(--gold);
+            border-radius: 0 1rem 1rem 0;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .quote-author { color: var(--gold); font-size: 0.95rem; }
+
+        /* === SERIES LIST === */
+        .series-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .series-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 0.8rem;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .series-item:hover {
+            background: rgba(30,144,255,0.1);
+            border-color: rgba(30,144,255,0.3);
+        }
+
+        .series-num {
+            background: var(--accent);
+            color: white;
+            width: 2.2rem; height: 2.2rem;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .series-title { font-size: 0.95rem; color: var(--light); }
+
+        /* === CTA === */
+        .cta-section {
+            background: linear-gradient(135deg, #0d1b4b, #0a2060);
+            border: 1px solid rgba(30,144,255,0.3);
+            border-radius: 2rem;
+            padding: 5rem 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(30,144,255,0.15), transparent 60%);
+            top: -200px; right: -100px;
+        }
+
+        .cta-section h2 { margin-bottom: 1rem; }
+        .cta-section p { color: var(--gray); margin-bottom: 2.5rem; font-size: 1.1rem; }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* === DIVIDER === */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30,144,255,0.3), transparent);
+            margin: 0;
+        }
+
+        /* === SCROLL REVEAL === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="tag">🇰🇷 서울대 자원공학과 김태유 교수</div>
+            <h1>대한민국,<br><span>초격차 전략</span>으로<br>패권을 도약하라</h1>
+            <p>4차 산업혁명은 저절로 오는 것이 아닙니다. 국가가 정책적으로 '일으키는 것'입니다. 잘하는 분야에 올인하는 초격차 전략만이 강소국 대한민국이 살아남는 방법입니다.</p>
+            <div class="hero-btns">
+                <a href="#strategy" class="btn-primary">핵심 전략 보기</a>
+                <a href="#series" class="btn-outline">강연 시리즈 보기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-num">11</div>
+            <div class="stat-label">강연 시리즈</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">4차</div>
+            <div class="stat-label">산업혁명 시대 분석</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">필승 핵심 전략</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">1</div>
+            <div class="stat-label">천 년에 한 번의 기회</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CORE STRATEGY -->
+    <section id="strategy" class="reveal">
+        <div class="section-tag">🎯 CORE STRATEGY</div>
+        <h2>3가지 <span>필승 전략</span></h2>
+        <p style="color: var(--gray); font-size: 1.05rem; line-height: 1.8;">김태유 교수가 강조하는 대한민국 생존과 번영의 핵심 원칙</p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>선착의 효 (先着)</h3>
+                <p>질량이 작아도 가속도를 높이면 힘이 커진다. 4차 산업혁명에 먼저 뛰어들어 패권을 선점해야 한다. 먼저 성공하는 국가가 다음 세기의 패권국이 된다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>초격차 확보</h3>
+                <p>반도체, 조선 등 이미 잘하는 분야에 R&D를 집중하여 누구도 따라올 수 없는 격차를 만든다. 균형 발전이 아닌 강점 분야 올인만이 강소국의 살길이다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>실리주의 외교</h3>
+                <p>명분보다는 국가적 이익(국익)을 최우선으로 하는 실용적인 외교를 펼쳐야 한다. 한·미·러 합종(1-3-5 전략)으로 '연안국의 저주'를 극복해야 한다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="reveal">
+        <div class="quote-section">
+            <div class="quote-text">"산업혁명은 저절로 오는 것이 아닙니다.<br>국가가 정책적으로 <strong style="color:var(--gold)">일으켜야</strong> 하는 것입니다."</div>
+            <div class="quote-author">— 김태유 교수 · 서울대학교 자원공학과</div>
+        </div>
+    </section>
+
+    <!-- KEY INSIGHTS -->
+    <section class="reveal">
+        <div class="section-tag">💡 KEY INSIGHTS</div>
+        <h2>이 시대 대한민국이<br>반드시 알아야 할 <span>5가지 통찰</span></h2>
+        <div class="cards" style="margin-top:2rem">
+            <div class="card">
+                <div class="card-icon">🌏</div>
+                <h3>사이버 대륙의 시대</h3>
+                <p>물리적 영토 대신 첨단 기술로 이루어진 '사이버 대륙'에서 새로운 부가가치가 창출된다. 이 새로운 영토의 주인이 되어야 한다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>이모작 사회</h3>
+                <p>유동지능이 높은 청년은 첨단 직업(1모작)에, 결정지능이 높은 장년은 관리/서비스(2모작)에 집중하는 사회적 역할 분담이 필요하다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏛️</div>
+                <h3>스페셜리스트 관료제</h3>
+                <p>순환보직 제너럴리스트 대신 한 분야만 파고드는 전문 관료 중심의 직무군 제도를 도입해야 국가 역량이 극대화된다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏠</div>
+                <h3>부동산의 진실</h3>
+                <p>부동산 투기는 실질 가치를 창출하지 않는 '약탈적 불로소득'. 이것이 물가 상승, 수도권 집중, 초저출산의 근본 원인이다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧊</div>
+                <h3>북극항로 선점</h3>
+                <p>천 년에 한 번 오는 기회인 북극항로를 선점하여 '연안국의 저주'를 극복하고 교역 강국으로 도약해야 한다.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏭</div>
+                <h3>외생적 성장</h3>
+                <p>한국처럼 후발국은 정부 주도의 강력한 산업 정책 없이는 선진국을 추월할 수 없다. '빨리빨리'는 부끄러운 것이 아닌 전략적 DNA다.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- SERIES -->
+    <section id="series" class="reveal">
+        <div class="section-tag">📺 LECTURE SERIES</div>
+        <h2>김태유 교수 <span>강연 시리즈</span></h2>
+        <p style="color: var(--gray); margin-bottom:1rem">11개의 핵심 강연으로 배우는 대한민국 생존 전략</p>
+        <div class="series-grid">
+            <div class="series-item"><div class="series-num">10</div><div class="series-title">한국의 '빨리빨리' 부끄러워하지 마세요</div></div>
+            <div class="series-item"><div class="series-num">11</div><div class="series-title">선진국 흉내 내다 한국은 망했습니다</div></div>
+            <div class="series-item"><div class="series-num">12</div><div class="series-title">남미는 망했는데 한국엔 기적 일어난 이유</div></div>
+            <div class="series-item"><div class="series-num">13</div><div class="series-title">손가락 빨던 삼성·현대, 적자 수출이 살렸습니다</div></div>
+            <div class="series-item"><div class="series-num">14</div><div class="series-title">부실공사가 한국을 살렸습니다</div></div>
+            <div class="series-item"><div class="series-num">15</div><div class="series-title">한국 유전펀드가 엉망진창이 된 이유</div></div>
+            <div class="series-item"><div class="series-num">16</div><div class="series-title">러시아 가스관, 한국의 마지막 기회입니다</div></div>
+            <div class="series-item"><div class="series-num">17</div><div class="series-title">저출산은 사실 축복입니다</div></div>
+            <div class="series-item"><div class="series-num">18</div><div class="series-title">한국의 4050세대는 은퇴 없이 평생 일해야 합니다</div></div>
+            <div class="series-item"><div class="series-num">19</div><div class="series-title">부동산은 재테크 아닙니다, 남의 돈 뺏는 겁니다</div></div>
+            <div class="series-item"><div class="series-num">EP</div><div class="series-title">한국 선진국 되려면 트럼프처럼 해야합니다 (에필로그)</div></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal">
+        <div class="cta-section">
+            <div class="section-tag">📖 DEEP DIVE</div>
+            <h2>지금 바로 <span>초격차 전략</span>을<br>직접 확인하세요</h2>
+            <p>김태유 교수의 강연 노트를 NotebookLM으로 직접 탐구하고<br>대한민국의 미래를 함께 분석해보세요.</p>
+            <div class="hero-btns">
+                <a href="https://notebooklm.google.com/notebook/36be541c-8883-4a72-9d06-fb09a7731ff2" target="_blank" class="btn-primary">📓 NotebookLM에서 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 김태유 교수 | 초격차 전략 · Built with <strong>Luca AI Agent</strong> × NotebookLM × Stitch × Firebase</p>
+        <p style="margin-top:0.5rem">Powered by Antigravity AI Automation Technology</p>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

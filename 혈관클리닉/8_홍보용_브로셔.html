@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDB 더 클리어 혈관클리닉 3단 브로셔</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 0;
+            margin: 0;
+        }
+
+        .brochure-wrapper {
+            margin-bottom: 50px;
+        }
+
+        .brochure-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Brochure dimensions (A4 landscape: 297x210mm) */
+        .brochure {
+            width: 1122px;
+            /* Roughly 297mm at 96dpi */
+            height: 794px;
+            /* Roughly 210mm at 96dpi */
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/vascular_brochure_bg_1772610761921.png');
+            background-size: cover;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            position: relative;
+        }
+
+        /* 3-fold sections */
+        .panel {
+            flex: 1;
+            box-sizing: border-box;
+            padding: 40px 30px;
+            border-right: 1px dashed rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel:last-child {
+            border-right: none;
+        }
+
+        /* Inside content styling */
+        h1,
+        h2,
+        h3 {
+            color: #0B192C;
+            word-break: keep-all;
+        }
+
+        p {
+            color: #444;
+            line-height: 1.6;
+            font-size: 14px;
+            word-break: keep-all;
+        }
+
+        /* Specific panels */
+        /* OUTSIDE: Left=Inner Flap, Mid=Back Cover, Right=Front Cover */
+
+        .front-cover {
+            background: linear-gradient(to bottom, rgba(11, 25, 44, 0.9), #0B192C);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .front-cover h1 {
+            color: white;
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+        .front-cover h3 {
+            color: #FF5722;
+            font-size: 20px;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .keywords {
+            margin-top: 30px;
+        }
+
+        .keyword-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px;
+        }
+
+        .back-cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: center;
+        }
+
+        /* INSIDE: Left=Intro, Mid=Neuro, Right=Surgery */
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            border-top: 4px solid #0B192C;
+        }
+
+        .card.orange {
+            border-top-color: #FF5722;
+        }
+
+        .list-style {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .list-style li {
+            margin-bottom: 8px;
+            font-size: 13.5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .doc-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0B192C;
+            float: right;
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="brochure-title">[브로셔 외부 전개도] 안쪽 날개 | 뒷면 표지 | 앞면 표지</div>
+    <div class="brochure">
+        <!-- 안쪽 날개 -->
+        <div class="panel">
+            <h2>기다림은 줄이고<br>정확도는 높인 병원</h2>
+            <br>
+            <div class="card">
+                <h3 style="margin-top:0;">01. 투-트랙 당일 혈관 케어</h3>
+                <p>MRA, CT 등 최상위 기기를 통해 당일 진단하고, 증상에 맞춘 항혈소판제 전문 약물과 킬레이션 해독 치료를 즉시 병행합니다.</p>
+            </div>
+            <div class="card orange">
+                <h3 style="margin-top:0;">02. 원인 모를 어지럼증 완벽 분석</h3>
+                <p>뇌가 아닌 자율신경계 문제(기립성 저혈압 등)까지 감별하기 위해 정밀 검사 장비를 풀가동하여 정확한 원인을 찾아냅니다.</p>
+            </div>
+        </div>
+
+        <!-- 뒷면 (백커버) -->
+        <div class="panel back-cover">
+            <h2 style="font-size:28px; font-weight:900;">NAMYANGJU<br>BAEK HOSPITAL</h2>
+            <p style="font-size: 16px; font-style: italic;">"New, Different and much Better"<br>세상에 없던 새롭고 더 좋은 병원</p>
+            <hr style="width:50%; border: 0; border-top: 1px solid #ccc; margin: 30px auto;">
+            <p style="font-weight: 700; font-size: 16px; color:#0B192C;">진료예약 및 핫라인</p>
+            <h1 style="margin: 5px 0 20px; font-size: 32px; color: #FF5722;">031-572-3111</h1>
+            <p><strong>www.baeak.hospital.co.kr</strong></p>
+            <p><strong>위치: </strong>경기도 남양주시 진접읍 해밀예당1로 30-25<br>(남양주 백병원 뇌신경/외과 센터)</p>
+        </div>
+
+        <!-- 앞 표지 (프론트커버) -->
+        <div class="panel front-cover">
+            <h3>동맥경화 진단부터 하지정맥 수술까지!</h3>
+            <h1>NDB 더 클리어<br>통합 혈관클리닉</h1>
+
+            <div class="keywords">
+                <span class="keyword-badge">뇌/경동맥 동맥경화 진단</span>
+                <span class="keyword-badge">기립성 저혈압</span>
+                <span class="keyword-badge">킬레이션 해독요법</span>
+                <span class="keyword-badge">프레보그립 외과수술</span>
+            </div>
+
+            <div style="margin-top: auto;">
+                <p style="color:#aaa;">생명선의 위기, 단 하루만에 끊어냅니다.</p>
+                <div style="font-size: 18px; font-weight: 900; letter-spacing: 1px;">남양주 백병원</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="brochure-title" style="margin-top: 80px;">[브로셔 내부 전개도] 좌측 면 | 중앙 면 | 우측 면</div>
+    <div class="brochure">
+        <!-- 내부 좌측 (클리닉 인트로) -->
+        <div class="panel">
+            <h3 style="color:#FF5722;">Why NDB The Clear?</h3>
+            <h2 style="font-size:26px; margin-top:0;">대학병원급 검사를<br>가장 빠르게, 가장 정확하게</h2>
+            <p style="font-size:15px;">남양주 백병원은 진단에서 치료까지 원스톱 애자일(Agile) 시스템을 가동합니다. 하이엔드 듀얼 초음파와 3.0T MRI를 통한 동맥경화 검진이
+                바로 눈 앞의 결과를 보여줍니다.</p>
+
+            <div style="margin-top: 30px;">
+                <strong style="color:#0B192C;">초고해상도 영상 장비 보유</strong>
+                <ul class="list-style">
+                    <li>방사선 Zero, 3D 구현 <strong>3.0T MRI/MRA</strong></li>
+                    <li>혈관/신체 범용 최고 사양 <strong>GE LOGIQ E10S</strong></li>
+                    <li>심장/심혈관 특화 <strong>GE Vivid Fortis</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 내부 중앙 (뇌신경센터) -->
+        <div class="panel">
+            <span
+                style="background:#0B192C; color:white; padding:4px 10px; font-size:12px; border-radius:15px; font-weight:700;">뇌신경센터</span>
+            <img src="file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/media__1772609785453.png"
+                alt="강진호 병원장" class="doc-img">
+            <h2 style="margin-top:10px;">머리쪽 혈관을 담당하는<br>강진호 병원장</h2>
+            <p>1초의 차이가 평생의 장애를 막습니다. 어지럼증과 숨은 뇌동맥경화를 조기 포착하여 중풍과 뇌졸중을 완벽하게 예방합니다.</p>
+
+            <div class="card" style="box-shadow:none; border: 1px solid #ddd; background:#f9f9f9;">
+                <h4 style="margin-top:0; color:#FF5722;">핵심 진료 내용</h4>
+                <ul class="list-style" style="padding-left:15px; font-size:13px;">
+                    <li>MRA, CT Angio 동맥경화 진단</li>
+                    <li>킬레이션(Chelation) 해독 화학치료</li>
+                    <li>눈을 통한 뇌혈류 검사 (안저검사)</li>
+                    <li>자율신경계 이상 감별 정밀 초음파</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 내부 우측 (외과) -->
+        <div class="panel">
+            <span
+                style="background:#0B192C; color:white; padding:4px 10px; font-size:12px; border-radius:15px; font-weight:700;">외과
+                전문센터</span>
+            <img src="file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/media__1772609800829.png"
+                alt="김용운 진료과장" class="doc-img" style="border-color: #FF5722;">
+            <h2 style="margin-top:10px;">다리쪽 혈관을 전담하는<br>김용운 진료과장</h2>
+            <p>다리로 가는 혈관이 막히면 걷기조차 힘들어집니다. 외과적 보존치료와 흉터 없는 최신 수술 기법으로 무거운 다리를 치유합니다.</p>
+
+            <div class="card" style="box-shadow:none; border: 1px solid #ddd; background:#f9f9f9;">
+                <h4 style="margin-top:0; color:#FF5722;">핵심 진료 내용</h4>
+                <ul class="list-style" style="padding-left:15px; font-size:13px;">
+                    <li>다리 혈관 막힘 심층 진단 / 보존 치료</li>
+                    <li>최신 기계화학 기술 <strong>프레보그립</strong> 도입</li>
+                    <li>신경 손상 및 흉터 없는 당일 보행 시술</li>
+                    <li>초음파 유도하 원인 혈관 발거 수술</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

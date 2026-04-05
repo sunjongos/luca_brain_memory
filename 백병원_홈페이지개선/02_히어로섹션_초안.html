@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>남양주백병원 - 척추·관절·뇌신경 전문 병원 | NDB</title>
+    <meta name="description" content="정진엽 의료원장(전 복지부장관), 서울의대 최선종·김용래 원장. 내시경척추수술·로봇인공관절·3.0T AI MRI. 보건복지부 4주기 인증.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --navy: #08172e;
+            --navy2: #0c2040;
+            --cyan: #00d4aa;
+            --blue: #3db8ff;
+            --gold: #f5c533;
+            --purple: #b57bff;
+            --green: #3ddc84;
+            --rose: #ff6b8a;
+            --teal: #2dd4bf;
+            --w: #fff;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif
+        }
+
+        /* ════ TRUST BAR ════ */
+        .trust-bar {
+            background: linear-gradient(90deg, #0c2040, #122e58, #0c2040);
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            padding: 9px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 50;
+        }
+
+        .trust-scroll {
+            display: flex;
+            gap: 48px;
+            white-space: nowrap;
+            animation: scroll-x 30s linear infinite;
+        }
+
+        .trust-scroll span {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .75);
+            font-weight: 500;
+            letter-spacing: .3px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .trust-scroll .ico {
+            color: var(--gold)
+        }
+
+        @keyframes scroll-x {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* ════ HERO ════ */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: calc(90vh - 38px);
+            min-height: 580px;
+            overflow: hidden;
+            background: var(--navy);
+        }
+
+        /* ── 슬라이드 ── */
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity .7s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .slide.active .ct-inner {
+            animation: riseUp .7s ease forwards
+        }
+
+        @keyframes riseUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* 배경 */
+        .s1 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(185, 145, 10, .12) 0%, transparent 65%), linear-gradient(135deg, #06101e 0%, #0b1c34 100%)
+        }
+
+        .s2 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(15, 80, 40, .25) 0%, transparent 65%), linear-gradient(135deg, #050f08 0%, #081a10 100%)
+        }
+
+        .s3 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(0, 150, 200, .15) 0%, transparent 65%), linear-gradient(135deg, #050e1a 0%, #091828 100%)
+        }
+
+        .s4 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(0, 80, 200, .15) 0%, transparent 65%), linear-gradient(135deg, #040812 0%, #081020 100%)
+        }
+
+        .s5 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 220, .15) 0%, transparent 65%), linear-gradient(135deg, #050c1e 0%, #091630 100%)
+        }
+
+        .s6 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(130, 60, 255, .15) 0%, transparent 65%), linear-gradient(135deg, #080512 0%, #100820 100%)
+        }
+
+        .s7 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(0, 200, 180, .12) 0%, transparent 65%), linear-gradient(135deg, #050e12 0%, #081820 100%)
+        }
+
+        .s8 {
+            background: radial-gradient(ellipse at 70% 50%, rgba(200, 160, 0, .1) 0%, transparent 65%), linear-gradient(135deg, #07101a 0%, #0c1c30 100%)
+        }
+
+        /* 우측 글로우 오브 */
+        .orb {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            opacity: .2;
+            filter: blur(80px);
+        }
+
+        .s1 .orb {
+            background: radial-gradient(circle, #f5c533, transparent 70%)
+        }
+
+        .s2 .orb {
+            background: radial-gradient(circle, #3ddc84, transparent 70%)
+        }
+
+        .s3 .orb {
+            background: radial-gradient(circle, #00d4aa, transparent 70%)
+        }
+
+        .s4 .orb {
+            background: radial-gradient(circle, #3db8ff, transparent 70%)
+        }
+
+        .s5 .orb {
+            background: radial-gradient(circle, #3db8ff, transparent 70%)
+        }
+
+        .s6 .orb {
+            background: radial-gradient(circle, #b57bff, transparent 70%)
+        }
+
+        .s7 .orb {
+            background: radial-gradient(circle, #2dd4bf, transparent 70%)
+        }
+
+        .s8 .orb {
+            background: radial-gradient(circle, #f5c533, transparent 70%)
+        }
+
+        /* 우측 대형 숫자 워터마크 */
+        .wm {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 240px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -10px;
+            opacity: .04;
+            color: var(--w);
+            user-select: none;
+            z-index: 1;
+        }
+
+        /* 콘텐츠 */
+        .ct {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 56px;
+            width: 100%
+        }
+
+        .ct-inner {
+            opacity: 0
+        }
+
+        /* 상단 라벨 */
+        .label-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite
+        }
+
+        .ld-gold {
+            background: var(--gold)
+        }
+
+        .ld-green {
+            background: var(--green)
+        }
+
+        .ld-cyan {
+            background: var(--cyan)
+        }
+
+        .ld-blue {
+            background: var(--blue)
+        }
+
+        .ld-purple {
+            background: var(--purple)
+        }
+
+        .ld-teal {
+            background: var(--teal)
+        }
+
+        .ld-rose {
+            background: var(--rose)
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 currentColor;
+                opacity: 1
+            }
+
+            50% {
+                box-shadow: 0 0 0 5px transparent;
+                opacity: .5
+            }
+        }
+
+        .label-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .65);
+            font-weight: 500;
+            letter-spacing: .3px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 20px;
+            padding: 4px 14px
+        }
+
+        /* 영문 카테고리 */
+        .cat {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px
+        }
+
+        .c-gold {
+            color: var(--gold)
+        }
+
+        .c-green {
+            color: var(--green)
+        }
+
+        .c-cyan {
+            color: var(--cyan)
+        }
+
+        .c-blue {
+            color: var(--blue)
+        }
+
+        .c-purple {
+            color: var(--purple)
+        }
+
+        .c-teal {
+            color: var(--teal)
+        }
+
+        /* 메인 헤드라인 */
+        .headline {
+            font-size: clamp(34px, 4.5vw, 62px);
+            font-weight: 900;
+            color: var(--w);
+            line-height: 1.18;
+            margin-bottom: 10px;
+            word-break: keep-all
+        }
+
+        .h-gold {
+            color: var(--gold)
+        }
+
+        .h-green {
+            color: var(--green)
+        }
+
+        .h-cyan {
+            color: var(--cyan)
+        }
+
+        .h-blue {
+            color: var(--blue)
+        }
+
+        .h-purple {
+            color: var(--purple)
+        }
+
+        .h-teal {
+            color: var(--teal)
+        }
+
+        /* 임팩트 서브라인 */
+        .impact {
+            font-size: clamp(15px, 1.8vw, 20px);
+            font-weight: 700;
+            color: rgba(255, 255, 255, .9);
+            margin-bottom: 14px;
+            word-break: keep-all
+        }
+
+        /* 설명 */
+        .desc {
+            font-size: clamp(13px, 1.4vw, 15.5px);
+            color: rgba(255, 255, 255, .62);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            max-width: 560px;
+            word-break: keep-all
+        }
+
+        .desc strong {
+            color: var(--w);
+            font-weight: 700
+        }
+
+        /* 강점 칩 */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px
+        }
+
+        .chip {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 600;
+            border: 1px solid
+        }
+
+        .chip-gold {
+            background: rgba(245, 197, 51, .1);
+            border-color: rgba(245, 197, 51, .3);
+            color: #fdd85a
+        }
+
+        .chip-green {
+            background: rgba(61, 220, 132, .1);
+            border-color: rgba(61, 220, 132, .3);
+            color: #6feba0
+        }
+
+        .chip-cyan {
+            background: rgba(0, 212, 170, .1);
+            border-color: rgba(0, 212, 170, .3);
+            color: #4defc8
+        }
+
+        .chip-blue {
+            background: rgba(61, 184, 255, .1);
+            border-color: rgba(61, 184, 255, .3);
+            color: #7aceff
+        }
+
+        .chip-purple {
+            background: rgba(181, 123, 255, .1);
+            border-color: rgba(181, 123, 255, .3);
+            color: #cfaaff
+        }
+
+        .chip-teal {
+            background: rgba(45, 212, 191, .1);
+            border-color: rgba(45, 212, 191, .3);
+            color: #5ee8d8
+        }
+
+        .chip-w {
+            background: rgba(255, 255, 255, .07);
+            border-color: rgba(255, 255, 255, .18);
+            color: rgba(255, 255, 255, .85)
+        }
+
+        /* CTA */
+        .cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0088ee, #005bbf);
+            color: var(--w);
+            font-size: 15px;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 9px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+            transition: all .25s;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 136, 238, .55)
+        }
+
+        .btn-sub {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .22);
+            color: var(--w);
+            font-size: 15px;
+            font-weight: 600;
+            padding: 15px 26px;
+            border-radius: 9px;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(6px);
+            transition: all .25s;
+        }
+
+        .btn-sub:hover {
+            background: rgba(255, 255, 255, .14);
+            transform: translateY(-3px)
+        }
+
+        /* 우측 인물 카드 */
+        .person-card {
+            position: absolute;
+            right: 52px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 20px;
+            padding: 26px 22px;
+            backdrop-filter: blur(20px);
+            width: 270px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(-50%)
+            }
+
+            50% {
+                transform: translateY(calc(-50% - 10px))
+            }
+        }
+
+        .pc-role {
+            font-size: 10.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 10px
+        }
+
+        .pc-name {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--w);
+            margin-bottom: 6px
+        }
+
+        .pc-career {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+            line-height: 1.55;
+            margin-bottom: 16px
+        }
+
+        .pc-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .pc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 7px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .82)
+        }
+
+        .pc-item::before {
+            content: '▸';
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .pc-badge {
+            margin-top: 14px;
+            padding: 9px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-align: center
+        }
+
+        /* 통계 플로터 */
+        .stat-box {
+            position: absolute;
+            right: 52px;
+            bottom: 80px;
+            z-index: 20;
+            display: flex;
+            gap: 24px;
+        }
+
+        .stt {
+            text-align: center
+        }
+
+        .stt .n {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--w);
+            line-height: 1
+        }
+
+        .stt .n sup {
+            font-size: 13px;
+            color: var(--blue)
+        }
+
+        .stt .l {
+            font-size: 11px;
+            color: rgba(255, 255, 255, .45);
+            margin-top: 3px
+        }
+
+        /* 장비 카드 */
+        .equip-card {
+            position: absolute;
+            right: 52px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 270px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .eq-item {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        .eq-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5px
+        }
+
+        .eq-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--w)
+        }
+
+        .eq-sub {
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, .55);
+            margin-top: 2px
+        }
+
+        /* 진행 바 */
+        .prog {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--blue));
+            z-index: 40;
+            transition: width .08s linear;
+            border-radius: 0 2px 2px 0
+        }
+
+        /* 도트 */
+        .dots {
+            position: absolute;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            display: flex;
+            gap: 7px
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: rgba(255, 255, 255, .28);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all .3s;
+            padding: 0
+        }
+
+        .dot.on {
+            width: 24px;
+            border-radius: 4px;
+            background: var(--blue)
+        }
+
+        /* 화살표 */
+        .arr {
+            position: absolute;
+            top: 50%;
+            z-index: 25;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            color: rgba(255, 255, 255, .65);
+            transition: all .25s
+        }
+
+        .arr:hover {
+            background: rgba(255, 255, 255, .14);
+            color: var(--w)
+        }
+
+        .al {
+            left: 18px
+        }
+
+        .ar {
+            right: 18px
+        }
+
+        /* 반응형 */
+        @media(max-width:768px) {
+            .hero {
+                height: auto;
+                min-height: 100svh
+            }
+
+            .ct {
+                padding: 70px 20px 130px
+            }
+
+            .person-card,
+            .equip-card {
+                display: none
+            }
+
+            .stat-box {
+                right: 20px;
+                bottom: 84px;
+                gap: 14px
+            }
+
+            .stt .n {
+                font-size: 20px
+            }
+
+            .headline {
+                font-size: 28px
+            }
+
+            .impact {
+                font-size: 15px
+            }
+
+            .desc {
+                font-size: 13px
+            }
+
+            .btn-main,
+            .btn-sub {
+                font-size: 13.5px;
+                padding: 12px 18px
+            }
+
+            .arr {
+                display: none
+            }
+
+            .wm {
+                font-size: 120px;
+                right: 10px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════ TRUST BAR ════ -->
+    <div class="trust-bar">
+        <div class="trust-scroll">
+            <span><span class="ico">🏆</span> 보건복지부 4주기 인증의료기관 (2024~2028)</span>
+            <span><span class="ico">🎓</span> 정진엽 의료원장 — 전 제52대 복지부장관 · 분당서울대병원장</span>
+            <span><span class="ico">🔬</span> 최선종 병원장 — 서울의대 · 내시경척추수술 · 고난이도 재수술 전문</span>
+            <span><span class="ico">🧠</span> 강진호 병원장 — 서울대병원 신경과 연구위원 · 뇌경색·치매 전문</span>
+            <span><span class="ico">🤖</span> 김용래 원장 — 서울의대 · 로봇인공관절 수술 전문</span>
+            <span><span class="ico">🧲</span> 남양주 유일 3.0T AI MRI · 128채널 CT · GE 하이엔드 장비 4종</span>
+            <span><span class="ico">📞</span> 031-572-3111 · 월~일 09:00~21:00 / 24시간 응급진료</span>
+            <!-- 반복 -->
+            <span><span class="ico">🏆</span> 보건복지부 4주기 인증의료기관 (2024~2028)</span>
+            <span><span class="ico">🎓</span> 정진엽 의료원장 — 전 제52대 복지부장관 · 분당서울대병원장</span>
+            <span><span class="ico">🔬</span> 최선종 병원장 — 서울의대 · 내시경척추수술 · 고난이도 재수술 전문</span>
+            <span><span class="ico">🧠</span> 강진호 병원장 — 서울대병원 신경과 연구위원 · 뇌경색·치매 전문</span>
+            <span><span class="ico">🤖</span> 김용래 원장 — 서울의대 · 로봇인공관절 수술 전문</span>
+            <span><span class="ico">🧲</span> 남양주 유일 3.0T AI MRI · 128채널 CT · GE 하이엔드 장비 4종</span>
+            <span><span class="ico">📞</span> 031-572-3111 · 월~일 09:00~21:00 / 24시간 응급진료</span>
+        </div>
+    </div>
+
+    <!-- ════ HERO ════ -->
+    <section class="hero" id="hero">
+        <div class="prog" id="prog"></div>
+
+        <!-- [1] 정진엽 의료원장 -->
+        <div class="slide s1 active">
+            <div class="orb"></div>
+            <div class="wm">01</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-gold"></div>
+                        <span class="label-text">제52대 보건복지부 장관 · 전 분당서울대학교 병원장</span>
+                    </div>
+                    <div class="cat c-gold">Medical Director</div>
+                    <h1 class="headline">
+                        대한민국 의료를<br>
+                        가장 잘 아는 원장이<br>
+                        <span class="h-gold">여기 남양주에</span> 있습니다
+                    </h1>
+                    <div class="impact">복지부 장관 · 분당서울대 원장 출신 — 정진엽 의료원장</div>
+                    <p class="desc">대형병원 수준의 의료서비스를 굳이 서울까지 가지 않아도 됩니다.<br><strong>정진엽 의료원장</strong>이 이끄는 남양주백병원이 바로 옆에
+                        있습니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-gold">🏛️ 제52대 보건복지부 장관</div>
+                        <div class="chip chip-gold">🏥 전 분당서울대학교 병원장</div>
+                        <div class="chip chip-gold">🎓 서울대학교 의과대학</div>
+                        <div class="chip chip-w">🏆 보건복지부 4주기 인증의료기관</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 빠른 상담</a>
+                        <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-sub">온라인 예약 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="person-card">
+                <div class="pc-role" style="color:var(--gold)">의료원장</div>
+                <div class="pc-name">정진엽</div>
+                <div class="pc-career">"병원은 환자를 위하여 존재합니다. 밝고 친절하며 실력있는 병원을 만들겠습니다."</div>
+                <div class="pc-list">
+                    <div class="pc-item" style="color:rgba(255,255,255,.8)">제52대 보건복지부 장관</div>
+                    <div class="pc-item" style="color:rgba(255,255,255,.8)">전 분당서울대학교 병원장</div>
+                    <div class="pc-item" style="color:rgba(255,255,255,.8)">서울대학교 의과대학 졸업</div>
+                    <div class="pc-item" style="color:rgba(255,255,255,.8)">의학박사 · 정형외과 전문의</div>
+                </div>
+                <div class="pc-badge"
+                    style="background:rgba(245,197,51,.1);border:1px solid rgba(245,197,51,.25);color:var(--gold)">🏆
+                    보건복지부 4주기 인증<br><small style="font-weight:400;opacity:.8">2024.12.23 ~ 2028.12.22</small></div>
+            </div>
+        </div>
+
+        <!-- [2] 보건복지부 인증 -->
+        <div class="slide s2">
+            <div class="orb"></div>
+            <div class="wm">02</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-green"></div>
+                        <span class="label-text">4주기 연속 인증 · 2024.12.23 ~ 2028.12.22</span>
+                    </div>
+                    <div class="cat c-green">Healthcare Accreditation</div>
+                    <h1 class="headline">
+                        정부가 인정한<br>
+                        <span class="h-green">믿을 수 있는 병원</span>
+                    </h1>
+                    <div class="impact">보건복지부 4주기 병원 인증의료기관 — 환자 안전 최우선</div>
+                    <p class="desc">까다로운 심사를 통과한 <strong>4주기 인증</strong>은 단순한 타이틀이 아닙니다.<br>환자 안전 시스템, 감염 관리, 의료서비스 품질
+                        모두가 정부로부터 엄격히 검증된 병원입니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-green">✅ 환자 안전 1등급 시스템</div>
+                        <div class="chip chip-green">✅ 감염 관리 체계 인증</div>
+                        <div class="chip chip-green">✅ 의료서비스 품질 인증</div>
+                        <div class="chip chip-green">✅ 4주기 연속 획득</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 진료 예약</a>
+                        <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-sub">온라인 예약 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stt">
+                    <div class="n">4<sup>주기</sup></div>
+                    <div class="l">연속 인증</div>
+                </div>
+                <div class="stt">
+                    <div class="n">2028<sup>년</sup></div>
+                    <div class="l">인증 유효</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [3] 최선종 병원장 - 척추센터 -->
+        <div class="slide s3">
+            <div class="orb"></div>
+            <div class="wm">03</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-cyan"></div>
+                        <span class="label-text">최선종 병원장 · 서울의대 · 척추센터장</span>
+                    </div>
+                    <div class="cat c-cyan">Spine Center</div>
+                    <h1 class="headline">
+                        허리·목 수술,<br>
+                        <span class="h-cyan">서울까지 갈 필요 없습니다</span>
+                    </h1>
+                    <div class="impact">서울의대 출신 최선종 병원장 — 내시경척추·고난이도 재수술 전문</div>
+                    <p class="desc">피부 1cm 절개, 전신마취 없이.<br><strong>ERAS 빠른 회복 프로그램</strong>으로 1~2일 입원 후 일상
+                        복귀.<br>풍석확장성형술·유착박리술 등 고난이도 수술까지 커버합니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-cyan">🔬 서울의대 척추내시경 수술</div>
+                        <div class="chip chip-cyan">🔄 고난이도 척추 재수술 전문</div>
+                        <div class="chip chip-cyan">🩺 풍석확장성형술 · 유착박리술</div>
+                        <div class="chip chip-cyan">🏃 ERAS 빠른 회복 프로그램</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 척추 상담</a>
+                        <a href="#" class="btn-sub">척추센터 자세히 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="person-card">
+                <div class="pc-role" style="color:var(--cyan)">척추센터장 · 병원장</div>
+                <div class="pc-name">최선종</div>
+                <div class="pc-career">척추외과 전문의 · 의학박사<br>서울대학교 의과대학 출신</div>
+                <div class="pc-list">
+                    <div class="pc-item">서울의대 척추내시경 수술</div>
+                    <div class="pc-item">고난이도 척추 재수술 전문</div>
+                    <div class="pc-item">풍석확장성형술 · 유착박리술</div>
+                    <div class="pc-item">ERAS 수술 후 빠른 회복 프로그램</div>
+                </div>
+                <div class="pc-badge"
+                    style="background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);color:var(--cyan)">⚡ 당일 ·
+                    1~2일 입원 후 일상 복귀</div>
+            </div>
+        </div>
+
+        <!-- [4] 강진호 병원장 - 뇌신경센터 -->
+        <div class="slide s4">
+            <div class="orb"></div>
+            <div class="wm">04</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-blue"></div>
+                        <span class="label-text">강진호 병원장 · 서울대병원 신경과 연구위원 · 뇌신경센터장</span>
+                    </div>
+                    <div class="cat c-blue">Brain & Neurology Center</div>
+                    <h1 class="headline">
+                        두통·어지러움·치매,<br>
+                        <span class="h-blue">정확한 진단이 먼저입니다</span>
+                    </h1>
+                    <div class="impact">강진호 병원장 — 서울대병원 신경과 연구위원 · 3.0T MRI/MRA 정밀 진단</div>
+                    <p class="desc">뇌경색, 치매, 난치성 두통, 대상포진까지.<br><strong>서울대학교병원 신경과 연구위원</strong>인 강진호 병원장이<br>3.0T AI
+                        MRI로 정확하게 원인을 찾아드립니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-blue">🧠 뇌경색 · 뇌출혈 전문</div>
+                        <div class="chip chip-blue">🫀 치매 조기 진단 · 치료</div>
+                        <div class="chip chip-blue">😵 난치성 두통 · 어지러움증</div>
+                        <div class="chip chip-blue">🦠 대상포진 전문 치료</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 뇌신경 상담</a>
+                        <a href="#" class="btn-sub">뇌신경센터 자세히 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="person-card">
+                <div class="pc-role" style="color:var(--blue)">뇌신경센터장 · 병원장</div>
+                <div class="pc-name">강진호</div>
+                <div class="pc-career">신경과 전문의 · 의학박사<br>서울대학교병원 신경과 연구위원 위촉</div>
+                <div class="pc-list">
+                    <div class="pc-item">서울대병원 신경과 연구위원</div>
+                    <div class="pc-item">뇌경색 · 뇌출혈 전문</div>
+                    <div class="pc-item">치매 · 두통 · 어지러움증</div>
+                    <div class="pc-item">3.0T MRI / MRA 정밀 분석</div>
+                </div>
+                <div class="pc-badge"
+                    style="background:rgba(61,184,255,.08);border:1px solid rgba(61,184,255,.2);color:var(--blue)">🧲
+                    3.0T AI MRI · 128채널 CT 보유</div>
+            </div>
+        </div>
+
+        <!-- [5] 로봇인공관절 / 관절센터 -->
+        <div class="slide s5">
+            <div class="orb"></div>
+            <div class="wm">05</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-blue"></div>
+                        <span class="label-text">김용래 원장(서울의대) · 백사무엘 센터장 · 관절센터</span>
+                    </div>
+                    <div class="cat c-blue">Joint & Orthopedic Center</div>
+                    <h1 class="headline">
+                        무릎·어깨 통증,<br>
+                        로봇이 오차 <span class="h-blue">0.1mm</span>로<br>
+                        정확하게 해결합니다
+                    </h1>
+                    <div class="impact">김용래 원장(서울의대) 로봇인공관절 · 백사무엘 센터장 어깨 관절경</div>
+                    <p class="desc">사람 손보다 정밀한 <strong>로봇 수술</strong>로 인공관절을,<br><strong>백사무엘 센터장</strong>의 고난이도 어깨
+                        관절경(회전근개 파열)까지.<br>두 전문가가 함께하는 관절센터입니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-blue">🤖 로봇인공관절 수술</div>
+                        <div class="chip chip-blue">💪 회전근개 파열 관절경</div>
+                        <div class="chip chip-blue">🏃 수술 당일 보행 가능</div>
+                        <div class="chip chip-blue">🎓 서울의대 출신 전문의</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 관절 상담</a>
+                        <a href="#" class="btn-sub">관절센터 자세히 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stt">
+                    <div class="n">0.1<sup>mm</sup></div>
+                    <div class="l">로봇 정밀도</div>
+                </div>
+                <div class="stt">
+                    <div class="n">3<sup>일</sup></div>
+                    <div class="l">평균 입원</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [6] GE 하이엔드 장비 -->
+        <div class="slide s6">
+            <div class="orb"></div>
+            <div class="wm">06</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-purple"></div>
+                        <span class="label-text">남양주 유일 · GE 하이엔드 의료장비 4종 완비</span>
+                    </div>
+                    <div class="cat c-purple">Premium Diagnosis</div>
+                    <h1 class="headline">
+                        남양주에서 유일하게<br>
+                        <span class="h-purple">최고 사양 GE 장비</span><br>
+                        4종을 보유합니다
+                    </h1>
+                    <div class="impact">3.0T AI MRI · 128채널 CT · E10S 초음파 · Fortis 초음파</div>
+                    <p class="desc">정확한 진단은 최고의 장비에서 시작됩니다.<br>국내 최고 수준 <strong>GE 하이엔드 장비 4종</strong>을<br>남양주에서는 오직
+                        남양주백병원에서만 만나실 수 있습니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-purple">🧲 3.0T AI MRI (최고 해상도)</div>
+                        <div class="chip chip-purple">💿 128채널 CT (극저선량)</div>
+                        <div class="chip chip-purple">🔊 E10S 초음파</div>
+                        <div class="chip chip-purple">🔊 Fortis 초음파</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 검사 예약</a>
+                        <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-sub">온라인 예약 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="equip-card">
+                <div class="eq-item">
+                    <div class="eq-badge" style="color:var(--purple)">MRI</div>
+                    <div class="eq-name">3.0T AI MRI</div>
+                    <div class="eq-sub">최고 해상도 · AI 보조 분석</div>
+                </div>
+                <div class="eq-item">
+                    <div class="eq-badge" style="color:var(--blue)">CT</div>
+                    <div class="eq-name">128채널 CT</div>
+                    <div class="eq-sub">극저선량 · 초고속 스캔</div>
+                </div>
+                <div class="eq-item">
+                    <div class="eq-badge" style="color:var(--teal)">초음파</div>
+                    <div class="eq-name">E10S · Fortis</div>
+                    <div class="eq-sub">GE 프리미엄 초음파 2종</div>
+                </div>
+                <div class="pc-badge"
+                    style="background:rgba(181,123,255,.08);border:1px solid rgba(181,123,255,.2);color:var(--purple);text-align:center;font-size:11.5px;font-weight:700;padding:9px;border-radius:8px">
+                    ⭐ 남양주 지역 최고 사양 장비</div>
+            </div>
+        </div>
+
+        <!-- [7] 간호·간병 통합서비스 -->
+        <div class="slide s7">
+            <div class="orb"></div>
+            <div class="wm">07</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-teal"></div>
+                        <span class="label-text">보호자 없이 안심 입원 · 24시간 전문 간호 케어</span>
+                    </div>
+                    <div class="cat c-teal">Integrated Nursing Care</div>
+                    <h1 class="headline">
+                        보호자 없어도<br>
+                        <span class="h-teal">24시간 옆에서</span><br>
+                        케어해 드립니다
+                    </h1>
+                    <div class="impact">간호사 : 환자 = 1 : 12 · 24시간 전문 간호인력 상주</div>
+                    <p class="desc">가족이 곁에 없어도 걱정 없습니다.<br><strong>전문 간호인력이 24시간 상주</strong>해 수준 높은 입원서비스를 제공합니다.<br>간병
+                        부담을 덜고 오직 회복에만 집중하세요.</p>
+                    <div class="chips">
+                        <div class="chip chip-teal">👩‍⚕️ 간호사 : 환자 = 1 : 12</div>
+                        <div class="chip chip-teal">🌙 24시간 전문 간호상주</div>
+                        <div class="chip chip-teal">🏠 보호자 상주 불필요</div>
+                        <div class="chip chip-teal">❤️ 환자 맞춤 케어</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 입원 문의</a>
+                        <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-sub">온라인 예약 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stt">
+                    <div class="n">1<sup>:12</sup></div>
+                    <div class="l">간호사:환자</div>
+                </div>
+                <div class="stt">
+                    <div class="n">24<sup>H</sup></div>
+                    <div class="l">전문 케어</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [8] 5대 센터 원스톱 통합진료 -->
+        <div class="slide s8">
+            <div class="orb"></div>
+            <div class="wm">08</div>
+            <div class="ct">
+                <div class="ct-inner">
+                    <div class="label-row">
+                        <div class="live-dot ld-gold"></div>
+                        <span class="label-text">5대 센터 · 대기 없이 · 원하는 날 · 검사~치료 하루 완결</span>
+                    </div>
+                    <div class="cat c-gold">5-Center One-Stop Care</div>
+                    <h1 class="headline">
+                        여러 과를 돌아다니는<br>
+                        시간 낭비, 이제 그만.<br>
+                        <span class="h-gold">5대 센터 원스톱 진료</span>
+                    </h1>
+                    <div class="impact">척추관절 · 뇌신경 · 소화기 · 건강증진 · 응급진료실 — 하나의 병원에서</div>
+                    <p class="desc">환자가 원하는 날짜에 <strong>검사부터 치료까지 하루에 완결</strong>됩니다.<br>5대 센터가 유기적으로 협력하는 통합진료
+                        시스템으로<br>불필요한 재방문과 시간 낭비를 없앴습니다.</p>
+                    <div class="chips">
+                        <div class="chip chip-gold">🦴 척추관절센터</div>
+                        <div class="chip chip-gold">🧠 뇌신경센터</div>
+                        <div class="chip chip-gold">🫁 소화기센터(내과·외과)</div>
+                        <div class="chip chip-gold">💪 건강증진센터</div>
+                        <div class="chip chip-gold">🚑 24시간 응급진료실</div>
+                        <div class="chip chip-w">⚡ 당일 원스톱 완결</div>
+                    </div>
+                    <div class="cta">
+                        <a href="tel:031-572-3111" class="btn-main">📞 031-572-3111 예약 문의</a>
+                        <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-sub">온라인 예약 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-box">
+                <div class="stt">
+                    <div class="n">5<sup>개</sup></div>
+                    <div class="l">전문센터</div>
+                </div>
+                <div class="stt">
+                    <div class="n">1<sup>day</sup></div>
+                    <div class="l">원스톱 완결</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 네비 -->
+        <button class="arr al" onclick="mv(-1)">‹</button>
+        <button class="arr ar" onclick="mv(1)">›</button>
+        <div class="dots" id="dots">
+            <button class="dot on" onclick="go(0)"></button>
+            <button class="dot" onclick="go(1)"></button>
+            <button class="dot" onclick="go(2)"></button>
+            <button class="dot" onclick="go(3)"></button>
+            <button class="dot" onclick="go(4)"></button>
+            <button class="dot" onclick="go(5)"></button>
+            <button class="dot" onclick="go(6)"></button>
+            <button class="dot" onclick="go(7)"></button>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide'),
+            inners = document.querySelectorAll('.ct-inner'),
+            dots = document.querySelectorAll('.dot'),
+            prog = document.getElementById('prog');
+        let cur = 0, pct = 0, tmr; const DUR = 6500;
+
+        function go(n) {
+            // 이전 슬라이드 숨김
+            slides[cur].classList.remove('active');
+            dots[cur].classList.remove('on');
+            inners[cur].style.animation = 'none';
+            // 새 슬라이드 표시
+            cur = (n + slides.length) % slides.length;
+            slides[cur].classList.add('active');
+            dots[cur].classList.add('on');
+            // 애니메이션 리셋
+            void inners[cur].offsetWidth;
+            inners[cur].style.animation = 'riseUp .7s ease forwards';
+            pct = 0; prog.style.width = '0%';
+            restart();
+        }
+        function mv(d) { go(cur + d) }
+        function restart() {
+            clearInterval(tmr);
+            tmr = setInterval(() => {
+                pct += 100; prog.style.width = (pct / DUR * 100) + '%';
+                if (pct >= DUR) go(cur + 1);
+            }, 100);
+        }
+        restart();
+
+        // 터치 스와이프
+        let sx = 0;
+        const h = document.getElementById('hero');
+        h.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+        h.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) mv(dx < 0 ? 1 : -1) });
+    </script>
+</body>
+
+</html>

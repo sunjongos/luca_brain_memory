@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>혈관클리닉 팝업창</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .popup {
+            width: 550px;
+            height: 650px;
+            background-color: #0B192C;
+            /* Deep Navy */
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            position: relative;
+        }
+
+        .popup-header {
+            height: 280px;
+            background-image: url('file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/vascular_popup_header_1772610775304.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .popup-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, #0B192C, transparent);
+        }
+
+        .popup-content {
+            padding: 30px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .subtitle {
+            color: #FFD700;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+            word-break: keep-all;
+        }
+
+        .main-title span {
+            color: #FF5722;
+        }
+
+        .features {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .features p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #ddd;
+        }
+
+        .features strong {
+            color: #fff;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6500 0%, #E65A00 100%);
+            color: #fff;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 101, 0, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .doctors {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .doctors img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #FF5722;
+        }
+
+        .popup-footer {
+            height: 40px;
+            background-color: #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .popup-footer span {
+            cursor: pointer;
+        }
+
+        .popup-footer span:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="popup">
+        <div class="popup-header"></div>
+        <div class="popup-content">
+            <div class="subtitle">보이지 않는 질환, 타 병원 비교 불가 솔루션</div>
+            <h2 class="main-title">막힌 혈관, 남양주 백병원<br><span>'NDB 더 클리어'</span>에서 뚫어드립니다!</h2>
+
+            <div class="doctors">
+                <img src="file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/media__1772609785453.png"
+                    alt="강진호 병원장" title="강진호 병원장">
+                <img src="file:///C:/Users/USER/.gemini/antigravity/brain/1a02f67a-5d73-4195-86e3-523d20dd31c9/media__1772609800829.png"
+                    alt="김용운 과장" title="김용운 과장">
+            </div>
+
+            <div class="features" style="margin-bottom: 20px;">
+                <p>🩺 <strong>당일 원스톱 트리플 검사</strong> : 3.0T MRA, GE E10S 초음파</p>
+                <p>💧 <strong>새 혈관으로 돌리는 해독</strong> : 킬레이션 및 약물 보존치료</p>
+                <p>👨‍⚕️ <strong>대학병원급 투톱 케어</strong> : 강진호 병원장 / 김용운 과장</p>
+            </div>
+
+            <div>
+                <a href="http://www.baeak.hospital.co.kr" class="cta-btn">내 혈관 나이 거꾸로 돌리기 (예약하기) ▶</a>
+                <div class="contact-info">안내 및 문의: 031-572-3111 | 경기도 남양주시 해밀예당1로 30-25</div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <span>오늘 하루 이 창을 열지 않음</span>
+            <span>[닫기 X]</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

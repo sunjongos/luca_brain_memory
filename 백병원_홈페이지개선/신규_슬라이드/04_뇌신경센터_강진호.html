@@ -1,0 +1,245 @@
+<!-- 슬라이드 ④: 강진호 병원장 - 뇌신경센터 -->
+<style>
+    .slide-kang {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 50%, rgba(0, 80, 200, .15) 0%, transparent 65%),
+            linear-gradient(135deg, #040812 0%, #081020 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .slide-kang .orb {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #3db8ff, transparent 70%);
+        opacity: .18;
+        filter: blur(70px);
+    }
+
+    .slide-kang .wm {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 220px;
+        font-weight: 900;
+        color: #fff;
+        opacity: .04;
+        user-select: none;
+        letter-spacing: -10px;
+    }
+
+    .slide-kang .inner {
+        position: relative;
+        z-index: 10;
+        padding: 0 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slide-kang .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 50px;
+        padding: 6px 18px;
+        margin-bottom: 20px;
+    }
+
+    .slide-kang .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #3db8ff;
+        animation: blink 2s infinite;
+    }
+
+    .slide-kang .badge span {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, .8);
+        font-weight: 500;
+    }
+
+    .slide-kang .cat {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #3db8ff;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .slide-kang h2 {
+        font-size: clamp(32px, 4vw, 56px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        word-break: keep-all;
+    }
+
+    .slide-kang h2 .hl {
+        color: #3db8ff;
+    }
+
+    .slide-kang .impact {
+        font-size: clamp(14px, 1.6vw, 18px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, .9);
+        margin-bottom: 14px;
+    }
+
+    .slide-kang .desc {
+        font-size: clamp(13px, 1.4vw, 15px);
+        color: rgba(255, 255, 255, .62);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        max-width: 540px;
+        word-break: keep-all;
+    }
+
+    .slide-kang .desc strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .slide-kang .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .slide-kang .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: rgba(61, 184, 255, .1);
+        border: 1px solid rgba(61, 184, 255, .3);
+        color: #7aceff;
+    }
+
+    .slide-kang .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .slide-kang .btn-call {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0088ee, #005bbf);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 9px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+        transition: all .25s;
+    }
+
+    .slide-kang .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 26px;
+        border-radius: 9px;
+        text-decoration: none;
+        backdrop-filter: blur(6px);
+        transition: all .25s;
+    }
+
+    .slide-kang .card {
+        position: absolute;
+        right: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        width: 260px;
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 18px;
+        padding: 24px 20px;
+        backdrop-filter: blur(18px);
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .card .cr-b {
+        font-size: 10.5px;
+        color: #3db8ff;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .card .cbadge-b {
+        margin-top: 14px;
+        padding: 9px;
+        border-radius: 8px;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-align: center;
+        background: rgba(61, 184, 255, .08);
+        border: 1px solid rgba(61, 184, 255, .2);
+        color: #3db8ff;
+    }
+</style>
+
+<div class="slide-kang">
+    <div class="orb"></div>
+    <div class="wm">04</div>
+    <div class="inner">
+        <div class="badge">
+            <div class="dot"></div><span>강진호 병원장 · 서울대병원 신경과 연구위원 · 뇌신경센터장</span>
+        </div>
+        <div class="cat">Brain & Neurology Center</div>
+        <h2>두통·어지러움·치매,<br><span class="hl">정확한 진단이 먼저입니다</span></h2>
+        <div class="impact">강진호 병원장 — 서울대병원 신경과 연구위원 · 3.0T MRI/MRA 정밀 진단</div>
+        <p class="desc">뇌경색, 치매, 난치성 두통, 어지러움, 대상포진까지.<br><strong>서울대학교병원 신경과 연구위원</strong>인 강진호 병원장이<br>3.0T AI MRI로
+            정확하게 원인을 찾아드립니다.</p>
+        <div class="chips">
+            <div class="chip">🧠 뇌경색 · 뇌출혈 전문</div>
+            <div class="chip">🫀 치매 조기 진단 · 치료</div>
+            <div class="chip">😵 난치성 두통 · 어지러움증</div>
+            <div class="chip">🦠 대상포진 전문 치료</div>
+        </div>
+        <div class="cta">
+            <a href="tel:031-572-3111" class="btn-call">📞 031-572-3111 뇌신경 상담</a>
+            <a href="/sub/r70/r10/s1010.php" class="btn-more">뇌신경센터 자세히 →</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cr-b">뇌신경센터장 · 병원장</div>
+        <div class="cn">강진호</div>
+        <div class="cd">신경과 전문의 · 의학박사<br>서울대학교병원 신경과 연구위원</div>
+        <div class="cl">
+            <div class="ci">서울대병원 신경과 연구위원 위촉</div>
+            <div class="ci">뇌경색 · 뇌출혈 전문</div>
+            <div class="ci">치매 · 두통 · 어지러움증</div>
+            <div class="ci">3.0T MRI / MRA 정밀 분석</div>
+        </div>
+        <div class="cbadge-b">🧲 3.0T AI MRI · 128채널 CT 보유</div>
+    </div>
+</div>

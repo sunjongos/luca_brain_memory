@@ -1,0 +1,294 @@
+<!-- 슬라이드 ⑥: GE 하이엔드 장비 4종 (남양주 유일) -->
+<style>
+    .slide-ge {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(ellipse at 70% 50%, rgba(130, 60, 255, .15) 0%, transparent 65%),
+            linear-gradient(135deg, #080512 0%, #100820 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .slide-ge .orb {
+        position: absolute;
+        right: -60px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #b57bff, transparent 70%);
+        opacity: .18;
+        filter: blur(70px);
+    }
+
+    .slide-ge .wm {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 220px;
+        font-weight: 900;
+        color: #fff;
+        opacity: .04;
+        user-select: none;
+        letter-spacing: -10px;
+    }
+
+    .slide-ge .inner {
+        position: relative;
+        z-index: 10;
+        padding: 0 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .slide-ge .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, .07);
+        border: 1px solid rgba(255, 255, 255, .15);
+        border-radius: 50px;
+        padding: 6px 18px;
+        margin-bottom: 20px;
+    }
+
+    .slide-ge .badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #b57bff;
+        animation: blink 2s infinite;
+    }
+
+    .slide-ge .badge span {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, .8);
+        font-weight: 500;
+    }
+
+    .slide-ge .cat {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #b57bff;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .slide-ge h2 {
+        font-size: clamp(32px, 4vw, 56px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        word-break: keep-all;
+    }
+
+    .slide-ge h2 .hl {
+        color: #b57bff;
+    }
+
+    .slide-ge .impact {
+        font-size: clamp(14px, 1.6vw, 18px);
+        font-weight: 700;
+        color: rgba(255, 255, 255, .9);
+        margin-bottom: 14px;
+    }
+
+    .slide-ge .desc {
+        font-size: clamp(13px, 1.4vw, 15px);
+        color: rgba(255, 255, 255, .62);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        max-width: 540px;
+        word-break: keep-all;
+    }
+
+    .slide-ge .desc strong {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .slide-ge .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .slide-ge .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: rgba(181, 123, 255, .1);
+        border: 1px solid rgba(181, 123, 255, .3);
+        color: #cfaaff;
+    }
+
+    .slide-ge .cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .slide-ge .btn-call {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0088ee, #005bbf);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 15px 30px;
+        border-radius: 9px;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 136, 238, .4);
+        transition: all .25s;
+    }
+
+    .slide-ge .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .2);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 15px 26px;
+        border-radius: 9px;
+        text-decoration: none;
+        backdrop-filter: blur(6px);
+        transition: all .25s;
+    }
+
+    /* 장비 카드들 */
+    .ge-cards {
+        position: absolute;
+        right: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .ge-card {
+        background: rgba(255, 255, 255, .06);
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 12px;
+        padding: 13px 16px;
+        backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ge-icon {
+        font-size: 22px;
+    }
+
+    .ge-info {}
+
+    .ge-badge {
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #b57bff;
+        margin-bottom: 3px;
+    }
+
+    .ge-name {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .ge-sub {
+        font-size: 11px;
+        color: rgba(255, 255, 255, .5);
+    }
+
+    .ge-star {
+        margin-top: 10px;
+        background: rgba(181, 123, 255, .1);
+        border: 1px solid rgba(181, 123, 255, .2);
+        border-radius: 8px;
+        padding: 9px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #b57bff;
+        text-align: center;
+    }
+</style>
+
+<div class="slide-ge">
+    <div class="orb"></div>
+    <div class="wm">06</div>
+    <div class="inner">
+        <div class="badge">
+            <div class="dot"></div><span>남양주 유일 · GE 하이엔드 의료장비 4종 완비</span>
+        </div>
+        <div class="cat">Premium Diagnosis</div>
+        <h2>남양주에서 유일하게<br><span class="hl">최고 사양 GE 장비</span><br>4종을 보유합니다</h2>
+        <div class="impact">3.0T AI MRI · 128채널 CT · E10S 초음파 · Fortis 초음파</div>
+        <p class="desc">정확한 진단은 최고의 장비에서 시작됩니다.<br>국내 최고 수준 <strong>GE 하이엔드 장비 4종</strong>을<br>남양주에서는 오직 남양주백병원에서만 만나실 수
+            있습니다.</p>
+        <div class="chips">
+            <div class="chip">🧲 3.0T AI MRI (최고 해상도)</div>
+            <div class="chip">💿 128채널 CT (극저선량)</div>
+            <div class="chip">🔊 E10S 초음파</div>
+            <div class="chip">🔊 Fortis 초음파</div>
+        </div>
+        <div class="cta">
+            <a href="tel:031-572-3111" class="btn-call">📞 031-572-3111 검사 예약</a>
+            <a href="https://afdoc.co.kr/appointment/h/100003" class="btn-more">온라인 예약 →</a>
+        </div>
+    </div>
+    <div class="ge-cards">
+        <div class="ge-card">
+            <div class="ge-icon">🧲</div>
+            <div class="ge-info">
+                <div class="ge-badge">MRI</div>
+                <div class="ge-name">3.0T AI MRI</div>
+                <div class="ge-sub">최고 해상도 · AI 보조 분석</div>
+            </div>
+        </div>
+        <div class="ge-card">
+            <div class="ge-icon">💿</div>
+            <div class="ge-info">
+                <div class="ge-badge">CT</div>
+                <div class="ge-name">128채널 CT</div>
+                <div class="ge-sub">극저선량 · 초고속 스캔</div>
+            </div>
+        </div>
+        <div class="ge-card">
+            <div class="ge-icon">🔊</div>
+            <div class="ge-info">
+                <div class="ge-badge">초음파</div>
+                <div class="ge-name">E10S 초음파</div>
+                <div class="ge-sub">GE 프리미엄 초음파</div>
+            </div>
+        </div>
+        <div class="ge-card">
+            <div class="ge-icon">🔊</div>
+            <div class="ge-info">
+                <div class="ge-badge">초음파</div>
+                <div class="ge-name">Fortis 초음파</div>
+                <div class="ge-sub">GE 프리미엄 초음파</div>
+            </div>
+        </div>
+        <div class="ge-star">⭐ 남양주 지역 최고 사양 장비</div>
+    </div>
+</div>
