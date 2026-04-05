@@ -11,9 +11,7 @@ description: 컴퓨터 재시작 후 루카 호출 시 루틴 세팅 (반가운 
 
 1. GitHub 최신 코드 동기화 (Git Pull)
 // turbo
-2. 장기 기억 메모리 서버 실행 (Port 5050)
-// turbo
-3. 텔레그램 챗봇 실행
+2. 필수 통합 서비스 실행 (장기 기억 메모리 서버 5050, 텔레그램 챗봇, Watchdog 포함)
 // turbo
 3. OpenClaw Gateway 실행
 // turbo
@@ -25,22 +23,16 @@ cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
 git pull origin main
 ```
 
-```bash
-# 2. 메모리 서버 실행
-cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트\memory_layer"
-python memory_server.py
+```powershell
+# 2. 필수 통합 서비스 확실한 독립 실행 (메모리 + 챗봇 + Watchdog)
+cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
+Start-Process -FilePath "cmd.exe" -ArgumentList "/c start_all_services.bat" -WindowStyle Hidden
 ```
 
-```bash
-# 3. 텔레그램 챗봇 실행
+```powershell
+# 3. OpenClaw Gateway 확실한 독립 실행
 cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
-python telegram_bot.py
-```
-
-```bash
-# 4. OpenClaw Gateway 실행
-cd "c:\Users\sunjo\Desktop\luca 연구자동화에이전트"
-openclaw gateway
+Start-Process -FilePath "openclaw" -ArgumentList "gateway" -WindowStyle Hidden
 ```
 
 ```powershell
