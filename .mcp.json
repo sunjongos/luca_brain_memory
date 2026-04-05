@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "luca_computer": {
+      "command": "C:\\Users\\sunjo\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "args": [
+        "C:\\Users\\sunjo\\Desktop\\luca 연구자동화에이전트\\mcp_computer_chrome.py"
+      ]
+    }
+  }
+}

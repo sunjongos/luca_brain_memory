@@ -24,6 +24,20 @@ from google.genai import types
 
 app = Flask(__name__)
 
+# Token Governance: Simple rate limiting & circuit breaker
+MAX_CALLS_PER_HOUR = 300
+call_records = []
+
+def check_rate_limit():
+    global call_records
+    now = asyncio.get_event_loop().time() if asyncio.get_event_loop().is_running() else __import__('time').time()
+    # Remove older than 3600 seconds (1 hour)
+    call_records = [t for t in call_records if now - t < 3600]
+    if len(call_records) >= MAX_CALLS_PER_HOUR:
+        raise Exception("Rate limit exceeded: Token Governance Circuit Breaker triggered (Max 300 calls/hr).")
+    call_records.append(now)
+
+
 # Initialize Memory Agent Runner
 class MemoryAgent:
     def __init__(self):
@@ -64,6 +78,7 @@ import traceback
 @app.route('/ingest', methods=['POST'])
 def ingest():
     try:
+        check_rate_limit()
         data = request.json
         text = data.get('text')
         if not text:
@@ -77,14 +92,19 @@ def ingest():
 
 @app.route('/query', methods=['POST'])
 def query():
-    data = request.json
-    question = data.get('question')
-    if not question:
-        return jsonify({"error": "question is required"}), 400
-    
-    msg = f"Query memory: {question}"
-    result = run_async(memory_agent.run(msg))
-    return jsonify({"status": "success", "result": result})
+    try:
+        check_rate_limit()
+        data = request.json
+        question = data.get('question')
+        if not question:
+            return jsonify({"error": "question is required"}), 400
+        
+        msg = f"Query memory: {question}"
+        result = run_async(memory_agent.run(msg))
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 429
+
 
 @app.route('/consolidate', methods=['POST'])
 def consolidate():

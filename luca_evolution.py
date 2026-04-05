@@ -198,7 +198,7 @@ async def job_trend_research(app=None):
     import subprocess
     perplexity_script = BASE_DIR / ".agent" / "skills" / "perplexity" / "perplexity_search.py"
 
-    trend_query = "AI agent automation productivity tools trends 2025 latest this week"
+    trend_query = "site:twitter.com OR latest posts on X regarding Claude Code, AI Agents, Multi-Agent workflow trends this week"
     try:
         env_copy = os.environ.copy()
         env_copy["PYTHONIOENCODING"] = "utf-8"
@@ -215,8 +215,9 @@ async def job_trend_research(app=None):
 
     # 2. GPT-4o로 Luca에게 적용할 인사이트 추출
     insight_prompt = f"""당신은 AI 에이전트 개발 전략가입니다.
-아래는 이번 주 최신 AI 에이전트 트렌드 리서치 결과입니다.
-Luca(텔레그램 기반 자동화 에이전트)에게 즉시 적용할 수 있는 핵심 인사이트 TOP 3를 추출하세요.
+아래는 이번 주 최신 X(트위터) 및 글로벌 AI 에이전트 트렌드 리서치 결과입니다.
+특히 Claude Code 및 Multi-agent 관련 핫이슈를 집중 분석하여, 
+Luca(OpenClaw 기반 자동화 에이전트)에게 즉시 적용 및 고도화할 수 있는 핵심 파이프라인 업그레이드 방안 TOP 3를 추출하세요.
 
 [트렌드 리서치]
 {trend_raw}
