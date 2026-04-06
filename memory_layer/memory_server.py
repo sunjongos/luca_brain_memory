@@ -15,7 +15,7 @@ if "GEMINI_API_KEY" not in os.environ and "GOOGLE_API_KEY" in os.environ:
     os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
 elif "GEMINI_API_KEY" not in os.environ:
     # Fallback to the discovered API key for testing
-    os.environ["GEMINI_API_KEY"] = "AIzaSyDipeFnZQS06vdO3Tt4JFhATWljJDXL-Go"
+    os.environ["GEMINI_API_KEY"] = "AIzaSyDz2WUYBNpo_X2cQaybXKu4kX4QS86whBU"
 
 from core import build_memory_agents
 from google.adk.runners import Runner

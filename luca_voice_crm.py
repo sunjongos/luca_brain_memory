@@ -8,6 +8,23 @@ load_dotenv()
 
 VAPI_API_KEY = os.getenv("VAPI_API_KEY")
 VAPI_PHONE_NUMBER_ID = os.getenv("VAPI_PHONE_NUMBER_ID")
+AINDB_BOT_TOKEN = os.getenv("AINDB_BOT_TOKEN")
+CEO_CHAT_ID = os.getenv("CEO_CHAT_ID")
+
+def send_crm_telegram_alert(patient_name, summary, recordingUrl):
+    if not AINDB_BOT_TOKEN or not CEO_CHAT_ID:
+        return
+    url = f"https://api.telegram.org/bot{AINDB_BOT_TOKEN}/sendMessage"
+    text = f"📞 <b>[CRM AI 통화 보고]</b>\n\n👤 <b>대상:</b> {patient_name}\n\n📝 <b>AI 요약 내용:</b>\n{summary}\n\n🎙️ <b>녹음 파일:</b> <a href='{recordingUrl}'>듣기</a>"
+    payload = {
+        "chat_id": CEO_CHAT_ID,
+        "text": text,
+        "parse_mode": "HTML"
+    }
+    try:
+        requests.post(url, json=payload)
+    except Exception:
+        pass
 
 def make_crm_call(patient_name, phone_number, appointment_info):
     url = "https://api.vapi.ai/call/phone"
@@ -118,6 +135,15 @@ def main():
                     df.to_csv(csv_path, index=False, encoding='utf-8-sig')
                     
                 print(f"💾 통화 기록이 [{csv_path}] 에 엑셀(DB) 형태로 완벽히 자동 저장되었습니다!")
+                
+                # AIndb_bot으로 발송
+                try:
+                    patient_for_alert = final_res.get("customer", {}).get("name", patient_name)
+                    send_crm_telegram_alert(patient_for_alert, summary, recordingUrl)
+                    print("✅ AIndb_bot 텔레그램으로 CRM 보고 완료!")
+                except Exception as e:
+                    print(f"❌ 텔레그램 보고 실패: {e}")
+                    
                 print("💡 향후 이 데이터를 Supabase(PostgreSQL Base) 등에 API로 밀어 넣으면 완벽한 Hospital CRM이 됩니다.")
                 break
             elif status in ["failed", "no-answer", "canceled", "rejected"]:

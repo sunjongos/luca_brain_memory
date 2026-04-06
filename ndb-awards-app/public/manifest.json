@@ -1,0 +1,16 @@
+{
+  "name": "NDB 우수직원 시상",
+  "short_name": "NDB Awards",
+  "description": "남양주 백병원 월별 우수직원 시상 프로그램",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB615rZ6vjthTOfFAA50EbgjoChtl8jOUx3-jg9UifDacbWCNUoNP2Hir32uvQZvSOPedUUIkAZnp5vLD_oojoLdwGQ93Tr4wikEKN3qPcXxun9geYzHCAO09gnqQT2CSotAQiPExGHXM9W1_IHkqceB5nkE4NE2gUwIVqCeH8mywLxM581HDNC4WggZWmSF_zFO5z7i57qFGHxdgFv6qoRKPRY8ys-C6-714sxAwD4K8selEqM3BuVchS9L9NoHXQ9tRpS9AqfyTk",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

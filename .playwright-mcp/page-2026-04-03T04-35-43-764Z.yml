@@ -1,0 +1,161 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - button "menu" [ref=e5] [cursor=pointer]:
+          - generic [ref=e6]: menu
+        - generic [ref=e7]:
+          - generic [ref=e8]:
+            - generic [ref=e9]: "n"
+            - generic [ref=e10]: d
+            - generic [ref=e11]: b
+          - generic [ref=e12]:
+            - generic [ref=e13]: 남양주백병원
+            - generic [ref=e14]: NDB NAMYANGJU BAEK HOSPITAL
+        - navigation [ref=e15]:
+          - link "Overview" [ref=e16] [cursor=pointer]:
+            - /url: "#"
+          - link "Nominations" [ref=e17] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e18]:
+        - button "shield_person Admin" [ref=e19] [cursor=pointer]:
+          - generic [ref=e20]: shield_person
+          - text: Admin
+        - generic [ref=e21]:
+          - generic [ref=e22]: System Date
+          - generic [ref=e23]: April 2026
+        - img "Profile" [ref=e25] [cursor=pointer]
+  - complementary [ref=e26]:
+    - button "close" [ref=e27] [cursor=pointer]:
+      - generic [ref=e28]: close
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: "n"
+          - generic [ref=e33]: d
+          - generic [ref=e34]: b
+        - generic [ref=e35]:
+          - generic [ref=e36]: 남양주백병원
+          - generic [ref=e37]: NDB NAMYANGJU BAEK HOSPITAL
+      - navigation [ref=e38]:
+        - link "dashboard Dashboard" [ref=e39] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e40]: dashboard
+          - text: Dashboard
+        - link "workspace_premium Awards Program" [ref=e41] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e42]: workspace_premium
+          - text: Awards Program
+        - separator [ref=e43]
+        - button "admin_panel_settings Administrator Vault" [ref=e44] [cursor=pointer]:
+          - generic [ref=e45]: admin_panel_settings
+          - text: Administrator Vault
+    - button "Nominate Colleague" [ref=e47] [cursor=pointer]
+  - main [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e52]: campaign
+        - generic [ref=e53]:
+          - 'heading "Action Required : 5월 수상자 선정안건" [level=3] [ref=e54]'
+          - paragraph [ref=e55]: 4월 마지막 주 경영회의가 도래했습니다. 대상자를 확정해주십시오.
+      - button "심사 시작하기" [ref=e56] [cursor=pointer]
+    - generic [ref=e58]:
+      - heading "남양주 백병원, '이달의 빛나는 직원'" [level=1] [ref=e59]:
+        - text: 남양주 백병원,
+        - text: "'이달의 빛나는 직원'"
+      - paragraph [ref=e60]: 서로를 아끼고 존중하는 '가족 같은 공동체'를 지향하며, 숨은 주인공들을 찾아 기쁨을 나누고자 5월~12월 월별 테마 시상식을 새롭게 시작합니다.
+    - generic [ref=e61]:
+      - heading "2026 Registry" [level=2] [ref=e63]: 2026 Registry
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: "05."
+            - generic [ref=e69]: mood
+          - generic [ref=e70]:
+            - paragraph [ref=e71]: 긍정의 힘
+            - heading "백(Baek)만불 미소상" [level=3] [ref=e72]
+            - paragraph [ref=e73]: 밝은 미소와 친절한 태도로 병원 분위기를 밝힌 직원
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: "06."
+            - generic [ref=e77]: favorite
+          - generic [ref=e78]:
+            - paragraph [ref=e79]: 효도와 감사
+            - heading "진심 동행상" [level=3] [ref=e80]
+            - paragraph [ref=e81]: 동료와 협력하고 환자에게 진심을 다해 동행한 직원
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: "07."
+            - generic [ref=e85]: bolt
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: 열정과 도전
+            - heading "에너지 마스터상" [level=3] [ref=e88]
+            - paragraph [ref=e89]: 지치지 않는 열정으로 부서에 활력을 불어넣은 직원
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]: "08."
+            - generic [ref=e93]: handshake
+          - generic [ref=e94]:
+            - paragraph [ref=e95]: 배려와 휴식
+            - heading "든든한 동료상" [level=3] [ref=e96]
+            - paragraph [ref=e97]: 보이지 않는 곳에서 책임감을 가지고 묵묵히 지원한 직원
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - generic [ref=e100]: "09."
+            - generic [ref=e101]: volunteer_activism
+          - generic [ref=e102]:
+            - paragraph [ref=e103]: 나눔과 풍성
+            - heading "마음 나눔상" [level=3] [ref=e104]
+            - paragraph [ref=e105]: 따뜻한 배려와 봉사 정신으로 나눔을 실천한 직원
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e108]: "010."
+            - generic [ref=e109]: school
+          - generic [ref=e110]:
+            - paragraph [ref=e111]: 전문과 성장
+            - heading "스마트 프로상(AI)" [level=3] [ref=e112]
+            - paragraph [ref=e113]: 창의적인 아이디어와 혁신으로 업무 효율을 높인 직원
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - generic [ref=e116]: "011."
+            - generic [ref=e117]: forum
+          - generic [ref=e118]:
+            - paragraph [ref=e119]: 소통과 화합
+            - heading "공감 울림상" [level=3] [ref=e120]
+            - paragraph [ref=e121]: 뛰어난 소통과 공감 능력으로 부서 간 화합에 기여한 직원
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: "012."
+            - generic [ref=e125]: workspace_premium
+          - generic [ref=e126]:
+            - paragraph [ref=e127]: 결실과 감사
+            - heading "올해의 빛 (Honor)" [level=3] [ref=e128]
+            - paragraph [ref=e129]: 한 해 동안 명확한 성과를 창출하고 모범이 된 최우수 직원
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - generic [ref=e133]: redeem
+          - heading "공식 포상 내역" [level=3] [ref=e134]
+        - generic [ref=e135]:
+          - generic [ref=e136]:
+            - generic [ref=e138]: payments
+            - generic [ref=e139]:
+              - heading "상금 20만원 지원" [level=4] [ref=e140]
+              - paragraph [ref=e141]: ndbTogether 회의 지정일, 병원장 주관 하에 공식 시상식 진행 및 상금 수여.
+          - generic [ref=e142]:
+            - generic [ref=e144]: badge
+            - generic [ref=e145]:
+              - heading "최우수 명예 배지 증정" [level=4] [ref=e146]
+              - paragraph [ref=e147]: 유니폼 전용 프리미엄 배지 제공. 타인과 차별화되는 사내 평판의 상징.
+      - generic [ref=e148]:
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - generic [ref=e152]: robot_2
+              - 'heading "특별상 : AI 선도 혁신상" [level=3] [ref=e153]'
+            - generic [ref=e154]: Bonus
+          - paragraph [ref=e155]: 업무 로직에 언어모델이나 자동화를 융합하여 부서의 실질적인 시간을 획기적으로 감축한 '스마트 리더'에게 증정됩니다.
+        - button "혁신 평가 지표 열람" [ref=e156] [cursor=pointer]
+  - generic:
+    - generic: check_circle
+    - paragraph: 처리되었습니다.

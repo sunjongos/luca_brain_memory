@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <title>NDB Baek - Excellence Awards</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcfcfc;
+            color: #111827;
+            font-family: 'Pretendard', 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Modern Soft UI */
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            box-shadow: 0 20px 40px -4px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #e5e7eb; border-radius: 10px; }
+
+        .anim-slide-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Pure dot gradient for brand */
+        .ndb-gradient-bg {
+            background: linear-gradient(135deg, #059669 0%, #2563eb 50%, #ea580c 100%);
+        }
+        
+        .ndb-gradient-text {
+            background: linear-gradient(135deg, #059669, #2563eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Clean PIN input */
+        .pin-input {
+            width: 3.5rem;
+            height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            color: #111827;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+            transition: all 0.2s;
+        }
+        .pin-input:focus {
+            background: #ffffff;
+            border-color: #111827;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(17,24,39,0.1);
+        }
+        input[type="number"]::-webkit-inner-spin-button, 
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        ndb: {
+                            green: "#059669",
+                            blue: "#2563eb",
+                            orange: "#ea580c",
+                        }
+                    },
+                    letterSpacing: { tightest: '-.04em' }
+                }
+            }
+        }
+    </script>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+</head>
+<body class="min-h-screen pb-16">
+
+<!-- Minimalist Header -->
+<header class="fixed top-0 w-full z-40 bg-white/70 backdrop-blur-xl border-b border-black/[0.04] transition-all">
+    <div class="flex justify-between items-center px-6 lg:px-12 py-4 w-full max-w-[1600px] mx-auto">
+        <div class="flex items-center gap-6">
+            <button id="mobileMenuBtn" class="lg:hidden text-gray-500 hover:text-black transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <!-- Recreated Typographic Brand Logo -->
+            <div class="flex items-center gap-1.5 cursor-default hover:opacity-90 transition-opacity shrink-0 lg:hidden">
+                <div class="flex items-baseline select-none shrink-0" style="font-family: 'Arial Rounded MT Bold', 'Nunito', 'Pretendard', sans-serif; letter-spacing: -0.03em;">
+                    <span style="color: #8CC63F; font-size: 32px; font-weight: 900; line-height: 1;">n</span>
+                    <span style="color: #008FD5; font-size: 32px; font-weight: 900; line-height: 1;">d</span>
+                    <span style="color: #F49820; font-size: 32px; font-weight: 900; line-height: 1;">b</span>
+                </div>
+                <div class="flex flex-col justify-center ml-1.5 shrink-0">
+                    <span class="text-[#4A4A4A] font-black text-[16px] leading-[1.1] tracking-tight whitespace-nowrap" style="font-family: 'Pretendard', sans-serif;">남양주백병원</span>
+                    <span class="text-[#6B6B6B] font-bold text-[6.5px] leading-tight tracking-[0.02em] whitespace-nowrap" style="font-family: 'Inter', sans-serif;">NDB NAMYANGJU BAEK HOSPITAL</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-[13px] font-semibold tracking-wide ml-8 text-gray-500">
+                <a class="hover:text-black transition-colors" href="#">Overview</a>
+                <a class="text-black" href="#">Nominations</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-5">
+            <!-- Admin pill button (Black & White style) -->
+            <button id="openAdminBtnHeader" class="hidden sm:flex items-center gap-2 text-[12px] font-bold bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-full hover:border-gray-300 hover:bg-gray-50 transition-all shadow-sm">
+                <span class="material-symbols-outlined text-[14px]">shield_person</span> Admin
+            </button>
+            <div id="currentSystemBadge" class="hidden sm:flex flex-col items-end">
+                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">System Date</span>
+                <span class="text-xs font-bold text-gray-800">April 2026</span>
+            </div>
+            <div class="w-9 h-9 rounded-full bg-gray-200 border border-black/5 overflow-hidden shadow-sm cursor-pointer hover:opacity-80 transition-opacity">
+                <img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB615rZ6vjthTOfFAA50EbgjoChtl8jOUx3-jg9UifDacbWCNUoNP2Hir32uvQZvSOPedUUIkAZnp5vLD_oojoLdwGQ93Tr4wikEKN3qPcXxun9geYzHCAO09gnqQT2CSotAQiPExGHXM9W1_IHkqceB5nkE4NE2gUwIVqCeH8mywLxM581HDNC4WggZWmSF_zFO5z7i57qFGHxdgFv6qoRKPRY8ys-C6-714sxAwD4K8selEqM3BuVchS9L9NoHXQ9tRpS9AqfyTk"/>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Sidebar -->
+<div id="mobileOverlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden opacity-0 transition-opacity duration-300"></div>
+<aside id="sideNav" class="h-[100dvh] w-72 fixed left-0 top-0 border-r border-gray-100 bg-white shadow-2xl flex flex-col p-6 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <button id="closeMenuBtn" class="absolute top-6 right-6 lg:hidden text-gray-400 hover:text-black p-2"><span class="material-symbols-outlined">close</span></button>
+    <div class="mt-16 mb-8">
+        <div class="flex items-center gap-1.5 cursor-default mb-10 select-none shrink-0">
+                <div class="flex items-baseline shrink-0" style="font-family: 'Arial Rounded MT Bold', 'Nunito', 'Pretendard', sans-serif; letter-spacing: -0.03em;">
+                    <span style="color: #8CC63F; font-size: 35px; font-weight: 900; line-height: 1;">n</span>
+                    <span style="color: #008FD5; font-size: 35px; font-weight: 900; line-height: 1;">d</span>
+                    <span style="color: #F49820; font-size: 35px; font-weight: 900; line-height: 1;">b</span>
+                </div>
+                <div class="flex flex-col justify-center ml-1.5 mt-0.5 shrink-0">
+                    <span class="text-[#4A4A4A] font-black text-[17px] leading-[1.1] tracking-tight whitespace-nowrap" style="font-family: 'Pretendard', sans-serif;">남양주백병원</span>
+                    <span class="text-[#6B6B6B] font-bold text-[7px] leading-tight tracking-[0.02em] whitespace-nowrap" style="font-family: 'Inter', sans-serif;">NDB NAMYANGJU BAEK HOSPITAL</span>
+                </div>
+        </div>
+        <nav class="space-y-1">
+            <a class="flex items-center gap-3 p-3 text-gray-500 hover:text-black hover:bg-gray-50 rounded-xl transition-all text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined text-[18px]">dashboard</span> Dashboard
+            </a>
+            <a class="flex items-center gap-3 p-3 text-black bg-gray-50 rounded-xl font-semibold text-sm" href="#">
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> Awards Program
+            </a>
+            <hr class="my-4 border-gray-100">
+            <button id="openAdminBtnSidebar" class="w-full flex items-center gap-3 p-3 text-gray-500 hover:text-black hover:bg-gray-50 rounded-xl transition-all text-sm font-semibold text-left">
+                <span class="material-symbols-outlined text-[18px]">admin_panel_settings</span> Administrator Vault
+            </button>
+        </nav>
+    </div>
+    <div class="mt-auto pt-4 border-t border-gray-100">
+        <button id="openNominateModal" class="w-full bg-black text-white py-3.5 rounded-xl font-bold text-[13px] tracking-wide mb-2 hover:bg-gray-800 transition-all shadow-md hover:shadow-lg">Nominate Colleague</button>
+    </div>
+</aside>
+
+<!-- Main Workflow Canvas -->
+<main class="lg:ml-72 pt-32 px-5 sm:px-8 lg:px-16 max-w-[1500px] mx-auto">
+    
+    <!-- 🚨 Minimal Alert Banner (Clean White Box, Orange Icon) -->
+    <div class="anim-slide-up glass-card rounded-[1.5rem] p-5 sm:p-6 mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border border-ndb-orange/10 relative overflow-hidden group">
+        <!-- Subtle glow -->
+        <div class="absolute right-0 top-0 w-32 h-32 bg-ndb-orange/5 rounded-full blur-2xl pointer-events-none group-hover:bg-ndb-orange/10 transition-colors"></div>
+        <div class="flex items-center gap-4 relative z-10 w-full sm:w-auto">
+            <div class="w-10 h-10 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-ndb-orange text-[20px]" style="font-variation-settings: 'FILL' 1;">campaign</span>
+            </div>
+            <div>
+                <h3 class="text-black font-extrabold text-[15px] tracking-tight">Action Required : 5월 수상자 선정안건</h3>
+                <p class="text-gray-500 text-[13px] font-medium mt-0.5"><span class="text-black font-bold border-b border-ndb-orange/30">4월 마지막 주</span> 경영회의가 도래했습니다. 대상자를 확정해주십시오.</p>
+            </div>
+        </div>
+        <button id="openAdminBtnHighlight" class="w-full sm:w-auto bg-black hover:bg-gray-800 text-white font-bold py-2.5 px-6 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 whitespace-nowrap z-10 text-[13px] tracking-wide">
+            심사 시작하기
+        </button>
+    </div>
+
+    <!-- Header Section (Sophisticated Typography) -->
+    <section class="mb-16 anim-slide-up" style="animation-delay: 0.1s;">
+        <div class="max-w-3xl">
+            <h1 class="text-[36px] sm:text-[46px] lg:text-[54px] font-extrabold tracking-tightest leading-[1.1] mb-5 text-gray-900">
+                남양주 백병원, <br/>
+                <span class="ndb-gradient-text">'이달의 빛나는 직원'</span>
+            </h1>
+            <p class="text-gray-500 text-[15px] sm:text-[17px] font-medium leading-[1.6]">
+                서로를 아끼고 존중하는 '가족 같은 공동체'를 지향하며, 숨은 주인공들을 찾아 기쁨을 나누고자 5월~12월 월별 테마 시상식을 새롭게 시작합니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Detailed Awards Monthly Grid -->
+    <section class="mb-20 anim-slide-up" style="animation-delay: 0.2s;">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-[18px] font-extrabold text-black tracking-tight flex items-center gap-2">
+                2026 Registry 
+                <span class="w-2 h-2 rounded-full bg-ndb-blue ml-1"></span>
+            </h2>
+        </div>
+        
+        <!-- 동적 렌더링 영역 -->
+        <div id="awardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- JS Inject -->
+        </div>
+    </section>
+
+    <!-- Criteria Information (Monochrome layout) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 anim-slide-up pb-16" style="animation-delay: 0.3s;">
+        
+        <!-- Standard Rewards -->
+        <div class="bg-white border border-gray-100 p-8 rounded-[2rem] shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-shadow">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="material-symbols-outlined text-gray-800 text-[24px]">redeem</span>
+                <h3 class="text-lg font-extrabold text-black">공식 포상 내역</h3>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- item 1 -->
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[16px] text-gray-600">payments</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[15px] text-black mb-1">상금 20만원 지원</h4>
+                        <p class="text-[13px] text-gray-500 leading-relaxed font-medium">ndbTogether 회의 지정일, 병원장 주관 하에 공식 시상식 진행 및 상금 수여.</p>
+                    </div>
+                </div>
+                <!-- item 2 -->
+                <div class="flex gap-4 items-start">
+                    <div class="w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[16px] text-gray-600">badge</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[15px] text-black mb-1">최우수 명예 배지 증정</h4>
+                        <p class="text-[13px] text-gray-500 leading-relaxed font-medium">유니폼 전용 프리미엄 배지 제공. 타인과 차별화되는 사내 평판의 상징.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI Innovation Promo (Dark Minimal) -->
+        <div class="bg-[#111111] text-white p-8 rounded-[2rem] shadow-xl relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute right-0 top-0 w-32 h-32 bg-white/[0.03] rounded-bl-full pointer-events-none"></div>
+            
+            <div>
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-white text-[24px]" style="font-variation-settings: 'FILL' 1;">robot_2</span>
+                        <h3 class="text-lg font-extrabold tracking-tight">특별상 : AI 선도 혁신상</h3>
+                    </div>
+                    <span class="border border-white/20 text-white text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-widest">Bonus</span>
+                </div>
+                <p class="text-gray-400 text-[14px] leading-[1.7] font-medium max-w-sm mb-8">
+                    업무 로직에 언어모델이나 자동화를 융합하여 부서의 실질적인 시간을 획기적으로 감축한 '스마트 리더'에게 증정됩니다.
+                </p>
+            </div>
+            
+            <button id="openInnovationModalBtn" class="bg-white text-black font-bold py-3.5 px-6 rounded-xl hover:bg-gray-100 transition-colors w-full sm:w-max text-[13px] shadow-lg">
+                혁신 평가 지표 열람
+            </button>
+        </div>
+    </section>
+</main>
+
+<!-- Auth Modal (PIN Code) 🔒 -->
+<div id="authModal" class="fixed inset-0 z-[120] flex items-center justify-center hidden opacity-0 transition-all duration-300 backdrop-blur-sm">
+    <div class="absolute inset-0 bg-black/40" id="authBackdrop"></div>
+    <div class="relative w-full max-w-[340px] bg-white rounded-3xl shadow-2xl p-8 m-4 transform scale-95 transition-transform duration-300" id="authModalDialog">
+        <button class="closeGenericModalBtn absolute top-5 right-5 text-gray-400 hover:text-black transition-colors">
+            <span class="material-symbols-outlined border border-transparent hover:border-gray-200 rounded-full p-1">close</span>
+        </button>
+        
+        <div class="text-center mb-6 mt-2">
+            <span class="material-symbols-outlined text-[32px] text-gray-800 mb-3 block">lock</span>
+            <h2 class="text-xl font-extrabold text-black tracking-tight">Vault Access</h2>
+            <p class="text-gray-500 text-[13px] mt-1 font-medium">관리자 전용 PIN 코드</p>
+        </div>
+        
+        <div class="flex justify-center gap-2.5 mb-8">
+            <input type="password" maxlength="1" class="pin-input" autofocus>
+            <input type="password" maxlength="1" class="pin-input">
+            <input type="password" maxlength="1" class="pin-input">
+            <input type="password" maxlength="1" class="pin-input">
+        </div>
+        
+        <button id="verifyPinBtn" class="w-full bg-black text-white py-3.5 rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-[0.98] disabled:opacity-50 text-[14px]">
+            언락 (Unlock)
+        </button>
+        <p id="authErrorMsg" class="text-red-500 text-[12px] font-bold text-center mt-4 opacity-0 transition-opacity">코드가 일치하지 않습니다.</p>
+    </div>
+</div>
+
+<!-- Admin Management Workspace Modal 🛠️ -->
+<div id="adminModal" class="fixed inset-0 z-[130] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="adminBackdrop"></div>
+    <div class="relative w-full max-w-[1000px] bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] flex flex-col m-4 transform scale-95 transition-transform duration-300 h-[85vh] overflow-hidden" id="adminModalDialog">
+        
+        <!-- Header -->
+        <div class="border-b border-gray-100 p-6 lg:px-8 flex justify-between items-center bg-white z-10 relative">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[20px] text-black">security</span>
+                </div>
+                <div>
+                    <h2 class="text-[18px] font-extrabold text-black tracking-tight">수석 관리자 Vault</h2>
+                    <p class="text-gray-500 text-[12px] font-medium mt-0.5">후보자 목록 열람 및 공식 수상 기록 장부</p>
+                </div>
+            </div>
+            <button class="closeGenericModalBtn text-gray-400 hover:text-black transition-colors rounded-full p-2 hover:bg-gray-50">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        
+        <!-- Content Body -->
+        <div class="flex flex-col lg:flex-row flex-1 overflow-hidden bg-gray-50">
+            <!-- Left: Nominations List -->
+            <div class="w-full lg:w-[50%] flex flex-col border-r border-gray-100 bg-white">
+                <div class="p-5 border-b border-gray-50 flex items-center justify-between bg-white z-10">
+                    <h3 class="font-bold text-black text-[13px] tracking-wide">수신된 추천서</h3>
+                    <span class="text-[11px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full" id="nomCount">0</span>
+                </div>
+                <!-- scrollable list -->
+                <div id="nominationsListContainer" class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2 bg-gray-50/50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Right: Action Form -->
+            <div class="w-full lg:w-[50%] p-6 lg:p-8 flex flex-col bg-white">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-black text-[18px]">gavel</span>
+                    <h3 class="font-bold text-black text-[14px]">최종 공표 패널</h3>
+                </div>
+                
+                <form id="winnerSelectionForm" class="flex flex-col flex-1 relative">
+                    <!-- Target Display -->
+                    <div class="mb-8 p-5 rounded-2xl border border-gray-200 bg-gray-50/50 transition-all duration-200" id="selectedUserBox">
+                        <label class="block text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2">Selected Nominee</label>
+                        <div id="selectedNomineeDisplay" class="text-lg font-bold text-gray-300">
+                            좌측 명단에서 대상을 클릭하십시오.
+                        </div>
+                        <input type="hidden" id="selectedNomineeId" required>
+                        <input type="hidden" id="selectedNomineeName">
+                        <input type="hidden" id="selectedNomineeDept">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-[12px] font-bold text-gray-700 mb-2">포상 지급 월 (Month)</label>
+                        <div class="relative">
+                            <select id="assignMonth" required class="w-full bg-white border border-gray-300 rounded-xl px-4 py-3.5 text-[14px] text-black font-semibold focus:border-black focus:ring-1 focus:ring-black transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>월을 선택해주세요</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[18px]">expand_more</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-auto">
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <span class="material-symbols-outlined text-gray-600 text-[15px]">groups</span>
+                            <label class="block text-[12px] font-bold text-gray-700">공식 선정위원 (위원회 결의)</label>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">정진엽 의료원장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">최선종 병원장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">강진호 병원장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">이영희 간호부원장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">이호정 경영실장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">박창기 이사</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">권오성 실장</span>
+                            <span class="bg-gray-100 text-gray-800 text-[11px] font-bold px-2 py-1 rounded-md border border-gray-200/60">이은성 본부장</span>
+                        </div>
+                        <p class="text-[10px] text-gray-400 font-medium mt-2 leading-[1.6]">
+                            * 경영회의 시 위 임원진의 과반수 결의 하에 수상자를 확정합니다.<br/>
+                            승인 처리 시 공식 서명된 것과 동일한 효력을 가집니다.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <button type="submit" id="confirmWinnerBtn" disabled class="w-full bg-black text-white py-4 rounded-xl font-bold tracking-wide hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition-all transform active:scale-[0.98] text-[14px] shadow-md">
+                            공식 기록 승인 (Approve)
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nominate Form Modal -->
+<div id="nominateModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+    <div class="relative w-full max-w-[480px] bg-white rounded-[2rem] shadow-2xl p-8 lg:p-10 m-4 transform scale-95 transition-transform duration-300" id="nominateModalDialog">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-extrabold text-black flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">draw</span> 추천서 작성
+            </h2>
+            <button class="closeGenericModalBtn text-gray-400 hover:text-black border border-transparent hover:border-gray-200 rounded-full p-1 transition-colors">
+                <span class="material-symbols-outlined text-[18px]">close</span>
+            </button>
+        </div>
+        <form id="nominationForm" class="space-y-5">
+            <div>
+                <label class="block text-[12px] font-bold text-gray-500 mb-1.5" for="nomineeName">대상자 실명</label>
+                <input type="text" id="nomineeName" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all font-medium text-black text-[14px]" placeholder="예: 김선종 과장">
+            </div>
+            <div>
+                <label class="block text-[12px] font-bold text-gray-500 mb-1.5" for="department">소속 부서</label>
+                <div class="relative">
+                    <select id="department" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all appearance-none text-[14px] font-medium text-black cursor-pointer">
+                        <option value="" disabled selected class="text-gray-400">선택하십시오</option>
+                        <option value="진료부">진료부</option>
+                        <option value="간호부">간호부</option>
+                        <option value="의료기사">의료기사</option>
+                        <option value="행정-경영관리">행정-경영관리</option>
+                        <option value="행정-전산시설관리">행정-전산시설관리</option>
+                        <option value="행정-환자유치TF">행정-환자유치TF</option>
+                    </select>
+                    <!-- Using material symbol instead of bg image -->
+                    <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[18px]">expand_more</span>
+                </div>
+            </div>
+            <div>
+                <label class="block text-[12px] font-bold text-gray-500 mb-1.5" for="reason">구체적 사유</label>
+                <textarea id="reason" required rows="4" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all resize-none text-[14px] leading-relaxed text-black" placeholder="어떤 업적과 긍정적인 영향을 주었는지 기재 바랍니다."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-3.5 rounded-xl font-bold tracking-wide hover:bg-gray-800 shadow-md hover:shadow-lg transition-all mt-4 text-[14px]">
+                서류 접수
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- AI Details Modal -->
+<div id="innovationModal" class="fixed inset-0 z-[110] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+    <div class="relative w-full max-w-[500px] bg-white border border-gray-100 rounded-[2rem] shadow-2xl p-8 lg:p-10 m-4 transform scale-95 transition-transform duration-300" id="innovationModalDialog">
+        <div class="mb-8">
+            <span class="material-symbols-outlined text-[28px] text-black mb-3">psychology</span>
+            <h2 class="text-[20px] font-extrabold text-black">AI 선도 혁신상 지표</h2>
+            <p class="text-[13px] text-gray-500 mt-1">객관적인 성과 도출을 위한 평가 기준</p>
+        </div>
+        
+        <ul class="space-y-4">
+            <li class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-black text-[13px] mb-1">업무 지능화 (40%)</h4>
+                <p class="text-[13px] text-gray-600 font-medium">거대언어모델, 사내 봇 연동을 통해 월 평균 10시간 이상 반복 업무를 감소시켰는가.</p>
+            </li>
+            <li class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-black text-[13px] mb-1">팀워크 / 전파력 (30%)</h4>
+                <p class="text-[13px] text-gray-600 font-medium">도입한 툴이 개인이 아닌 부서 차원으로 적용되도록 교육 및 확산에 기여했는가.</p>
+            </li>
+            <li class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-black text-[13px] mb-1">데이터 활용도 (30%)</h4>
+                <p class="text-[13px] text-gray-600 font-medium">인사이트가 담긴 데이터를 경영진에 정기적으로 리포팅하여 이익률에 이바지했는가.</p>
+            </li>
+        </ul>
+        <button class="closeGenericModalBtn w-full mt-8 bg-gray-100 text-black py-3 rounded-xl font-bold hover:bg-gray-200 transition-colors text-[13px]">닫기</button>
+    </div>
+</div>
+
+<!-- Global Toast -->
+<div id="toastNotification" class="fixed top-6 left-1/2 transform -translate-x-1/2 -translate-y-20 opacity-0 transition-all duration-400 flex items-center gap-2.5 bg-black text-white px-5 py-3 rounded-full shadow-2xl z-[200] pointer-events-none">
+    <span class="material-symbols-outlined text-white text-[18px]" id="toastIcon">check_circle</span>
+    <p class="font-semibold text-[13px] tracking-wide" id="toastText">처리되었습니다.</p>
+</div>
+
+<script>
+    const SYS_CURRENT_MONTH = 4;
+    const PIN_CODE = '1122'; 
+    
+    // Monthly configurations (Accurate to campaign info)
+    const monthlyThemes = [
+        { month: 5, emoji: 'mood', themeLabel: '긍정의 힘', title: '백(Baek)만불 미소상', color: 'ndb-green', criteria: '밝은 미소와 친절한 태도로 병원 분위기를 밝힌 직원' },
+        { month: 6, emoji: 'favorite', themeLabel: '효도와 감사', title: '진심 동행상', color: 'ndb-blue', criteria: '동료와 협력하고 환자에게 진심을 다해 동행한 직원' },
+        { month: 7, emoji: 'bolt', themeLabel: '열정과 도전', title: '에너지 마스터상', color: 'ndb-orange', criteria: '지치지 않는 열정으로 부서에 활력을 불어넣은 직원' },
+        { month: 8, emoji: 'handshake', themeLabel: '배려와 휴식', title: '든든한 동료상', color: 'ndb-green', criteria: '보이지 않는 곳에서 책임감을 가지고 묵묵히 지원한 직원' },
+        { month: 9, emoji: 'volunteer_activism', themeLabel: '나눔과 풍성', title: '마음 나눔상', color: 'ndb-blue', criteria: '따뜻한 배려와 봉사 정신으로 나눔을 실천한 직원' },
+        { month: 10, emoji: 'school', themeLabel: '전문과 성장', title: '스마트 프로상(AI)', color: 'ndb-orange', criteria: '창의적인 아이디어와 혁신으로 업무 효율을 높인 직원' },
+        { month: 11, emoji: 'forum', themeLabel: '소통과 화합', title: '공감 울림상', color: 'ndb-green', criteria: '뛰어난 소통과 공감 능력으로 부서 간 화합에 기여한 직원' },
+        { month: 12, emoji: 'workspace_premium', themeLabel: '결실과 감사', title: '올해의 빛 (Honor)', isHonor: true, criteria: '한 해 동안 명확한 성과를 창출하고 모범이 된 최우수 직원' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderAwardsGrid();
+        
+        function toggleModal(modalId, dialogId) {
+            const m = document.getElementById(modalId);
+            const d = document.getElementById(dialogId);
+            if(m.classList.contains('hidden')){
+                m.classList.remove('hidden');
+                void m.offsetWidth;
+                m.classList.remove('opacity-0');
+                if(d){ d.classList.remove('scale-95'); d.classList.add('scale-100'); }
+            } else {
+                m.classList.add('opacity-0');
+                if(d){ d.classList.remove('scale-100'); d.classList.add('scale-95'); }
+                setTimeout(() => m.classList.add('hidden'), 300);
+            }
+        }
+
+        document.querySelectorAll('.closeGenericModalBtn').forEach(b => {
+            b.addEventListener('click', e => {
+                const modal = e.target.closest('.fixed.inset-0');
+                if(modal) {
+                    modal.classList.add('opacity-0');
+                    const d = modal.querySelector('div[id$="Dialog"]');
+                    if(d) { d.classList.remove('scale-100'); d.classList.add('scale-95'); }
+                    setTimeout(() => modal.classList.add('hidden'), 300);
+                }
+            });
+        });
+
+        document.getElementById('openNominateModal').addEventListener('click', () => toggleModal('nominateModal', 'nominateModalDialog'));
+        document.getElementById('openInnovationModalBtn').addEventListener('click', () => toggleModal('innovationModal', 'innovationModalDialog'));
+
+        // --- AUTH PIN LOGIC ---
+        const pinInputs = document.querySelectorAll('.pin-input');
+        const authErrorMsg = document.getElementById('authErrorMsg');
+
+        function openAuthModal() {
+            pinInputs.forEach(i => i.value = '');
+            authErrorMsg.classList.add('opacity-0');
+            toggleModal('authModal', 'authModalDialog');
+            setTimeout(() => pinInputs[0].focus(), 100);
+        }
+
+        ['openAdminBtnHeader', 'openAdminBtnSidebar', 'openAdminBtnHighlight'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.addEventListener('click', openAuthModal);
+        });
+
+        pinInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if(e.target.value.length > 0 && index < pinInputs.length - 1) {
+                    pinInputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if(e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    pinInputs[index - 1].focus();
+                }
+                if(e.key === 'Enter') verifyPin();
+            });
+        });
+
+        function verifyPin() {
+            const val = Array.from(pinInputs).map(i => i.value).join('');
+            if(val === PIN_CODE) {
+                authErrorMsg.classList.add('opacity-0');
+                document.getElementById('authModal').classList.add('opacity-0');
+                setTimeout(() => {
+                    document.getElementById('authModal').classList.add('hidden');
+                    populateAdminMonthDropdown();
+                    refreshAdminNominationsList();
+                    resetAdminFormSelection();
+                    toggleModal('adminModal', 'adminModalDialog');
+                }, 300);
+            } else {
+                authErrorMsg.classList.remove('opacity-0');
+                pinInputs.forEach(i => i.value = '');
+                pinInputs[0].focus();
+                
+                const d = document.getElementById('authModalDialog');
+                d.animate([
+                    { transform: 'scale(1) translateX(0)' },
+                    { transform: 'scale(1) translateX(-8px)' },
+                    { transform: 'scale(1) translateX(8px)' },
+                    { transform: 'scale(1) translateX(-8px)' },
+                    { transform: 'scale(1) translateX(0)' }
+                ], { duration: 300, easing: 'ease-in-out' });
+            }
+        }
+        document.getElementById('verifyPinBtn').addEventListener('click', verifyPin);
+
+
+        // --- NOMINATION FORM ---
+        document.getElementById('nominationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nominee = document.getElementById('nomineeName').value;
+            const payload = { 
+                id: Date.now().toString(), 
+                nominee, 
+                department: document.getElementById('department').value, 
+                reason: document.getElementById('reason').value, 
+                timestamp: new Date().toISOString() 
+            };
+            let noms = JSON.parse(localStorage.getItem('ndb2026_nominations') || '[]');
+            noms.push(payload);
+            localStorage.setItem('ndb2026_nominations', JSON.stringify(noms));
+            
+            e.target.reset();
+            const modal = document.getElementById('nominateModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+            showToast(`접수서 송신 완료됨`, 'done_all');
+        });
+
+        // --- ADMIN RECORDING LOGIC ---
+        document.getElementById('winnerSelectionForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const month = document.getElementById('assignMonth').value;
+            const id = document.getElementById('selectedNomineeId').value;
+            const name = document.getElementById('selectedNomineeName').value;
+            const dept = document.getElementById('selectedNomineeDept').value;
+            if(!month || !id) return;
+            
+            const title = monthlyThemes.find(t => t.month == month).title;
+            let winners = JSON.parse(localStorage.getItem('ndb2026_winners') || '{}');
+            winners[month] = { id, name, dept, awardTitle: title };
+            localStorage.setItem('ndb2026_winners', JSON.stringify(winners));
+            
+            const modal = document.getElementById('adminModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+            
+            renderAwardsGrid();
+            showToast(`${month}월 수상자 확정됨`, 'campaign');
+        });
+    });
+
+    function getWinners() { return JSON.parse(localStorage.getItem('ndb2026_winners') || '{}'); }
+
+    function renderAwardsGrid() {
+        const grid = document.getElementById('awardsGrid');
+        const winners = getWinners();
+        let html = '';
+
+        monthlyThemes.forEach(theme => {
+            const winner = winners[theme.month];
+            if(winner) {
+                // Awarded Card (Black Minimalistic Look)
+                html += `
+                <div class="bg-black text-white rounded-3xl p-6 shadow-lg transition-transform hover:-translate-y-1 relative">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-sm font-bold text-gray-400">0${theme.month}</span>
+                        <div class="bg-white/10 text-white px-2 py-1 rounded text-[10px] font-bold tracking-widest border border-white/10">WINNER</div>
+                    </div>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-1 tracking-widest">${theme.title}</p>
+                    <h3 class="text-2xl font-extrabold text-white break-keep">
+                        ${winner.name} <span class="text-xs font-semibold text-gray-400 ml-1">(${winner.dept})</span>
+                    </h3>
+                </div>`;
+            } else {
+                // Pending Card (Enhanced for targeted months)
+                let bgClass = 'bg-white';
+                let borderClass = 'border-gray-100';
+                let shadowClass = 'shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1';
+                let titleColor = 'text-black';
+                let dotColor = 'text-gray-300';
+                let scaleClass = '';
+                
+                // Highlight specific months powerfully based on theme
+                let themeIconColor = theme.color || 'gray-400';
+                if (theme.color === 'ndb-green') {
+                    bgClass = 'bg-emerald-50/50';
+                    borderClass = 'border-ndb-green/40';
+                    shadowClass = 'shadow-[0_10px_20px_rgba(5,150,105,0.15)] ring-2 ring-ndb-green/20 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(5,150,105,0.25)]';
+                    titleColor = 'text-ndb-green';
+                    dotColor = 'text-ndb-green/60';
+                } else if (theme.color === 'ndb-blue') {
+                    bgClass = 'bg-blue-50/50';
+                    borderClass = 'border-ndb-blue/40';
+                    shadowClass = 'shadow-[0_10px_20px_rgba(37,99,235,0.15)] ring-2 ring-ndb-blue/20 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(37,99,235,0.25)]';
+                    titleColor = 'text-ndb-blue';
+                    dotColor = 'text-ndb-blue/60';
+                } else if (theme.color === 'ndb-orange') {
+                    bgClass = 'bg-orange-50/50';
+                    borderClass = 'border-ndb-orange/40';
+                    shadowClass = 'shadow-[0_10px_20px_rgba(234,88,12,0.15)] ring-2 ring-ndb-orange/20 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(234,88,12,0.25)]';
+                    titleColor = 'text-ndb-orange';
+                    dotColor = 'text-ndb-orange/60';
+                } else if (theme.isHonor) {
+                    // Month 12: Grand Honor
+                    bgClass = 'bg-amber-50/50';
+                    borderClass = 'border-amber-500/40';
+                    shadowClass = 'shadow-[0_10px_20px_rgba(245,158,11,0.15)] ring-2 ring-amber-500/20 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(245,158,11,0.25)]';
+                    titleColor = 'text-amber-600';
+                    dotColor = 'text-amber-500/60';
+                    themeIconColor = 'amber-500';
+                }
+                
+                // Add scale transform for all pending cards to make them pop
+                scaleClass = 'hover:scale-[1.02] transform transition-transform duration-300';
+
+                html += `
+                <div class="${bgClass} border ${borderClass} rounded-3xl p-6 ${scaleClass} transition-all ${shadowClass} flex flex-col justify-between z-10 relative">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-[17px] font-extrabold ${dotColor}">0${theme.month}.</span>
+                        <span class="material-symbols-outlined text-[24px] text-${themeIconColor}" style="font-variation-settings: 'FILL' 1;">${theme.emoji}</span>
+                    </div>
+                    <div>
+                        <p class="text-[12px] text-gray-800 font-extrabold uppercase mb-0.5 tracking-widest">${theme.themeLabel}</p>
+                        <h3 class="text-[21px] font-black ${titleColor} tracking-tight">${theme.title}</h3>
+                        <p class="mt-2.5 text-[12px] font-medium text-gray-500 leading-snug break-keep">${theme.criteria}</p>
+                    </div>
+                </div>`;
+            }
+        });
+        grid.innerHTML = html;
+    }
+
+    function populateAdminMonthDropdown() {
+        const select = document.getElementById('assignMonth');
+        const winners = getWinners();
+        select.innerHTML = '<option value="" disabled selected>월 선택</option>';
+        monthlyThemes.forEach(t => {
+            const hasWg = winners[t.month] ? ' (기록 덮어쓰기)' : '';
+            select.innerHTML += `<option value="${t.month}">${t.month}월 - ${t.title}${hasWg}</option>`;
+        });
+    }
+
+    function refreshAdminNominationsList() {
+        const c = document.getElementById('nominationsListContainer');
+        const noms = JSON.parse(localStorage.getItem('ndb2026_nominations') || '[]');
+        document.getElementById('nomCount').textContent = noms.length;
+        
+        if(noms.length === 0) {
+            c.innerHTML = `<div class="text-gray-400 text-xs text-center py-10 bg-white rounded-xl border border-gray-100 font-medium">데이터가 없습니다.</div>`;
+            return;
+        }
+
+        let html = '';
+        noms.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp)).forEach(n => {
+            const d = new Date(n.timestamp);
+            const tm = `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+            html += `
+            <div class="nom-card bg-white p-4 rounded-2xl border border-gray-100 hover:border-black cursor-pointer transition-all hover:shadow-md group relative overflow-hidden" data-id="${n.id}" data-name="${n.nominee}" data-dept="${n.department}">
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-bold text-black text-[13px]">${n.nominee} <span class="text-[11px] text-gray-400 font-medium ml-1">${n.department}</span></h4>
+                    <span class="text-[10px] text-gray-300 group-hover:text-black transition-colors">${tm}</span>
+                </div>
+                <p class="text-[12px] text-gray-600 line-clamp-2 leading-relaxed">${n.reason}</p>
+            </div>`;
+        });
+        c.innerHTML = html;
+        
+        c.querySelectorAll('.nom-card').forEach(card => {
+            card.addEventListener('click', function() {
+                c.querySelectorAll('.nom-card').forEach(x => {
+                    x.classList.remove('selected', 'border-black', 'bg-gray-50', 'ring-1', 'ring-black');
+                });
+                this.classList.add('selected', 'border-black', 'bg-gray-50', 'ring-1', 'ring-black');
+                
+                document.getElementById('selectedNomineeId').value = this.dataset.id;
+                document.getElementById('selectedNomineeName').value = this.dataset.name;
+                document.getElementById('selectedNomineeDept').value = this.dataset.dept;
+                
+                document.getElementById('selectedNomineeDisplay').innerHTML = `
+                    <span class="text-black text-xl font-extrabold tracking-tight">${this.dataset.name}</span> 
+                    <span class="text-[13px] font-bold text-gray-500 ml-1">(${this.dataset.dept})</span>
+                `;
+                document.getElementById('selectedUserBox').classList.add('border-black/20', 'bg-white');
+                document.getElementById('confirmWinnerBtn').disabled = false;
+            });
+        });
+    }
+
+    function resetAdminFormSelection() {
+        document.getElementById('selectedNomineeId').value = '';
+        document.getElementById('selectedNomineeDisplay').innerHTML = '<span class="text-gray-400 text-sm font-medium">좌측 명단에서 대상을 클릭하십시오.</span>';
+        document.getElementById('selectedUserBox').classList.remove('border-black/20', 'bg-white');
+        document.getElementById('confirmWinnerBtn').disabled = true;
+    }
+
+    let toastTimer;
+    function showToast(msg, iconLabel) {
+        const t = document.getElementById('toastNotification');
+        document.getElementById('toastText').textContent = msg;
+        const ic = document.getElementById('toastIcon');
+        ic.textContent = iconLabel;
+        
+        clearTimeout(toastTimer);
+        t.style.transform = 'translate(-50%, -20px)';
+        t.style.opacity = '0';
+        
+        requestAnimationFrame(() => {
+            t.style.transform = 'translate(-50%, 0)';
+            t.style.opacity = '1';
+        });
+        
+        toastTimer = setTimeout(() => {
+            t.style.transform = 'translate(-50%, -20px)';
+            t.style.opacity = '0';
+        }, 3000);
+    }
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(err => {
+                console.log('SW Registration failed: ', err);
+            });
+        });
+    }
+</script>
+</body>
+</html>
