@@ -62,3 +62,17 @@ memory_layer/__pycache__/
 
 # Airlock Sync Directory
 .brain_sync/
+
+# [Iron Dome] Maximum Security Mask
+*.secrets
+*.secret
+*.token
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*secret*.json
+*api*.json
+*api_key*
+*.env.*
