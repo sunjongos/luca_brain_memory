@@ -3,6 +3,8 @@ import json
 import logging
 import os
 import sqlite3
+import re
+from pathlib import Path
 from datetime import datetime, timezone
 from google.adk.agents import Agent
 
@@ -106,6 +108,30 @@ def store_consolidation(source_ids: list[int], summary: str, insight: str, conne
     db.commit()
     db.close()
     log.info(f"🔄 Consolidated {len(source_ids)} memories. Insight: {insight[:80]}...")
+    # === Integrate with Obsidian 2nd Brain ===
+    try:
+        base_dir = Path(__file__).resolve().parent.parent
+        wiki_dir = base_dir / "Luca_Memory_Vault" / "Wiki"
+        ttl_file = base_dir / ".agent" / "skills" / "ontology_ndb" / "ndb_knowledge.ttl"
+        
+        if wiki_dir.exists():
+            safe_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+            insight_title = f"Luca_Insight_{safe_time}"
+            w_filepath = wiki_dir / f"{insight_title}.md"
+            content = f"{summary}\n\n{insight}\n\n### 연관 기록\n"
+            for conn in connections:
+                if conn.get('relationship'):
+                    content += f"- [[Memory_{conn.get('from_id')}]] -- {conn.get('relationship')} --> [[Memory_{conn.get('to_id')}]]\n"
+            
+            with open(w_filepath, "w", encoding="utf-8") as f:
+                f.write(content)
+                
+            if ttl_file.parent.exists():
+                with open(ttl_file, "a", encoding="utf-8") as f:
+                    f.write(f'\ndreye:{insight_title} a owl:Class ;\n    rdfs:label "Luca Consolidation Insight" ;\n    rdfs:comment "{summary[:50].replace(chr(10), "")}" .\n')
+    except Exception as e:
+        log.error(f"Failed to sync insight to Obsidian: {e}")
+
     return {"status": "consolidated", "memories_processed": len(source_ids), "insight": insight}
 
 def read_consolidation_history(limit: int = 10) -> dict:
@@ -115,6 +141,21 @@ def read_consolidation_history(limit: int = 10) -> dict:
     result = [{"summary": r["summary"], "insight": r["insight"], "source_ids": json.loads(r["source_ids"])} for r in rows]
     db.close()
     return {"consolidations": result, "count": len(result)}
+
+def search_obsidian_vault(keyword: str) -> dict:
+    """Search for a keyword in the visual Obsidian LLM Wiki and return matched contents. Helps query_agent find deep semantic knowledge."""
+    base_dir = Path(__file__).resolve().parent.parent
+    wiki_dir = base_dir / "Luca_Memory_Vault" / "Wiki"
+    results = []
+    if wiki_dir.exists():
+        for md_file in wiki_dir.glob("*.md"):
+            try:
+                content = md_file.read_text(encoding="utf-8", errors="ignore")
+                if keyword.lower() in content.lower() or keyword.lower() in md_file.name.lower():
+                    results.append({"title": md_file.stem, "snippet": content[:500] + "..."})
+            except Exception:
+                pass
+    return {"keyword": keyword, "obsidian_matches": results[:5]}
 
 # ─── ADK Agents Factory ──────────────────────────────────────────────
 def build_memory_agents() -> Agent:
@@ -153,15 +194,15 @@ def build_memory_agents() -> Agent:
     query_agent = Agent(
         name="query_agent",
         model=MODEL,
-        description="Answers questions by digging into long-term stored memories and insights.",
+        description="Answers questions by digging into long-term stored memories, insights, and Obsidian Wiki files.",
         instruction=(
             "You are Luca's Memory Query Agent. When asked to recall something:\n"
-            "1. Call `read_all_memories` and `read_consolidation_history` to search the SQLite brain.\n"
+            "1. Call `read_all_memories`, `read_consolidation_history`, and `search_obsidian_vault` to search the SQLite brain and Obsidian notes.\n"
             "2. Synthesize an accurate, helpful answer based ONLY on stored facts.\n"
-            "3. Cite your sources (e.g., [Memory 12] or [Insight from Q1]).\n"
+            "3. Cite your sources (e.g., [Memory 12] or [Obsidian: Node Name]).\n"
             "If no relevant memory is found, state clearly that you have no record of it."
         ),
-        tools=[read_all_memories, read_consolidation_history],
+        tools=[read_all_memories, read_consolidation_history, search_obsidian_vault],
     )
 
     orchestrator = Agent(

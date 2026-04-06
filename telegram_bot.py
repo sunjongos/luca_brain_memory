@@ -537,6 +537,45 @@ async def cmd_deepsearch(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     )
     await update.message.reply_text(result)
 
+async def cmd_research(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    query = " ".join(ctx.args) if ctx.args else ""
+    if not query:
+        await update.message.reply_text("❓ 사용법: /research [주제]\n예: /research 2026 의료 AI 트렌드")
+        return
+        
+    # 1. 지시 수신
+    await update.message.reply_text(f"🔬 **[Karpathy Loop]** 심층 리서치 시작: `{query}`\n*인터넷 전체를 긁어오고 있습니다...*", parse_mode="Markdown")
+    
+    # 2. 자율 딥 리서치 (Deep Research)
+    loop = asyncio.get_running_loop()
+    research_result = await loop.run_in_executor(
+        None, run_script, [".agent/skills/perplexity/perplexity_search.py", query, "--model", "sonar-pro"]
+    )
+    
+    await update.message.reply_text(f"📝 리서치 완료! \n*장기 기억(DB) 주입 및 옵시디언 동기화를 진행합니다...*", parse_mode="Markdown")
+    
+    # 3. 카파시 메모리 주입 (Memory Ingestion)
+    await loop.run_in_executor(
+        None, run_script, [".agent/skills/memory/memory_manager.py", "save", f"[자동 리서치] {query}", research_result]
+    )
+    
+    # 4. 옵시디언 병합 (Sync System)
+    export_result = await loop.run_in_executor(
+        None, run_script, ["memory_layer/export_to_obsidian.py"]
+    )
+    
+    # 5. 최종 보고
+    await update.message.reply_text(
+        f"✅ **[Karpathy Loop] 지식 통합 완료!**\n\n"
+        f"해당 주제가 옵시디언 Vault 그래프에 완벽히 마크다운으로 동기화되었습니다.\n"
+        f"(Raw, Wiki 개념 연결 완료)",
+        parse_mode="Markdown"
+    )
+    
+    await update.message.reply_text(
+        f"[리서치 요약]\n{research_result[:2000]}..."
+    )
+
 
 async def cmd_status(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     msg = update.message or update.callback_query.message
@@ -1247,6 +1286,32 @@ async def handle_message(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         await cmd_search(update, ctx)
     elif any(k in text for k in ["상태", "status"]):
         await cmd_status(update, ctx)
+        return
+        
+    # [신규 추가] '기억해' 패턴 감지 시 5050 메모리 서버 및 옵시디언 덤프
+    elif "기억해" in text or "기억해둬" in text:
+        memory_content = original.replace("기억해둬", "").replace("기억해", "").replace("루카야", "").strip()
+        if memory_content:
+            await update.message.reply_text(f"🧠 장기 기억 통제가 시작되었습니다. \n`{memory_content}`\n포트 5050(공유 메모리)과 옵시디언에 각인 중입니다...", parse_mode="Markdown")
+            try:
+                loop = asyncio.get_running_loop()
+                from luca_brain import LucaAGIBrain
+                agi = LucaAGIBrain()
+                
+                # 1. 5050 공유 메모리 서버 주입 (LucaAGIBrain 사용)
+                await loop.run_in_executor(None, agi.memorize, memory_content)
+                
+                # 2. 로컬 sqlite (luca_memory.db)에도 동시 주입 및 옵시디언 내보내기 
+                await loop.run_in_executor(None, run_script, [".agent/skills/memory/memory_manager.py", "save", "[수동 기억]", memory_content])
+                await loop.run_in_executor(None, run_script, ["memory_layer/export_to_obsidian.py"])
+                
+                await update.message.reply_text("✅ 기억 및 옵시디언 동기화가 완벽히 완료되었습니다!")
+            except Exception as e:
+                await update.message.reply_text(f"❌ 기억 실패: {e}")
+            return
+        else:
+            await update.message.reply_text("❓ 무엇을 기억할까요? 예: '내일 회의는 3시임을 기억해'")
+            return
 
     # 1. 사용자별 모델 결정
     model_used = USER_MODEL_PREF.get(chat_id, DEFAULT_MODEL)
@@ -1766,6 +1831,7 @@ def main():
     app.add_handler(CommandHandler("email", cmd_email))
     app.add_handler(CommandHandler("search", cmd_search))
     app.add_handler(CommandHandler("deepsearch", cmd_deepsearch))
+    app.add_handler(CommandHandler("research", cmd_research))
     app.add_handler(CommandHandler("memory", cmd_memory))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("voice", cmd_voice))

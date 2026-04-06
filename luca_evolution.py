@@ -104,9 +104,8 @@ async def job_self_reflection(app=None):
         for e in errors
     ]) or "없음"
 
-    analysis_prompt = f"""당신은 AI 에이전트 개선 전문가입니다.
-아래는 Luca AI 에이전트의 이번 주 실패 사례와 현재 시스템 프롬프트입니다.
-이를 분석하여 개선된 시스템 프롬프트를 작성해 주세요.
+    analysis_prompt = f"""당신은 세계 최고 수준(AlphaCode 레벨)의 자율 AI 에이전트 개선 전문가입니다.
+아래는 Luca AI 에이전트의 이번 주 실패 사례와 에러 로그, 현재 시스템 프롬프트입니다.
 
 [현재 시스템 프롬프트]
 {current_prompt[:1500]}
@@ -117,27 +116,59 @@ async def job_self_reflection(app=None):
 [에러 발생 사례 (최근 7일)]
 {error_text}
 
-[요구사항]
-1. 실패 원인을 분석하고 구체적인 개선 방향을 반영하세요.
-2. 기존 페르소나(Luca 부장, 충성스러운 비서)는 반드시 유지하세요.
-3. 개선된 시스템 프롬프트 전문을 출력하세요 (설명 없이 프롬프트만).
-4. 한국어로 작성하세요.
+[요구사항 - 세계 최고 수준의 TDD 기반 진화]
+1. 기존 페르소나(Luca 부장)는 온전히 유지하되, 부정 피드백을 방어할 수 있도록 시스템 프롬프트를 고도화하세요.
+2. 에러 사례가 존재한다면, 파이썬 기반의 자가 치유(Test-Driven Hotfix) 코드를 작성하세요. 
+3. 출력은 다음 JSON 구조만을 따라야 합니다. (Markdown 생략)
+{{
+    "new_system_prompt": "업데이트된 시스템 프롬프트 전문",
+    "hotfix_code": "에러를 해결하기 위한 파이썬 함수/클래스 수정안 (에러가 없다면 빈 문자열)",
+    "test_code": "수정된 코드가 정상 동작하는지 확인하는 assert 기반 테스트 코드 (에러가 없다면 빈 문자열)"
+}}
 """
 
     try:
+        import json
         response = _openai_client.chat.completions.create(
             model="gpt-4o",
             messages=[
-                {"role": "system", "content": "당신은 AI 에이전트 프롬프트 최적화 전문가입니다."},
+                {"role": "system", "content": "당신은 AlphaCode 수준의 AI 자가 개선 및 TDD 패치 통합 전문가입니다."},
                 {"role": "user", "content": analysis_prompt}
             ],
-            max_tokens=2000,
-            temperature=0.7
+            max_tokens=3000,
+            temperature=0.4,
+            response_format={"type": "json_object"}
         )
-        new_prompt = response.choices[0].message.content.strip()
+        data = json.loads(response.choices[0].message.content.strip())
+        new_prompt = data.get("new_system_prompt", current_prompt)
+        hotfix_code = data.get("hotfix_code", "")
+        test_code = data.get("test_code", "")
     except Exception as e:
-        logger.error(f"GPT-4o 자기반성 분석 실패: {e}")
+        logger.error(f"GPT-4o 자기반성 분석 오류: {e}")
         return
+
+    # [NEW] TDD 기반 검증 (Auto Healing)
+    healing_report = ""
+    if hotfix_code and test_code:
+        try:
+            import tempfile, subprocess
+            with tempfile.NamedTemporaryFile("w", suffix=".py", delete=False, encoding="utf-8") as f:
+                f.write(hotfix_code + "\n\n" + test_code)
+                temp_name = f.name
+                
+            res = subprocess.run([sys.executable, temp_name], capture_output=True, text=True, timeout=10)
+            if res.returncode == 0:
+                healing_report = f"\n[TDD Self-Healing] 성공적으로 에러를 치유하는 핫픽스 코드가 검증되었습니다.\n(백룸 패치 준비 완료)"
+                logger.info(healing_report)
+                # 옵시디언 영구 기억에 패치 코드를 각인 
+                from luca_brain import LucaAGIBrain
+                LucaAGIBrain().memorize(f"에러 자가 통과(TDD) 성공: {hotfix_code}")
+            else:
+                healing_report = f"\n[TDD Self-Healing] 테스트 실패로 핫픽스 코드를 보류합니다.\n{res.stderr[:200]}"
+                logger.warning(healing_report)
+            os.remove(temp_name)
+        except Exception as e:
+            logger.error(f"TDD 실행 중 에러: {e}")
 
     # 3. 새 프롬프트 자동 적용
     new_version = luca_brain.update_system_prompt(
@@ -245,11 +276,34 @@ Luca(OpenClaw 기반 자동화 에이전트)에게 즉시 적용 및 고도화�
         insights = f"GPT-4o 분석 실패: {e}"
         logger.error(insights)
 
-    # 3. 교훈 저장
-    luca_brain.save_lesson(insights, source="trend_research")
+    # 3. 자동 스킬 증식 (Metamorphic Skill System)
+    # [NEW] 세계 최고 수준의 자가 코드 생성 적용 (Auto Skill Gen)
+    try:
+        sys.path.append(str(BASE_DIR / ".agent" / "skills" / "auto_skill_generator"))
+        from auto_skill_gen import generate_skill
+        
+        # 인사이트를 기반으로 신규 스킬 하나를 무조건 생성해봄 (주 1회 제동 제한)
+        skill_res = generate_skill(insights)
+        if skill_res.get("success"):
+            insights += f"\n\n[Auto-Evolution] 자가 코드 증식 성공!\n- 신규 획득 스킬명: {skill_res['skill_name']}\n- 경로: {skill_res['path']}"
+        else:
+            insights += f"\n\n[Auto-Evolution] 자가 코드 증식 보류: {skill_res.get('error')}"
+    except Exception as e:
+        logger.error(f"Auto-Skill Generator 호출 실패: {e}")
 
-    # 4. 로그 기록
-    _append_evolution_log("AI 트렌드 흡수", f"**검색어:** {trend_query}\n\n**인사이트:**\n{insights}")
+    # 4. AGI 코어를 통한 영구 지식망(옵시디언/포트5050) 교훈 저장
+    try:
+        from luca_brain import LucaAGIBrain
+        agi = LucaAGIBrain()
+        agi.memorize(f"트렌드 흡수 결과 및 신규 자가 증식 요약:\n{insights}")
+        
+        # 기존 텍스트 기반 저장도 백업용으로 유지
+        luca_brain.save_lesson(insights, source="trend_research_auto_gen")
+    except Exception as e:
+        logger.error(f"AGI Brain 연동 실패: {e}")
+
+    # 5. 기존 로그 기록
+    _append_evolution_log("AI 트렌드 및 자가 증식", f"**검색어:** {trend_query}\n\n**인사이트 및 스킬 증식 결과:**\n{insights}")
 
     logger.info("✅ 트렌드 리서치 완료")
 

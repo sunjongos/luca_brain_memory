@@ -59,3 +59,6 @@ push_out.txt
 # 캐시
 memory_layer/__pycache__/
 .agent/skills/google_workspace/__pycache__/
+
+# Airlock Sync Directory
+.brain_sync/

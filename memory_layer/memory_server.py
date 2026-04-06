@@ -32,7 +32,8 @@ call_records = []
 
 def check_rate_limit():
     global call_records
-    now = asyncio.get_event_loop().time() if asyncio.get_event_loop().is_running() else __import__('time').time()
+    import time
+    now = time.time()
     # Remove older than 3600 seconds (1 hour)
     call_records = [t for t in call_records if now - t < 3600]
     if len(call_records) >= MAX_CALLS_PER_HOUR:

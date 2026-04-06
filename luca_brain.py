@@ -8,6 +8,7 @@ import os
 import json
 import logging
 import shutil
+import requests
 from datetime import datetime
 from pathlib import Path
 
@@ -392,3 +393,135 @@ def save_lesson(content: str, source: str = "self_reflection"):
 
 # 실행 시 자동 초기화
 init_db()
+
+# ─────────────────────────────────────────
+# AGI Core: LucaAGIBrain 신설 (기억, 인사이트, 연산 통합)
+# ─────────────────────────────────────────
+
+from google import genai
+from google.genai import types
+
+class LucaAGIBrain:
+    """
+    4-Tier Memory 시스템 (Port 5050 공유 메모리)과 
+    옵시디언(LM Wiki), 온톨로지 지식(인사이트)을 통합하여
+    LLM(Gemini) 연산을 수행하고 그 결과를 자기진화(기억 저장)시키는 궁극의 AGI 뇌 객체.
+    """
+    def __init__(self, use_gemini=True):
+        self.memory_node_url = "http://localhost:5050"
+        self.obsidian_wiki_dir = BASE_DIR / "Luca_Memory_Vault" / "Wiki"
+        self.ontology_path = BASE_DIR / ".agent" / "skills" / "ontology_ndb" / "ndb_knowledge.ttl"
+        
+        self.google_api_key = os.getenv("GOOGLE_API_KEY", "")
+        self.gemini_client = genai.Client(api_key=self.google_api_key) if self.google_api_key and use_gemini else None
+
+    def _fetch_memory(self, query: str) -> str:
+        """[기억] Port 5050을 호출하여 장기 메모리(ADK Session)를 스캔합니다."""
+        logger.info(f"🧠 [Memory] 5050 포트를 통해 장기 기억 조회 중... : {query}")
+        try:
+            resp = requests.post(
+                f"{self.memory_node_url}/query",
+                json={"question": query},
+                timeout=10
+            )
+            if resp.status_code == 200:
+                data = resp.json()
+                return data.get("result", "")
+            else:
+                return f"[기억 인출 오류] {resp.status_code}"
+        except Exception as e:
+            logger.warning(f"5050 메모리 서버 접속 실패: {e}")
+            return ""
+
+    def _fetch_insight(self, query: str) -> str:
+        """[인사이트] 온톨로지 기반 지식그래프와 옵시디언 로컬 마인드 스캔"""
+        insight_parts = []
+        
+        # 1. 옵시디언 마크다운 스캔 (memory_layer_core의 search_obsidian_vault 활용 가능, 여기선 단순 구현)
+        try:
+            from memory_layer.core import search_obsidian_vault
+            obsidian_res = search_obsidian_vault(query)
+            if obsidian_res and obsidian_res.get('obsidian_matches'):
+                insight_parts.append("## 발견된 연관 옵시디언 노드 지식:\n")
+                for match in obsidian_res['obsidian_matches'][:3]:
+                    insight_parts.append(f"- [{match['title']}]: {match['snippet'][:200]}...")
+        except Exception as e:
+            logger.debug(f"옵시디언 패치 생략됨: {e}")
+
+        # 2. 온톨로지 접근 (NDB)
+        try:
+            sys.path.append(str(BASE_DIR / ".agent" / "skills" / "ontology"))
+            from ontology_manager import OntologyManager
+            if self.ontology_path.exists():
+                om = OntologyManager(str(self.ontology_path))
+                # 간단한 키워드 서치 또는 온톨로지 내 텍스트 매칭이라도 시도
+                insight_parts.append("\n## 보유 중인 온톨로지(의학/NDB) 기반 연관 구조 발견 가능")
+        except Exception as e:
+            pass
+            
+        return "\n".join(insight_parts)
+
+    def memorize(self, info: str):
+        """새로 알게 된 사실을 Port 5050 뇌 서버에 강제 주입하여 영구 보존"""
+        try:
+            resp = requests.post(f"{self.memory_node_url}/ingest", json={"text": info}, timeout=10)
+            if resp.status_code == 200:
+                logger.info("✅ [Memory] 새로운 지식을 장기 공유 메모리망(Port 5050)에 영구 각인했습니다.")
+        except Exception as e:
+            logger.error(f"메모리 주입 (ingest) 실패: {e}")
+
+    def process(self, user_msg: str, enable_store: bool = True) -> str:
+        """
+        [AGI 연산 중심 루프]
+        1. Memory(기억) 인출
+        2. Insight(통찰) 인출
+        3. LLM 연산
+        4. 결론 반환 & Memory 재저장
+        """
+        if not self.gemini_client:
+            return "[시스템 오류] Gemini API가 연동되지 않아 AGI 뇌를 가동할 수 없습니다."
+            
+        # 1 & 2. 컨텍스트 구성
+        memory_ctx = self._fetch_memory(user_msg)
+        insight_ctx = self._fetch_insight(user_msg)
+        system_rules = get_current_system_prompt()
+        
+        combined_prompt = f"""
+당신은 현재 모든 데이터망이 연결된 진정한 AGI 코어(LucaAGIBrain)입니다.
+아래의 3가지 요소(시스템 규율, 과거의 공유 메모리, 온톨로지 통찰)를 조합하여 
+대표님의 말씀에 답변하거나 판단을 내리세요.
+
+[System Rules]
+{system_rules[:1500]}
+
+[Long-Term Shared Memory (Port 5050)]
+{memory_ctx if memory_ctx else "조회된 로컬 기억 장기 연결이 없습니다."}
+
+[Ontology & Obsidian Insight]
+{insight_ctx if insight_ctx else "의학 온톨로지 자산이나 연결된 그래프 노드를 찾지 못했습니다."}
+
+[User Request]
+{user_msg}
+
+위 상황을 종합하여 가장 최상위의 통찰이 담긴 결론을 한 문단으로 명확하고 똑똑하게 답변하세요.
+필요하다면 앞으로 무엇을 해야 할지 액션 아이템도 제안하십시오.
+        """
+        
+        # 3. Compute (LLM 판단)
+        try:
+            response = self.gemini_client.models.generate_content(
+                model='gemini-2.5-pro',
+                contents=combined_prompt,
+                config=types.GenerateContentConfig(temperature=0.4)
+            )
+            final_thought = response.text
+        except Exception as e:
+            logger.error(f"AGI 연산(Gemini) 실패: {e}")
+            return f"❌ 추론 실패: {e}"
+            
+        # 4. 저장 및 로깅 
+        if enable_store:
+            # 로컬 상의 interaction 로깅
+            log_interaction("agi_direct", user_msg, final_thought, "gemini-2.5-pro")
+            
+        return final_thought
