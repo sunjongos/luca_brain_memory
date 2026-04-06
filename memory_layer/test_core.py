@@ -1,8 +1,10 @@
 import asyncio
 import os
 
-# Inject discovered API Key
-os.environ["GEMINI_API_KEY"] = "AIzaSyAYOi4di5rQijPD8pgE4SgzyAV1d6CkWWA"
+from dotenv import load_dotenv
+
+load_dotenv()
+# (If GEMINI_API_KEY is not in .env, ensure it is set properly using the user's .env configuration)
 
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService

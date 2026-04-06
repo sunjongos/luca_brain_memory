@@ -2,8 +2,8 @@ import os
 import argparse
 from googleapiclient.discovery import build
 
-# API Key provided by CEO
-API_KEY = "AIzaSyAYOi4di5rQijPD8pgE4SgzyAV1d6CkWWA"
+# API Key loaded from environment variable
+API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 

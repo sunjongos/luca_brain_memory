@@ -40,6 +40,16 @@ import luca_brain
 import luca_evolution
 BASE_DIR = Path(__file__).parent
 sys.path.append(str(BASE_DIR / ".agent" / "skills" / "google_workspace"))
+
+# 🛡️ OpenClaw Validator 에이전트 임포트
+try:
+    from DRclaw_DReye.validator_agent import OutputValidator
+    openclaw_validator = OutputValidator()
+    VALIDATOR_ENABLED = True
+except ImportError as e:
+    import logging
+    logging.warning(f"Validator 에이전트 로드 실패: {e}")
+    VALIDATOR_ENABLED = False
 try:
     from gws_helper import GWSHelper
     GWS_ENABLED = True
@@ -78,14 +88,14 @@ try:
     from openai import OpenAI
     client = OpenAI(api_key=OPENAI_API_KEY, timeout=120.0)
     STT_AVAILABLE = bool(OPENAI_API_KEY)
-except ImportError:
+except Exception:
     STT_AVAILABLE = False
 
 try:
     from google import genai
     gemini_client = genai.Client(api_key=GOOGLE_API_KEY)
     GEMINI_AVAILABLE = bool(GOOGLE_API_KEY)
-except ImportError:
+except Exception:
     GEMINI_AVAILABLE = False
 
 
@@ -115,6 +125,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger("LucaBot")
 
+# ── 전역 설정 및 상태 (OpenClaw v2026.4.2 지원)
+CANCELLATION_INTENT = {}
+NOTIFY_USER_ON_COMPACTION = True
 
 def run_script(args: list) -> str:
     """스크립트를 실행하고 결과를 반환합니다."""
@@ -904,6 +917,12 @@ async def cmd_news_voice(update: Update, ctx: ContextTypes.DEFAULT_TYPE, keyword
     except Exception as e:
         await msg.reply_text(f"❌ 뉴스 음성 브리핑 실패: {e}")
 
+async def cmd_cancel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    """실행 중인 에이전트 작업을 명시적으로 취소합니다 (Sticky Cancel)."""
+    chat_id_str = str(update.effective_chat.id)
+    CANCELLATION_INTENT[chat_id_str] = True
+    await update.message.reply_text("⛔ **취소 접수됨**\n진행 중인 에이전트 작업이 취소되도록 신호를 보냈습니다.", parse_mode="Markdown")
+
 
 async def handle_button(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -922,6 +941,28 @@ async def handle_button(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     elif data == "voice_intro":
         ctx.args = None
         await cmd_voice(update, ctx)
+
+# ─────────────────────────────────────────
+# OpenClaw 고도화 유틸리티 (v2026.4.2 지원)
+# ─────────────────────────────────────────
+import re
+
+def sanitize_markdown_for_telegram(text: str) -> str:
+    """Telegram의 엄격한 Markdown 파싱 에러(언더바, 괄호 등) 방지를 위해
+    텍스트를 다듬거나 길이를 제한합니다. v2026.4.2 mrkdwn 개선사항 대응."""
+    if not text:
+        return text
+    # 텔레그램 메시지 길이 제한
+    return text[:4000]
+
+def hook_before_agent_reply(chat_id: str, text: str) -> str:
+    """LLM이 최종 응답을 전송하기 전 Internal Monologue(<think>) 등 시스템 태그를 
+    필터링하고 조정하는 OpenClaw before_agent_reply Hook 구조를 구현합니다."""
+    if not text:
+        return text
+    clean_text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    clean_text = clean_text.replace("system:", "").replace("assistant:", "")
+    return clean_text.strip()
 
 
 # ─────────────────────────────────────────
@@ -949,6 +990,12 @@ async def run_agent_loop(
     final_text = ""
 
     for step in range(max_steps):
+        chat_id_str = str(update.effective_chat.id)
+        if CANCELLATION_INTENT.get(chat_id_str, False):
+            final_text = "🚫 [OpenClaw] 사용자의 강제 취소 명령(Sticky Cancel)으로 인하여 에이전트 작업이 즉각 중단되었습니다."
+            CANCELLATION_INTENT[chat_id_str] = False
+            break
+
         try:
             response = client.chat.completions.create(
                 model=model_used,
@@ -962,6 +1009,8 @@ async def run_agent_loop(
             # 도구 호출 없음 → 최종 응답
             if not msg.tool_calls:
                 final_text = msg.content or ""
+                final_text = hook_before_agent_reply(chat_id_str, final_text)
+                final_text = sanitize_markdown_for_telegram(final_text)
                 break
 
             tool_call = msg.tool_calls[0]
@@ -1027,8 +1076,12 @@ async def run_agent_loop(
                 tool_result = await exec_loop.run_in_executor(
                     None, agent_tools.browse_url, tool_args.get("url", ""))
             elif tool_name == "execute_python":
-                tool_result = await exec_loop.run_in_executor(
-                    None, agent_tools.execute_python, tool_args.get("code", ""))
+                code_to_exec = tool_args.get("code", "")
+                if VALIDATOR_ENABLED and not openclaw_validator.validate_code(code_to_exec):
+                    tool_result = "🚫 [OpenClaw Validator] 보안 위협이 감지되어 실행이 차단되었습니다."
+                else:
+                    tool_result = await exec_loop.run_in_executor(
+                        None, agent_tools.execute_python, code_to_exec)
             elif tool_name == "list_directory":
                 tool_result = await exec_loop.run_in_executor(
                     None, agent_tools.list_directory, tool_args.get("path", "."))
@@ -1241,6 +1294,8 @@ async def handle_message(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             CONVERSATION_HISTORY[chat_id].append({"user": original, "ai": ai_reply})
             if len(CONVERSATION_HISTORY[chat_id]) > MAX_HISTORY:
                 CONVERSATION_HISTORY[chat_id].pop(0)
+                if NOTIFY_USER_ON_COMPACTION:
+                    await update.message.reply_text("🧹 시스템 컨텍스트 한도 도달: 가장 오래된 대화를 압축(제거)했습니다.")
 
             # 피드백 버튼
             feedback_kb = InlineKeyboardMarkup([[
@@ -1307,7 +1362,12 @@ async def handle_document(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             await msg.reply_text(f"❌ 데이터 분석 실패: {e}")
         return
 
-    await msg.reply_text("📄 문서 스캔 중...")
+    # 미디어/텍스트 문서 확장자 처리: OpenClaw 파일 처리 확장
+    if file_name.endswith(('.html', '.xml', '.css', '.json', '.txt', '.md', '.log')):
+        await msg.reply_text("📄 텍스트 기반 문서(HTML/XML 등) 스캔 중...")
+    else:
+        await msg.reply_text("📄 문서 스캔 중...")
+        
     try:
         doc = await msg.document.get_file()
         text_bytes = await doc.download_as_bytearray()
@@ -1618,7 +1678,11 @@ async def handle_tool_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             loop = asyncio.get_running_loop()
             if tool_name == "run_terminal_command": 
                 # [Best Practice] 동기(Sync) 터미널 실행이 텔레그램 봇 전체 이벤트를 먹통으로 만들지 못하도록 백그라운드 스레드로 위임
-                res = await loop.run_in_executor(None, agent_tools.run_terminal_command, args.get("command", ""))
+                cmd_to_run = args.get("command", "")
+                if VALIDATOR_ENABLED and not openclaw_validator.validate_code(cmd_to_run):
+                    res = "🚫 [OpenClaw Validator] 보안 위협이 감지되어 실행이 차단되었습니다."
+                else:
+                    res = await loop.run_in_executor(None, agent_tools.run_terminal_command, cmd_to_run)
             elif tool_name == "write_local_file": 
                 res = await loop.run_in_executor(None, agent_tools.write_local_file, args.get("path", ""), args.get("content", ""))
             else:
@@ -1713,6 +1777,7 @@ def main():
     app.add_handler(CommandHandler("evolve", cmd_evolve))
     app.add_handler(CommandHandler("growth", cmd_growth))
     # ✅ New OpenClaw Commands
+    app.add_handler(CommandHandler("cancel", cmd_cancel))
     app.add_handler(CommandHandler("run", cmd_run))
     app.add_handler(CommandHandler("loop", cmd_loop))
     app.add_handler(CommandHandler("schedule", cmd_schedule))

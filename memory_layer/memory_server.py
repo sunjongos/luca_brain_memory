@@ -10,12 +10,14 @@ if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
+from dotenv import load_dotenv
+
+# dotenv 파일에서 환경변수 로드
+load_dotenv()
+
 # Inject API key globally for ADK if missing in env
 if "GEMINI_API_KEY" not in os.environ and "GOOGLE_API_KEY" in os.environ:
     os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
-elif "GEMINI_API_KEY" not in os.environ:
-    # Fallback to the discovered API key for testing
-    os.environ["GEMINI_API_KEY"] = "AIzaSyDz2WUYBNpo_X2cQaybXKu4kX4QS86whBU"
 
 from core import build_memory_agents
 from google.adk.runners import Runner
