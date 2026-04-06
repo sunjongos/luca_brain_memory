@@ -10,6 +10,7 @@ description: 매주 주말마다 최신 GitHub 트렌드 및 최첨단 AI/에이
 Luca는 다음 소스들을 검색 및 분석합니다:
 - **GitHub Trending**: `AI Agent`, `Long-term Memory`, `LLM Orchestration`, `RAG`, `Knowledge Graph` 키워드의 이번 주 핫한 리포지토리
 - **AI News & Papers**: Perplexity 스킬 또는 NotebookLM MCP를 사용하여 최신 AI 에이전트 구조 논문 스크랩
+- **Security Audit & Code Review**: 이번 주 작업 중 노출될 뻔한 API 키 검수 혹은 취약점 방어 내역(Pre-commit 동작 등) 점검
 - **Twitter/X & Tech Blogs**: 주요 AI 리더(예: Harrison Chase, Andrew Ng 등)의 이번 주 발언 및 기술 트렌드
 
 ## 2. 🧠 자체 아키텍처 비교 분석 (Reflect)

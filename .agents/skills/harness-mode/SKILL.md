@@ -18,6 +18,7 @@ description: 과제 난이도 맞춤형 자동 발전, 평가기준표, 안전 �
 - **책임**: 루프 구조 설계, 컨텍스트 압축, 코드 롤백, 중재(Escalation).
 - **강제 규칙**:
   - **[Safety] Git Snapshot & Rollback**: 첫 실행 전 무조건 터미널에서 `git stash` 혹은 시스템 스냅샷 커밋을 생성해 깨끗한 상태를 백업합니다. `Loop`가 모두 실패(FAIL)로 끝날 시, 코드를 엉망으로 두지 않고 저장해둔 깨끗한 상태로 반드시 롤백(`git stash pop` 등)시킵니다.
+  - **[Security] Logs & Secret Masking (NEW)**: 에러 로그나 디버깅 텍스트를 출력하거나 메모리에 저장할 때, `.env`나 소스코드 상의 평문 API 키(Gemini, OpenAI 등)는 절대 그대로 출력하지 않고 `***MASKED***`로 블라인드 처리하여 로컬 및 원격 저장소 노출을 원천 차단합니다.
   - **[Token Optimizer] Context Compressor**: 여러 번의 FAIL로 에러 로그가 길어지면 토큰 낭비와 환각(Hallucination)이 옵니다. 이전 루프의 엄청난 에러 로그를 읽고 **"다음 Generator에게 전달할 에러 원인 3줄 요약"**으로 압축시킵니다.
   - **[Escalation] Dispute Resolution**: 똑같은 로직에서 2번 이상 에러가 나거나, 해결책을 찾지 못할 경우 억지로 혼자 풀려 하지 않습니다. 즉시 루프를 일시정지하고 사용자("Supreme Court/대표님")에게 "A와 B의 방향 중 어떤 것이 맞습니까?"라고 중재를 요청합니다.
 
