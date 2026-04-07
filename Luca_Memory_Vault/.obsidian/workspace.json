@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ef76aef51e8a9134",
+        "id": "888d269414f95bf8",
         "type": "tabs",
         "children": [
           {
-            "id": "a63415b2c2283d0c",
+            "id": "6e5b5ae7b1e84652",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "regret ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,7 +70,8 @@
               "title": "북마크"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -176,8 +177,22 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "a63415b2c2283d0c",
+  "active": "6e5b5ae7b1e84652",
   "lastOpenFiles": [
+    "무제.canvas",
+    "2026-04-07.md",
+    "무제.base",
+    "Index/MOC.md",
+    "Wiki/포트 5050.md",
+    "Wiki/Supabase.md",
+    "Raw/Memory_10.md",
+    "Raw/Memory_11.md",
+    "Raw/Memory_12.md",
+    "Raw/Memory_13.md",
+    "Raw/Memory_14.md",
+    "Raw/Memory_15.md",
+    "Raw/Memory_16.md",
+    "Wiki/Luca_Insight_20260407_230935.md",
     "Wiki/이순태 교수님.md",
     "Raw/Memory_7.md",
     "Raw/YT_nldkPgp3aIA.md",
@@ -190,9 +205,6 @@
     "HotCache.md",
     "Raw/Thought_202604d_000301.md",
     "Wiki/Luca_Insight_20260406_235439.md",
-    "Wiki/Memory_8.md",
-    "Wiki/청킹.md",
-    "Wiki/일정 관리.md",
-    "Index/MOC.md"
+    "Wiki/Memory_8.md"
   ]
 }

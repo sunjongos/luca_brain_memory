@@ -6,27 +6,27 @@ SERVER_URL = "http://localhost:5050"
 
 def ingest(text):
     try:
-        response = requests.post(f"{SERVER_URL}/ingest", json={"text": text}, timeout=10)
+        response = requests.post(f"{SERVER_URL}/ingest", json={"text": text}, timeout=120)
         response.raise_for_status()
-        print(f"✅ Ingested: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+        print(f"Ingested: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
     except Exception as e:
-        print(f"❌ Ingestion failed: {e}")
+        print(f"Ingestion failed: {e}")
 
 def query(question):
     try:
-        response = requests.post(f"{SERVER_URL}/query", json={"question": question}, timeout=15)
+        response = requests.post(f"{SERVER_URL}/query", json={"question": question}, timeout=120)
         response.raise_for_status()
-        print(f"✅ Query Result:\n{response.json().get('result', 'No result')}")
+        print(f"Query Result:\n{response.json().get('result', 'No result')}")
     except Exception as e:
-        print(f"❌ Query failed: {e}")
+        print(f"Query failed: {e}")
 
 def consolidate():
     try:
-        response = requests.post(f"{SERVER_URL}/consolidate", timeout=30)
+        response = requests.post(f"{SERVER_URL}/consolidate", timeout=120)
         response.raise_for_status()
-        print(f"✅ Consolidation triggered: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+        print(f"Consolidation triggered: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
     except Exception as e:
-        print(f"❌ Consolidation failed: {e}")
+        print(f"Consolidation failed: {e}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

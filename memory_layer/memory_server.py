@@ -3,7 +3,9 @@ import asyncio
 import os
 import sys
 import io
+import time
 import threading
+import traceback
 
 # Fix cp949 encoding on Windows console
 if sys.platform == "win32":
@@ -11,37 +13,46 @@ if sys.platform == "win32":
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 from dotenv import load_dotenv
-
-# dotenv 파일에서 환경변수 로드
 load_dotenv()
 
-# Inject API key globally for ADK if missing in env
 if "GEMINI_API_KEY" not in os.environ and "GOOGLE_API_KEY" in os.environ:
     os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
 
-from core import build_memory_agents
+from core import (
+    build_memory_agents,
+    semantic_search, get_proactive_context, query_causal_chains,
+    predict_next_memories, cross_time_reasoning, get_memory_stats,
+    apply_temporal_decay, store_causal_chain
+)
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
 app = Flask(__name__)
 
-# Token Governance: Simple rate limiting & circuit breaker
+# ── Rate Limiting ──────────────────────────────────────────────────────────
 MAX_CALLS_PER_HOUR = 300
 call_records = []
 
 def check_rate_limit():
     global call_records
-    import time
     now = time.time()
-    # Remove older than 3600 seconds (1 hour)
     call_records = [t for t in call_records if now - t < 3600]
     if len(call_records) >= MAX_CALLS_PER_HOUR:
-        raise Exception("Rate limit exceeded: Token Governance Circuit Breaker triggered (Max 300 calls/hr).")
+        raise Exception("Rate limit exceeded (300/hr)")
     call_records.append(now)
 
+# ── Persistent Async Loop (FIXED - no more new_event_loop per request) ─────
+_bg_loop = asyncio.new_event_loop()
+_bg_thread = threading.Thread(target=_bg_loop.run_forever, daemon=True, name="luca-async-loop")
+_bg_thread.start()
 
-# Initialize Memory Agent Runner
+def run_async(coro):
+    """Submit coroutine to persistent background event loop (thread-safe)."""
+    future = asyncio.run_coroutine_threadsafe(coro, _bg_loop)
+    return future.result(timeout=120)
+
+# ── ADK Memory Agent ───────────────────────────────────────────────────────
 class MemoryAgent:
     def __init__(self):
         self.agent = build_memory_agents()
@@ -69,15 +80,7 @@ class MemoryAgent:
 
 memory_agent = MemoryAgent()
 
-# Helper function to run async methods from Flask sync context
-def run_async(coro):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    return loop.run_until_complete(coro)
-
-
-import traceback
-
+# ── Existing Endpoints ─────────────────────────────────────────────────────
 @app.route('/ingest', methods=['POST'])
 def ingest():
     try:
@@ -86,8 +89,8 @@ def ingest():
         text = data.get('text')
         if not text:
             return jsonify({"error": "text is required"}), 400
-        
-        msg = f"Remember this information:\n\n{text}"
+        agent_id = data.get('agent_id', 'ClaudeCode')
+        msg = f"Remember this information (agent: {agent_id}):\n\n{text}"
         result = run_async(memory_agent.run(msg))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
@@ -101,35 +104,156 @@ def query():
         question = data.get('question')
         if not question:
             return jsonify({"error": "question is required"}), 400
-        
         msg = f"Query memory: {question}"
         result = run_async(memory_agent.run(msg))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
-        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 429
-
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/consolidate', methods=['POST'])
 def consolidate():
-    msg = "Consolidate all recent unconsolidated memories now."
-    result = run_async(memory_agent.run(msg))
-    return jsonify({"status": "success", "result": result})
+    try:
+        result = run_async(memory_agent.run("Consolidate all recent unconsolidated memories now."))
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+# ── Phase 1: Semantic Search ───────────────────────────────────────────────
+@app.route('/search', methods=['POST'])
+def search():
+    try:
+        data = request.json
+        query_text = data.get('query')
+        if not query_text:
+            return jsonify({"error": "query is required"}), 400
+        top_k    = int(data.get('top_k', 5))
+        agent_id = data.get('agent_id')
+        result = semantic_search(query_text, top_k=top_k, agent_id=agent_id)
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+@app.route('/decay', methods=['POST'])
+def decay():
+    try:
+        data = request.json or {}
+        result = apply_temporal_decay(memory_id=data.get('memory_id'))
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── Phase 2: Proactive Context + Causal Chains ────────────────────────────
+@app.route('/context', methods=['POST'])
+def context():
+    try:
+        data = request.json
+        topic = data.get('topic')
+        if not topic:
+            return jsonify({"error": "topic is required"}), 400
+        top_k = int(data.get('top_k', 7))
+        result = get_proactive_context(topic, top_k=top_k)
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+@app.route('/causal', methods=['POST'])
+def causal():
+    try:
+        data = request.json or {}
+        result = query_causal_chains(
+            memory_id=data.get('memory_id'),
+            keyword=data.get('keyword')
+        )
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/causal/store', methods=['POST'])
+def causal_store():
+    try:
+        data = request.json
+        result = store_causal_chain(
+            from_memory_id=data['from_memory_id'],
+            to_memory_id=data['to_memory_id'],
+            cause_description=data['cause_description'],
+            effect_description=data['effect_description'],
+            confidence=data.get('confidence', 0.7),
+            agent_id=data.get('agent_id', 'ClaudeCode')
+        )
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── Phase 3: Prediction + Cross-Time Reasoning ────────────────────────────
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.json
+        context_text = data.get('context')
+        if not context_text:
+            return jsonify({"error": "context is required"}), 400
+        top_k = int(data.get('top_k', 5))
+        result = predict_next_memories(context_text, top_k=top_k)
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+@app.route('/reason', methods=['POST'])
+def reason():
+    try:
+        data = request.json
+        topic = data.get('topic')
+        if not topic:
+            return jsonify({"error": "topic is required"}), 400
+        result = cross_time_reasoning(topic)
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
+
+@app.route('/stats', methods=['GET'])
+def stats():
+    try:
+        result = get_memory_stats()
+        return jsonify({"status": "success", "result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ── Health Check ───────────────────────────────────────────────────────────
+@app.route('/health', methods=['GET'])
+def health():
+    s = get_memory_stats()
+    return jsonify({
+        "status": "ok",
+        "port": 5050,
+        "total_memories": s.get("total", 0),
+        "with_embeddings": s.get("with_embedding", 0),
+        "causal_chains": s.get("causal_chains", 0),
+        "endpoints": ["/ingest", "/query", "/search", "/context", "/causal",
+                      "/predict", "/reason", "/decay", "/consolidate", "/stats", "/health"]
+    })
+
+# ── Background Jobs ────────────────────────────────────────────────────────
 def background_consolidation_loop():
-    """Periodically triggers consolidation in the background"""
-    import time
     while True:
         try:
-            time.sleep(3600) # Once an hour
-            print("[Auto-Consolidation] Triggering hourly background consolidation...")
+            time.sleep(3600)
+            print("[Auto-Consolidation] Triggering hourly consolidation...")
             run_async(memory_agent.run("Consolidate all recent unconsolidated memories now."))
         except Exception as e:
             print(f"[Auto-Consolidation Error] {e}")
 
+def background_decay_loop():
+    while True:
+        try:
+            time.sleep(21600)  # 6시간마다 감쇠 적용
+            print("[Auto-Decay] Applying temporal decay...")
+            apply_temporal_decay()
+        except Exception as e:
+            print(f"[Auto-Decay Error] {e}")
+
 if __name__ == '__main__':
-    # Start auto-consolidation background thread
-    t = threading.Thread(target=background_consolidation_loop, daemon=True)
-    t.start()
-    
-    print("🚀 Luca Persistent Memory Server running on port 5050")
+    threading.Thread(target=background_consolidation_loop, daemon=True).start()
+    threading.Thread(target=background_decay_loop, daemon=True).start()
+    print("🚀 Luca World-Best Memory Server v2.0 on port 5050")
+    print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health")
     app.run(host='0.0.0.0', port=5050)

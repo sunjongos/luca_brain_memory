@@ -1817,9 +1817,6 @@ def main():
         logger.error("TELEGRAM_BOT_TOKEN 없음")
         sys.exit(1)
     PID_FILE = BASE_DIR / "luca_bot.pid"
-    if PID_FILE.exists():
-        try: os.kill(int(PID_FILE.read_text().strip()), 9)
-        except: pass
     PID_FILE.write_text(str(os.getpid()))
     
     app = Application.builder().token(BOT_TOKEN).post_init(post_init).build()

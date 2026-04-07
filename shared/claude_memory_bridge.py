@@ -247,44 +247,133 @@ async def cmd_ontology(question: str):
         await _cleanup()
 
 
+# ─── Phase 1-3 직접 API 커맨드 ───────────────────────────────────
+
+async def cmd_search(query: str, top_k: int = 5):
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.post(f"{PORT_5050_URL}/search", json={"query": query, "top_k": top_k})
+        data = resp.json().get("result", {})
+        print(f"\n🔍 Semantic Search: '{query}' (searched {data.get('total_searched',0)} memories)")
+        for i, r in enumerate(data.get("results", []), 1):
+            print(f"  [{i}] #{r['id']} sim={r['similarity']:.3f} imp={r['importance']:.2f} [{r['agent_id']}]")
+            print(f"      {r['summary']}")
+    return 0
+
+async def cmd_context(topic: str):
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.post(f"{PORT_5050_URL}/context", json={"topic": topic})
+        data = resp.json().get("result", {})
+        print(f"\n🧠 Proactive Context: '{topic}'")
+        print(f"  Semantic ({len(data.get('semantic_memories',[]))}): " +
+              " | ".join(f"#{m['id']}" for m in data.get("semantic_memories", [])))
+        for c in data.get("causal_chains", []):
+            print(f"  🔗 {c.get('cause','')[:50]} → {c.get('effect','')[:50]}")
+        for r in data.get("recent_important", []):
+            print(f"  ⚡ #{r['id']} imp={r['importance']:.2f} {r['summary'][:70]}")
+    return 0
+
+async def cmd_reason(topic: str):
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.post(f"{PORT_5050_URL}/reason", json={"topic": topic})
+        data = resp.json().get("result", {})
+        print(f"\n⏳ Cross-Time Reasoning: '{topic}'")
+        print(f"  Trend: {data.get('trend','?')} | Total: {data.get('total',0)} | {data.get('oldest','?')} → {data.get('latest','?')}")
+        print(f"  Windows: {data.get('by_time_window',{})}")
+        for t in data.get("timeline", [])[-5:]:
+            print(f"  [{t['date']}] {t['summary'][:70]}")
+    return 0
+
+async def cmd_predict(context_text: str):
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.post(f"{PORT_5050_URL}/predict", json={"context": context_text})
+        data = resp.json().get("result", {})
+        print(f"\n🔮 Predicted Memories (method: {data.get('method','?')})")
+        for m in data.get("predicted", []):
+            print(f"  - #{m['id']} {m['summary'][:80]}")
+    return 0
+
+async def cmd_causal(keyword: str = None):
+    async with httpx.AsyncClient(timeout=30) as client:
+        body = {"keyword": keyword} if keyword else {}
+        resp = await client.post(f"{PORT_5050_URL}/causal", json=body)
+        data = resp.json().get("result", {})
+        print(f"\n🔗 Causal Chains ({data.get('count',0)}):")
+        for c in data.get("chains", []):
+            print(f"  #{c.get('from_memory_id','?')} → #{c.get('to_memory_id','?')} (conf={c.get('confidence',0):.2f})")
+            print(f"    {c.get('from_summary','')[:60]} → {c.get('to_summary','')[:60]}")
+    return 0
+
+async def cmd_stats():
+    async with httpx.AsyncClient(timeout=15) as client:
+        resp = await client.get(f"{PORT_5050_URL}/stats")
+        s = resp.json().get("result", {})
+        print(f"\n📊 Luca Brain Stats:")
+        for k, v in s.items():
+            print(f"  {k}: {v}")
+    return 0
+
+
 # ─── CLI 엔트리포인트 ────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Claude Code <-> Antigravity ASMR Memory Bridge",
+        description="Claude Code <-> Luca Brain Memory Bridge v2.0",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    sub.add_parser("health", help="서버 상태 + API 키 확인")
+    sub.add_parser("health", help="서버 상태 확인")
+    sub.add_parser("stats",  help="[Phase1-3] 메모리 시스템 통계")
 
-    p = sub.add_parser("raw-query", help="Port 5050 직접 쿼리 (빠름, ASMR 없음)")
+    p = sub.add_parser("raw-query", help="Port 5050 직접 쿼리")
     p.add_argument("question", type=str)
 
-    p = sub.add_parser("query", help="ASMR 3인방 분석 (Fact+Context+Causal+Arbiter)")
+    p = sub.add_parser("query", help="ASMR 3인방 분석")
     p.add_argument("question", type=str)
 
     p = sub.add_parser("ingest", help="공유 메모리에 저장")
     p.add_argument("text", type=str)
 
-    p = sub.add_parser("observe", help="세션 로그 분석 + 자동 ingest")
+    p = sub.add_parser("observe", help="세션 로그 분석 + ingest")
     p.add_argument("log", type=str)
 
     p = sub.add_parser("ontology", help="온톨로지 지식그래프 탐색")
     p.add_argument("question", type=str)
 
+    p = sub.add_parser("search",  help="[Phase1] 벡터 시맨틱 검색")
+    p.add_argument("query", type=str)
+    p.add_argument("--top-k", type=int, default=5, dest="top_k")
+
+    p = sub.add_parser("context", help="[Phase2] 능동적 컨텍스트 로드")
+    p.add_argument("topic", type=str)
+
+    p = sub.add_parser("reason",  help="[Phase3] 크로스타임 추론")
+    p.add_argument("topic", type=str)
+
+    p = sub.add_parser("predict", help="[Phase3] 다음 기억 예측")
+    p.add_argument("context", dest="context_text", type=str)
+
+    p = sub.add_parser("causal",  help="[Phase2] 인과관계 체인 조회")
+    p.add_argument("keyword", type=str, nargs="?", default=None)
+
     args = parser.parse_args()
 
-    commands = {
-        "health": lambda: cmd_health(),
+    cmd_map = {
+        "health":    lambda: cmd_health(),
+        "stats":     lambda: cmd_stats(),
         "raw-query": lambda: cmd_raw_query(args.question),
-        "query": lambda: cmd_query(args.question),
-        "ingest": lambda: cmd_ingest(args.text),
-        "observe": lambda: cmd_observe(args.log),
-        "ontology": lambda: cmd_ontology(args.question),
+        "query":     lambda: cmd_query(args.question),
+        "ingest":    lambda: cmd_ingest(args.text),
+        "observe":   lambda: cmd_observe(args.log),
+        "ontology":  lambda: cmd_ontology(args.question),
+        "search":    lambda: cmd_search(args.query, args.top_k),
+        "context":   lambda: cmd_context(args.topic),
+        "reason":    lambda: cmd_reason(args.topic),
+        "predict":   lambda: cmd_predict(args.context_text),
+        "causal":    lambda: cmd_causal(args.keyword),
     }
 
-    handler = commands.get(args.command)
+    handler = cmd_map.get(args.command)
     if handler:
         exit_code = asyncio.run(handler())
     else:
