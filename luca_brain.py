@@ -11,12 +11,32 @@ import shutil
 import requests
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
+from supabase import create_client, Client
 
 BASE_DIR = Path(__file__).parent
 DB_PATH = BASE_DIR / "luca_brain.db"
 PROMPT_FILE = BASE_DIR / "system_prompt.txt"
 
 logger = logging.getLogger("LucaBrain")
+
+# ─────────────────────────────────────────
+# Supabase 클라우드 설정 (Tier 3)
+# ─────────────────────────────────────────
+load_dotenv()
+_SB_URL = os.environ.get("SUPABASE_URL", "")
+_SB_KEY = os.environ.get("SUPABASE_KEY", "")
+
+try:
+    if _SB_URL and _SB_KEY:
+        supabase_client: Client = create_client(_SB_URL, _SB_KEY)
+        logger.info("✅ Supabase 클라이언트 실시간 연결 대기 중")
+    else:
+        supabase_client = None
+        logger.warning("⚠️ Supabase 환경변수가 없어 클라우드 연동망이 비활성화됩니다.")
+except Exception as e:
+    supabase_client = None
+    logger.error(f"❌ Supabase 클라이언트 초기화 실패: {e}")
 
 # ─────────────────────────────────────────
 # 기본 시스템 프롬프트 (최초 초기화용)
@@ -148,6 +168,21 @@ def log_interaction(chat_id: str, user_msg: str, ai_reply: str,
         interaction_id = c.lastrowid
         conn.commit()
         conn.close()
+
+        # [Tier 3] Supabase 클라우드에 실시간 동기화 (오류가 나도 로컬은 이미 저장됨)
+        if supabase_client:
+            try:
+                supabase_client.table("agent_interactions").insert({
+                    "chat_id": str(chat_id),
+                    "user_msg": user_msg[:2000],
+                    "ai_reply": ai_reply[:3000],
+                    "model": model,
+                    "has_error": bool(has_error),
+                    "error_msg": error_msg[:500]
+                }).execute()
+            except Exception as e:
+                logger.error(f"☁️ Supabase agent_interactions 동기화 실패: {e}")
+
         return interaction_id
     except Exception as e:
         logger.error(f"log_interaction 실패: {e}")
@@ -387,6 +422,17 @@ def save_lesson(content: str, source: str = "self_reflection"):
         """, (content[:2000], source, now))
         conn.commit()
         conn.close()
+        
+        # [Tier 3] 에이전트 교훈을 클라우드에도 로깅
+        if supabase_client:
+            try:
+                supabase_client.table("agent_lessons").insert({
+                    "content": content[:2000],
+                    "source": source
+                }).execute()
+            except Exception as e:
+                logger.error(f"☁️ Supabase agent_lessons 동기화 실패: {e}")
+                
     except Exception as e:
         logger.error(f"save_lesson 실패: {e}")
 
@@ -412,7 +458,7 @@ class LucaAGIBrain:
         self.obsidian_wiki_dir = BASE_DIR / "Luca_Memory_Vault" / "Wiki"
         self.ontology_path = BASE_DIR / ".agent" / "skills" / "ontology_ndb" / "ndb_knowledge.ttl"
         
-        self.google_api_key = os.getenv("GOOGLE_API_KEY", "")
+        self.google_api_key = os.getenv("GEMINI_API_KEY", os.getenv("GOOGLE_API_KEY", ""))
         self.gemini_client = genai.Client(api_key=self.google_api_key) if self.google_api_key and use_gemini else None
 
     def _fetch_memory(self, query: str) -> str:
@@ -422,7 +468,7 @@ class LucaAGIBrain:
             resp = requests.post(
                 f"{self.memory_node_url}/query",
                 json={"question": query},
-                timeout=10
+                timeout=120
             )
             if resp.status_code == 200:
                 data = resp.json()
@@ -464,11 +510,23 @@ class LucaAGIBrain:
     def memorize(self, info: str):
         """새로 알게 된 사실을 Port 5050 뇌 서버에 강제 주입하여 영구 보존"""
         try:
-            resp = requests.post(f"{self.memory_node_url}/ingest", json={"text": info}, timeout=10)
+            resp = requests.post(f"{self.memory_node_url}/ingest", json={"text": info}, timeout=120)
             if resp.status_code == 200:
-                logger.info("✅ [Memory] 새로운 지식을 장기 공유 메모리망(Port 5050)에 영구 각인했습니다.")
+                logger.info("✅ [Memory] 새로운 지식을 장기 공유 메모리망(Port 5050)에 전달했습니다.")
         except Exception as e:
             logger.error(f"메모리 주입 (ingest) 실패: {e}")
+
+        # [Tier 3] Supabase 에이전트 다목적 메모리에 무조건 때려 넣음 (Memory 4 Architecture 대응)
+        if supabase_client:
+            try:
+                supabase_client.table("agent_memories").insert({
+                    "raw_text": info,
+                    "source": "luca_brain_memorize",
+                    "importance": 0.8
+                }).execute()
+                logger.info("✅ [Memory] Supabase 클라우드(agent_memories)에 영구 각인했습니다.")
+            except Exception as e:
+                logger.error(f"☁️ Supabase agent_memories 저장 실패: {e}")
 
     def process(self, user_msg: str, enable_store: bool = True) -> str:
         """
