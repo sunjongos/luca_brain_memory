@@ -44,6 +44,8 @@ luca_brain.db
 luca_watchdog.log
 browser_state.json
 memory_layer/memory_server_out.log
+luca_memory.db
+neo4j_env/
 
 # 대용량 바이너리
 *.zip

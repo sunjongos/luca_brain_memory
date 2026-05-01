@@ -12,21 +12,54 @@ if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
+from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
 
+# Ensure .env is loaded to prevent hardcoding leaks
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(env_path, override=True)
+
+# Inject API key globally for ADK if missing in env
 if "GEMINI_API_KEY" not in os.environ and "GOOGLE_API_KEY" in os.environ:
     os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
+elif "GEMINI_API_KEY" not in os.environ:
+    raise ValueError("GEMINI_API_KEY is not set in the environment or .env file.")
 
 from core import (
     build_memory_agents,
     semantic_search, get_proactive_context, query_causal_chains,
     predict_next_memories, cross_time_reasoning, get_memory_stats,
-    apply_temporal_decay, store_causal_chain
+    apply_temporal_decay, store_causal_chain, resolve_memory_conflicts,
+    get_core_memory, update_core_memory, sync_from_supabase
 )
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
+
+
+# ── API Error Alerting ─────────────────────────────────────────────────────
+def check_api_error_and_alert(e):
+    err_str = str(e).lower()
+    if '429' in err_str or 'quota' in err_str or 'exhausted' in err_str or 'billing' in err_str:
+        print("\n" + "="*60)
+        print("🚨 [CRITICAL] GEMINI API BILLING OR QUOTA LIMIT REACHED! 🚨")
+        print("="*60 + "\n")
+        import time
+        now = time.time()
+        if not hasattr(check_api_error_and_alert, 'last_alert') or (now - getattr(check_api_error_and_alert, 'last_alert', 0) > 600):
+            check_api_error_and_alert.last_alert = now
+            try:
+                import webbrowser
+                webbrowser.open("https://console.cloud.google.com/billing")
+            except:
+                pass
+            import sys
+            if sys.platform == "win32":
+                import threading
+                import ctypes
+                def show_popup():
+                    ctypes.windll.user32.MessageBoxW(0, "Gemini API 호출 한도 초과 (Billing/Quota Limit)\n\nGoogle Cloud Console 결제 상태를 확인하세요.\n브라우저에 결제 페이지를 띄웠습니다.", "Luca ASMR Memory Server - 결제 경고", 0x10 | 0x0)
+                threading.Thread(target=show_popup, daemon=True).start()
 
 app = Flask(__name__)
 
@@ -94,6 +127,7 @@ def ingest():
         result = run_async(memory_agent.run(msg))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/query', methods=['POST'])
@@ -105,9 +139,13 @@ def query():
         if not question:
             return jsonify({"error": "question is required"}), 400
         msg = f"Query memory: {question}"
+        print("DEBUG: /query called. GEMINI_API_KEY =", os.environ.get("GEMINI_API_KEY"))
+        import google.genai
+        print("DEBUG: google_genai fallback exists?", hasattr(google.genai, '_api_client'))
         result = run_async(memory_agent.run(msg))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/consolidate', methods=['POST'])
@@ -116,6 +154,7 @@ def consolidate():
         result = run_async(memory_agent.run("Consolidate all recent unconsolidated memories now."))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
 
 # ── Phase 1: Semantic Search ───────────────────────────────────────────────
@@ -131,6 +170,7 @@ def search():
         result = semantic_search(query_text, top_k=top_k, agent_id=agent_id)
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/decay', methods=['POST'])
@@ -140,6 +180,7 @@ def decay():
         result = apply_temporal_decay(memory_id=data.get('memory_id'))
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
 
 # ── Phase 2: Proactive Context + Causal Chains ────────────────────────────
@@ -154,6 +195,7 @@ def context():
         result = get_proactive_context(topic, top_k=top_k)
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/causal', methods=['POST'])
@@ -166,6 +208,7 @@ def causal():
         )
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
 
 @app.route('/causal/store', methods=['POST'])
@@ -182,6 +225,7 @@ def causal_store():
         )
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
 
 # ── Phase 3: Prediction + Cross-Time Reasoning ────────────────────────────
@@ -196,6 +240,7 @@ def predict():
         result = predict_next_memories(context_text, top_k=top_k)
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/reason', methods=['POST'])
@@ -208,6 +253,7 @@ def reason():
         result = cross_time_reasoning(topic)
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/stats', methods=['GET'])
@@ -216,7 +262,29 @@ def stats():
         result = get_memory_stats()
         return jsonify({"status": "success", "result": result})
     except Exception as e:
+        check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
+
+@app.route('/core-memory', methods=['GET', 'POST'])
+def core_memory():
+    try:
+        if request.method == 'GET':
+            user_id = request.args.get('user_id', 'default_user')
+            session_id = request.args.get('session_id', 'default_session')
+            agent_id = request.args.get('agent_id', 'system')
+            content = get_core_memory(user_id, session_id, agent_id)
+            return jsonify({"status": "success", "content": content})
+        elif request.method == 'POST':
+            data = request.json
+            user_id = data.get('user_id', 'default_user')
+            session_id = data.get('session_id', 'default_session')
+            agent_id = data.get('agent_id', 'system')
+            content = data.get('content', '')
+            res = update_core_memory(user_id, session_id, agent_id, content)
+            return jsonify(res)
+    except Exception as e:
+        check_api_error_and_alert(e)
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 # ── Health Check ───────────────────────────────────────────────────────────
 @app.route('/health', methods=['GET'])
@@ -239,7 +307,13 @@ def background_consolidation_loop():
             time.sleep(3600)
             print("[Auto-Consolidation] Triggering hourly consolidation...")
             run_async(memory_agent.run("Consolidate all recent unconsolidated memories now."))
+            
+            print("[Auto-Resolution] Resolving memory conflicts...")
+            res = resolve_memory_conflicts()
+            if res.get("resolved_count", 0) > 0:
+                print(f"   => Resolved {res['resolved_count']} conflicting memories.")
         except Exception as e:
+            check_api_error_and_alert(e)
             print(f"[Auto-Consolidation Error] {e}")
 
 def background_decay_loop():
@@ -249,11 +323,15 @@ def background_decay_loop():
             print("[Auto-Decay] Applying temporal decay...")
             apply_temporal_decay()
         except Exception as e:
+            check_api_error_and_alert(e)
             print(f"[Auto-Decay Error] {e}")
 
 if __name__ == '__main__':
+    print("🔄 초기화 중: 외부 장기 메모리(Supabase) 동기화...")
+    sync_from_supabase()
+
     threading.Thread(target=background_consolidation_loop, daemon=True).start()
     threading.Thread(target=background_decay_loop, daemon=True).start()
     print("🚀 Luca World-Best Memory Server v2.0 on port 5050")
-    print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health")
+    print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health /core-memory")
     app.run(host='0.0.0.0', port=5050)

@@ -4,6 +4,14 @@ import re
 import os
 import webbrowser
 import sys
+import io
+
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
 
 MEMORY_SERVER_URL = "http://127.0.0.1:5050/query"
 

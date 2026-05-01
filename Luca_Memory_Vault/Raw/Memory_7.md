@@ -1,19 +1,22 @@
 ---
 id: 7
 source: luca_chat
-date: 2026-03-22T08:56:15.769968+00:00
-importance: 0.9
+date: 2026-03-11T14:45:53.335218+00:00
+importance: 0.95
 tags: [raw, memory, luca_chat]
 ---
 
-# Memory 7: 이순태 교수님의 부친상 소식이 전달되었으며, 대표님의 조의 표명이 필요합니다.
+# Memory 7: A standing workflow rule was established: the system must automatically save a daily progress summary to the ADK memory server (port 5050) when the user says 'automemory하면서 오늘은 여기까지'.
 
-**Date**: 2026-03-22T08:56:15.769968+00:00
-**Importance**: 0.9
-**Tags**: #경조사 #일정_관리
+**Date**: 2026-03-11T14:45:53.335218+00:00
+**Importance**: 0.95
+**Tags**: #System_Configuration #Workflow_Automation
 
 ## Linked Concepts
-[[이순태 교수님]], [[대표님]], [[경조사]], [[일정 관리]]
+[[Operational rule]], [[ADK persistent memory server]], [[automemory]], [[System Configuration]], [[Workflow Automation]]
+
+## 🔗 Causal Links (인과관계)
+현재 기록된 인과관계가 없습니다.
 
 ## Raw Context
-2026-03-22 이순태 교수님 부친상 소식. 대표님이 조의를 표해야 할 사항.
+Operational rule: when the user says 'automemory하면서 오늘은 여기까지' at the end of the day, automatically create and store a concise day-end progress summary into the ADK persistent memory server on port 5050. This should happen without asking again. This rule is important and should be treated as a standing workflow preference for the user.

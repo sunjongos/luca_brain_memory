@@ -1,6 +1,6 @@
 ---
 tags: [index, moc]
-date: 2026-04-07 23:39:27
+date: 2026-05-01 14:27:45
 ---
 
 # 🧠 Luca Master Map of Content (MOC)
@@ -8,43 +8,43 @@ date: 2026-04-07 23:39:27
 이 페이지는 에이전트의 전체 머릿속(장기 메모리)을 조망하는 대시보드입니다.
 
 ## 📊 현재 기억 상태
-- **원시 메모리(Raw):** 7 개
-- **위키 개념(Wiki):** 36 개
-- **심층 통찰(Log):** 2 개
+- **원시 메모리(Raw):** 29 개
+- **위키 개념(Wiki):** 156 개
+- **심층 통찰(Log):** 11 개
 
 ## ⭐ 핵심 개념 (Top 30)
 가장 많이 참조된 상위 토픽 및 엔티티입니다.
 
-- [[Claude Code]] (2 mentions)
-- [[Supabase]] (2 mentions)
-- [[포트 5050]] (2 mentions)
-- [[luca-codex]] (2 mentions)
-- [[alpha-5050]] (2 mentions)
-- [[비스트모드(Beast Mode)]] (1 mentions)
-- [[Infrastructure]] (1 mentions)
-- [[Development]] (1 mentions)
-- [[Integration]] (1 mentions)
-- [[비스트모드]] (1 mentions)
-- [[똘마니 에이전트]] (1 mentions)
-- [[시스템 인프라]] (1 mentions)
-- [[통신 검증]] (1 mentions)
-- [[개발 환경]] (1 mentions)
-- [[System Test]] (1 mentions)
-- [[Verification]] (1 mentions)
-- [[Testing]] (1 mentions)
-- [[System Verification]] (1 mentions)
-- [[장기메모리]] (1 mentions)
-- [[옵시디언]] (1 mentions)
-- [[지식 그래프]] (1 mentions)
-- [[파이썬]] (1 mentions)
-- [[sqlite]] (1 mentions)
-- [[AI 인사이트]] (1 mentions)
-- [[obsidian_llm_brain]] (1 mentions)
-- [[second_brain]] (1 mentions)
-- [[marketing team]] (1 mentions)
-- [[hospital CRM]] (1 mentions)
-- [[Work]] (1 mentions)
-- [[Marketing]] (1 mentions)
+- [[Development]] (8 mentions)
+- [[OpenClaw]] (6 mentions)
+- [[Infrastructure]] (5 mentions)
+- [[Luca]] (4 mentions)
+- [[System Configuration]] (3 mentions)
+- [[Claude Code]] (3 mentions)
+- [[startup_routine]] (3 mentions)
+- [[ADK persistent memory server]] (3 mentions)
+- [[병원운영]] (2 mentions)
+- [[Claude]] (2 mentions)
+- [[GitHub]] (2 mentions)
+- [[Automation]] (2 mentions)
+- [[대표님]] (2 mentions)
+- [[최선종 대표님]] (2 mentions)
+- [[아침 경영회의]] (2 mentions)
+- [[경영 관리]] (2 mentions)
+- [[루카]] (2 mentions)
+- [[ADK]] (2 mentions)
+- [[CEO]] (2 mentions)
+- [[Memory Management]] (2 mentions)
+- [[Perplexity]] (2 mentions)
+- [[Google Workspace]] (2 mentions)
+- [[ACP]] (2 mentions)
+- [[Codex]] (2 mentions)
+- [[antigravity]] (2 mentions)
+- [[Hive-Mind]] (2 mentions)
+- [[test_task]] (1 mentions)
+- [[GENERAL]] (1 mentions)
+- [[Task Management]] (1 mentions)
+- [[settings.json]] (1 mentions)
 
 ---
 *Generated Automatically by Luca Exporter*

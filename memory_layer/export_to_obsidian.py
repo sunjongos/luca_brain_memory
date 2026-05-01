@@ -4,8 +4,17 @@ import json
 import re
 from collections import defaultdict
 from datetime import datetime
+import sys
+import io
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "luca_memory.db")
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
+DB_PATH = os.path.join(os.path.dirname(__file__), "luca_memory.db")
 VAULT_DIR = os.path.join(os.path.dirname(__file__), "..", "Luca_Memory_Vault")
 
 def sanitize_filename(name):
@@ -30,6 +39,14 @@ def export_vault():
     
     # 1. Export Raw Memories
     memories = db.execute("SELECT * FROM memories ORDER BY created_at DESC").fetchall()
+    
+    # Pre-fetch causal chains
+    causal_chains = db.execute("SELECT * FROM causal_chains").fetchall()
+    causes_map = defaultdict(list)
+    effects_map = defaultdict(list)
+    for c in causal_chains:
+        causes_map[c["to_memory_id"]].append((c["from_memory_id"], c["cause_description"]))
+        effects_map[c["from_memory_id"]].append((c["to_memory_id"], c["effect_description"]))
     
     wiki_nodes = defaultdict(list) # Mapping Entity/Topic -> List of Memory IDs
     memory_links = {} # memory_id -> list of node links
@@ -63,6 +80,19 @@ def export_vault():
                 
         memory_links[m_id] = linked_pages
         
+        # Build Causal Links Markdown
+        causal_md = "## 🔗 Causal Links (인과관계)\n"
+        if causes_map[m_id]:
+            causal_md += "### ⬅️ 이 기억의 원인 (Causes)\n"
+            for from_id, desc in causes_map[m_id]:
+                causal_md += f"- [[Memory_{from_id}]] : {desc}\n"
+        if effects_map[m_id]:
+            causal_md += "### ➡️ 이 기억이 초래한 결과 (Effects)\n"
+            for to_id, desc in effects_map[m_id]:
+                causal_md += f"- [[Memory_{to_id}]] : {desc}\n"
+        if not causes_map[m_id] and not effects_map[m_id]:
+            causal_md += "현재 기록된 인과관계가 없습니다.\n"
+
         # Write Raw Memory File
         tags_str = " ".join([f"#{sanitize_filename(t).replace(' ', '_')}" for t in topics if t])
         content = f"""---
@@ -82,6 +112,7 @@ tags: [raw, memory, {source}]
 ## Linked Concepts
 {", ".join(linked_pages)}
 
+{causal_md}
 ## Raw Context
 {raw_text}
 """

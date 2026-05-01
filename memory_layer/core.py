@@ -19,8 +19,16 @@ if _SB_URL and _SB_KEY:
     except Exception:
         pass
 
-MODEL            = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
-EMBED_MODEL      = "models/text-embedding-004"
+MODEL            = os.getenv("GEMINI_MODEL", "gemini-2.5-pro")
+os.environ["ADK_DEFAULT_LLM_MODEL"] = MODEL
+
+from google.adk.agents.llm_agent import LlmAgent
+try:
+    LlmAgent.set_default_model(MODEL)
+except Exception:
+    pass
+
+EMBED_MODEL      = "models/gemini-embedding-2-preview"
 DB_PATH          = os.getenv("MEMORY_DB_PATH", "luca_memory.db")
 DECAY_RATE       = float(os.getenv("MEMORY_DECAY_RATE", "0.03"))
 IMPORTANCE_FLOOR = 0.05
@@ -65,6 +73,9 @@ def get_db() -> sqlite3.Connection:
         ("embedding",     "ALTER TABLE memories ADD COLUMN embedding TEXT DEFAULT NULL"),
         ("access_count",  "ALTER TABLE memories ADD COLUMN access_count INTEGER NOT NULL DEFAULT 0"),
         ("last_accessed", "ALTER TABLE memories ADD COLUMN last_accessed TEXT DEFAULT NULL"),
+        ("user_id",       "ALTER TABLE memories ADD COLUMN user_id TEXT NOT NULL DEFAULT 'default_user'"),
+        ("session_id",    "ALTER TABLE memories ADD COLUMN session_id TEXT NOT NULL DEFAULT 'default_session'"),
+        ("status",        "ALTER TABLE memories ADD COLUMN status TEXT NOT NULL DEFAULT 'active'"),
     ]
     for col, sql in migrations:
         if col not in existing:
@@ -125,8 +136,18 @@ def get_db() -> sqlite3.Connection:
             ttl_patch  TEXT DEFAULT NULL,
             created_at TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS core_memory (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT NOT NULL,
+            session_id TEXT NOT NULL,
+            agent_id TEXT NOT NULL,
+            content TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            UNIQUE(user_id, session_id, agent_id)
+        );
         CREATE INDEX IF NOT EXISTS idx_mem_importance ON memories(importance DESC);
         CREATE INDEX IF NOT EXISTS idx_mem_agent      ON memories(agent_id);
+        CREATE INDEX IF NOT EXISTS idx_mem_tenant     ON memories(user_id, session_id);
         CREATE INDEX IF NOT EXISTS idx_mem_created    ON memories(created_at DESC);
         CREATE INDEX IF NOT EXISTS idx_causal_from    ON causal_chains(from_memory_id);
     """)
@@ -163,17 +184,54 @@ def reinforce_memory(memory_id: int) -> None:
                (REINFORCE_BOOST, now, memory_id))
     db.commit(); db.close()
 
-# ── Core Tools ─────────────────────────────────────────────────────────────
-def store_memory(raw_text: str, summary: str, entities: list, topics: list,
-                 importance: float, source: str = "luca_chat",
-                 agent_id: str = "system", confidence: float = 0.8) -> dict:
+from typing import List
+
+# ── Core Memory (Working Memory) ──────────────────────────────────────────
+def update_core_memory(user_id: str, session_id: str, agent_id: str, content: str) -> dict:
+    """Core Memory 업데이트 (최대 2000자 제한)"""
+    if len(content) > 2000:
+        content = content[:2000]
+        log.warning("Core memory content truncated to 2000 characters.")
     db = get_db()
     now = datetime.now(timezone.utc).isoformat()
-    emb_text = f"{summary} {' '.join(entities or [])} {' '.join(topics or [])}"
+    db.execute('''
+        INSERT INTO core_memory (user_id, session_id, agent_id, content, updated_at)
+        VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT(user_id, session_id, agent_id) 
+        DO UPDATE SET content=excluded.content, updated_at=excluded.updated_at
+    ''', (user_id, session_id, agent_id, content, now))
+    db.commit()
+    db.close()
+    return {"status": "success", "length": len(content)}
+
+def get_core_memory(user_id: str, session_id: str, agent_id: str) -> str:
+    db = get_db()
+    row = db.execute('''
+        SELECT content FROM core_memory 
+        WHERE user_id=? AND session_id=? AND agent_id=?
+    ''', (user_id, session_id, agent_id)).fetchone()
+    db.close()
+    return row["content"] if row else ""
+
+# ── Core Tools ─────────────────────────────────────────────────────────────
+def store_memory(raw_text: str, summary: str, entities: str, topics: str,
+                 importance: float, source: str = "luca_chat",
+                 user_id: str = "default_user", session_id: str = "default_session",
+                 agent_id: str = "system", confidence: float = 0.8) -> dict:
+    """
+    entities: comma separated string
+    topics: comma separated string
+    """
+    db = get_db()
+    entities_list = [e.strip() for e in entities.split(',')] if entities else []
+    topics_list = [t.strip() for t in topics.split(',')] if topics else []
+    
+    now = datetime.now(timezone.utc).isoformat()
+    emb_text = f"{summary} {' '.join(entities_list)} {' '.join(topics_list)}"
     embedding = get_embedding(emb_text)
     cursor = db.execute(
-        "INSERT INTO memories (source,agent_id,raw_text,summary,entities,topics,importance,confidence,embedding,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)",
-        (source, agent_id, raw_text, summary, json.dumps(entities or []), json.dumps(topics or []),
+        "INSERT INTO memories (source,user_id,session_id,agent_id,raw_text,summary,entities,topics,importance,confidence,embedding,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+        (source, user_id, session_id, agent_id, raw_text, summary, json.dumps(entities_list), json.dumps(topics_list),
          importance, confidence, json.dumps(embedding) if embedding else None, now)
     )
     mid = cursor.lastrowid
@@ -198,13 +256,74 @@ def store_memory(raw_text: str, summary: str, entities: list, topics: list,
     log.info(f"Memory #{mid} [{agent_id}]: {summary[:60]}")
     return {"memory_id": mid, "status": "stored", "summary": summary, "has_embedding": bool(embedding)}
 
-def semantic_search(query: str, top_k: int = 5, agent_id: str = None) -> dict:
+def sync_from_supabase():
+    """
+    Supabase에 저장된 외부(진료실 등) 메모리를 로컬 SQLite로 동기화(Pull)합니다.
+    """
+    if not supabase_client:
+        log.warning("Supabase client not initialized, skipping sync.")
+        return {"status": "skipped", "reason": "No Supabase client"}
+        
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        log.info("📡 Supabase 메모리 동기화 시작...")
+        response = supabase_client.table("agent_memories").select("*").order('created_at', desc=True).limit(50).execute()
+        data = response.data
+        if not data:
+            return {"status": "success", "synced_count": 0}
+            
+        synced_count = 0
+        for row in data:
+            sb_id = row.get("id")
+            # 이미 로컬에 있는지 확인 (간단히 summary 로컬 중복 검사 또는 raw_text 검사)
+            # 가장 완벽한건 supabase_id 컬럼을 추가하는 것이지만, 일단 내용 기반 중복 방지
+            cursor.execute("SELECT id FROM memories WHERE summary = ?", (row.get("summary", ""),))
+            if cursor.fetchone() is None:
+                # 로컬에 없으면 추가
+                raw_text = row.get("raw_text", "")
+                summary = row.get("summary", "")
+                entities = row.get("entities", [])
+                topics = row.get("topics", [])
+                importance = row.get("importance", 5)
+                
+                # 임베딩 생성
+                embedding = get_embedding(summary)
+                
+                created_at = row.get("created_at")
+                if not created_at:
+                    created_at = datetime.now().isoformat()
+                
+                cursor.execute(
+                    "INSERT INTO memories (user_id, session_id, agent_id, raw_text, summary, entities, topics, importance, confidence, embedding, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    ('default_user', 'default_session', row.get('source', 'supabase'), raw_text, summary, json.dumps(entities), json.dumps(topics), importance, 0.8, json.dumps(embedding) if embedding else None, created_at)
+                )
+                mid = cursor.lastrowid
+                _auto_update_ontology(db, mid, entities, topics)
+                synced_count += 1
+                
+        db.commit()
+        log.info(f"✅ Supabase 메모리 {synced_count}개 로컬 동기화 완료.")
+        return {"status": "success", "synced_count": synced_count}
+    except Exception as e:
+        log.error(f"Supabase sync failed: {e}")
+        return {"status": "error", "error": str(e)}
+    finally:
+        db.close()
+
+
+def semantic_search(query: str, top_k: int = 5, user_id: str = None, session_id: str = None, agent_id: str = None) -> dict:
     q_emb = get_embedding(query)
     if not q_emb:
         return {"error": "embedding_failed", "results": []}
     db = get_db()
-    sql = "SELECT id,summary,entities,topics,importance,confidence,agent_id,created_at,embedding FROM memories WHERE embedding IS NOT NULL"
+    # status가 active인 것만 검색
+    sql = "SELECT id,summary,entities,topics,importance,confidence,agent_id,created_at,embedding FROM memories WHERE embedding IS NOT NULL AND status='active'"
     params = []
+    if user_id:
+        sql += " AND user_id=?"; params.append(user_id)
+    if session_id:
+        sql += " AND session_id=?"; params.append(session_id)
     if agent_id:
         sql += " AND agent_id=?"; params.append(agent_id)
     rows = db.execute(sql, params).fetchall()
@@ -223,9 +342,67 @@ def semantic_search(query: str, top_k: int = 5, agent_id: str = None) -> dict:
             pass
     scored.sort(key=lambda x: x["score"], reverse=True)
     results = scored[:top_k]
+    
+    # ── Hybrid GraphRAG Enrichment ──
+    db = get_db()
     for r in results:
         reinforce_memory(r["id"])
+        row_onto = db.execute("SELECT entities FROM ontology_events WHERE memory_id=? ORDER BY created_at DESC LIMIT 1", (r["id"],)).fetchone()
+        if row_onto:
+            try:
+                r["graph_entities"] = json.loads(row_onto["entities"])
+            except Exception:
+                r["graph_entities"] = []
+        else:
+            r["graph_entities"] = []
+    db.close()
+    
     return {"query": query, "results": results, "total_searched": len(scored)}
+
+def resolve_memory_conflicts(user_id: str = "default_user", session_id: str = "default_session", agent_id: str = "system"):
+    """최근 메모리와 기존 메모리 간의 충돌을 감지하여 과거 메모리를 superseded 처리"""
+    db = get_db()
+    # 최근 5개의 메모리를 가져옴
+    sql = "SELECT id, summary, embedding FROM memories WHERE status='active'"
+    params = []
+    if user_id:
+        sql += " AND user_id=?"; params.append(user_id)
+    if session_id:
+        sql += " AND session_id=?"; params.append(session_id)
+    sql += " ORDER BY created_at DESC LIMIT 5"
+    recent_rows = db.execute(sql, params).fetchall()
+    
+    if not recent_rows:
+        db.close()
+        return {"status": "no_active_memories"}
+        
+    resolved_count = 0
+    for row in recent_rows:
+        try:
+            # 1. 유사한 기존 메모리 검색
+            q_emb = json.loads(row["embedding"])
+            sql_search = "SELECT id, summary, embedding FROM memories WHERE status='active' AND id != ?"
+            search_params = [row["id"]]
+            if user_id:
+                sql_search += " AND user_id=?"; search_params.append(user_id)
+            if session_id:
+                sql_search += " AND session_id=?"; search_params.append(session_id)
+            
+            old_rows = db.execute(sql_search, search_params).fetchall()
+            for old_row in old_rows:
+                old_emb = json.loads(old_row["embedding"])
+                sim = cosine_similarity(q_emb, old_emb)
+                # 유사도가 매우 높으면 충돌 가능성 있음 (0.85 이상)
+                if sim > 0.85:
+                    db.execute("UPDATE memories SET status='superseded' WHERE id=?", (old_row["id"],))
+                    log.info(f"Memory conflict resolved: Memory #{old_row['id']} superseded by #{row['id']}")
+                    resolved_count += 1
+        except Exception as e:
+            log.warning(f"Error during conflict resolution for memory #{row['id']}: {e}")
+            
+    db.commit()
+    db.close()
+    return {"status": "success", "resolved_count": resolved_count}
 
 def read_all_memories(limit: int = 50) -> dict:
     apply_temporal_decay()
@@ -246,12 +423,27 @@ def read_unconsolidated_memories(limit: int = 15) -> dict:
     db.close()
     return {"memories": memories, "count": len(memories)}
 
-def store_consolidation(source_ids: list, summary: str, insight: str, connections: list) -> dict:
+def store_consolidation(source_ids: str, summary: str, insight: str, connections: str) -> dict:
+    """
+    source_ids: JSON array of integers, e.g. '[1, 2, 3]'
+    connections: JSON array of objects, e.g. '[{\"from_id\":1, \"to_id\":2, \"relationship\":\"causes\"}]'
+    """
     db = get_db()
+    
+    try:
+        src_list = json.loads(source_ids) if source_ids else []
+    except:
+        src_list = []
+        
+    try:
+        conn_list = json.loads(connections) if connections else []
+    except:
+        conn_list = []
+    
     now = datetime.now(timezone.utc).isoformat()
     db.execute("INSERT INTO consolidations (source_ids,summary,insight,created_at) VALUES (?,?,?,?)",
-               (json.dumps(source_ids), summary, insight, now))
-    for conn in connections:
+               (json.dumps(src_list), summary, insight, now))
+    for conn in conn_list:
         from_id, to_id, rel = conn.get("from_id"), conn.get("to_id"), conn.get("relationship","")
         if from_id and to_id:
             for mid in [from_id, to_id]:

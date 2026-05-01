@@ -13,7 +13,7 @@ from pathlib import Path
 
 # ── 경로 설정
 BASE_DIR = Path(__file__).parent
-PYTHON_EXE = r"C:\Users\sunjo\AppData\Local\Programs\Python\Python313\pythonw.exe"  # process without window
+PYTHON_EXE = "python.exe"  # process without window
 
 SERVICES_CONFIG = [
     {

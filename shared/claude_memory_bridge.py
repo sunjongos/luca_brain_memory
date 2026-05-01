@@ -19,10 +19,17 @@ import os
 import sys
 import argparse
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 # ASMR 모듈 경로 추가
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-ASMR_SKILLS_DIR = os.path.join(PROJECT_ROOT, ".agents", "skills")
+ASMR_SKILLS_DIR = os.path.join(PROJECT_ROOT, ".agent", "skills")
 if ASMR_SKILLS_DIR not in sys.path:
     sys.path.insert(0, ASMR_SKILLS_DIR)
 
@@ -101,6 +108,49 @@ async def gemini_llm_call(system_prompt: str, user_prompt: str, json_schema: dic
         return text_response.strip()
     except (KeyError, IndexError):
         return json.dumps({"error": "Gemini API 응답 파싱 실패"})
+
+
+async def local_gemma_call(system_prompt: str, user_prompt: str, json_schema: dict) -> str:
+    """Local Gemma (Ollama) API 호출 (ASMR 에이전트용) - API 키 노출 방지"""
+    # 환경 변수에서 로컬 모델 이름 가져오기 (기본값 gemma)
+    model_name = os.environ.get("LOCAL_GEMMA_MODEL", "gemma")
+    url = "http://127.0.0.1:11434/api/generate"
+    
+    schema_str = json.dumps(json_schema, ensure_ascii=False) if json_schema else "{}"
+    full_prompt = (
+        f"System Instruction:\n{system_prompt}\n\n"
+        f"User:\n{user_prompt}\n\n"
+        "[CRITICAL INSTRUCTION]\n"
+        "You MUST return ONLY a pure JSON string matching the schema below. "
+        "No markdown fences, no commentary, no extra text.\n"
+        f"Schema: {schema_str}"
+    )
+    
+    payload = {
+        "model": model_name,
+        "prompt": full_prompt,
+        "stream": False,
+        "options": {"temperature": 0.2}
+    }
+    
+    client = await _get_gemini_client()
+    try:
+        resp = await client.post(url, json=payload)
+        if resp.status_code != 200:
+            return json.dumps({"error": f"Ollama API Error {resp.status_code}: {resp.text[:300]}"})
+        
+        data = resp.json()
+        text_response = data.get("response", "").strip()
+        # 마크다운 펜스 제거
+        if text_response.startswith("```json"):
+            text_response = text_response[7:]
+        if text_response.startswith("```"):
+            text_response = text_response[3:]
+        if text_response.endswith("```"):
+            text_response = text_response[:-3]
+        return text_response.strip()
+    except Exception as e:
+        return json.dumps({"error": f"Local Gemma Error: {str(e)}"})
 
 
 # ─── 명령어 구현 ──────────────────────────────────────────
@@ -198,6 +248,31 @@ async def cmd_query(question: str):
         await bridge.close()
         await _cleanup()
 
+async def cmd_core_memory(action: str, content: str = None):
+    """Core Memory 조회 및 업데이트"""
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            if action == "get":
+                resp = await client.get(f"{PORT_5050_URL}/core-memory")
+                if resp.status_code == 200:
+                    data = resp.json()
+                    print(data.get("content", ""))
+                    return 0
+                else:
+                    print(f"ERROR: HTTP {resp.status_code}", file=sys.stderr)
+                    return 1
+            elif action == "update" and content is not None:
+                resp = await client.post(f"{PORT_5050_URL}/core-memory", json={"content": content})
+                if resp.status_code == 200:
+                    data = resp.json()
+                    print(json.dumps({"status": "updated", "length": data.get("length")}, ensure_ascii=False))
+                    return 0
+                else:
+                    print(f"ERROR: HTTP {resp.status_code}", file=sys.stderr)
+                    return 1
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 1
 
 async def cmd_observe(log_text: str):
     """세션 로그를 ASMR Observer 3인방으로 분석 + 자동 ingest"""
@@ -351,10 +426,14 @@ def main():
     p.add_argument("topic", type=str)
 
     p = sub.add_parser("predict", help="[Phase3] 다음 기억 예측")
-    p.add_argument("context", dest="context_text", type=str)
+    p.add_argument("context_text", type=str)
 
     p = sub.add_parser("causal",  help="[Phase2] 인과관계 체인 조회")
     p.add_argument("keyword", type=str, nargs="?", default=None)
+
+    p = sub.add_parser("core-memory", help="Core Memory 관리")
+    p.add_argument("action", choices=["get", "update"], help="get 또는 update")
+    p.add_argument("content", type=str, nargs="?", default=None, help="update 시 내용")
 
     args = parser.parse_args()
 
@@ -371,6 +450,7 @@ def main():
         "reason":    lambda: cmd_reason(args.topic),
         "predict":   lambda: cmd_predict(args.context_text),
         "causal":    lambda: cmd_causal(args.keyword),
+        "core-memory": lambda: cmd_core_memory(args.action, args.content)
     }
 
     handler = cmd_map.get(args.command)

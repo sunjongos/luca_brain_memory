@@ -1,19 +1,22 @@
 ---
 id: 16
 source: luca_chat
-date: 2026-04-07T14:14:00.923320+00:00
-importance: 0.8
+date: 2026-03-18T00:44:59.207638+00:00
+importance: 0.95
 tags: [raw, memory, luca_chat]
 ---
 
-# Memory 16: Claude Code에서 Supabase로의 포트 5050 통신 경로가 성공적으로 구축되었음을 확인했습니다.
+# Memory 16: 최선종 대표님의 매일 아침 경영회의 관련 정보는 장기 메모리로서 최우선 순위로 관리되어야 합니다.
 
-**Date**: 2026-04-07T14:14:00.923320+00:00
-**Importance**: 0.8
-**Tags**: #Infrastructure #Development #Integration
+**Date**: 2026-03-18T00:44:59.207638+00:00
+**Importance**: 0.95
+**Tags**: #경영_관리 #대표님_지시사항
 
 ## Linked Concepts
-[[비스트모드(Beast Mode)]], [[Claude Code]], [[Supabase]], [[포트 5050]], [[Infrastructure]], [[Development]], [[Integration]]
+[[최선종 대표님]], [[아침 경영회의]], [[경영 관리]], [[대표님 지시사항]]
+
+## 🔗 Causal Links (인과관계)
+현재 기록된 인과관계가 없습니다.
 
 ## Raw Context
-비스트모드 통신 검증: 똘마니 에이전트(Claude Code)에서 포트 5050을 통해 Supabase로 가는 경로 완벽 개통 확인
+최선종 대표님은 매일 아침 경영회의가 있다. 아침경영회의 관련 메모, 안건, 반복 패턴, 회의용 정리는 장기메모리 관점에서 우선 관리한다.

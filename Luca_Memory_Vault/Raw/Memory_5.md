@@ -1,19 +1,22 @@
 ---
 id: 5
 source: luca_chat
-date: 2026-03-21T15:26:57.298495+00:00
-importance: 0.8
+date: 2026-03-11T14:44:14.158127+00:00
+importance: 0.95
 tags: [raw, memory, luca_chat]
 ---
 
-# Memory 5: KODARI 부장이 QA 검토를 거쳐 데이터 무결성이 보완된 병원 직원 연락처 관리 파이썬 프로그램을 완성했습니다.
+# Memory 5: User directed that all end-of-day summaries be stored in the ADK persistent memory server (port 5050) as the authoritative source of truth, moving away from local files like MEMORY.md or LanceDB. Several core integrations (Perplexity, Google Workspace, ACP) were successfully updated or repaired to align with this unified memory architecture.
 
-**Date**: 2026-03-21T15:26:57.298495+00:00
-**Importance**: 0.8
-**Tags**: #Development #Task_Management
+**Date**: 2026-03-11T14:44:14.158127+00:00
+**Importance**: 0.95
+**Tags**: #Operational_Policy #Infrastructure #System_Architecture
 
 ## Linked Concepts
-[[KODARI]], [[병원 직원 연락처 관리 시스템]], [[Python]], [[Development]], [[Task Management]]
+[[ADK persistent memory server]], [[Perplexity]], [[Google Workspace]], [[ACP]], [[Codex]], [[Claude Code]], [[OpenClaw]], [[antigravity]], [[Operational Policy]], [[Infrastructure]], [[System Architecture]]
+
+## 🔗 Causal Links (인과관계)
+현재 기록된 인과관계가 없습니다.
 
 ## Raw Context
-KODARI 부장이 병원 직원 연락처 관리 파이썬 코드를 작성하고 QA 검토를 완료했습니다. 주요 개선 사항으로 next_id 관리 로직 오류 수정, 전화번호 및 이메일 입력 유효성 검사 추가, 직원 중복 확인 시 상세 정보 제공 기능이 포함되었습니다.
+[2026-03-11 day-end summary] User preference: at end of day, store an AutoMemory-style progress summary into the ADK persistent memory server on port 5050 instead of local files. Important completed work today: Perplexity deep-search path configured and tested; Google Workspace moved from MCP-style usage to CLI and basic tests passed; ACP repaired and verified end-to-end for both Codex and Claude Code, including actual file/code edits and execution checks; OpenClaw, Claude Code, and antigravity are intended to share memory through the ADK persistent memory layer on port 5050 as the single source of truth. Operational rule: do not treat MEMORY.md or LanceDB as the authoritative long-term memory when ADK memory_layer is available.

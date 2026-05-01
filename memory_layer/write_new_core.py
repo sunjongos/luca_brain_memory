@@ -10,7 +10,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from google.adk.agents import Agent
 
-MODEL            = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+MODEL            = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 EMBED_MODEL      = "models/text-embedding-004"
 DB_PATH          = os.getenv("MEMORY_DB_PATH", "luca_memory.db")
 DECAY_RATE       = float(os.getenv("MEMORY_DECAY_RATE", "0.03"))

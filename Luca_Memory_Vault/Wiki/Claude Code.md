@@ -2,7 +2,7 @@
 title: Claude Code
 aliases: []
 tags: [wiki, concept]
-reference_count: 2
+reference_count: 3
 ---
 
 # Claude Code
@@ -10,6 +10,7 @@ reference_count: 2
 이 개념은 Luca의 장기 기억 체계 내에서 주요한 노드로 식별되었습니다.
 
 ## 언급된 원본 기억 (Backlinks)
-- [[Memory_16]]
-- [[Memory_15]]
+- [[Memory_28]]
+- [[Memory_6]]
+- [[Memory_5]]
 

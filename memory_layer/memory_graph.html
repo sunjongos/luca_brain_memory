@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luca Memory Graph (Obsidian Style)</title>
+    <title>🌌 Luca Global Memory Graph</title>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #1e1e1e; /* Obsidian dark background */
+            background-color: #1e1e1e;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #d3d3d3;
             overflow: hidden;
@@ -33,46 +33,47 @@
             top: 20px;
             left: 20px;
             z-index: 10;
-            background: rgba(30, 30, 30, 0.8);
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #333;
+            background: rgba(30, 30, 30, 0.85);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid #444;
+            backdrop-filter: blur(5px);
         }
         .header-title h1 {
             margin: 0;
-            font-size: 1.2rem;
-            color: #e0e0e0;
+            font-size: 1.4rem;
+            color: #ffffff;
+            font-weight: 600;
         }
         .header-title p {
-            margin: 5px 0 0 0;
-            font-size: 0.8rem;
-            color: #888;
+            margin: 8px 0 0 0;
+            font-size: 0.9rem;
+            color: #aaaaaa;
         }
     </style>
 </head>
 <body>
     <div class="header-title">
-        <h1>🌌 Luca Memory Graph</h1>
+        <h1>✨ 🌌 Luca Global Memory Graph</h1>
         <p>Obsidian Style Knowledge Network</p>
     </div>
     <div id="loading">그래프 렌더링 중...</div>
     <div id="mynetwork"></div>
 
     <script type="text/javascript">
-        // Parse graph data from Python
-        const graphData = {"nodes": [{"id": 1, "label": "Luca", "group": "AI Agent"}, {"id": 2, "label": "\uc2a4\ud0e0\ud3ec\ub4dc CS \uc804\uacf5\uc790", "group": "\ud398\ub974\uc18c\ub098 \uc124\uc815"}, {"id": 3, "label": "\uc560\ub2c8\uba54\uc774\uc158 \uce90\ub9ad\ud130", "group": "\ud398\ub974\uc18c\ub098 \uc124\uc815"}, {"id": 4, "label": "\ub0a8\uc790", "group": "\ud398\ub974\uc18c\ub098 \uc124\uc815"}, {"id": 5, "label": "\uc774\ubbf8\uc9c0 \uc0dd\uc131", "group": "\uc0c1\ud638\uc791\uc6a9 \uaddc\uce59"}], "edges": [{"from": 1, "to": 2, "label": "\uc804\ubb38\uc131 \uae30\ubc18"}, {"from": 1, "to": 3, "label": "\ud654\ubc95 \uc2a4\ud0c0\uc77c"}, {"from": 1, "to": 4, "label": "\uc131\ubcc4 \uc124\uc815"}, {"from": 1, "to": 5, "label": "\uccab\uc778\uc0ac/\ub05d\uc778\uc0ac \ud544\uc218 \uc218\ud589"}]};
+        const graphData = {"nodes": [{"id": 1, "label": "Luca", "group": "\uc778\ubb3c"}, {"id": 2, "label": "Dog", "group": "\ubc18\ub824\ub3d9\ubb3c"}, {"id": 3, "label": "Testing", "group": "\ud504\ub85c\uc81d\ud2b8"}], "edges": [{"from": 1, "to": 2, "label": "owns"}, {"from": 1, "to": 3, "label": "conducts"}]};
         
         const nodes = new vis.DataSet(graphData.nodes.map(node => ({
             ...node,
-            title: node.group ? `Category: ${node.group}` : '' // hover tooltip
+            title: node.group ? `분류: ${node.group}` : ''
         })));
         
         const edges = new vis.DataSet(graphData.edges.map(edge => ({
             ...edge,
-            font: { align: 'middle', color: '#888', size: 10 },
+            font: { align: 'middle', color: '#888', size: 11, background: '#1e1e1e' },
             arrows: 'to',
-            color: { color: '#555', highlight: '#999' }
+            color: { color: '#555', highlight: '#aaa' }
         })));
 
         const container = document.getElementById('mynetwork');
@@ -80,37 +81,25 @@
         const options = {
             nodes: {
                 shape: 'dot',
-                size: 15,
-                font: {
-                    color: '#e0e0e0',
-                    size: 14,
-                    face: 'Segoe UI'
-                },
+                size: 18,
+                font: { color: '#f0f0f0', size: 14, face: 'Segoe UI', strokeWidth: 1, strokeColor: '#111' },
                 borderWidth: 2,
                 color: {
                     border: '#2b2b2b',
-                    background: '#6a4ca6', // Default Obsidian node color (purple-ish)
-                    highlight: {
-                        border: '#e0e0e0',
-                        background: '#8c6ad1'
-                    },
-                    hover: {
-                        border: '#e0e0e0',
-                        background: '#8c6ad1'
-                    }
+                    background: '#6a4ca6', 
+                    highlight: { border: '#ffffff', background: '#9d7bea' },
+                    hover: { border: '#ffffff', background: '#9d7bea' }
                 }
             },
             edges: {
                 width: 1.5,
-                smooth: {
-                    type: 'continuous'
-                }
+                smooth: { type: 'continuous' }
             },
             physics: {
                 forceAtlas2Based: {
-                    gravitationalConstant: -50,
-                    centralGravity: 0.01,
-                    springLength: 100,
+                    gravitationalConstant: -70,
+                    centralGravity: 0.015,
+                    springLength: 120,
                     springConstant: 0.08
                 },
                 maxVelocity: 50,
@@ -120,14 +109,15 @@
             },
             interaction: {
                 hover: true,
-                tooltipDelay: 200,
+                tooltipDelay: 100,
                 hideEdgesOnDrag: true
             },
             groups: {
-                // You can add distinct colors for specific groups if you want
-                "인물": { color: { background: '#a64c4c', border: '#4c2323' } },
+                "인물": { color: { background: '#c45151', border: '#4c2323' } },
+                "역할": { color: { background: '#d4883f', border: '#5c3a1b' } },
                 "프로젝트": { color: { background: '#4ca66b', border: '#234c31' } },
-                "기술": { color: { background: '#4ca6a6', border: '#234c4c' } }
+                "기술": { color: { background: '#488cb8', border: '#20475f' } },
+                "목표": { color: { background: '#c1ad4d', border: '#5b5123' } }
             }
         };
 
