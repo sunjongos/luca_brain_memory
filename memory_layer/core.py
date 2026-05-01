@@ -8,6 +8,7 @@ from pathlib import Path
 from google.adk.agents import Agent
 from supabase import create_client, Client
 from dotenv import load_dotenv
+from neo4j import GraphDatabase
 
 load_dotenv()
 _SB_URL = os.environ.get("SUPABASE_URL", "")
@@ -36,6 +37,44 @@ REINFORCE_BOOST  = 0.02
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger("luca-brain")
+
+# ── Neo4j Ontology ─────────────────────────────────────────────────────────
+class Neo4jOntologyManager:
+    def __init__(self, uri="bolt://localhost:7687"):
+        self.uri = uri
+        self.driver = None
+        try:
+            self.driver = GraphDatabase.driver(self.uri, auth=None)
+            self.driver.verify_connectivity()
+            log.info("Neo4j Ontology Manager initialized.")
+        except Exception as e:
+            log.warning(f"Neo4j connectivity failed (ensure Neo4j is running): {e}")
+
+    def close(self):
+        if self.driver:
+            self.driver.close()
+
+    def merge_memory_ontology(self, memory_id: int, summary: str, entities: list, topics: list):
+        if not self.driver: return
+        query = """
+        MERGE (m:Memory {id: $memory_id})
+        SET m.summary = $summary
+        WITH m
+        UNWIND $entities AS entity
+        MERGE (e:Entity {name: entity})
+        MERGE (m)-[:MENTIONS]->(e)
+        WITH m
+        UNWIND $topics AS topic
+        MERGE (t:Topic {name: topic})
+        MERGE (m)-[:HAS_TOPIC]->(t)
+        """
+        try:
+            with self.driver.session() as session:
+                session.run(query, memory_id=memory_id, summary=summary, entities=entities, topics=topics)
+        except Exception as e:
+            log.warning(f"Neo4j merge failed: {e}")
+
+neo4j_manager = Neo4jOntologyManager()
 
 # ── Embedding ──────────────────────────────────────────────────────────────
 def get_embedding(text: str) -> list:
@@ -237,6 +276,7 @@ def store_memory(raw_text: str, summary: str, entities: str, topics: str,
     mid = cursor.lastrowid
     db.commit()
     _auto_update_ontology(db, mid, entities or [], topics or [])
+    neo4j_manager.merge_memory_ontology(mid, summary, entities_list, topics_list)
     db.close()
     
     # [Tier 3] Cloud Sync

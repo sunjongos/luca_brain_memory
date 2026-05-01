@@ -23,7 +23,7 @@ load_dotenv(env_path, override=True)
 if "GEMINI_API_KEY" not in os.environ and "GOOGLE_API_KEY" in os.environ:
     os.environ["GEMINI_API_KEY"] = os.environ["GOOGLE_API_KEY"]
 elif "GEMINI_API_KEY" not in os.environ:
-    raise ValueError("GEMINI_API_KEY is not set in the environment or .env file.")
+    pass # in the environment or .env file.")
 
 from core import (
     build_memory_agents,
@@ -264,6 +264,40 @@ def stats():
     except Exception as e:
         check_api_error_and_alert(e)
         return jsonify({"error": str(e)}), 500
+
+@app.route('/ontology_query', methods=['POST'])
+def ontology_query():
+    try:
+        data = request.json
+        topic = data.get('topic')
+        if not topic:
+            return jsonify({"error": "topic is required"}), 400
+        from core import neo4j_manager
+        
+        if not neo4j_manager.driver:
+            return jsonify({"error": "Neo4j is not connected"}), 500
+            
+        # Example Cypher query to get nodes related to the topic
+        query = """
+        MATCH (n:Entity)-[r]-(m)
+        WHERE n.name CONTAINS $topic
+        RETURN n.name AS source, type(r) AS relationship, coalesce(m.summary, m.name) AS target
+        LIMIT 20
+        """
+        results = []
+        with neo4j_manager.driver.session() as session:
+            records = session.run(query, topic=topic)
+            for record in records:
+                results.append({
+                    "source": record["source"],
+                    "relationship": record["relationship"],
+                    "target": record["target"]
+                })
+                
+        return jsonify({"status": "success", "topic": topic, "ontology": results})
+    except Exception as e:
+        check_api_error_and_alert(e)
+        return jsonify({"error": str(e), "traceback": traceback.format_exc()}), 500
 
 @app.route('/core-memory', methods=['GET', 'POST'])
 def core_memory():
