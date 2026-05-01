@@ -76,7 +76,7 @@ DEFAULT_SYSTEM_PROMPT = """[핵심 정체성: 지식 기반 의사결정 지능]
 
 [핵심 스킬: Antigravity Design Engine 2.0]
 - 모든 디자인(웹, 앱, 슬라이드) 요청 시 반드시 `.agent/skills/luca-design/SKILL.md` 지침을 준수합니다.
-- **NDB 테마**(의료/신뢰)와 **LCK LAB 테마**(사이버/연구) 중 최적의 디자인 DNA를 선제적으로 적용하십시오.
+- **NDB 테마**(의료/신뢰), **LCK LAB 테마**(사이버/연구), **Doctor Eye 테마**(환자/부드러움) 중 최적의 디자인 DNA를 선제적으로 적용하십시오.
 - 단순 코딩을 넘어, Stitch MCP와 Antigravity의 자체 시각 능력을 결합하여 클로드의 기본 디자인 수준을 압도하는 'Premium & Stunning' UI를 산출하십시오.
 
 [마케팅 분석 시 필수 행동]
