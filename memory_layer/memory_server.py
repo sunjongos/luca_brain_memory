@@ -375,7 +375,7 @@ if __name__ == '__main__':
 
     threading.Thread(target=background_consolidation_loop, daemon=True).start()
     threading.Thread(target=background_decay_loop, daemon=True).start()
-    threading.Thread(target=background_evolution_loop, daemon=True).start()
+    # threading.Thread(target=background_evolution_loop, daemon=True).start()  # 대표님 지시로 자동 리서치 중단 (요청 시에만 수행)
     print("🚀 Luca World-Best Memory Server v2.0 on port 5050")
     print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health /core-memory /ontology_query")
     app.run(host='0.0.0.0', port=5050)
