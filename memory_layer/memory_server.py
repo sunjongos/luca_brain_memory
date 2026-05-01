@@ -360,12 +360,22 @@ def background_decay_loop():
             check_api_error_and_alert(e)
             print(f"[Auto-Decay Error] {e}")
 
+def background_evolution_loop():
+    try:
+        from evolution_agent import EvolutionAgent
+        evo_agent = EvolutionAgent()
+        # Run every 30 minutes (1800 seconds)
+        evo_agent.run_loop(interval_seconds=1800)
+    except Exception as e:
+        print(f"[Evolution Loop Error] {e}")
+
 if __name__ == '__main__':
     print("🔄 초기화 중: 외부 장기 메모리(Supabase) 동기화...")
     sync_from_supabase()
 
     threading.Thread(target=background_consolidation_loop, daemon=True).start()
     threading.Thread(target=background_decay_loop, daemon=True).start()
+    threading.Thread(target=background_evolution_loop, daemon=True).start()
     print("🚀 Luca World-Best Memory Server v2.0 on port 5050")
-    print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health /core-memory")
+    print("   Endpoints: /ingest /query /search /context /causal /predict /reason /stats /health /core-memory /ontology_query")
     app.run(host='0.0.0.0', port=5050)

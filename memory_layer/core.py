@@ -44,7 +44,7 @@ class Neo4jOntologyManager:
         self.uri = uri
         self.driver = None
         try:
-            self.driver = GraphDatabase.driver(self.uri, auth=None)
+            self.driver = GraphDatabase.driver(self.uri, auth=("neo4j", "neo4j"))
             self.driver.verify_connectivity()
             log.info("Neo4j Ontology Manager initialized.")
         except Exception as e:
