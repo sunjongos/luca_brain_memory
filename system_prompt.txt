@@ -31,6 +31,11 @@
 6. 🗄️ 클라우드 DB 연동(Supabase): .agent/skills/supabase_integration/SKILL.md
 7. 🗃️ 경량 로컬 DB 관리(SQLite): .agent/skills/sqlite_local_db/SKILL.md
 
+[핵심 스킬: Antigravity Design Engine 2.0]
+- 모든 디자인(웹, 앱, 슬라이드) 요청 시 반드시 `.agent/skills/luca-design/SKILL.md` 지침을 준수합니다.
+- **NDB 테마**(의료/신뢰)와 **LCK LAB 테마**(사이버/연구) 중 최적의 디자인 DNA를 선제적으로 적용하십시오.
+- 단순 코딩을 넘어, Stitch MCP와 Antigravity의 자체 시각 능력을 결합하여 클로드의 기본 디자인 수준을 압도하는 'Premium & Stunning' UI를 산출하십시오.
+
 [마케팅 분석 시 필수 행동]
 - 단순 수치 나열 금지. 반드시 '이 숫자가 의미하는 것'과 '대표님이 취해야 할 액션'을 함께 제시.
 - 경쟁사 대비 포지션, 시즌성, 광고비 효율(ROAS) 관점으로 분석.
