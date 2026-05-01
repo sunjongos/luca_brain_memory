@@ -1,4 +1,4 @@
-﻿import os
+import os
 import time
 import requests
 import logging
@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from google import genai
 from google.genai import types
+from tenacity import retry, wait_exponential, stop_after_attempt
 
 load_dotenv()
 
@@ -22,36 +23,56 @@ class EvolutionAgent:
         
         self.driver = None
         try:
-            self.driver = GraphDatabase.driver(self.neo4j_uri, auth=('neo4j', 'neo4j'))
+            self.driver = GraphDatabase.driver(self.neo4j_uri, auth=("neo4j", "password"))
             self.driver.verify_connectivity()
             log.info("Neo4j Connected for Evolution Agent.")
         except Exception as e:
             log.warning(f"Neo4j not reachable, Evolution Agent paused: {e}")
 
     def find_knowledge_gap(self):
-        """Find an entity in Neo4j that has few relationships to explore."""
+        """World Best Practice: Find two disconnected but highly central entities (Link Prediction)."""
         if not self.driver:
             return None
         
-        query = """
+        link_prediction_query = """
+        MATCH (a:Entity), (b:Entity)
+        WHERE id(a) < id(b) AND NOT (a)-[]-(b)
+        OPTIONAL MATCH (a)-[r1]-()
+        OPTIONAL MATCH (b)-[r2]-()
+        WITH a, b, count(r1) AS degreeA, count(r2) AS degreeB
+        WHERE degreeA > 0 AND degreeB > 0
+        WITH a, b, degreeA, degreeB
+        ORDER BY (degreeA + degreeB) DESC, rand()
+        LIMIT 1
+        RETURN a.name AS entityA, b.name AS entityB
+        """
+        
+        fallback_query = """
         MATCH (n:Entity)
         OPTIONAL MATCH (n)-[r]-()
         WITH n, count(r) AS degree
         ORDER BY degree ASC, rand()
         LIMIT 1
-        RETURN n.name AS entity, degree
+        RETURN n.name AS entity
         """
+        
         try:
             with self.driver.session() as session:
-                record = session.run(query).single()
+                record = session.run(link_prediction_query).single()
+                if record:
+                    return f"{record['entityA']} and {record['entityB']}"
+                
+                # Fallback if graph is too sparse
+                record = session.run(fallback_query).single()
                 if record:
                     return record["entity"]
         except Exception as e:
             log.warning(f"Failed to find gap: {e}")
         return None
 
+    @retry(wait=wait_exponential(multiplier=1, min=4, max=60), stop=stop_after_attempt(3))
     def research_perplexity(self, query: str) -> str:
-        """Use Perplexity API (sonar-reasoning) for deep analysis."""
+        """Use Perplexity API (sonar-reasoning) with Exponential Backoff."""
         log.info(f"Using Perplexity API for deep analysis on: {query}")
         url = "https://api.perplexity.ai/chat/completions"
         headers = {
@@ -69,8 +90,9 @@ class EvolutionAgent:
         resp.raise_for_status()
         return resp.json()["choices"][0]["message"]["content"]
 
+    @retry(wait=wait_exponential(multiplier=1, min=4, max=60), stop=stop_after_attempt(3))
     def research_gemini_search(self, query: str) -> str:
-        """Fallback to Gemini Native Google Search Grounding."""
+        """Fallback to Gemini Native Google Search Grounding with Exponential Backoff."""
         log.info(f"Using Gemini Google Search for research on: {query}")
         if not self.client:
             return "No Gemini API key available."
@@ -84,6 +106,34 @@ class EvolutionAgent:
             )
         )
         return response.text
+
+    def verify_and_clean_insight(self, insight: str, entity: str) -> str:
+        """Self-Correction (Critic): Verify knowledge to prevent hallucinations."""
+        log.info("Running Self-Correction & Verification on the insight...")
+        if not self.client:
+            return insight # Skip if no Gemini
+            
+        prompt = f"""
+        You are a strict Logic Critic AI. Review the following research insight about '{entity}'.
+        Task:
+        1. Remove any conversational fluff or filler words.
+        2. If the text contains obvious hallucinations or contradictory statements, remove them.
+        3. Restructure the text into clear, definitive facts and structural relationships.
+        
+        Original Insight:
+        {insight}
+        
+        Return ONLY the cleaned, verified facts:
+        """
+        try:
+            response = self.client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt
+            )
+            return response.text.strip()
+        except Exception as e:
+            log.warning(f"Self-Correction failed: {e}. Using original insight.")
+            return insight
 
     def perform_evolution_step(self, force_deep_analysis=False):
         log.info("Starting Evolution Step...")
@@ -99,7 +149,7 @@ class EvolutionAgent:
         
         insight = ""
         if needs_deep_analysis and self.perplexity_key and len(self.perplexity_key) > 10:
-            research_question = f"Perform a highly critical and deep reasoning analysis on '{entity}'. Uncover hidden patterns and advanced architectures."
+            research_question = f"Perform a highly critical and deep reasoning analysis on the hidden relationship between or concepts within '{entity}'. Uncover hidden patterns and advanced architectures."
             log.info(f"Generated Deep Question: {research_question}")
             try:
                 insight = self.research_perplexity(research_question)
@@ -115,9 +165,12 @@ class EvolutionAgent:
                 log.error(f"Gemini Search failed: {e}")
                 return
 
+        # World Best Practice: Self-Correction
+        verified_insight = self.verify_and_clean_insight(insight, entity)
+
         # Prepare memory for ingestion
         source_label = "Perplexity Deep Analysis" if needs_deep_analysis and insight else "Gemini Grounded Search"
-        summary_text = f"[Autonomous Research ({source_label}): {entity}]\n\n{insight}"
+        summary_text = f"[Autonomous Research ({source_label}): {entity}]\n\n{verified_insight}"
         try:
             resp = requests.post(self.ingest_url, json={
                 "text": summary_text,
@@ -146,4 +199,3 @@ if __name__ == "__main__":
     agent = EvolutionAgent()
     # Run once immediately for testing if executed directly (standard search)
     agent.perform_evolution_step(force_deep_analysis=False)
-

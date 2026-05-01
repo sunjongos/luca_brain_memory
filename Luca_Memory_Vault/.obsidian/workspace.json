@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "7ec9d9bd9a977c29",
+    "id": "bb6e3bfdb4330058",
     "type": "split",
     "children": [
       {
-        "id": "888d269414f95bf8",
+        "id": "40f2bde8e517492b",
         "type": "tabs",
         "children": [
           {
-            "id": "6e5b5ae7b1e84652",
+            "id": "694c0e2cc3a54475",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -23,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "dbd5ef00327a83bf",
+    "id": "544fd902563c45e2",
     "type": "split",
     "children": [
       {
-        "id": "14f81b94817032a4",
+        "id": "3609366b49f8d5dc",
         "type": "tabs",
         "children": [
           {
-            "id": "4a62b9ce2cc1c072",
+            "id": "18f76856f2e26443",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,12 +44,12 @@
             }
           },
           {
-            "id": "56d70b224db126b9",
+            "id": "552ecedd51b82991",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "regret ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -61,7 +61,7 @@
             }
           },
           {
-            "id": "5086c0ff951d2310",
+            "id": "ddf5b45f29216e73",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -78,15 +78,15 @@
     "width": 300
   },
   "right": {
-    "id": "0cc8eb5630e923b2",
+    "id": "a1fb80e0101880db",
     "type": "split",
     "children": [
       {
-        "id": "6ed815f465ea27fc",
+        "id": "a30fb66acba4f4db",
         "type": "tabs",
         "children": [
           {
-            "id": "68e5a1c1ef1b0f03",
+            "id": "870abd32fe5b8e65",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -104,7 +104,7 @@
             }
           },
           {
-            "id": "c5e96bd8448be953",
+            "id": "92ecc3480eb693b8",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -117,7 +117,7 @@
             }
           },
           {
-            "id": "cc5aa9ab5e5d4a8c",
+            "id": "1ca85de780e9141b",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -132,7 +132,7 @@
             }
           },
           {
-            "id": "d815050d3b268dd6",
+            "id": "c259c83d5a45ccef",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -146,7 +146,7 @@
             }
           },
           {
-            "id": "987e250751270006",
+            "id": "f2181edc460f9f3a",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -177,34 +177,35 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "6e5b5ae7b1e84652",
+  "active": "552ecedd51b82991",
   "lastOpenFiles": [
-    "무제.canvas",
-    "2026-04-07.md",
-    "무제.base",
-    "Index/MOC.md",
-    "Wiki/포트 5050.md",
-    "Wiki/Supabase.md",
-    "Raw/Memory_10.md",
-    "Raw/Memory_11.md",
-    "Raw/Memory_12.md",
-    "Raw/Memory_13.md",
-    "Raw/Memory_14.md",
-    "Raw/Memory_15.md",
-    "Raw/Memory_16.md",
-    "Wiki/Luca_Insight_20260407_230935.md",
-    "Wiki/이순태 교수님.md",
-    "Raw/Memory_7.md",
-    "Raw/YT_nldkPgp3aIA.md",
-    "Wiki/AI 인사이트.md",
-    "Wiki/sqlite.md",
-    "Wiki/파이썬.md",
-    "Wiki/지식 그래프.md",
+    "Wiki/의료 운영.md",
+    "Wiki/유엠아이옵틱스.md",
+    "Wiki/원본 데이터.md",
+    "Wiki/운영 메모.md",
     "Wiki/옵시디언.md",
-    "Wiki/장기메모리.md",
-    "HotCache.md",
-    "Raw/Thought_202604d_000301.md",
-    "Wiki/Luca_Insight_20260406_235439.md",
-    "Wiki/Memory_8.md"
+    "Wiki/연구네트워크.md",
+    "Wiki/업체 미팅.md",
+    "Wiki/업무 자동화.md",
+    "Wiki/업무 관리.md",
+    "Wiki/애니메이션 캐릭터 스타일.md",
+    "Wiki/아키텍처 업그레이드.md",
+    "Wiki/아침 경영회의.md",
+    "Wiki/심사팀.md",
+    "Wiki/신환 TF.md",
+    "Wiki/시스템 인프라.md",
+    "Wiki/시스템 관리.md",
+    "Wiki/스탠포드 컴퓨터 사이언스 전공자.md",
+    "Wiki/개발 환경.md",
+    "Wiki/감염관리 전략.md",
+    "Wiki/Workflow.md",
+    "Wiki/Workflow Automation.md",
+    "Wiki/Work.md",
+    "Wiki/Wiki 페이지.md",
+    "Wiki/Watchdog.md",
+    "Wiki/Visuals.md",
+    "Wiki/VIP Visits.md",
+    "무제.base",
+    "무제.canvas"
   ]
 }
